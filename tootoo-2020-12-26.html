@@ -31,13 +31,11 @@
 	<!-- https://github.com/showdownjs/showdown -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 
-	<script src="./lib/mnu-menu/v-2020-12-25/mnu-menu.js"></script>
+	<script src="./lib/mnu-menu/v-2020-12-26/mnu-menu.js"></script>
 
-	<script src="./lib/grv-github-repo-tree-view/grv-github-repo-tree-view-2020-12-25.js"></script>
+	<script src="./lib/grv-github-repo-tree-view/v-2020-12-26/grv-github-repo-tree-view.js"></script>
 
-	<script src="./lib/fo-file-open/foo-file-open-object-2020-12-25.js"></script>
-	<script src="./lib/fo-file-open/foz-file-open-zip-2020-07-07.js"></script>
-	<script src="./lib/fo-file-open/fr-file-reader-2020-07-06.js"></script>
+	<script src="./lib/fox-file-open-xhr/v-2020-12-26/fox-file-open-xhr.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
@@ -47,28 +45,6 @@
 		<nav id="navMenu" class="gmd-2">
 
 			<div id=MNUdivHeader></div>
-
-			<div id=divNavLog></div>
-
-			<details id=detFile>
-
-				<summary class="summary-primary gmd-1" title="Open files on your device: ">file menu</summary>
-
-				<div id=FRdivMenuFileReader></div>
-
-				<p>
-					<input type=file id=FRinpFile onchange=FR.readFile(this); accept="*">
-				</p>
-
-				<div id=FOOdivLog>to be reset</div>
-
-				<div id=FOZdivFileOpenZip></div>
-
-				<div id=divLog></div>
-
-			</details>
-
-			<div id=GFFdivDetails></div>
 
 			<div id=GRVdivDetails></div>
 
@@ -126,7 +102,7 @@
 
 				if ( location.href.includes( "pushme" ) ) {
 
-					GRV.urlViewer = ""; // "https://pushme-pullyou.github.io/";
+					GRV.urlViewer = "https://pushme-pullyou.github.io/tootoo-2021/";
 
 				} else {
 
@@ -143,9 +119,9 @@
 
 			GRV.init();
 
-			FOO.init();
+			FOX.init();
 
-			FOO.onHashChange();
+			FOX.onHashChange();
 
 		}
 

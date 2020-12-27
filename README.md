@@ -1,7 +1,7 @@
 
 
 
-# [TooToo 2021 Read Me]( ./readme.html )
+# [TooToo 2021 Read Me]( ./index.html#README.md )
 
 <!--
 <div style=height:300px;overflow:hidden;width:100%;resize:both; ><iframe src=https://evereverland.github.io/lib/style/style-sample-tags.html height=100% width=100% ></iframe></div>
@@ -39,6 +39,9 @@ Switching themes
 
 ## Change Log
 
+### 2020-12-26
+
+* TooToo 2021 first commit
 
 ### 2020-10-11
 
