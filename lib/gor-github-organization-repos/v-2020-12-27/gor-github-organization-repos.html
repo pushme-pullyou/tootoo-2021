@@ -35,6 +35,8 @@
 
 	<script src="../../../lib/grv-github-repo-tree-view/v-2020-12-26/grv-github-repo-tree-view.js"></script>
 
+	<script src="../../../lib/gor-github-organization-repos/v-2020-12-27/gor-github-organization-repos.js"></script>
+
 	<script src="../../../lib/fox-file-open-xhr/v-2020-12-26/fox-file-open-xhr.js"></script>
 
 
@@ -45,6 +47,8 @@
 		<nav id="navMenu" class="gmd-2">
 
 			<div id=MNUdivHeader></div>
+
+			<div id=GORdivDetails></div>
 
 			<div id=GRVdivDetails></div>
 
@@ -89,6 +93,13 @@
 
 			divDescription.innerHTML = description;
 
+			GOR.user = "pushme-pullyou";
+			GOR.user = "ladybug-tools";
+			GOR.repo = "tootoo-2021";
+			GOR.path = "../../../";
+
+			GOR.init()
+
 			// if running on server, keeps address bar pointed to latest dev
 
 			//if ( !location.hash && location.protocol === "https:" ) {
@@ -118,15 +129,15 @@
 			GRV.user = "pushme-pullyou";
 			GRV.repo = "tootoo-2021";
 			GRV.path = "../../../";
-			GRV.getFiles = GRV.getFilesSimple;
+			//GRV.getFiles = GRV.getFilesSimple;
 
 			GRV.init();
 
-			FOX.defaultFile = "../README.md";
+			// FOX.defaultFile = "../README.md";
 
-			FOX.init();
+			// FOX.init();
 
-			FOX.onHashChange();
+			// FOX.onHashChange();
 
 		}
 
