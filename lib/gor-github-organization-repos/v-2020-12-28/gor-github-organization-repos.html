@@ -35,7 +35,7 @@
 
 	<script src="../../../lib/grv-github-repo-tree-view/v-2020-12-26/grv-github-repo-tree-view.js"></script>
 
-	<script src="../../../lib/gor-github-organization-repos/v-2020-12-27/gor-github-organization-repos.js"></script>
+	<script src="../../../lib/gor-github-organization-repos/v-2020-12-28/gor-github-organization-repos.js"></script>
 
 	<script src="../../../lib/fox-file-open-xhr/v-2020-12-26/fox-file-open-xhr.js"></script>
 
@@ -94,7 +94,7 @@
 			divDescription.innerHTML = description;
 
 			GOR.user = "pushme-pullyou";
-			GOR.user = "ladybug-tools";
+			//GOR.user = "ladybug-tools";
 			GOR.repo = "tootoo-2021";
 			GOR.path = "../../../";
 
@@ -126,8 +126,8 @@
 
 			// }
 
-			GRV.user = "pushme-pullyou";
-			GRV.repo = "tootoo-2021";
+			GRV.user = GOR.user;
+			GRV.repo = GOR.repo;
 			GRV.path = "../../../";
 			//GRV.getFiles = GRV.getFilesSimple;
 
