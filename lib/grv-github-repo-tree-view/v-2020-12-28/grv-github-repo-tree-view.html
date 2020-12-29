@@ -35,7 +35,7 @@
 
 	<script src="../../../lib/grv-github-repo-tree-view/v-2020-12-28/grv-github-repo-tree-view.js"></script>
 
-	<!-- <script src="../../../lib/fox-file-open-xhr/v-2020-12-26/fox-file-open-xhr.js"></script> -->
+	<script src="../../../lib/fox-file-open-xhr/v-2020-12-26/fox-file-open-xhr.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
@@ -83,15 +83,15 @@
 
 		function init() {
 
-			// MNU.path = "../../../";
+			MNU.path = "../../../";
 
-			// MNU.init();
+			MNU.init();
 
-			// aGithub.href = source;
+			aGithub.href = source;
 
-			// spnVersion.innerHTML = version;
+			spnVersion.innerHTML = version;
 
-			// divDescription.innerHTML = description;
+			divDescription.innerHTML = description;
 
 			// if running on server, keeps address bar pointed to latest dev
 
@@ -131,11 +131,11 @@
 
 			GRV.getRepo();
 
-			// FOX.defaultFile = "../README.md";
+			FOX.defaultFile = "../README.md";
 
-			// FOX.init();
+			FOX.init();
 
-			// FOX.onHashChange();
+			FOX.onHashChange();
 
 		}
 
