@@ -52,7 +52,7 @@
 
 			<div id=GRVdivDetails></div>
 
-			<div id="divStats"></div>
+			<div id="divMessage"></div>
 			<div id="divLog"></div>
 
 			<hr>
@@ -94,11 +94,11 @@
 			divDescription.innerHTML = description;
 
 			GOR.user = "pushme-pullyou";
-			//GOR.user = "ladybug-tools";
 			GOR.repo = "tootoo-2021";
+			GOR.branch = "main"
 			GOR.path = "../../../";
 
-			GOR.init()
+			GOR.init();
 
 			// if running on server, keeps address bar pointed to latest dev
 
@@ -128,7 +128,7 @@
 
 			GRV.user = GOR.user;
 			GRV.repo = GOR.repo;
-			GRV.path = "../../../";
+			GRV.path = GOR.path;
 			//GRV.getFiles = GRV.getFilesSimple;
 
 			GRV.init();
