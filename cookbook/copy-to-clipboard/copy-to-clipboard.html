@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Write something:</h1>
+<textarea id="textareaId" rows="4" cols="50"></textarea>
+</br>
+<button type="button" onclick="copyToClipboard();">Copy to clipboard</button>
+<p>Paste here the clipboard content to verify that it works:</p> 
+<p>(but you can paste the content wherever you wants)</p>
+<textarea id="textarea2Id" rows="10" cols="50"></textarea>
+  
+<script>
+
+    // https://medium.com/javascript-in-plain-english/four-super-useful-techniques-in-vanilla-js-896bab184574
+    
+  const copyToClipboard = () => {
+     //1.
+     document.querySelector('#textareaId').select();
+     //2.
+     document.execCommand('copy');
+  }; 
+</script>
+  
+</body>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+
+	<title>Document</title>
+
+	<style>
+		@import url(https://fonts.googleapis.com/css?family=Lato:400,400italic,700|Sansita+One);
+
+		:root {
+			--primary-color: #302AE6;
+			--secondary-color: #536390;
+			--font-color: #424242;
+			--bg-color: #fff;
+			--heading-color: #292922;
+		}
+
+		[data-theme="dark"] {
+			--primary-color: #9A97F3;
+			--secondary-color: #818cab;
+			--font-color: #e1e1ff;
+			--bg-color: #161625;
+			--heading-color: #818cab;
+		}
+
+		body {
+			font-family: "Lato", sans-serif;
+			background-color: var(--bg-color);
+			color: var(--font-color);
+			max-width: 90%;
+			margin: 0 auto;
+			font-size: calc(1rem + 0.25vh);
+		}
+
+		h1 {
+			color: var(--heading-color);
+			font-family: "Sansita One", serif;
+			font-size: 2rem;
+			margin-bottom: 1vh;
+		}
+
+		p {
+			font-size: 1.1rem;
+			line-height: 1.6rem;
+		}
+
+		a {
+			color: var(--primary-color);
+			text-decoration: none;
+			border-bottom: 3px solid transparent;
+			font-weight: bold;
+
+		}
+
+		section {
+			max-width: 68%;
+			margin: 0 auto;
+		}
+
+		.post-meta {
+			font-size: 1rem;
+			font-style: italic;
+			display: block;
+			margin-bottom: 4vh;
+			color: var(--secondary-color);
+		}
+
+		nav {
+			display: flex;
+			justify-content: flex-end;
+			padding: 20px 0;
+		}
+
+
+
+		/*slider switch css */
+
+		.switch {
+			position: absolute;
+			display: inline-block;
+			width: 5rem;
+			height: 1.3rem;
+			background-color: rgba(0, 0, 0, 0.25);
+			border-radius: 0.6rem;
+			transition: all 0.3s;
+		}
+
+		.switch::after {
+			content: "";
+			position: absolute;
+			width: 1rem;
+			height: 1rem;
+			border-radius: 50%;
+			background-color: white;
+			top: 0.1rem;
+			left: 0.2rem;
+			transition: all 0.3s;
+		}
+
+		.checkbox:checked+.switch::after {
+			left: 3.8rem;
+		}
+
+		.checkbox:checked+.switch {
+			background-color: var(--primary-color);
+		}
+
+		.checkbox {
+			display: none;
+		}
+
+	</style>
+</head>
+
+<body>
+	<nav >
+
+		<input type="checkbox" id="toggleSwitch" class="checkbox" /> 
+		<label for="toggleSwitch" class="switch" title="toggle dark mode"></label> 
+
+	</nav>
+
+	<section>
+		<article class="post">
+
+			<h1><a href="#"> Principles of Good Design</a></h1>
+
+			<p class="post-meta">Circa 2014 <span>by</span> Ian Daniel Stewart</p>
+
+			<p>
+				Is <strong>beauty</strong> objectively true? Are there principles you can use to guide you to it in your
+				work? Can designers from both the sciences and the arts look at each others work and find
+				<strong>beauty</strong>? These are important questions for all designers.
+			</p>
+
+			<p>
+				For those of us who design things … we need to be able to recognize it. We need good taste to make good
+				things. Instead of treating <strong>beauty</strong> as an airy abstraction, to be either blathered about
+				or avoided depending on how one feels about airy abstractions, let’s try considering it as a practical
+				question: how do you make good stuff?
+			</p>
+
+			<a href="#">Read More</a>
+
+		</article>
+	</section>
+
+	<script>
+
+		// https://dev.to/ananyaneogi/create-a-dark-light-mode-switch-with-css-variables-34l8
+		// https://codepen.io/ananyaneogi/pen/zXZyMP
+
+		//const toggleSwitch = document.querySelector( '.theme-switch input[type="checkbox"]' );
+		const currentTheme = localStorage.getItem( 'theme' );
+
+		if ( currentTheme ) {
+			document.documentElement.setAttribute( 'data-theme', currentTheme );
+
+			if ( currentTheme === 'dark' ) {
+				toggleSwitch.checked = true;
+			}
+		}
+
+		function switchTheme( e ) {
+			console.log( "", 23 );
+			if ( e.target.checked ) {
+				document.documentElement.setAttribute( 'data-theme', 'dark' );
+				localStorage.setItem( 'theme', 'dark' );
+			}
+			else {
+				document.documentElement.setAttribute( 'data-theme', 'light' );
+				localStorage.setItem( 'theme', 'light' );
+			}
+		}
+
+		toggleSwitch.addEventListener( 'change', switchTheme, false );
+
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="utf-8" />
+	<style>
+		#pop {
+			display: none;
+			position: absolute;
+			top: 2rem;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="pop">howdy</div>
+
+	right click to open context menu
+
+	<script>
+		document.body.style.cssText = " font: bold 12pt monospace; ";
+
+		window.addEventListener( "contextmenu", onContextMenu );
+		window.addEventListener( "click", onClick )
+
+		function onContextMenu( event ) {
+			event.preventDefault();
+
+			console.log( "", 23 );
+
+			pop.style.display = "block";
+			pop.style.left = event.pageX - 10 + "px";
+			pop.style.top = event.pageY - 10 + "px";
+		}
+
+		function onClick() {
+
+
+			pop.style.display = "";
+		}
+	</script>
+</body>
+
+</html>
