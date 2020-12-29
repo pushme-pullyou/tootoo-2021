@@ -90,11 +90,15 @@
 
 			divDescription.innerHTML = description;
 
-			GOR.user = "pushme-pullyou";
-			GOR.repo = "tootoo-2021";
-			GOR.branch = "main"
+			// GOR.user = "pushme-pullyou";
+			// GOR.repo = "tootoo-2021";
+			// GOR.branch = "main";
 			GOR.path = "./";
 			GOR.init();
+			//GORinpUser.value = "theo-armour/2020";
+			GORinpUser.value = "ladybug-tools/spider-2020";
+
+			GOR.getOrganization();
 
 			// if running on server, keeps address bar pointed to latest dev
 
@@ -103,7 +107,7 @@
 
 				window.history.pushState( "", "", "./" + location.hash );
 
-				GRV.urlViewer = "";
+				//GRV.urlViewer = "";
 				//GRV.ignoreFolders = [ "archive", "drafts", "images", lib", "lib3d", "lib-template-viewer",
 				//"lib3d-template-viewer", "plugins","src", "templates" ];
 
@@ -111,27 +115,28 @@
 
 				if ( location.href.includes( "pushme" ) ) {
 
-					GRV.urlViewer = "https://pushme-pullyou.github.io/tootoo-2021/";
+					//GRV.urlViewer = "https://pushme-pullyou.github.io/tootoo-2021/";
 
 				} else {
 
-					GRV.urlViewer = "";
+					//GRV.urlViewer = "";
 
 				}
 				GRV.ignoreFolders = [];
 
 			}
 
-			GRV.user = GOR.user;
-			GRV.repo = GOR.repo;
-			GRV.path = GOR.path;
+			// GRV.user = GOR.user;
+			// GRV.repo = GOR.repo;
+			// GRV.path = GOR.path;
 			//GRV.getFiles = GRV.getFilesSimple;
-
-			GRV.init();
 
 			FOX.init();
 
-			FOX.onHashChange();
+			GRV.init();
+
+
+			//FOX.onHashChange();
 
 		}
 
