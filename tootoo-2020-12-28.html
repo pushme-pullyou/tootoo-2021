@@ -7,11 +7,11 @@
 	<meta name="description"
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2020-12-27">
-	<title></title>
+	<meta name="date" content="2020-12-26">
+	<title>TooToo 2021</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
-	<link rel="stylesheet" href="../../../lib/style/style-2020-12-24.css">
+	<link rel="stylesheet" href="./lib/style/style-2020-12-24.css">
 
 	<style>
 		:root {
@@ -31,11 +31,11 @@
 	<!-- https://github.com/showdownjs/showdown -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 
-	<script src="../../../lib/mnu-menu/v-2020-12-26/mnu-menu.js"></script>
+	<script src="./lib/mnu-menu/v-2020-12-26/mnu-menu.js"></script>
 
-	<script src="../../../lib/grv-github-repo-tree-view/v-2020-12-26/grv-github-repo-tree-view.js"></script>
+	<script src="./lib/grv-github-repo-tree-view/v-2020-12-28/grv-github-repo-tree-view.js"></script>
 
-	<script src="../../../lib/fox-file-open-xhr/v-2020-12-26/fox-file-open-xhr.js"></script>
+	<script src="./lib/fox-file-open-xhr/v-2020-12-26/fox-file-open-xhr.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
@@ -48,7 +48,7 @@
 
 			<div id=GRVdivDetails></div>
 
-			<div id="divMessage"></div>
+			<div id="divStats"></div>
 			<div id="divLog"></div>
 
 			<hr>
@@ -79,50 +79,45 @@
 
 		function init() {
 
-			MNU.path = "../../../";
-
 			MNU.init();
 
 			aGithub.href = source;
 
-			spnVersion.innerHTML = version;
+			//spnVersion.innerHTML = version;
 
 			divDescription.innerHTML = description;
 
 			// if running on server, keeps address bar pointed to latest dev
 
 			//if ( !location.hash && location.protocol === "https:" ) {
-			// if ( location.protocol === "https:" ) {
+			if ( location.protocol === "https:" ) {
 
-			// 	window.history.pushState( "", "", "./" + location.hash );
+				window.history.pushState( "", "", "./" + location.hash );
 
-			// 	GRV.urlViewer = "";
-			// 	//GRV.ignoreFolders = [ "archive", "drafts", "images", lib", "lib3d", "lib-template-viewer",
-			// 	//"lib3d-template-viewer", "plugins","src", "templates" ];
+				GRV.urlViewer = "";
+				//GRV.ignoreFolders = [ "archive", "drafts", "images", lib", "lib3d", "lib-template-viewer",
+				//"lib3d-template-viewer", "plugins","src", "templates" ];
 
-			// } else {
+			} else {
 
-			// 	if ( location.href.includes( "pushme" ) ) {
+				if ( location.href.includes( "pushme" ) ) {
 
-			// 		GRV.urlViewer = "https://pushme-pullyou.github.io/tootoo-2021/";
+					GRV.urlViewer = "https://pushme-pullyou.github.io/tootoo-2021/";
 
-			// 	} else {
+				} else {
 
-			// 		GRV.urlViewer = "";
+					GRV.urlViewer = "";
 
-			// 	}
-			// 	GRV.ignoreFolders = [];
+				}
+				GRV.ignoreFolders = [];
 
-			// }
+			}
 
 			GRV.user = "pushme-pullyou";
 			GRV.repo = "tootoo-2021";
-			GRV.path = "../../../";
-			GRV.getFiles = GRV.getFilesSimple;
+			//GRV.getFiles = GRV.getFilesSimple;
 
 			GRV.init();
-
-			FOX.defaultFile = "../README.md";
 
 			FOX.init();
 

@@ -16,6 +16,11 @@ _Basic Lib in a resizable window. One finger to rotate. Two to zoom._
 
 ## Concept
 
+* Template that may be used to launch individual modules
+* Should work OK on a module basis
+* Should work OK with some of the modules
+* Should work OK with all the modules
+
 
 ## To Do / Wish List
 
