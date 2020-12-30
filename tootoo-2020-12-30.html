@@ -31,13 +31,14 @@
 	<!-- https://github.com/showdownjs/showdown -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 
-	<script src="./lib/mnu-menu/v-2020-12-30/mnu-menu.js"></script>
+	<script src="./lib/fox-file-open-xhr/v-2020-12-30/fox-file-open-xhr.js"></script>
 
-	<script src="./lib/gor-github-organization-repos/v-2020-12-29/gor-github-organization-repos.js"></script>
+	<script src="./lib/gor-github-organization-repos/v-2020-12-30/gor-github-organization-repos.js"></script>
 
 	<script src="./lib/grv-github-repo-tree-view/v-2020-12-30/grv-github-repo-tree-view.js"></script>
 
-	<script src="./lib/fox-file-open-xhr/v-2020-12-29/fox-file-open-xhr.js"></script>
+	<script src="./lib/mnu-menu/v-2020-12-30/mnu-menu.js"></script>
+
 
 	<details id=detNavMenu class="gmd-4">
 
@@ -81,11 +82,17 @@
 
 			aGithub.href = source;
 
-			//spnVersion.innerHTML = version;
+			spnVersionInfo.innerHTML = version;
 
 			divDescription.innerHTML = description;
 
 			GOR.init();
+
+			FOX.init();
+
+			GRV.init();
+
+			GOR.getOrganization(); // let's get going!
 
 			// if running on server, keeps address bar pointed to latest dev
 
@@ -95,12 +102,6 @@
 				window.history.pushState( "", "", "./" + location.hash );
 
 			}
-
-			FOX.init();
-
-			GRV.init();
-
-			GOR.getOrganization(); // let's get going!
 
 		}
 

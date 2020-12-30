@@ -8,10 +8,10 @@
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
 	<meta name="date" content="2020-12-30">
-	<title>fox-file-open-xhr</title>
+	<title>Theo Armour 2021</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
-	<link rel="stylesheet" href="../../../lib/style/style-2020-12-29.css">
+	<link rel="stylesheet" href="./lib/style/style-2020-12-29.css">
 
 	<style>
 		:root {
@@ -31,13 +31,14 @@
 	<!-- https://github.com/showdownjs/showdown -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 
-	<script src="../../../lib/mnu-menu/v-2020-12-30/mnu-menu.js"></script>
+	<script src="./lib/fox-file-open-xhr/v-2020-12-30/fox-file-open-xhr.js"></script>
 
-	<script src="../../../lib/gor-github-organization-repos/v-2020-12-29/gor-github-organization-repos.js"></script>
+	<script src="./lib/gor-github-organization-repos/v-2020-12-30/gor-github-organization-repos.js"></script>
 
-	<script src="../../../lib/grv-github-repo-tree-view/v-2020-12-30/grv-github-repo-tree-view.js"></script>
+	<script src="./lib/grv-github-repo-tree-view/v-2020-12-30/grv-github-repo-tree-view.js"></script>
 
-	<script src="../../../lib/fox-file-open-xhr/v-2020-12-30/fox-file-open-xhr.js"></script>
+	<script src="./lib/mnu-menu/v-2020-12-30/mnu-menu.js"></script>
+
 
 	<details id=detNavMenu class="gmd-4">
 
@@ -67,7 +68,7 @@
 
 	<script>
 
-		const source = "https://github.com/pushme-pullyou/tootoo-2021/";
+		const source = "https://github.com/theo-armour/2020/";
 
 		const version = document.head.querySelector( "[ name=date ]" ).content;
 
@@ -77,17 +78,27 @@
 
 		function init() {
 
-			FOX.path = GOR.path = GRV.path = MNU.path = "../../../";
+			GOR.user = "theo-armour";
+			GOR.repo = "2020";
+			GOR.valueDefault = GOR.user + "/" + GOR.repo;
 
 			MNU.init();
 
 			aGithub.href = source;
 
-			spnVersion.innerHTML = version;
+			spnVersionInfo.innerHTML = version;
 
 			divDescription.innerHTML = description;
 
-			//GOR.init();
+			GOR.init();
+
+			FOX.path = "https://theo-armour.github.io/2020/";
+
+			FOX.init();
+
+			GRV.init();
+
+			GOR.getOrganization(); // let's get going!
 
 			// if running on server, keeps address bar pointed to latest dev
 
@@ -97,25 +108,6 @@
 				window.history.pushState( "", "", "./" + location.hash );
 
 			}
-
-			GRV.user = "theo-armour";
-			GRV.repo = "2020";
-
-			GRV.user = "ladybug-tools";
-			GRV.repo = "spider-2020";
-
-			GRV.branch = "master";
-			
-			GRV.init();
-
-			GRV.getRepo();
-
-			FOX.path = GRV.urlViewer;
-			FOX.path = "https://www.ladybug.tools/spider-2020/"
-
-			FOX.init();
-
-			//GOR.getOrganization(); // let's get going!
 
 		}
 
