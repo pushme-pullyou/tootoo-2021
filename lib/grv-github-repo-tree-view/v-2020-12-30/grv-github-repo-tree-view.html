@@ -35,7 +35,7 @@
 
 	<script src="../../../lib/grv-github-repo-tree-view/v-2020-12-30/grv-github-repo-tree-view.js"></script>
 
-	<script src="../../../lib/fox-file-open-xhr/v-2020-12-29/fox-file-open-xhr.js"></script>
+	<script src="../../../lib/fox-file-open-xhr/v-2020-12-30/fox-file-open-xhr.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
@@ -79,7 +79,7 @@
 
 		function init() {
 
-			MNU.path = "../../../";
+			FOX.path = GRV.path = MNU.path = "../../../";
 
 			MNU.init();
 
@@ -97,23 +97,13 @@
 			// 	window.history.pushState( "", "", "./" + location.hash );
 			//}
 
-			detNavMenu.open = true;
-
-			// GRV.user = "pushme-pullyou";
-			// GRV.repo = "tootoo-2021";
-			// GRV.branch = "main";
-			GRV.path = "../../../";
-			//GRV.getFiles = GRV.getFilesSimple;
-
 			GRV.init();
 
 			GRV.getRepo();
 
-			FOX.defaultFile = "../README.md";
-
 			FOX.init();
 
-			FOX.onHashChange();
+			//FOX.onHashChange();
 
 		}
 
