@@ -11,7 +11,7 @@
 	<title>TooToo 2021</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
-	<link rel="stylesheet" href="./lib/style/style-2020-12-29.css">
+	<link rel="stylesheet" href="../../../lib/style/style-2020-12-29.css">
 
 	<style>
 		:root {
@@ -31,13 +31,13 @@
 	<!-- https://github.com/showdownjs/showdown -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 
-	<script src="./lib/mnu-menu/v-2020-12-30/mnu-menu.js"></script>
+	<script src="../../../lib/mnu-menu/v-2020-12-30/mnu-menu.js"></script>
 
-	<script src="./lib/gor-github-organization-repos/v-2020-12-29/gor-github-organization-repos.js"></script>
+	<script src="../../../lib/gor-github-organization-repos/v-2020-12-29/gor-github-organization-repos.js"></script>
 
-	<script src="./lib/grv-github-repo-tree-view/v-2020-12-30/grv-github-repo-tree-view.js"></script>
+	<script src="../../../lib/grv-github-repo-tree-view/v-2020-12-30/grv-github-repo-tree-view.js"></script>
 
-	<script src="./lib/fox-file-open-xhr/v-2020-12-29/fox-file-open-xhr.js"></script>
+	<script src="../../../lib/fox-file-open-xhr/v-2020-12-29/fox-file-open-xhr.js"></script>
 
 	<details id=detNavMenu class="gmd-4">
 
@@ -76,6 +76,8 @@
 		init();
 
 		function init() {
+
+			GOR.path = GRV.path = MNU.path = "../../../";
 
 			MNU.init();
 
