@@ -7,8 +7,8 @@
 	<meta name="description"
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2020-12-30">
-	<title>TooToo 2021</title>
+	<meta name="date" content="2020-12-31">
+	<title>Theo Armour 2021</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
 	<link rel="stylesheet" href="./lib/style/style-2020-12-29.css">
@@ -16,7 +16,7 @@
 	<style>
 		:root {
 			/* --mnu-width: 15rem; */
-			--main-hue: 0;
+			--main-hue: 120;
 			/* 0 to 360 0=red 120=green 240=blue */
 		}
 
@@ -88,10 +88,14 @@
 
 			divDescription.innerHTML = description;
 
-			GOR.user = "pushme-pullyou";
-			GOR.repo = "tootoo-2021";
+			GOR.user = "theo-armour";
+			GOR.repo = "2021";
+
+			GOR.valueDefault = GOR.user + "/" + GOR.repo;
 
 			GOR.init();
+
+			FOX.path = "https://theo-armour.github.io/2021/";
 
 			FOX.init();
 
