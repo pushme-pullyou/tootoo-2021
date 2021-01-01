@@ -7,11 +7,11 @@
 	<meta name="description"
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2020-12-26">
+	<meta name="date" content="2020-12-30">
 	<title>Theo Armour 2021</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
-	<link rel="stylesheet" href="./lib/style/style-2020-12-24.css">
+	<link rel="stylesheet" href="./lib/style/style-2020-12-29.css">
 
 	<style>
 		:root {
@@ -31,11 +31,13 @@
 	<!-- https://github.com/showdownjs/showdown -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 
-	<script src="./lib/mnu-menu/v-2020-12-26/mnu-menu.js"></script>
+	<script src="./lib/fox-file-open-xhr/v-2020-12-30/fox-file-open-xhr.js"></script>
 
-	<script src="./lib/grv-github-repo-tree-view/v-2020-12-26/grv-github-repo-tree-view.js"></script>
+	<script src="./lib/gor-github-organization-repos/v-2020-12-31/gor-github-organization-repos.js"></script>
 
-	<script src="./lib/fox-file-open-xhr/v-2020-12-26/fox-file-open-xhr.js"></script>
+	<script src="./lib/grv-github-repo-tree-view/v-2020-12-30/grv-github-repo-tree-view.js"></script>
+
+	<script src="./lib/mnu-menu/v-2020-12-30/mnu-menu.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
@@ -46,12 +48,9 @@
 
 			<div id=MNUdivHeader></div>
 
+			<div id=GORdivDetails></div>
+
 			<div id=GRVdivDetails></div>
-
-			<div id="divStats"></div>
-			<div id="divLog"></div>
-
-			<hr>
 
 			<div id=MNUdivFooter></div>
 
@@ -69,7 +68,7 @@
 
 	<script>
 
-		const source = "https://github.com/pushme-pullyou/tootoo-2021/";
+		const source = "https://github.com/theo-armour/2021/";
 
 		const version = document.head.querySelector( "[ name=date ]" ).content;
 
@@ -79,13 +78,27 @@
 
 		function init() {
 
+			GOR.user = "theo-armour";
+			GOR.repo = "2021";
+			GOR.valueDefault = GOR.user + "/" + GOR.repo;
+
 			MNU.init();
 
 			aGithub.href = source;
 
-			//spnVersion.innerHTML = version;
+			spnVersionInfo.innerHTML = version;
 
 			divDescription.innerHTML = description;
+
+			GOR.init();
+
+			//FOX.path = "https://theo-armour.github.io/2021/";
+
+			FOX.init();
+
+			GRV.init();
+
+			GOR.getOrganization(); // let's get going!
 
 			// if running on server, keeps address bar pointed to latest dev
 
@@ -94,35 +107,7 @@
 
 				window.history.pushState( "", "", "./" + location.hash );
 
-				GRV.urlViewer = "";
-				//GRV.ignoreFolders = [ "archive", "drafts", "images", lib", "lib3d", "lib-template-viewer",
-				//"lib3d-template-viewer", "plugins","src", "templates" ];
-
-			} else {
-
-				if ( location.href.includes( "pushme" ) ) {
-
-					GRV.urlViewer = "https://Theo-Armour.github.io/2020/";
-
-				} else {
-
-					GRV.urlViewer = "";
-
-				}
-				GRV.ignoreFolders = [];
-
 			}
-
-			GRV.user = "Theo-Armour";
-			GRV.repo = "2020";
-
-			//GRV.getFiles = GRV.getFilesSimple;
-
-			GRV.init();
-
-			FOX.init();
-
-			FOX.onHashChange();
 
 		}
 
