@@ -1,28 +1,26 @@
-
-
-
 # [TooToo 2021 Read Me]( ./index.html#README.md )
 
 <!--
-<div style=height:300px;overflow:hidden;width:100%;resize:both; ><iframe src=https://evereverland.github.io/lib/style/style-sample-tags.html height=100% width=100% ></iframe></div>
+<div style=height:300px;overflow:hidden;width:100%;resize:both; ><iframe src=https://pushme-pullyou.github.io/lib/style/style-sample-tags.html height=100% width=100% ></iframe></div>
 _/lib/style_
 
-### Full Screen: [/lib/style]( https://evereverland.github.io/lib/style/ )
+### Full Screen: [/lib/style]( https://pushme-pullyou.github.io/lib/style/ )
 -->
 
 ## Concept
 
+* Invite all the GitHub peeps over to your place
 
 ## To Do / Wish List
 
+* Add GubGub-like GitHub search utility modules
 
 ## Issues
 
 
 ## Links of Interest
 
-* https://github.com/pushme-pullyou/templates-01/tree/master/html-hamburger-plus << latest
-* https://www.ladybug.tools/spider-gbxml-tools/spider-gbxml-viewer/
+
 
 Web
 
@@ -38,6 +36,10 @@ Switching themes
 
 
 ## Change Log
+
+### 2020-12-31
+
+* Many fixes - beginning to look good
 
 ### 2020-12-26
 
