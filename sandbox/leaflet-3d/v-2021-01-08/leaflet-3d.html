@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="description"
+		content="Part of a series of online interactive AEC viewers designed to be forked, hacked and remixed  with real-time interactive 3D graphics in your browser using the WebGL and the Three.js JavaScript library" />
+	<meta name="keywords" content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" />
+	<meta name="date" content="2021-01-01">
+	<title>Leaflet 3D</title>
+
+	<!-- Copyright 2021 Theo Armour. MIT license -->
+	<link rel="stylesheet" href="../../../lib/style/style-2020-12-29.css">
+
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r123/build/three.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r123/examples/js/controls/OrbitControls.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r123/examples/js/utils/BufferGeometryUtils.js"></script>
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+		integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+		crossorigin="" />
+	<!-- Make sure you put this AFTER Leaflet's CSS -->
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+		integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+		crossorigin=""></script>
+
+	<script src="../../../lib3d/thr-three/thr-threejs-2020-12-23.js"></script>
+	<script src="../../../lib3d/thrc-three-set-colors/thrc-three-set-colors-2020-07-11.js"></script>
+	<script src="../../../lib3d/thrr-three-raycaster/thrr-three-raycaster-mousedown-2020-09-11.js"></script>
+	<script src="../../../lib3d/thru-three-utilities/thru-three-utilities-2020-07-13.js"></script>
+
+	<script src="../../../lib/mnu-menu/v-2020-12-30/mnu-menu.js"></script>
+
+	<!-- <script src="../../../lib/gff-github-folder-files/gff-github-folder-files-2020-12-17.js"></script> -->
+
+	<script src="leaflet-3d.js"></script>
+
+	<style>
+		:root {
+			--main-hue: 120;
+			/* 0 to 360 0=red 120=green 240=blue */
+		}
+
+		body {
+			overflow: hidden;
+		}
+
+
+
+		#map {
+			/* configure the size of the map */
+			/* width: 100%;
+			height: 20rem;
+			resize: both */
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<details id=detNavMenu class="gmd-4">
+
+		<summary id=sumNavMenu class="summary-secondary gmd-1">show || hide menu</summary>
+
+		<nav id="navMenu" class="gmd-2">
+
+			<div id=MNUdivHeader></div>
+
+			<p><button onclick=drawImage(img)>drawImage </button> <button onclick=addPlane()>add Plane</button></p>
+
+
+
+			<div id=GORdivDetails></div>
+
+			<div id=GRVdivDetails></div>
+
+			<div id="map"></div>
+
+			<div id=divCanvas> </div>
+
+			<div><img id=img src="../../../lib/assets/textures/im11.jpg"></div>
+
+
+
+			<div id=MNUdivFooter></div>
+
+		</nav>
+
+	</details>
+
+	<!--
+		<main>
+
+			<div id="divContentMain"></div>
+
+		</main>
+
+-->
+
+
+
+	<script>
+
+		init(); // see script-template-viewer.js
+
+		//var map = L.map( 'map' ).setView( { lon: -122.4309479, lat: 37.8031325 }, 12 );
+
+		// add the OpenStreetMap tiles
+		// L.tileLayer( 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		// 	maxZoom: 19,
+		// 	attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+		// } ).addTo( map );
+
+		// // show the scale bar on the lower left corner
+		// L.control.scale().addTo( map );
+
+		// // show a marker on the map
+		// L.marker( { lon: 0, lat: 0 } ).bindPopup( 'The center of the world' ).addTo( map );
+		// L.marker( { lon: -122.4309479, lat: 37.8031325 } ).bindPopup( 'The center of the world #3' ).addTo( map );
+
+		// L.rectangle( [ [ 37.8031325, -122.4309479 ], [ 37.8, -122.43 ] ] ).bindTooltip( "here I am", { permanent: true } ).addTo( map );
+
+
+
+
+		function drawImage( image ) {
+
+			const size = 256;
+			canvas = divCanvas.appendChild( document.createElement( 'canvas' ) );
+			canvas.width = canvas.height = size;
+			canvas.style.cssText = 'border: 1px solid gray; ';
+			context = canvas.getContext( '2d' );
+
+			context.drawImage( image, 0, 0, 256, 256 );
+
+		}
+
+
+		function addPlane() {
+
+			const geometry = new THREE.PlaneGeometry( 256, 256 );
+
+			//const imageUrl = "../../../lib/assets/textures/im11.jpg";
+
+			//THREE.ImageUtils.crossOrigin = "";
+
+			var material = new THREE.MeshLambertMaterial( {
+				//map: THREE.ImageUtils.loadTexture( imageUrl ),
+				map: canvas.toDataURL(),
+			} );
+
+			const mesh = new THREE.Mesh( geometry, material );
+			THR.group.add( mesh );
+
+		}
+
+
+	</script>
+
+
+</body>
+
+</html>
