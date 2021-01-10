@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+		integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+		crossorigin="" />
+	<!-- Make sure you put this AFTER Leaflet's CSS -->
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+		integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+		crossorigin=""></script>
+	<style>
+		html,
+		body {
+			font: 100% monospace;
+			height: 100%;
+			padding: 0;
+			margin: 0;
+		}
+
+		#map {
+			/* configure the size of the map */
+			left: 10%;
+			top: 10%;
+			width: 50%;
+			height: 50%;
+			resize: both
+		}
+
+		.posAbs {
+			position: absolute;
+		}
+	</style>
+</head>
+
+<body>
+	<nav class=posAbs>
+
+		<h1><a href="">Leaflet 2D</a></h1>
+
+		<p><a href="https://leafletjs.com/reference-1.7.1.html" target="_blank">leafletjs.com</a></p>
+
+		<p><button onclick=addCircle()>addCircle</button> </p>
+		<p><button onclick=addPolygon()>addPolygon</button></p>
+
+	</nav>
+	<div id="map"></div>
+	<script>
+
+		let map;
+
+
+		init()
+
+
+		function init() {
+
+
+			// from https://leafletjs.com/examples/quick-start/
+
+
+			// initialize Leaflet
+			map = L.map( 'map' ).setView( { lon: -122.4309479, lat: 37.8031325 }, 12 );
+
+			// add the OpenStreetMap tiles
+			L.tileLayer( 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				maxZoom: 19,
+				attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+			} ).addTo( map );
+
+			// show the scale bar on the lower left corner
+			L.control.scale().addTo( map );
+
+			// show a marker on the map
+			L.marker( { lon: 0, lat: 0 } ).bindPopup( 'The center of the world' ).addTo( map );
+			L.marker( { lon: -122.4309479, lat: 37.8031325 } ).bindPopup( 'The center of the world #3' ).addTo( map );
+
+			L.rectangle( [ [ 37.8031325, -122.4309479 ], [ 37.8, -122.43 ] ] ).bindTooltip( "here I am", { permanent: true } ).addTo( map );
+
+			// var map = L.map( "map" );
+			// 	L.tileLayer( "http://{s}.tile.osm.org/{z}/{x}/{y}.png" ).addTo( map );
+
+			// 	map.setView( [ 48.85, 2.35 ], 12 );
+
+			// 	L.rectangle( [ [ 48.84, 2.34 ], [ 48.86, 2.36 ] ] ).bindTooltip( "test", {
+			// 		permanent: true
+			// 	} ).addTo( map );
+			// 	L.rectangle( [ [ 48.84, 2.34 ], [ 48.86, 2.36 ] ] ).bindTooltip( "hello", {
+			// 		permanent: false
+			// 	} ).addTo( map );
+
+			map.on( 'click', onMapClick );
+
+
+		}
+
+
+		function addCircle() {
+
+			var circle = L.circle( [ 37.78, -122.4309479 ], {
+				color: 'red',
+				fillColor: '#f03',
+				fillOpacity: 0.5,
+				radius: 500
+			} ).addTo( map );
+
+		}
+
+
+		function addPolygon() {
+			var polygon = L.polygon( [
+				[ 37.78, -122.43 ],
+				[ 37.77, -122.41 ],
+				[ 37.76, -122.44 ]
+			] ).addTo( map )
+
+		}
+
+		var popup = L.popup();
+
+		function onMapClick( e ) {
+
+			popup
+				.setLatLng( e.latlng )
+				.setContent( "You clicked the map at " + e.latlng.toString() )
+				.openOn( map );
+
+		}
+
+
+	https://leafletjs.com/plugins.html#printexport
+	
+
+
+
+	</script>
+</body>
+
+</html>

@@ -49,11 +49,11 @@
 
 
 
-		#map {
+		#divMap {
 			/* configure the size of the map */
-			/* width: 100%;
+			width: 100%;
 			height: 20rem;
-			resize: both */
+			resize: both
 		}
 	</style>
 
@@ -69,19 +69,32 @@
 
 			<div id=MNUdivHeader></div>
 
-			<p><button onclick=drawImage(img)>drawImage </button> <button onclick=addPlane()>add Plane</button></p>
+			<div id="divMap"></div>
 
+			<p>
+				<button onclick=getImg()>getImg </button>
 
+				<button onclick=drawImg(img)>drawImg </button>
+			</p>
+			<p>
+				<button onclick=getImage()>getImage </button>
+
+				<button onclick=drawImage(image)>drawImage </button>
+
+				<button onclick=addImagePlane()>addImagePlane</button>
+			</p>
+
+			<p>
+				<button onclick=addMapPlane()>addMapPlane</button>
+			</p>
 
 			<div id=GORdivDetails></div>
 
 			<div id=GRVdivDetails></div>
 
-			<div id="map"></div>
-
 			<div id=divCanvas> </div>
 
-			<div><img id=img src="../../../lib/assets/textures/im11.jpg"></div>
+			<div id=divImg><img id=img></div>
 
 
 
@@ -91,28 +104,17 @@
 
 	</details>
 
-	<!--
-		<main>
-
-			<div id="divContentMain"></div>
-
-		</main>
-
--->
-
-
-
 	<script>
 
 		init(); // see script-template-viewer.js
 
-		//var map = L.map( 'map' ).setView( { lon: -122.4309479, lat: 37.8031325 }, 12 );
+		var map = L.map( "divMap", { mycanvas: L.canvas() } ).setView( { lon: -122.4309479, lat: 37.8031325 }, 12 );
 
-		// add the OpenStreetMap tiles
-		// L.tileLayer( 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		// 	maxZoom: 19,
-		// 	attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
-		// } ).addTo( map );
+		//add the OpenStreetMap tiles
+		L.tileLayer( 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			maxZoom: 19,
+			attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+		} ).addTo( map );
 
 		// // show the scale bar on the lower left corner
 		// L.control.scale().addTo( map );
@@ -123,8 +125,21 @@
 
 		// L.rectangle( [ [ 37.8031325, -122.4309479 ], [ 37.8, -122.43 ] ] ).bindTooltip( "here I am", { permanent: true } ).addTo( map );
 
+		function getImg() {
+
+			img.src = "../../../lib/assets/textures/im11.jpg";
 
 
+		}
+
+		function getImage() {
+
+			image = new Image();
+			image.src = "../../../lib/assets/textures/im11.jpg";
+			image.width = 100;
+			divImg.appendChild( image );
+
+		}
 
 		function drawImage( image ) {
 
@@ -132,24 +147,25 @@
 			canvas = divCanvas.appendChild( document.createElement( 'canvas' ) );
 			canvas.width = canvas.height = size;
 			canvas.style.cssText = 'border: 1px solid gray; ';
-			context = canvas.getContext( '2d' );
-
+			context = canvas.getContext( '2d', { preserveDrawingBuffer: true } );
 			context.drawImage( image, 0, 0, 256, 256 );
 
 		}
 
+		function addImagePlane() {
 
-		function addPlane() {
+			const geometry = new THREE.PlaneGeometry( 100, 100 );
 
-			const geometry = new THREE.PlaneGeometry( 256, 256 );
+			const imageUrl = "../../../lib/assets/textures/im11.jpg";
 
-			//const imageUrl = "../../../lib/assets/textures/im11.jpg";
+			const loader = new THREE.TextureLoader();
 
-			//THREE.ImageUtils.crossOrigin = "";
+			texture = new THREE.Texture( canvas );
+			texture.needsUpdate = true;
 
 			var material = new THREE.MeshLambertMaterial( {
-				//map: THREE.ImageUtils.loadTexture( imageUrl ),
-				map: canvas.toDataURL(),
+				//map: loader.load( imageUrl ),
+				map: texture
 			} );
 
 			const mesh = new THREE.Mesh( geometry, material );
@@ -157,6 +173,31 @@
 
 		}
 
+
+		function addMapPlane() {
+
+			const geometry = new THREE.PlaneGeometry( 100, 100 );
+
+			texture = new THREE.Texture( L.mycanvas );
+
+			//texture = new THREE.Texture( L.mycanvas );
+
+			texture.magFilter = THREE.LinearFilter;
+			texture.minFilter = THREE.LinearMipMapLinearFilter;
+
+			// TODO: Set this to renderer.getMaxAnisotropy() / 4
+			texture.anisotropy = 4;
+
+			texture.needsUpdate = true;
+
+			var material = new THREE.MeshLambertMaterial( {
+				map: texture
+			} );
+
+			const mesh = new THREE.Mesh( geometry, material );
+			THR.group.add( mesh );
+
+		}
 
 	</script>
 

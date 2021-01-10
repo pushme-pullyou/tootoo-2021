@@ -19,7 +19,6 @@ _Leaflet_
 
 * https://mappa.js.org/
 	* Three.js as a layer over Leaflet
-
 	* https://jsfiddle.net/hg474d6r/7/
 * https://maptalks.org/
 
