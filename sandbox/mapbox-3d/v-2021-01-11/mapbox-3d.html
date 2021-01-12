@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="description"
+		content="Part of a series of online interactive AEC viewers designed to be forked, hacked and remixed  with real-time interactive 3D graphics in your browser using the WebGL and the Three.js JavaScript library" />
+	<meta name="keywords" content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" />
+	<meta name="date" content="2021-01-01">
+	<title>Mapbox 3D</title>
+
+	<!-- Copyright 2021 Theo Armour. MIT license -->
+	<link rel="stylesheet" href="../../../lib/style/style-2020-12-29.css">
+
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r123/build/three.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r123/examples/js/controls/OrbitControls.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r123/examples/js/utils/BufferGeometryUtils.js"></script>
+
+
+
+	<script src="../../../lib3d/thr-three/thr-threejs-2020-12-23.js"></script>
+	<script src="../../../lib3d/thrc-three-set-colors/thrc-three-set-colors-2020-07-11.js"></script>
+	<script src="../../../lib3d/thrr-three-raycaster/thrr-three-raycaster-mousedown-2020-09-11.js"></script>
+	<script src="../../../lib3d/thru-three-utilities/thru-three-utilities-2020-07-13.js"></script>
+
+	<script src="../../../lib/mnu-menu/v-2020-12-30/mnu-menu.js"></script>
+
+	<!-- <script src="../../../lib/gff-github-folder-files/gff-github-folder-files-2020-12-17.js"></script> -->
+
+	<script src="mapbox-3d.js"></script>
+
+	<style>
+		:root {
+			--main-hue: 120;
+			/* 0 to 360 0=red 120=green 240=blue */
+		}
+
+		body {
+			overflow: hidden;
+		}
+
+
+		#divMap {
+			/* configure the size of the map */
+			width: 100%;
+			height: 20rem;
+			resize: both
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<details id=detNavMenu class="gmd-4" open>
+
+		<summary id=sumNavMenu class="summary-secondary gmd-1">show || hide menu</summary>
+
+		<nav id="navMenu" class="gmd-2">
+
+			<div id=MNUdivHeader></div>
+
+			<div><textarea id=txtUrl style=height:10rem;width:100%;></textarea></div>
+
+
+			<p>
+
+				<button onclick=txtUrl.value="streets-v11/static/-91,60,2/800x600";mbxFilter=`&setfilter=["==","name_en","Canada"]&layer_id=country-label`;>filter feature</button>
+
+				<button onclick=txtUrl.value="streets-v11/static/-122,37,9/600x600";mbxFilter=`&addlayer={"id":"road-overlay","type":"line","source":"composite","source-layer":"road","filter":["==",["get","class"],"motorway"],"paint":{"line-color":"%23ff0000","line-width":5}}&before_layer=road-label`>layer z-index</button>
+
+				<button onclick=txtUrl.value="streets-v11/static/-122,37,9/600x600";mbxFilter=`&addlayer={"id":"road-overlay","type":"line","source":"composite","source-layer":"road","filter":["==",["get","class"],"motorway"],"paint":{"line-color":"%23ff0000","line-width":5}}`>style</button>
+
+				<button onclick=txtUrl.value="streets-v11/static/pin-s-a+9ed4bd(-122.46589,37.77343),pin-s-b+000(-122.42816,37.75965),path-5+f44-0.5(%7DrpeFxbnjVsFwdAvr@cHgFor@jEmAlFmEMwM_FuItCkOi@wc@bg@wBSgM)/auto/500x300">path overlay</button>
+
+				<button onclick=txtUrl.value="light-v10/static/url-https%3A%2F%2Fdocs.mapbox.com%2Fapi%2Fimg%2Fcustom-marker.png(-76.9,38.9)/-76.9,38.9,15/1000x1000">custom</button>
+
+				<button onclick=txtUrl.value="light-v10/static/pin-s-l+000(-87.0186,32.4055)/-87.0186,32.4055,14/500x300">html icon</button>
+
+				<button
+					onclick=txtUrl.value="dark-v10/static/pin-l-embassy+f74e4e(-74.0021,40.7338)/-74.0021,40.7338,16/600x300">maki
+					icon</button>
+				<button
+					onclick=txtUrl.value="streets-v11/static/geojson(%7B%22type%22%3A%22Point%22%2C%22coordinates%22%3A%5B-73.99%2C40.7%5D%7D)/-73.99,40.70,12/500x300">geojson</button>
+				<button
+					onclick=txtUrl.value="streets-v11/static/\[-77.043686,38.892035,-77.028923,38.904192\]/400x400">bounding box</button>
+
+				<button
+					onclick=txtUrl.value="streets-v11/static/-122.4241,37.78,14.25,0,60/600x600";fn();>pitch</button>
+				<button
+					onclick=txtUrl.value="streets-v11/static/0,10,3,20/600x600";fn(); >bearing</button>
+			</p>
+
+			<p>
+				<button onclick=txtUrl.value="xxxxx">xxxxx</button>
+			</p>
+			<p>
+				<button onclick=addImagePlane()>addImagePlane</button>
+			</p>
+			<p>
+				<button onclick=getImg()>gtImg </button>
+
+				<button onclick=drawImage(img)>drwImg </button>
+
+				<button onclick=getImage()>gtImage </button>
+
+				<button onclick=drawImage(image)>drwImage </button>
+			</p>
+
+
+			<div id=divCanvas> </div>
+
+			<div id=divImg><img id=img width=100></div>
+
+			<div id="divMapvv"></div>
+
+			<div id=MNUdivFooter></div>
+
+		</nav>
+
+	</details>
+
+	<script>
+
+		//https://docs.mapbox.com/playground/static/
+
+		const mbxAccessToken = "?access_token=pk.eyJ1IjoidGhlb2EiLCJhIjoiY2o1YXFra3V2MGIzbzJxb2lneDUzaWhtZyJ9.7bYFAQabMXiYmcqW8NLfwg"
+		const mbxPrefix = "https://api.mapbox.com/styles/v1/mapbox/";
+		const urlMapBox = "light-v10/static/-87.0186,32.4055,14/1024x1024";
+		let mbxFilter = "";
+
+		init(); // see script-template-viewer.js
+
+		txtUrl.value = urlMapBox;
+
+
+		function fn() {
+
+			mbxFilter = "";
+		}
+		function getImg() {
+
+			img.src = mbxPrefix + txtUrl.value + mbxAccessToken;
+
+		}
+
+		function getImage() {
+
+			image = new Image();
+			image.src = mbxPrefix + txtUrl.value + mbxAccessToken;
+			image.width = 100;
+			divImg.appendChild( image );
+
+		}
+
+		function drawImage( image ) {
+
+			const size = 128;
+			canvas = divCanvas.appendChild( document.createElement( 'canvas' ) );
+			canvas.width = canvas.height = size;
+			canvas.style.cssText = 'border: 1px solid gray; ';
+			context = canvas.getContext( '2d', { preserveDrawingBuffer: true } );
+			context.drawImage( image, 0, 0, size, size );
+
+		}
+
+		function addImagePlane() {
+
+			THR.group = THR.getGroupNew();
+
+			const geometry = new THREE.PlaneGeometry( 100, 100 );
+
+			const imageUrl = mbxPrefix + txtUrl.value + mbxAccessToken + mbxFilter;
+
+			const loader = new THREE.TextureLoader();
+
+			const texture = new THREE.Texture( imageUrl );
+
+			var material = new THREE.MeshLambertMaterial( {
+				map: loader.load( imageUrl ),
+			} );
+
+			const mesh = new THREE.Mesh( geometry, material );
+
+			THR.group.add( mesh );
+
+		}
+
+
+		function addMapPlane() {
+
+			const geometry = new THREE.PlaneGeometry( 100, 100 );
+
+			texture = new THREE.Texture( L.mycanvas );
+
+			//texture = new THREE.Texture( L.mycanvas );
+
+			texture.magFilter = THREE.LinearFilter;
+			texture.minFilter = THREE.LinearMipMapLinearFilter;
+
+			// TODO: Set this to renderer.getMaxAnisotropy() / 4
+			texture.anisotropy = 4;
+
+			texture.needsUpdate = true;
+
+			var material = new THREE.MeshLambertMaterial( {
+				map: texture
+			} );
+
+			const mesh = new THREE.Mesh( geometry, material );
+			THR.group.add( mesh );
+
+		}
+
+	</script>
+
+
+</body>
+
+</html>

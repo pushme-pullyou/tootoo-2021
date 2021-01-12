@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset='utf-8' />
+<title>Style circles with a data-driven property</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' rel='stylesheet' />
+
+<style>
+
+body { margin:0; padding:0; }
+#map { position:absolute; top:0; bottom:0; width:100%; }
+
+
+</style>
+</head>
+<body >
+<div id='map'></div>
+
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoibG9ubmliZXNhbmNvbiIsImEiOiJjamxjaWNpOHQwMHV0M3FwaHhneGhvY2l2In0.7GxI8W_dnTKITNF4hEvZeQ';
+	var map = new mapboxgl.Map( {
+		container: 'map',
+		style: 'mapbox://styles/mapbox/light-v9',
+		zoom: 16,
+		center: [ -73.8581124527,
+			40.7177680369 ],
+		pitch: 20,
+	} );
+
+
+	var url = "https://cdn.rawgit.com/ebrelsford/geojson-examples/master/596acres-02-18-2014-queens.geojson"
+
+	map.on( 'load', function () {
+
+		var layers = map.getStyle().layers;
+
+		// var labelLayerId;
+		// for ( var i = 0; i < layers.length; i++ ) {
+		// 	if ( layers[ i ].type === 'symbol' && layers[ i ].layout[ 'text-field' ] ) {
+		// 		labelLayerId = layers[ i ].id;
+		// 		break;
+		// 	}
+		// }
+
+		map.addSource( "my_data", {
+			type: "geojson",
+			data: url //"./GeoObs.json",
+			/*cluster: true,
+			clusterMaxZoom: 15, // Max zoom to cluster points on
+			clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)*/
+		} );
+
+
+		map.addLayer( {
+			'id': 'population',
+			'type': 'circle',
+			source: 'my_data',
+			// 'source-layer': 'my_data',
+			'paint': {
+				// make circles larger as the user zooms from z12 to z22
+				'circle-radius': {
+					'base': 1.75,
+					'stops': [ [ 12, 2 ], [ 22, 180 ] ]
+				},
+				// color circles by ethnicity, using a match expression
+				// https://www.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
+				'circle-color': '#f00'
+			}
+		} );
+
+		// map.addLayer( {
+		// 	'id': '3d-buildings',
+		// 	'source': 'composite',
+		// 	'source-layer': 'building',
+		// 	'filter': [ '==', 'extrude', 'true' ],
+		// 	'type': 'fill-extrusion',
+		// 	'minzoom': 15,
+		// 	'paint': {
+		// 		'fill-extrusion-color': '#aaa',
+
+		// 		// use an 'interpolate' expression to add a smooth transition effect to the
+		// 		// buildings as the user zooms in
+		// 		'fill-extrusion-height': [
+		// 			"interpolate", [ "linear" ], [ "zoom" ],
+		// 			15, 0,
+		// 			15.05, [ "get", "height" ]
+		// 		],
+		// 		'fill-extrusion-base': [
+		// 			"interpolate", [ "linear" ], [ "zoom" ],
+		// 			10, 0,
+		// 			15.05, [ "get", "min_height" ]
+		// 		],
+		// 		'fill-extrusion-opacity': .6
+		// 	}
+		// }, labelLayerId );
+	} );
+</script>
+</body>
+</html>
