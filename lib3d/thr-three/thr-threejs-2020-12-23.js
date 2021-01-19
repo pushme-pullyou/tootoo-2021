@@ -181,6 +181,8 @@ THR.zoomObjectBoundingSphere = function ( obj = THR.group ) {
 	//window.dispatchEvent(event);
 };
 
+
+
 THR.zoomToFitObject = function ( obj = THR.group, fitOffset = 1 ) {
 
 	object = obj

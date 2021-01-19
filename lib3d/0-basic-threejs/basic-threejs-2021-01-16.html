@@ -17,6 +17,7 @@
 			overflow: hidden;
 		}
 
+
 		.nav {
 			background: white;
 			border-radius: 10px;
@@ -32,6 +33,7 @@
 			resize: both;
 		}
 
+
 		input[type=range],
 		.full {
 			width: 100%;
@@ -40,63 +42,38 @@
 </head>
 
 <body>
-	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r123/build/three.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r123/examples/js/controls/OrbitControls.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r124/build/three.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r124/examples/js/controls/OrbitControls.js"></script>
 
-	<script src="gjs-geojson.js"></script>
 	<nav id=navMenu class=nav>
 
 		<details open>
 			<summary>show/hide</summary>
 
 			<h1>
-				<a href="https://github.com/pushme-pullyou/tootoo-2020/tree/master/lib3d/" target="_blank"
+				<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/lib3d/" target="_blank"
 					title="source code on GitHub"><img
-						src=https://pushme-pullyou.github.io/tootoo-2020/lib/assets/icons/mark-github.svg></a>
+						src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
 				<a href="" id=aTitle title="Click this menu title to reset the model"></a>
 			</h1>
 
-			<!-- <div>
+			<div>
 
 				<label class=full title="Slide me">
-					X: <output id=outX>1</output><br>
-					<input id=rngX type=range oninput=updateModel(this);outX.value=this.value; min=0 max=10 value=1
-						step=0.1>
+					Opacity: <output id=outO >1</output><br>
+					<input id=rngX type=range oninput=mesh.material.opacity=+this.value/100;outO.value=(+this.value/100).toFixed(2); value=100
+					step=0.01>
 				</label>
 
-			</div> -->
-
-			<p>
-				<button
-					onclick=GJS.requestFile("https://pushme-pullyou.github.io/tootoo-2020/lib/assets/geojson/ne_110m_admin_0_countries_lakes.geojson")>world</button>
-			</p>
-
-			<p>
-				<button
-					onclick=GJS.requestFile("https://pushme-pullyou.github.io/tootoo-2020/lib/assets/geojson/china.geojson")>china</button>
-			</p>
-
-			<p>
-				<button
-					onclick=GJS.requestFile("https://pushme-pullyou.github.io/tootoo-2020/lib/assets/geojson/ne_50m_admin_1_states_provinces_lines.geojson")>states</button>
-			</p>
-
-						<p>
-							<button
-								onclick=GJS.requestFile("https://pushme-pullyou.github.io/tootoo-2020/lib/assets/geojson/cb_2019_us_county_20m.geojson")>us counties</button>
-						</p>
-			<p>
-				<button onclick=GJS.initGeoJson()>reset</button>
-			</p>
+			</div>
 
 			<p
-			title="View the number of objects that need rendering and the total number of triangles used to create the
-			objects">
-			<button onclick="setStats()">setStats</button>
+				title="View the number of objects that need rendering and the total number of triangles used to create the objects">
+				<button onclick="setStats()">setStats</button>
 			</p>
 
 		</details>
-</nav>
+
 
 		<script>
 
@@ -111,7 +88,6 @@
 				//aTitle.innerHTML = document.title = location.href.split( "/" ).pop();
 
 				aTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
-
 
 				camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
 				camera.position.set( -100, -100, 100 );
@@ -148,16 +124,10 @@
 				axesHelper = new THREE.AxesHelper( 50 );
 				scene.add( axesHelper );
 
-				geometry = new THREE.SphereGeometry( 50, 50, 25 );
-				material = new THREE.MeshNormalMaterial();
+				geometry = new THREE.BoxGeometry( 50, 50, 50 );
+				material = new THREE.MeshNormalMaterial( { opacity: 1, transparent: true });
 				mesh = new THREE.Mesh( geometry, material );
 				scene.add( mesh );
-
-				GJS.initGeoJson();
-
-				const urlGeoJson = "../../../lib/assets/geojson/cb_2019_us_county_20m.geojson";
-
-				GJS.requestFile( urlGeoJson, GJS.onLoadGeoJson );
 
 			}
 
@@ -174,6 +144,7 @@
 				xhr.send( null );
 
 			}
+
 
 
 			function setStats() {
@@ -194,7 +165,6 @@
 				};
 
 				script.src = "https://raw.githack.com/mrdoob/stats.js/master/build/stats.min.js";
-
 
 				const render = renderer.info.render;
 				if ( !window.divRendererInfo ) divRendererInfo = navMenu.appendChild( document.createElement( "div" ) );
