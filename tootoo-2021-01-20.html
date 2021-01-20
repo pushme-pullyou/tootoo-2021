@@ -5,10 +5,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
 	<meta name="description"
-		content="Your 3D cartography happy-place!">
+		content="TooToo 2021 uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2021-01-13">
-	<title>Theo Armour Maps 2021</title>
+	<meta name="date" content="2021-01-20">
+	<title>TooToo 2021</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
 	<link rel="stylesheet" href="./lib/style/style-2020-12-29.css">
@@ -73,13 +73,19 @@
 
 		function init() {
 
-			const source = "https://github.com/theo-armour/maps-2021/";
+			const user = "pushme-pullyou";
+			const repo = "tootoo-2021";
+			const branch = "main";
+			const path = "./"; //"../../../";
+			const defaultFile = "README.md";
+
+			const source = "https://github.com/pushme-pullyou/tootoo-2021/";
 
 			const version = document.head.querySelector( "[ name=date ]" ).content;
 
 			const description = document.head.querySelector( "[ name=description ]" ).content;
 
-			FOX.path = GOR.path = GRV.path = MNU.path = "./"; //"../../../";
+			FOX.path = GOR.path = GRV.path = MNU.path = path
 
 			MNU.init();
 
@@ -89,20 +95,27 @@
 
 			divDescription.innerHTML = description;
 
-			// GOR GitHub Organization Repos
-			GOR.user = "theo-armour";
-			GOR.repo = "maps-2021";
 
-			GOR.valueDefault = GOR.user + "/" + GOR.repo;
 
-			GOR.init();
-
-			FOX.path = "https://theo-armour.github.io/maps-2021/";
-
+			// FOX = File Open XHR
+			FOX.path = path;
+			FOX.defaultFile = defaultFile;
 			FOX.init();
 
-			GRV.init();
+			// GOR = GitHub Organization Repositories
+			GOR.user = user;
+			GOR.repo = repo;
+			GOR.init();
 
+			// GRV = GitHub Repo treeView
+			GRV.user = user;
+			GRV.repo = repo;
+			GRV.branch = branch;
+			GRV.path = path;
+
+			GRV.defaultFile = defaultFile;
+			GRV.ignoreFolders = [];
+			GRV.init();
 
 			// let's get going!
 			GOR.getOrganization();
