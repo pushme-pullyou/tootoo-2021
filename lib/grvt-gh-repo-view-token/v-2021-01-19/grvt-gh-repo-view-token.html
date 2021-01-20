@@ -7,152 +7,53 @@
 	<meta name="description"
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2021-01-01">
+	<meta name="date" content="2020-12-30">
 	<title>TooToo 2021</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
-	<link rel="stylesheet" href="https://theo-armour.github.io/2020/lib/style/style-2020-07-13.css">
+	<link rel="stylesheet" href="../../../lib/style/style-2020-12-29.css">
 
 	<style>
 		:root {
-			--main-hue: 300;
+			/* --mnu-width: 15rem; */
+			--main-hue: 0;
 			/* 0 to 360 0=red 120=green 240=blue */
 		}
+
+		/* #MNUdivPopUp {
+			max-height: 40vh;
+		} */
 	</style>
 
 </head>
 
 <body>
 
-	<script src="./grvt-gh-repo-view-token.js"></script>
+	<!-- https://github.com/showdownjs/showdown -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 
-	<script src="https://theo-armour.github.io/2020/lib/fo-file-open/foo-file-open-object-2020-07-07.js"></script>
-	<script src="https://theo-armour.github.io/2020/lib/fo-file-open/foz-file-open-zip-2020-07-07.js"></script>
-	<script src="https://theo-armour.github.io/2020/lib/fo-file-open/fr-file-reader-2020-07-06.js"></script>
+	<script src="../../../lib/fox-file-open-xhr/v-2020-12-31/fox-file-open-xhr.js"></script>
 
-	<details id=detNavMenu>
+	<!-- <script src="../../../lib/gor-github-organization-repos/v-2020-12-31/gor-github-organization-repos.js"></script> -->
+
+	<script src="../../../lib/grvt-gh-repo-view-token/v-2021-01-19/grvt-gh-repo-view-token.js"></script>
+
+	<script src="../../../lib/mnu-menu/v-2020-12-30/mnu-menu.js"></script>
+
+
+	<details id=detNavMenu class="gmd-4">
 
 		<summary id=sumNavMenu class="summary-secondary gmd-1">show || hide menu</summary>
 
 		<nav id="navMenu" class="gmd-2">
 
-			<header id="hdrTitle">
+			<div id=MNUdivHeader></div>
 
-				<h2>
+			<div id=GORdivDetails></div>
 
-					<a id=aGithub href="https://github.com/theo-armour/qdata/" target="_top"
-						title="Source code on GitHub">
-						<img src="https://theo-armour.github.io/2020/assets/icons/octicon.svg">
-					</a>
+			<div id=GRVTdivDetails></div>
 
-					<a id=aTitle href="" title="Click to reload this page">
-						qdata
-					</a>
-
-					<span class="info">
-						<img class=infoImg
-							src="https://theo-armour.github.io/2020/lib/assets/icons/noun_Information_585560.svg">
-						<span id="divDescription" class="infoTooltip gmd-5">
-
-						</span></span>
-
-				</h2>
-
-			</header>
-
-			<div id=divNavLog></div>
-
-			<p>
-				Access token
-				<input id=GRVinpGitHubApiKey onclick=this.select(); onblur=GRV.setGitHubAccessToken();
-					title="Obtain API Access Token" style=width:100%;>
-			</p>
-
-			<details id=detFile>
-
-				<summary class="summary-primary gmd-1" title="Open files on your device: ">file menu</summary>
-
-				<div id=FRdivMenuFileReader></div>
-
-				<p>
-					<input type=file id=FRinpFile onchange=FR.readFile(this); accept="*">
-				</p>
-
-				<div id=FOOdivLog>to be reset</div>
-
-				<div id=FOZdivFileOpenZip></div>
-
-				<div id=divLog></div>
-
-			</details>
-
-			<details open>
-				<!-- 'open' triggers a run on load -->
-
-				<summary class="summary-primary gmd-1" title="View selected items">repo files</summary>
-
-				<div class=divNavResize>
-
-					<p>Files you can load, view and experiment with:</p>
-
-					<div id=GRVdivGitHubRepoTreeView></div>
-
-					<br>
-
-				</div>
-
-			</details>
-			<!--
-			<details class=detNavMenu id=detView ontoggle="">
-
-				<summary class="sumPrimary gmd-1" title="View selected model aspects" >view menu</summary>
-
-				<div class=divNavResize >
-
-					<div id=VTdivViewTypes ></div>
-
-					<div id=VTdivAttributes></div>
-
-				</div>
-
-			</details>
-
-			<details class=detNavMenu id=detData ontoggle=JTV.init();JTV.onLoad(); >
-
-				<summary class="sumPrimary gmd-1" title="Browse the data in the file" >data menu</summary>
-
-				<div class=divNavResize >
-
-					<p>
-						<i>We need to decide what data should appear here & and how best to format it. Work-in-progress.</i>
-					</p>
-
-					<div id=JTHdivJsonTreeHelper ></div>
-
-					<div id=JTFdivJsonTreeFinder ></div>
-
-					<div id=JTEdivJsonTreeEdit ></div>
-
-					<div id=JTVdivJsonTreeView ></div>
-
-					<hr>
-
-				</div>
-
-			</details>
--->
-
-			<hr>
-
-			<footer>
-
-				<div title="go to top of menu" style=text-align:center;>
-					<a class=aDingbat href=javascript:navMenu.scrollTo(0,0);>
-						❦
-					</a>
-				</div>
-
-			</footer>
+			<div id=MNUdivFooter></div>
 
 		</nav>
 
@@ -161,83 +62,62 @@
 
 	<main>
 
-		<div id="divContentMain">
-
-			<iframe id=ifr style="border-width: 0 1px 1px 0;height:100%;width:100%;"></iframe>
-
-		</div>
+		<div id="divContentMain"></div>
 
 	</main>
 
-	<div id="divPopUp" class="gmd-2">Welcome! </div>
-
-
 
 	<script>
-
-		GRV.urlApi = "https://api.github.com/repos/theo-armour/qdata/git/trees/master?recursive=1";
-		GRV.urlSource = "https://github.com/theo-armour/qdata/tree/master/";
-		GRV.urlViewer = "https://theo-armour.github.io/qdata/";
-
-		divDescription.innerHTML = document.head.querySelector( "[ name=description ]" ).content;
-
 
 		init();
 
 		function init() {
 
-			divPopUp.hidden = true;
+			const source = "https://github.com/pushme-pullyou/tootoo-2021/";
 
-			//GRV.urlApi = "https://api.github.com/repos/theo-armour/2020/git/trees/master?recursive=1";
+			const version = document.head.querySelector( "[ name=date ]" ).content;
+
+			const description = document.head.querySelector( "[ name=description ]" ).content;
+
+			//FOX.path = GOR.path =
+
+			GRVT.path = MNU.path = "../../../";
+
+			MNU.init();
+
+			aGithub.href = source;
+
+			spnVersionInfo.innerHTML = version;
+
+			divDescription.innerHTML = description;
+
+			// GOR GitHub Organization Repos
+			// GOR.user = "pushme-pullyou";
+			// GOR.repo = "tootoo-2021";
+			// GOR.init();
+
+			// // FOX File open XHR
+
+			FOX.path = GRVT.urlViewer;
+
+			FOX.init();
+
+			GRVT.init();
 
 
-			GRV.accessToken = localStorage.getItem( 'githubAccessToken' ) || "";
+			FOX.onHashChange();
 
-			GRVinpGitHubApiKey.value = GRV.accessToken;
-
-			window.addEventListener( "hashchange", onHashChange, false );
-
-			onHashChange();
-
-			if ( window.innerWidth < 640 || window.innerHeight < 640 ) {
-
-			} else {
-
-				detNavMenu.open = true
-
-			}
+			// let's get going!
+			//GOR.getOrganization();
 
 			// if running on server, keeps address bar pointed to latest dev
 
-			if ( !location.hash && location.protocol === "https:" ) {
+			//if ( !location.hash && location.protocol === "https:" ) {
+			if ( location.protocol === "https:" ) {
 
-				window.history.pushState( "", "", "./" );
-
-			}
-
-			GRV.init();
-		}
-
-		function onHashChange() {
-
-			if ( !location.hash ) {
-
-				ifr.src = "./readme.html";
-
-				return;
+				window.history.pushState( "", "", "./" + location.hash );
 
 			}
-
-			if ( location.hash.toLowerCase().endsWith( ".md" ) ) {
-
-				ifr.src = "./readme.html" + location.hash;
-
-				return;
-
-			}
-
-			ifr.src = "./" + location.hash.slice( 1 );
-
 
 		}
 
