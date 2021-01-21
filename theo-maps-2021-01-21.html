@@ -5,20 +5,21 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
 	<meta name="description"
-		content="TooToo 2021 uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
+		content="Maps 2021 uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
 	<meta name="date" content="2021-01-21">
-	<title>FOX 2021</title>
+	<title>Maps 2021</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
-	<link rel="stylesheet" href="../../../lib/style/style-2020-12-29.css">
+	<link rel="stylesheet" href="./lib/style/style-2020-12-29.css">
 
 	<style>
 		:root {
 			/* --mnu-width: 15rem; */
-			--main-hue: 0;
+			--main-hue: 120;
 			/* 0 to 360 0=red 120=green 240=blue */
 		}
+
 	</style>
 
 </head>
@@ -28,13 +29,13 @@
 	<!-- https://github.com/showdownjs/showdown -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 
-	<script src="../../../lib/fox-file-open-xhr/v-2020-12-31/fox-file-open-xhr.js"></script>
+	<script src="./lib/fox-file-open-xhr/v-2021-01-21/fox-file-open-xhr.js"></script>
 
-	<script src="../../../lib/gor-github-organization-repos/v-2020-12-31/gor-github-organization-repos.js"></script>
+	<script src="./lib/gor-github-organization-repos/v-2020-12-31/gor-github-organization-repos.js"></script>
 
-	<script src="../../../lib/grv-github-repo-tree-view/v-2020-12-31/grv-github-repo-tree-view.js"></script>
+	<script src="./lib/grv-github-repo-tree-view/v-2020-12-31/grv-github-repo-tree-view.js"></script>
 
-	<script src="../../../lib/mnu-menu/v-2020-12-30/mnu-menu.js"></script>
+	<script src="./lib/mnu-menu/v-2020-12-30/mnu-menu.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
@@ -70,12 +71,12 @@
 		function init() {
 
 			const COR = {
-				user: "pushme-pullyou",
-				repo: "tootoo-2021",
+				user: "theo-armour",
+				repo: "maps-2021",
 				branch: "main",
 				defaultFile: "README.md",
 				ignoreFolders: [],
-				path: "../../../",
+				path: "https://theo-armour.github.io/maps-2021/" // ./", // "../../../",
 			}
 
 
@@ -96,9 +97,9 @@
 			divDescription.innerHTML = description;
 
 			// FOX = File Open XHR
-			FOX.path = COR.path;
-			FOX.defaultFile = COR.defaultFile;
-			FOX.init();
+			//FOX.path = COR.path;
+			//FOX.defaultFile = COR.defaultFile;
+			FOX.init( COR );
 
 			// GOR = GitHub Organization Repositories
 			GOR.user = COR.user;
