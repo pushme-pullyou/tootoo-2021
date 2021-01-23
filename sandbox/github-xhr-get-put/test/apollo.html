@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Github Api V3 test</title>
+	<style type="text/css">
+
+	/* https://gist.github.com/indriApollo/534d0c1c33afddc9802d */
+	
+		textarea {
+			height: 100%;
+		}
+
+		ul {
+			height: 100%;
+			width: 14vw;
+			overflow: auto;
+			border: 1px solid black;
+			border-radius: 2px;
+			display: inline-block;
+			padding: 2px;
+			margin: 1px;
+		}
+
+		li {
+			color: blue;
+			cursor: pointer;
+		}
+
+		.area {
+			width: 99vw;
+			height: 80vh;
+			float: left;
+		}
+
+		#content {
+			width: 52vw;
+		}
+
+		#consoleOut {
+			width: 30vw;
+		}
+	</style>
+</head>
+
+<body>
+	<input placeholder="github api key" id="apiKey" type="text">
+	<input placeholder="name repo" id="nameRepo" type="text">
+	<input placeholder="github username" id="username" type="text">
+	<button onclick="list()">list files in repo/master</button>
+	<button onclick="commitAndPush()">commit and push to master</button>
+	<button onclick="newFile()">new file</button>
+	<br />
+	<input placeholder="commit message" id="message" type="text">
+	<input id="pathTitle" type="text" readonly>
+	<div class="area">
+		<ul id="listContainer"></ul>
+		<textarea id="content"></textarea>
+		<textarea id="consoleOut" readonly></textarea>
+	</div>
+
+	<script type="text/javascript">
+		var githubApi = {};
+		githubApi.header = {};
+		githubApi.header.Accept = "application/vnd.github.v3+json"; //make sure we use v3
+		githubApi.header.Authorization = "token <token>";
+		githubApi.baseUrl = "https://api.github.com";
+		githubApi.username = "";
+		githubApi.nameRepo = "";
+		githubApi.sha = "";
+		githubApi.path = "";
+		githubApi.newFile = false;
+
+		function apiRequest( method, url, jsonData, callback ) {
+
+			//load the json file
+			var xhr = new XMLHttpRequest();
+
+			xhr.onreadystatechange = function () {
+				if ( xhr.readyState == 4 ) {
+					if ( xhr.status == 200 || xhr.status == 201 ) {
+						callback( xhr.responseText );
+					}
+					else {
+						cout( xhr.status );
+						cout( xhr.responseText );
+					}
+				}
+			}
+			xhr.open( method, url, true );
+			for ( var key in githubApi.header ) {
+				xhr.setRequestHeader( key, githubApi.header[ key ] );
+			}
+			xhr.send( jsonData );
+		}
+
+		function saveUserInfo() {
+
+			githubApi.username = document.getElementById( "username" ).value.trim();
+			githubApi.nameRepo = document.getElementById( "nameRepo" ).value.trim();
+			githubApi.header.Authorization = "token " + document.getElementById( "apiKey" ).value.trim();
+		}
+
+		function cout( str ) {
+
+			var csl = document.getElementById( "consoleOut" );
+			csl.value += ( str + "\n\n" );
+			csl.scrollTop = csl.scrollHeight //autoscroll to end;
+		}
+
+		function getfile( url, path ) {
+
+			apiRequest( "GET", url, null, function ( r ) {
+				var jsonRsp = JSON.parse( r );
+				if ( jsonRsp.encoding != "base64" ) {
+					cout( "unknown encoding " + jsonRsp.encoding );
+					return;
+				}
+				githubApi.sha = jsonRsp.sha;
+				githubApi.path = path;
+				githubApi.newFile = false;
+				document.getElementById( "content" ).value = atob( jsonRsp.content ); //decode base64
+				document.getElementById( "pathTitle" ).value = path;
+			} );
+		}
+
+		function newFile() {
+
+			githubApi.newFile = true;
+			githubApi.path = prompt( "File path : " );
+			document.getElementById( "content" ).value = ""; //clear
+			document.getElementById( "pathTitle" ).value = githubApi.path;
+		}
+
+		function list() {
+
+			saveUserInfo();
+			//get tree url from master branch's last commit
+			var url = githubApi.baseUrl + "/repos/" + githubApi.username + "/" + githubApi.nameRepo + "/branches/master";
+			apiRequest( "GET", url, null, function ( r ) {
+				var jsonRsp = JSON.parse( r );
+				var treeUrl = jsonRsp.commit.commit.tree.url + "?recursive=1";
+				//get tree
+				apiRequest( "GET", treeUrl, null, function ( r ) {
+					var jsonRsp = JSON.parse( r );
+					var cnt = document.getElementById( "listContainer" );
+					cnt.innerHTML = ""; //clear
+					//create li list elements
+					for ( var i in jsonRsp.tree ) {
+						var li = document.createElement( "li" );
+						li.url = jsonRsp.tree[ i ].url;
+						li.path = jsonRsp.tree[ i ].path;
+						li.innerHTML = li.path;
+						li.onclick = function () { getfile( this.url, this.path ) };
+						cnt.appendChild( li );
+					}
+				} );
+			} );
+		}
+
+		function commitAndPush() {
+
+			saveUserInfo();
+
+			var jsonData = new Object();
+			jsonData.message = document.getElementById( "message" ).value.trim();
+			jsonData.content = btoa( document.getElementById( "content" ).value ); //encode64
+			jsonData.path = githubApi.path;
+			jsonData.branch = "master";
+			if ( !githubApi.newFile ) {
+				jsonData.sha = githubApi.sha;
+			}
+			var url = githubApi.baseUrl + "/repos/" + githubApi.username + "/" + githubApi.nameRepo + "/contents/" + githubApi.path;
+			jsonData = JSON.stringify( jsonData ); //api expects json as string
+			cout( jsonData );
+			apiRequest( "PUT", url, jsonData, function ( r ) {
+				cout( r );
+			} );
+		}
+	</script>
+</body>
+
+</html>
