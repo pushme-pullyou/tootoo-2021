@@ -9,15 +9,22 @@ value='You are now in a GitHub web page view - Click this button to view this re
 <!--@@@
 <div class=iframe-resize ><iframe src=https://pushme-pullyou.github.io/tootoo-2021/ sandbox/xgp-xhr-get-put/ height=100% width=100% ></iframe></div>
 _XGP XHR get put in a resizable window. One finger to rotate. Two to zoom._
+@@@-->
 
 ### Full Screen: [XGP XHR get put]( https://pushme-pullyou.github.io/tootoo-2021/sandbox/xgp-xhr-get-put/ )
-@@@-->
 
 
 ## Concept
 
+use XMLHTTPRequest to GET or PUT any file in a GitHub repository
+
 
 ## To Do / Wish List
+
+* Read and write to any repo on GitHub
+* HTML file editor
+* Embed in TooToo
+* Google Drive to GitHub repo syn
 
 
 ## Issues
@@ -25,14 +32,15 @@ _XGP XHR get put in a resizable window. One finger to rotate. Two to zoom._
 
 ## Links of Interest
 
-* https://codesnippet.io/github-api-tutorial/
-	* nice bootstrap
+* https://github.com/penge/my-notes
+
 
 ## Change Log
 
 
-### 123
+### 2021-01-23
 
+* Bring together code from a lot of oldrr files
 * First commit
 
 
