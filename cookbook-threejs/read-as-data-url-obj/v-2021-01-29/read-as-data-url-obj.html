@@ -45,7 +45,12 @@
 <body>
 	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r124/build/three.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r124/examples/js/controls/OrbitControls.js"></script>
-	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r124/examples/js/loaders/STLLoader.js" ></script>
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r124/examples/js/loaders/DDSLoader.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r124/examples/js/loaders/MTLLoader.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r124/examples/js/loaders/OBJLoader.js"></script>
+
+
 	<nav id=navMenu class=nav>
 
 		<details open>
@@ -58,6 +63,9 @@
 						src=https://pushme-pullyou.github.io/tootoo-2020/lib/assets/icons/mark-github.svg></a>
 				<a href="" id=aTitle title="Click this menu title to reset the model"></a>
 			</h1>
+
+			<input type="file" id=inpFiles onchange="previewFile()"><br>
+
 
 			<div id=divMessage></div>
 
@@ -95,7 +103,6 @@
 
 			aTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
 
-
 			camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
 			camera.position.set( -100, -100, 100 );
 			camera.up.set( 0, 0, 1 );
@@ -104,6 +111,12 @@
 			scene.background = new THREE.Color( 0xcce0ff );
 			//scene.fog = new THREE.Fog( 0xcce0ff, 550, 800 );
 			scene.add( camera );
+
+			scene.add( new THREE.AmbientLight( 0xaaaaaa ) );
+
+			const pointLight = new THREE.PointLight( 0xffffff, 1 );
+			pointLight.position.copy( camera.position );
+			camera.add( pointLight );
 
 			renderer = new THREE.WebGLRenderer( { antialias: true } );
 			//renderer.setPixelRatio( window.devicePixelRatio );
@@ -131,49 +144,58 @@
 			axesHelper = new THREE.AxesHelper( 50 );
 			scene.add( axesHelper );
 
-			geometry = new THREE.BoxGeometry( 50, 50, 50 );
-			material = new THREE.MeshNormalMaterial();
-			mesh = new THREE.Mesh( geometry, material );
-			scene.add( mesh );
+			// geometry = new THREE.BoxGeometry( 50, 50, 50 );
+			// material = new THREE.MeshNormalMaterial();
+			// mesh = new THREE.Mesh( geometry, material );
+			// scene.add( mesh );
 
-			fileName = "../NPP_16.stl"
-			fileName = "https://va3c.github.io/viewer/samples/NPP_16.stl"
-			fileName = "https://cdn.jsdelivr.net/gh/ladybug-tools/3d-models@master/stl-samples/bigmakerbottable4.stl"
+			// https://ladybug.tools/3d-models
+			// https://github.com/ladybug-tools/3d-models/
+			fileName = "https://cdn.jsdelivr.net/gh/ladybug-tools/3d-models@master/obj/tree.obj"
 
-			loadFileSTLByURL( fileName )
+			loadFileOBJByURL( fileName );
+
 		}
 
+		function previewFile() {
 
-		function loadFileSTLByURL( fileName ) {
+				const reader = new FileReader();
+
+				reader.addEventListener( "load", () => loadFileOBJByURL( reader.result ), false );
+
+				if ( inpFiles.files[ 0 ] ) { reader.readAsDataURL( inpFiles.files[ 0 ] ); }
+
+			}
+
+		function loadFileOBJByURL( url ) {
 
 			// http:///jaanga.github.io/cookbook-threejs/viewers/viewer-stl/latest/#http://va3c.github.io/viewer/samples/NPP_16.stl
 
-			var loader = new THREE.STLLoader();
 
-			loader.load( fileName, function ( geometry ) {
+			const loader = new THREE.OBJLoader();
 
-				geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
-				geometry.computeFaceNormals();
-				geometry.computeVertexNormals();
-				geometry.center()
+			loader.load(
+				// resource URL
+				url,
+				// called when resource is loaded
+				function ( object ) {
 
-				if ( geometry.hasColors ) {
+					scene.add( object );
 
-					material = new THREE.MeshPhongMaterial( { opacity: geometry.alpha, vertexColors: THREE.VertexColors } );
+				},
+				// called when loading is in progresses
+				function ( xhr ) {
 
-				} else {
+					console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
 
-					material = new THREE.MeshNormalMaterial( { side: 2 } );
+				},
+				// called when loading has errors
+				function ( error ) {
+
+					console.log( 'An error happened' );
 
 				}
-
-				scene.remove( mesh );
-				mesh = new THREE.Mesh( geometry, material );
-				scene.add( mesh );
-
-				divMessage.innerHTML = `name: ${ fileName }`;
-
-			} );
+			);
 
 		}
 
