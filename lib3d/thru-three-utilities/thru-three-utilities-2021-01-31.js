@@ -550,3 +550,19 @@ THRU.setObjectExplode = function( range ) {
 };
 
 
+
+THRU.latLonToXYZ = function ( radius, lat, lon ) {
+
+	const pi2 = Math.PI / 2;
+
+	const theta = Number( lat ) * Math.PI / 180;
+	const phi = Number( lon ) * Math.PI / 180;
+	//console.log( "lat/lon", theta, phi, index);
+
+	const x = radius * Math.sin( theta + pi2 ) * Math.cos( phi );
+	const y = radius * Math.sin( theta + pi2 ) * Math.sin( phi );
+	const z = radius * Math.cos( theta - pi2 );
+
+	return new THREE.Vector3( x, y, z );
+
+};

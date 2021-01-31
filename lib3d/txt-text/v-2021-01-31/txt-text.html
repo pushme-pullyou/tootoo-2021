@@ -8,8 +8,8 @@
 	<meta name="description"
 		content="Part of a series of online interactive AEC viewers designed to be forked, hacked and remixed  with real-time interactive 3D graphics in your browser using the WebGL and the Three.js JavaScript library" />
 	<meta name="keywords" content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM" />
-	<meta name="date" content="2021-01-01">
-	<title>Lib 3D Template Viewer</title>
+	<meta name="date" content="2021-01-31">
+	<title></title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
 	<link rel="stylesheet" href="../../../lib/style/style-2020-12-29.css">
@@ -21,13 +21,15 @@
 	<script src="../../../lib3d/thr-three/thr-threejs-2020-12-23.js"></script>
 	<script src="../../../lib3d/thrc-three-set-colors/thrc-three-set-colors-2020-07-11.js"></script>
 	<script src="../../../lib3d/thrr-three-raycaster/thrr-three-raycaster-mousedown-2020-09-11.js"></script>
-	<script src="../../../lib3d/thru-three-utilities/thru-three-utilities-2021-01-30.js"></script>
+	<script src="../../../lib3d/thru-three-utilities/thru-three-utilities-2021-01-31.js"></script>
 
 	<script src="../../../lib/mnu-menu/v-2020-12-30/mnu-menu.js"></script>
 
 	<!-- <script src="../../../lib/gff-github-folder-files/gff-github-folder-files-2020-12-17.js"></script> -->
 
-	<script src="lib3d-template.js"></script>
+	<script src="txt-text.js"></script>
+
+	<script src="main.js"></script>
 
 	<style>
 		:root {
@@ -44,27 +46,37 @@
 
 <body>
 
-		<details id=detNavMenu class="gmd-4">
+	<details id=detNavMenu class="gmd-4">
 
-			<summary id=sumNavMenu class="summary-secondary gmd-1">show || hide menu</summary>
+		<summary id=sumNavMenu class="summary-secondary gmd-1">show || hide menu</summary>
 
-			<nav id="navMenu" class="gmd-2">
+		<nav id="navMenu" class="gmd-2">
 
-				<div id=MNUdivHeader></div>
+			<div id=MNUdivHeader></div>
 
-				<p>Click or touch a surface to view its details. Click &sdotb; icon to display all the surfaces.</p>
+			<p>
+				<button onclick=TXT.addText() >First post</button>
+			</p>
 
-				<div id=GORdivDetails></div>
+			<p>
+				<button onclick=TXT.addText2() >Second Post</button>
+			</p>
 
-				<div id=GRVdivDetails></div>
+			<p>
+				<button onclick=TXT.addText3()>Third Post</button>
+			</p>
 
-				<div id=MNUdivFooter></div>
+			<div id=GORdivDetails></div>
 
-			</nav>
+			<div id=GRVdivDetails></div>
 
-		</details>
+			<div id=MNUdivFooter></div>
 
-<!--
+		</nav>
+
+	</details>
+
+	<!--
 		<main>
 
 			<div id="divContentMain"></div>
@@ -72,10 +84,6 @@
 		</main>
 
 -->
-
-
-
-
 
 
 

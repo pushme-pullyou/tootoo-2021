@@ -29,13 +29,17 @@ function init () {
 
 	THR.addLights();
 
-	THR.addGround();
+	//THR.addGround();
 
 	THR.group = THR.getGroupNew();
 
-	THRU.addMeshes(100);
+	//THRU.addMeshes(100);
 
-	THR.zoomObjectBoundingSphere();
+	//THR.zoomObjectBoundingSphere();
+
+	TXT.init();
+
+	//TXT.addTextContinents();
 
 	// FOO.init();
 
