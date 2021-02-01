@@ -17,6 +17,7 @@
 	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r124/build/three.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r124/examples/js/controls/OrbitControls.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r124/examples/js/utils/BufferGeometryUtils.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r124/examples/js/controls/DragControls.js"></script>
 
 	<script src="../../../lib3d/thr-three/thr-threejs-2020-12-23.js"></script>
 	<script src="../../../lib3d/thrc-three-set-colors/thrc-three-set-colors-2020-07-11.js"></script>
@@ -27,7 +28,8 @@
 
 	<!-- <script src="../../../lib/gff-github-folder-files/gff-github-folder-files-2020-12-17.js"></script> -->
 
-	<script src="lib3d-template.js"></script>
+	<script src="drag-objects.js"></script>
+	<script src="ray-raycaster.js"></script>
 
 	<style>
 		:root {
@@ -44,27 +46,34 @@
 
 <body>
 
-		<details id=detNavMenu class="gmd-4">
+	<details id=detNavMenu class="gmd-4">
 
-			<summary id=sumNavMenu class="summary-secondary gmd-1">show || hide menu</summary>
+		<summary id=sumNavMenu class="summary-secondary gmd-1">show || hide menu</summary>
 
-			<nav id="navMenu" class="gmd-2">
+		<nav id="navMenu" class="gmd-2">
 
-				<div id=MNUdivHeader></div>
+			<div id=MNUdivHeader></div>
 
-				<p>Click or touch a surface to view its details. Click &sdotb; icon to display all the surfaces.</p>
+			<div id=GORdivDetails></div>
 
-				<div id=GORdivDetails></div>
+			<div id=GRVdivDetails></div>
 
-				<div id=GRVdivDetails></div>
+			<div id=RAYdivMeshData>
 
-				<div id=MNUdivFooter></div>
 
-			</nav>
+				<p>
+					Selected surface data will appear here when a surface in the 3D model is clicked on or touched.
+				</p>
 
-		</details>
+			</div>
 
-<!--
+			<div id=MNUdivFooter></div>
+
+		</nav>
+
+	</details>
+
+	<!--
 		<main>
 
 			<div id="divContentMain"></div>
@@ -72,10 +81,6 @@
 		</main>
 
 -->
-
-
-
-
 
 
 
