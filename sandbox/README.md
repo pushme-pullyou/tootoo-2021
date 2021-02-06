@@ -1,19 +1,22 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://pushme-pullyou.github.io/tootoo-2021/sandbox/  "View file as a web page." ) </span>
+<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://theo-armour.github.io/2021/sandbox/readme.html  "View file as a web page." ) </span>
+
+<div><input type=button onclick=window.top.location.href="https://github.com/theo-armour/2021/tree/master/sandbox/";
+value='You are now in a GitHub web page view - Click this button to view this read me file as source code' ></div>
 
 
-
-# [Sandbox Read Me]( ./index.html )
+# [Sandbox Read Me]( https://theo-armour.github.io/2021/sandbox/readme.html )
 
 <!--@@@
-<div class=iframe-resize ><iframe src=https://pushme-pullyou.github.io/tootoo-2021/sandbox/ height=100% width=100% ></iframe></div>
-_Sandbox_
+<div class=iframe-resize ><iframe src=https://theo-armour.github.io/2021/sandbox/us-county-votes/index.html  height=100% width=100% ></iframe></div>
+_ZZZZZ in a resizable window. One finger to rotate. Two to zoom._
 
-### Full Screen: [Sandbox]( https://pushme-pullyou.github.io/tootoo-2021/sandbox/ )
+### Full Screen: [Sandbox]( https://theo-armour.github.io/2021/sandbox/us-county-votes/index.html )
 @@@-->
 
 
 ## Concept
 
+* Projects that are new and experimental and may or may not go anywhere
 
 ## To Do / Wish List
 
@@ -26,11 +29,12 @@ _Sandbox_
 
 ## Change Log
 
-### 2021-01-11
 
+### 2021-01-01
 
+* First commit
 
 
 ***
 
-<center><a href=javascript:window.scrollTo(0,0); class=aDingbat title="Scroll to top" > ❦ </a></center>
+<center title="Hello! Click me to go up to the top" ><a class=aDingbat href=javascript:window.scrollTo(0,0);> ❦ </a></center>

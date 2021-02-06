@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang=en>
+
+<head>
+	<title></title>
+	<meta charset=utf-8 />
+	<style>
+		body {
+			font: bold 12pt monospace;
+		}
+	</style>
+</head>
+
+<body>
+
+	<a href="https://github.com/theo-armour/qdata/tree/master/sandbox/notes" target="_blank">
+		<img src="https://theo-armour.github.io/qdata/github-mark-32.png" height=16></a>
+	<a href="">notes</a>
+	<label>
+		Access token
+		<input id=inpToken onclick=this.select(); onblur=setGitHubAccessToken(); title="Obtain API Access Token"
+			size=45>
+	</label>
+
+	<button onclick=getHtmlFile()>getHtmlfile</button>
+
+	<button id=but onclick=putHtmlFile();>putHtmlFile</button>
+
+	<button onClick=fetchFile()>fetch file</button>
+
+	<div id=divContent contenteditable></div>
+
+	<div id=divToSend ></div>
+
+	<div id=divResponse ></div>
+
+	<script>
+
+		const urlSource = "https://github.com/theo-armour/qdata/edit/master/sandbox/notes/notes.txt";
+		const urlApi = "https://api.github.com/repos/theo-armour/qdata/contents/sandbox/notes/notes.txt";
+
+
+		const userName = "theo-armour"
+		let accessToken = localStorage.getItem( 'githubAccessToken' ) || '';
+		inpToken.value = accessToken;
+
+		let timeStart;
+
+		getHtmlFile();
+
+		function getHtmlFile() {
+
+			timeStart = performance.now();
+			const xhr = new XMLHttpRequest();
+			xhr.open( "GET", urlApi, true );
+			//xhr.setRequestHeader( "Authorization", "Basic " + btoa( userName + ":" + accessToken ) );
+			xhr.setRequestHeader( "Authorization", "token " + accessToken );
+			xhr.responseType = "json";
+			xhr.onerror = ( xhr ) => console.log( 'error:', xhr );
+			xhr.onprogress = ( xhr ) => console.log( 'bytes loaded:', xhr.loaded, performance.now() - timeStart );
+			xhr.onload = ( xhr ) => {
+				divContent.innerText = atob( xhr.target.response.content );
+				logFileSha = xhr.target.response.sha;
+			};
+			xhr.send( null );
+
+		}
+
+		//fetchFile( url )
+
+		function fetchFile() {
+
+			//const request = new Request( url );
+			timeStart = performance.now();
+			let headers = new Headers();
+
+			headers.append( "Authorization", "token " + accessToken );
+
+			fetch( urlApi, { method: 'GET', headers: headers } )
+				.then( response => response.json() )
+				.then( json => parseJson( json ) )
+
+
+		}
+
+
+		function parseJson( tmp ) {
+
+			const json = tmp;
+			//console.log( 'json', json );
+			//console.log( '', atob( json.content ) );
+
+			contentSource = atob( json.content );
+			logFileSha = json.sha;
+			divContent.innerText = contentSource;
+			console.log( "", performance.now() - timeStart )
+
+		}
+
+
+
+
+		function putHtmlFile() {
+
+			const content = divContent.innerText;
+
+			codedData = window.btoa( content ); // encode the string
+
+			divToSend.innerHTML = codedData;
+
+			const request = new Request( urlApi );
+
+			fetch( request, {
+				method: "PUT",
+				headers: { "Authorization": "token " + accessToken, "Content-Type": "text/plain" },
+				body: JSON.stringify( {
+					"branch": "master",
+					"content": codedData,
+					"message": `add to file`,
+					"sha": logFileSha
+				} ),
+
+			} )
+				.then( response => response.json() )
+				.then( data => {
+
+					contentSource = divContent.innerText;
+
+					// console.log( 'data', data );
+					// dd = data;
+					logFileSha = data.content.sha
+					divResponse.innerHTML =
+						`<p>commit:${ data.commit.author.date } file: notes.txt size:${ data.content.size }</p>`;
+
+					console.log( "", data.content );
+
+				} )
+				.catch( err => console.warn( 'Something went wrong.', err ) );
+
+		}
+		function setGitHubAccessToken() {
+
+			console.log( 'accessToken', inpToken.value );
+
+			localStorage.setItem( "githubAccessToken", inpToken.value );
+
+
+		};
+	</script>
+
+
+
+</body>
+
+</html>

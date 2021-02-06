@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>US County Votes</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+	<script src="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js"></script>
+	<link href="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css" rel="stylesheet" />
+	<style>
+		body {
+			font: 100% monospace;
+			margin: 0;
+			padding: 0;
+		}
+
+		#map {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			width: 100%;
+		}
+
+
+		.nav {
+			background: white;
+			border-radius: 10px;
+			box-shadow: 0 0 50px -25px black;
+			color: gray;
+			margin: 1rem;
+			width: 15rem;
+			overflow: auto;
+			padding: 1rem;
+			position: absolute;
+			resize: both;
+			/* height: 90%; */
+		}
+
+		a.mapboxgl-ctrl-logo {
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<script src="https://unpkg.com/three@0.124.0/build/three.min.js"></script>
+	<script src="https://unpkg.com/three@0.124.0/examples/js/loaders/GLTFLoader.js"></script>
+	<script src="https://unpkg.com/three@0.124.0/examples/js/utils/BufferGeometryUtils.js"></script>
+
+	<!-- <script src="../../../lib3d/thrr-three-raycaster/ray-raycaster-mousemove-2021-01-15.js"></script> -->
+
+	<!-- geo-->
+	<script src="../../../lib3d/gjs-geojson/v-2020-12-16/gjs-geojson.js"></script>
+
+	<!-- votes -->
+	<script src="ufr-usa-fips-remix.js"></script>
+	<script src="us-county-votes.js"></script>
+	<script src="vot-votes.js"></script>
+
+	<div id="map"></div>
+
+	<div id="MNUdivPopUp" class="gmd-2"></div>
+
+	<nav class="nav rounded-rect sidebar-content">
+
+		<details open>
+
+			<summary>show &uarr; || hide &darr; </summary>
+
+			<h1><a href="https://github.com/theo-armour/maps-2021/tree/master/lib3d/" target="_blank" title="source code on GitHub"><img
+					src=https://theo-armour.github.io/maps-2021/lib/assets/icons/mark-github.svg></a>
+
+					<a href="">US County Votes</a>
+				</h1>
+
+			<p><button onclick=map.setCenter([-122.431,37.803]);>San Francisco</button></p>
+
+			<p><button onclick=addBox()>addBox</button></p>
+
+			<select id=selYear oninput=VOT.drawVotes(); size=5 style="float:left;margin:0 1rem 0 0;"">
+				<option selected>2020</option>
+				<option>2016</option>
+				<option>2012</option>
+				<option>2008</option>
+				<option>2004</option>
+				<option>2000</option>
+			</select>
+
+			<div >Select year: use up & down cursor keys</div>
+
+			<p style=clear:both > 1|2|3 fingers to rotate|zoom|pan. </p>
+
+			<p>Click title to reset view.</p>
+
+			<p>
+			<button id=butPopLegend onclick=MNU.unhidePopUpCentered(legendText)>legend</button>
+
+			<br>
+
+			<button onclick=" THR.setStats();"
+				title="View the number of objects that need rendering and the total number of triangles used to create the objects">render
+				stats</button>
+
+				<button onclick=MNU.toggleDarkMode(this)>dark mode</button>
+
+				</p>
+
+				<div id=divMessage></div>
+
+				<pre id="coordinates" class="coordinates"></pre>
+
+		</details>
+
+	</nav>
+
+	<script>
+
+		mapboxgl.accessToken = 'pk.eyJ1IjoidGhlb2EiLCJhIjoiY2o1YXFra3V2MGIzbzJxb2lneDUzaWhtZyJ9.7bYFAQabMXiYmcqW8NLfwg';
+		let renderer;
+		let camera = new THREE.PerspectiveCamera( 28, window.innerWidth / window.innerHeight, 0.000000000001, Infinity );
+		let scene = new THREE.Scene();
+		let tellTale;
+		modelScale = 111000;
+
+		const RAY = {
+			raycaster: new THREE.Raycaster(),
+			mouse: new THREE.Vector2(),
+			intersectObjects: [],
+		};
+
+		init();
+
+
+		var map = ( new mapboxgl.Map( {
+			container: 'map',
+			style: 'mapbox://styles/mapbox/light-v10',
+			zoom: 4,
+			center: [ -97, 37 ],
+			pitch: 30,
+			antialias: true // create the gl context with MSAA antialiasing, so custom layers are antialiased
+		} ) );
+
+		// parameters to ensure the model is georeferenced correctly on the map
+		modelOrigin = [ 0, 0 ];
+		modelAltitude = 0;
+		modelRotate = [ Math.PI / 2, 0, 0 ];
+		//const modelRotate = [ 0, 0, 0 ];
+		//const modelScale = 111000;
+
+		modelAsMercatorCoordinate = mapboxgl.MercatorCoordinate.fromLngLat(
+			modelOrigin,
+			modelAltitude
+		);
+
+		// transformation parameters to position, rotate and scale the 3D model onto the map
+		var modelTransform = {
+			translateX: modelAsMercatorCoordinate.x,
+			translateY: modelAsMercatorCoordinate.y,
+			translateZ: modelAsMercatorCoordinate.z,
+			rotateX: modelRotate[ 0 ],
+			rotateY: modelRotate[ 1 ],
+			rotateZ: modelRotate[ 2 ],
+			/* Since our 3D model is in real world meters, a scale transform needs to be
+			 * applied since the CustomLayerInterface expects units in MercatorCoordinates.
+			 */
+			scale: modelAsMercatorCoordinate.meterInMercatorCoordinateUnits()
+		};
+
+		//var THREE = window.THREE;
+
+		// configuration of the custom layer for a 3D model per the CustomLayerInterface
+		var customLayer = {
+			id: '3d-model',
+			type: 'custom',
+			renderingMode: '3d',
+			onAdd: function ( map, gl ) {
+				// use the Mapbox GL JS map canvas for three.js
+				renderer = new THREE.WebGLRenderer( {
+					canvas: map.getCanvas(),
+					context: gl,
+					antialias: true
+				} );
+
+				renderer.autoClear = false;
+			},
+
+			render: function ( gl, matrix ) {
+				const rotationX = new THREE.Matrix4().makeRotationAxis(
+					new THREE.Vector3( 1, 0, 0 ),
+					modelTransform.rotateX
+				);
+				const rotationY = new THREE.Matrix4().makeRotationAxis(
+					new THREE.Vector3( 0, 1, 0 ),
+					modelTransform.rotateY
+				);
+				const rotationZ = new THREE.Matrix4().makeRotationAxis(
+					new THREE.Vector3( 0, 0, 1 ),
+					modelTransform.rotateZ
+				);
+
+				var m = new THREE.Matrix4().fromArray( matrix );
+				var l = new THREE.Matrix4()
+					.makeTranslation(
+						modelTransform.translateX,
+						modelTransform.translateY,
+						modelTransform.translateZ
+					)
+					.scale(
+						new THREE.Vector3(
+							modelTransform.scale,
+							modelTransform.scale,
+							modelTransform.scale
+						)
+					)
+					.multiply( rotationX )
+					.multiply( rotationY )
+					.multiply( rotationZ );
+
+				camera.projectionMatrix = m.multiply( l );
+				renderer.state.reset();
+				renderer.render( scene, camera );
+				map.triggerRepaint();
+			}
+		};
+
+		map.on( 'style.load', function () {
+			map.addLayer( customLayer, 'waterway-label' );
+		} );
+
+		map.on( 'mousemove', function ( event ) {
+
+			if ( !tellTale ) {
+
+				const geometry = new THREE.BoxGeometry( 1, 20, 1 );
+				geometry.translate( 0, 10, 0 );
+				geometry.scale( 111000, 111000, 111000 );
+				const material = new THREE.MeshNormalMaterial();
+				tellTale = new THREE.Mesh( geometry, material );
+				//tellTale.geometry.scale( 11, 11, 11 );
+				//mesh.position.set( -122, lat2y( 38 ), 5 );
+
+				scene.add( tellTale );
+
+				// geometry = new THREE.BoxGeometry( 1, 100, 1 );
+				// geometry.translate( 0, 10, 0 );
+				// geometry.scale( 111000, 111000, 111000 )
+				// const material = new THREE.MeshNormalMaterial();
+				center = new THREE.Mesh( geometry, material );
+				//center.position.set( -98, 0, lat2y( 38 ) );
+
+				center.position.set( modelScale * -98, 0, modelScale * lat2y( 38 ) );
+				scene.add( center );
+
+			}
+			//console.log( "e", event, event.point );
+
+			//RAY.mouse.x = ( event.point.x / map.transform.width ) * 2 - 1;
+			//RAY.mouse.y = 1 - ( event.point.y / map.transform.height ) * 2;
+			RAY.mouse.x = ( event.point.x/ window.innerWidth ) * 2 - 1;
+			RAY.mouse.y = -( event.point.y / window.innerHeight ) * 2 + 1;
+			console.log( "", RAY.mouse.x );
+
+			tellTale.position.set( RAY.mouse.x / ( modelTransform.scale ), 0, RAY.mouse.y / modelTransform.scale );
+
+			xx = group.children.filter( child => child.position.distanceTo( tellTale.position ) < 100000 );
+			console.log( "xx", xx );
+			//RAY.raycaster.setFromCamera( RAY.mouse, camera );
+
+			pos = group.children[ 9 ].position.clone();
+			pos.x = pos.x - 5;
+			//console.log( "distance", pos.distanceTo( group.children[ 9 ].position ) );
+			RAY.raycaster.set( pos, new THREE.Vector3( 1, 0, 0 ) );
+
+			// calculate objects intersecting the picking ray
+			var intersects = RAY.raycaster.intersectObject( group.children[ 9 ], true );
+			//console.log( "inter", intersects);
+
+			return intersects;
+
+
+		} );
+
+	</script>
+
+</body>
+
+</html>

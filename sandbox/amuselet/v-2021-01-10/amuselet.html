@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0">
+	<meta name=description content="An amusing amulet app to help you muse about stuff">
+	<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM">
+	<meta name="date" content="2021-01-10">
+	<title></title>
+	<style>
+		/* Copyright 2021 Theo Armour. MIT License */
+
+		body {
+			font: 100% monospace;
+			margin: 0;
+			overflow: hidden;
+		}
+
+		nav {
+			background-color: #ccc;
+			border: 1px solid #888;
+			opacity: 0.85;
+			padding: 0.5rem;
+			position: absolute;
+			left: 1rem;
+		}
+
+		input[type=range],
+		.full {
+			margin: 0;
+			width: 100%;
+		}
+
+		#divNav {
+			border: 0px solid red;
+			height: 95%;
+			overflow: auto;
+			width: 12rem;
+			resize: both;
+		}
+	</style>
+</head>
+
+<body>
+
+
+	<nav>
+
+		<div id=divNav>
+			<details open>
+				<summary>show/hide</summary>
+
+				<h1>
+					<a href="https://github.com/theo-armour/2021/tree/master/sandbox/amuselet/" target="_blank"
+						title="source code on GitHub"><img
+							src=https://theo-armour.github.io/2021/lib/assets/icons/mark-github.svg></a>
+					<a href="" id=aTitle title="Click this menu title to reset the model"></a>
+				</h1>
+
+				<p><i>An amusing amulet app to help you muse about stuff</i></p>
+
+				<div>
+					<label class=full title="Slide me">
+						X: <output id=outX>1</output><br>
+						<input id=rngX type=range oninput=updateModel(this);outX.value=this.value; min=0 max=10 value=1
+							step=0.1>
+					</label>
+				</div>
+
+				<div>
+					<label class=full title="Slide me">
+						Y: <output id=outY>1</output><br>
+						<input id=rngY type=range oninput=updateModel(this);outY.value=this.value; min=0 max=10 value=1
+							step=0.1>
+					</label>
+				</div>
+
+				<div>
+					<label class=full title="Slide me">
+						delta1: <output id=outD1>1</output><br>
+						<input id=rngD1 type=range oninput=updateModel(this);outD1.value=this.value; min=0 max=10
+							value=0.5 step=0.1>
+					</label>
+				</div>
+
+				<div>
+					<label class=full title="Slide me">
+						delta2: <output id=outD2>0</output><br>
+						<input id=rngD2 type=range oninput=updateModel(this);outD2.value=this.value; min=0 max=10
+							value=0 step=0.1>
+					</label>
+				</div>
+				<div>
+					<label class=full title="Slide me">
+						Z1: <output id=outZ1>0</output><br>
+						<input id=rngZ1 type=range oninput=updateModel(this);outZ1.value=this.value; min=0 max=5 value=0
+							step=0.1>
+					</label>
+				</div>
+				<div>
+					<label class=full title="Slide me">
+						Z2: <output id=outZ2>1</output><br>
+						<input id=rngZ2 type=range oninput=updateModel(this);outZ2.value=this.value; min=0 max=5 value=1
+							step=0.1>
+					</label>
+				</div>
+				<div>
+					<label class=full title="Slide me">
+						Z3: <output id=outZ3>1</output><br>
+						<input id=rngZ3 type=range oninput=updateModel(this);outZ3.value=this.value; min=0 max=5 value=1
+							step=0.1>
+					</label>
+				</div>
+				<div>
+					<label class=full title="Slide me">
+						Z4: <output id=outZ4>1</output><br>
+						<input id=rngZ4 type=range oninput=updateModel(this);outZ4.value=this.value; min=0 max=5 value=1
+							step=0.1>
+					</label>
+				</div>
+				<div>
+					<label class=full title="Slide me">
+						Z5: <output id=outZ5>1</output><br>
+						<input id=rngZ5 type=range oninput=updateModel(this);outZ5.value=this.value; min=0 max=5 value=1
+							step=0.1>
+					</label>
+				</div>
+				<div>
+					<label class=full title="Slide me">
+						Z6: <output id=outZ6>1</output><br>
+						<input id=rngZ6 type=range oninput=updateModel(this);outZ6.value=this.value; min=0 max=5 value=1
+							step=0.1>
+					</label>
+				</div>
+				<div>
+					<label class=full title="Slide me">
+						Z7: <output id=outZ7>1</output><br>
+						<input id=rngZ7 type=range oninput=updateModel(this);outZ7.value=this.value; min=0 max=5 value=1
+							step=0.1>
+					</label>
+				</div>
+				<div>
+					<label class=full title="Slide me">
+						Z8: <output id=outZ8>1</output><br>
+						<input id=rngZ8 type=range oninput=updateModel(this);outZ8.value=this.value; min=0 max=5 value=1
+							step=0.1>
+					</label>
+				</div>
+				<div>
+					<label class=full title="Slide me">
+						Z9: <output id=outZ9>1</output><br>
+						<input id=rngZ9 type=range oninput=updateModel(this);outZ9.value=this.value; min=0 max=5 value=1
+							step=0.1>
+					</label>
+				</div>
+				<div>
+					<label class=full title="Slide me">
+						Z10: <output id=outZ10>1</output><br>
+						<input id=rngZ10 type=range oninput=updateModel(this);outZ10.value=this.value; min=0 max=5
+							value=1 step=0.1>
+					</label>
+				</div>
+
+			</details>
+
+		</div>
+
+	</nav>
+
+
+
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r123/build/three.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r123/examples/js/controls/OrbitControls.js"></script>
+
+	<script>
+
+		let lightAmbient, lightDirectional, lightPoint;
+		var renderer, camera, controls, scene;
+		var geometry, material, mesh, axesHelper;
+
+		init();
+		animate();
+
+		function init() {
+
+			aTitle.innerHTML = document.title = location.href.split( "/" ).pop();
+
+			renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true } );
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			renderer.shadowMap.enabled = true;
+			renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
+
+			document.body.appendChild( renderer.domElement );
+
+			camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+			camera.position.set( -10, -10, 10 );
+			camera.up.set( 0, 0, 1 );
+
+			controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+			scene = new THREE.Scene();
+
+			addLights();
+
+			window.addEventListener( 'resize', onWindowResize, false );
+			window.addEventListener( 'orientationchange', onWindowResize, false );
+			window.addEventListener( 'keyup', function () { controls.autoRotate = false; }, false );
+			renderer.domElement.addEventListener( 'click', function () { controls.autoRotate = false; }, false );
+
+			axesHelper = new THREE.AxesHelper( 50 );
+			scene.add( axesHelper );
+
+			// const geometry = new THREE.SphereGeometry( 10, 10, 10 );
+			// const material = new THREE.MeshPhongMaterial( { flatShading: true } );
+			// const mesh = new THREE.Mesh( geometry, material );
+			// scene.add( mesh );
+
+			const planeGeometry = new THREE.PlaneBufferGeometry( 20, 20, 32, 32 );
+			const planeMaterial = new THREE.MeshStandardMaterial( { color: 0x00ff00 } )
+			const plane = new THREE.Mesh( planeGeometry, planeMaterial );
+			plane.receiveShadow = true;
+			scene.add( plane );
+
+			width = 50;
+			height = 50;
+			depth = 50;
+
+			updateModel();
+
+		}
+
+
+
+		function updateModel() {
+
+			scene.remove( mesh );
+
+			geometry = new THREE.PlaneGeometry( 1, 1, 8, 10 );
+
+			const pts = 9;
+			let count = 0;
+			const x = +rngX.value;
+			const y = +rngY.value;
+			const d1 = +rngD1.value;
+			const d2 = +rngD2.value;
+
+			const z1 = +rngZ1.value;
+			const z2 = +rngZ2.value + z1;
+			const z3 = +rngZ3.value + z2;
+			const z4 = +rngZ4.value + z3;
+			const z5 = +rngZ5.value + z4;
+			const z6 = +rngZ6.value + z5;
+			const z7 = +rngZ7.value + z6;
+			const z8 = +rngZ8.value + z7;
+			const z9 = +rngZ9.value + z8;
+			const z10 = +rngZ10.value + z9;
+
+			getVertices( geometry, pts * count++, 0.0, 0.0, z10 );
+			getVertices( geometry, pts * count++, d2, y, z10 );
+			getVertices( geometry, pts * count++, x, y, z9 );
+			getVertices( geometry, pts * count++, d2, y, z8 );
+			getVertices( geometry, pts * count++, x, y, z7 );
+			getVertices( geometry, pts * count++, x, y, z6 );
+			getVertices( geometry, pts * count++, d1, y, z5 );
+			getVertices( geometry, pts * count++, d1, y, z4 );
+			getVertices( geometry, pts * count++, x, y, z3 );
+			getVertices( geometry, pts * count++, x, y, z2 );
+			getVertices( geometry, pts * count++, d1, y, z1 );
+
+
+			//geometry.scale( height, depth, depth );
+
+			geometry.verticesNeedUpdate = true;
+			geometry.elementsNeedUpdate = true;
+			geometry.morphTargetsNeedUpdate = true;
+			geometry.uvsNeedUpdate = true;
+			geometry.normalsNeedUpdate = true;
+			geometry.colorsNeedUpdate = true;
+			geometry.tangentsNeedUpdate = true;
+			material = new THREE.MeshPhongMaterial( { flatShading: true, reflectivity: 1, side: 2, wireframe: false } );
+
+			mesh = new THREE.Mesh( geometry, material );
+			mesh.receiveShadow = true;
+			mesh.castShadow = true;
+			scene.add( mesh );
+
+
+			edgesGeometry = new THREE.EdgesGeometry( geometry ); // or WireframeGeometry
+			edgesMaterial = new THREE.LineBasicMaterial( { color: 0x000000 } );
+			edges = new THREE.LineSegments( edgesGeometry, edgesMaterial );
+			mesh.add( edges );
+
+			geometry.computeBoundingSphere();
+			controls.target.copy( geometry.boundingSphere.center );
+			rad = 3 * geometry.boundingSphere.radius
+			camera.position.set( rad, rad, rad )
+
+		}
+
+
+
+		function getVertices( geometry, a = 0, d1 = 0.5, d2 = 0.5, z = 0.5 ) {
+
+			//console.log( "geo", geometry );
+
+			geometry.vertices[ a + 0 ].set( d1, d2, z );
+			geometry.vertices[ a + 1 ].set( -d1, d2, z );
+
+			geometry.vertices[ a + 2 ].set( -d2, d1, z );
+			geometry.vertices[ a + 3 ].set( -d2, -d1, z );
+
+			geometry.vertices[ a + 4 ].set( -d1, -d2, z );
+			geometry.vertices[ a + 5 ].set( d1, -d2, z );
+
+			geometry.vertices[ a + 6 ].set( d2, -d1, z );
+			geometry.vertices[ a + 7 ].set( d2, d1, z );
+
+			geometry.vertices[ a + 8 ].set( d1, d2, z );
+
+		}
+
+
+
+		function addLights( d = 10 ) {
+
+
+			lightAmbient = new THREE.AmbientLight( 0x444444 );
+			scene.add( lightAmbient );
+
+			lightPoint = new THREE.PointLight( 0xffffff, 0.5 );
+			camera.add( lightPoint );
+			lightPoint.position = new THREE.Vector3( 0, 0, 1 );
+			scene.add( camera );
+
+
+			lightDirectional = new THREE.DirectionalLight( 0xffffff, 0.5 );
+			lightDirectional.position.set( -20, -5, 20 );
+
+			lightDirectional.shadow.camera.left = -d;
+			lightDirectional.shadow.camera.right = d;
+			lightDirectional.shadow.camera.top = d;
+			lightDirectional.shadow.camera.bottom = -d;
+			lightDirectional.shadow.camera.far = 50;
+
+			//lightDirectional.shadow.bias = -0.001; // default 0 ~ distance from corners?
+
+
+			//lightDirectional.shadow.mapSize.width = 2048;  // default 512
+			//lightDirectional.shadow.mapSize.height = 2048;
+
+			lightDirectional.castShadow = true;
+			scene.add( lightDirectional );
+
+			scene.add( new THREE.CameraHelper( lightDirectional.shadow.camera ) );
+
+
+		}
+
+
+
+		function onWindowResize() {
+
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+
+			renderer.setSize( window.innerWidth, window.innerHeight );
+
+			//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+		}
+
+
+
+		function animate() {
+
+			requestAnimationFrame( animate );
+			renderer.render( scene, camera );
+			controls.update();
+
+		}
+
+	</script>
+</body>
+
+</html>

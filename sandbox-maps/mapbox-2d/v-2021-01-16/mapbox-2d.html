@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>San Francisco Map</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+	<script src="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js"></script>
+	<link href="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css" rel="stylesheet" />
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+
+		#map {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			width: 100%;
+		}
+
+		.nav {
+			background: white;
+			border-radius: 10px;
+			box-shadow: 0 0 50px -25px black;
+			color: gray;
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 100%;
+			margin: 1rem;
+			width: 15rem;
+			overflow: auto;
+			padding: 1rem;
+			position: absolute;
+			resize: both;
+			/* height: 90%; */
+		}
+
+		a.mapboxgl-ctrl-logo {
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="map"></div>
+
+	<nav class="nav rounded-rect sidebar-content">
+
+		<details open>
+
+			<summary>show &uarr; || hide &darr; </summary>
+
+			<h1><a href="">mapbox 2d</a></h1>
+
+			<p><button onclick=map.setCenter([-122.431,37.803]);>San Francisco</button></p>
+
+			<p><button onclick=addBox()>addBox</button></p>
+
+			<pre id="coordinates" class="coordinates"></pre>
+
+		</details>
+
+	</nav>
+
+
+	<script>
+
+		const lat = 37.8031325;
+		const lon = -122.4309479;
+
+		let map;
+
+		//var coordinates = document.getElementById( 'coordinates' );
+
+		htm = `
+<details>
+	<summary>Show || Hide</summary>
+
+	aaa bbb ccc
+</details>`;
+
+
+		init()
+
+
+		function init() {
+
+			mapboxgl.accessToken = 'pk.eyJ1IjoidGhlb2EiLCJhIjoiY2o1YXFra3V2MGIzbzJxb2lneDUzaWhtZyJ9.7bYFAQabMXiYmcqW8NLfwg';
+
+			map = new mapboxgl.Map( {
+				attributionControl: true,
+				center: [ lon, lat ], // starting position [lng, lat]
+				container: 'map', // container id
+				style: 'mapbox://styles/mapbox/satellite-streets-v11', // style URL
+				zoom: 12 // starting zoom
+			} );
+
+
+			geo = new mapboxgl.GeolocateControl( {
+				positionOptions: {
+					enableHighAccuracy: true
+				},
+				trackUserLocation: true
+			} );
+			map.addControl( geo, 'top-right' );
+
+
+			const nav = new mapboxgl.NavigationControl( {
+				visualizePitch: true
+			} );
+			map.addControl( nav, 'top-right' );
+
+			const scale = new mapboxgl.ScaleControl( {
+				//maxWidth: 0,
+				unit: "imperial"
+			} );
+			map.addControl( scale );
+
+			const scaleM = new mapboxgl.ScaleControl( {
+				//maxWidth: 80,
+				unit: "metric"
+			} );
+			map.addControl( scaleM );
+
+			scale.setUnit( 'imperial' );
+
+			const marker = new mapboxgl.Marker( {
+				draggable: true
+			} )
+				.setLngLat( [ lon, lat ] )
+				.addTo( map );
+
+			function onDragEnd() {
+				var lngLat = marker.getLngLat();
+				coordinates.style.display = 'block';
+				coordinates.innerHTML =
+					'Longitude: ' + lngLat.lng + '<br />Latitude: ' + lngLat.lat;
+			}
+
+			marker.on( 'dragend', onDragEnd );
+
+			new mapboxgl.Popup()
+				.setLngLat( [ -122.45, 37.81 ] )
+
+				.setHTML( "<h3>Hello, World!</h3>" + htm )
+				.addTo( map );
+
+			var markerHeight = 50, markerRadius = 10, linearOffset = 25;
+
+
+			// map.addSource( 'some id', {
+			// 	type: 'geojson',
+			// 	data: 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_10m_ports.geojson'
+			// } );
+
+			map.on( 'load', function () {
+
+				// Add source for admin-1 Boundaries
+				map.addSource( 'admin-1', {
+					type: 'vector',
+					url: 'mapbox://mapbox.boundaries-adm1-v3'
+				} );
+
+				// Add a layer with boundary polygons
+				map.addLayer(
+					{
+						id: 'admin-1-fill',
+						type: 'fill',
+						source: 'admin-1',
+						'source-layer': 'boundaries_admin_1',
+						paint: {
+							'fill-color': '#CCCCCC'
+						}
+					},
+					// This final argument indicates that we want to add the Boundaries layer
+					// before the `waterway-label` layer that is in the map from the Mapbox
+					// Light style. This ensures the admin polygons will be rendered on top of
+					// the
+					'waterway-label'
+				);
+			} );
+
+		}
+
+		// Set options
+		// var marker = new mapboxgl.Marker( {
+		// 	color: "#F03",
+		// 	draggable: true
+		// } ).setLngLat( [ lon, lat ] )
+		// 	.addTo( map );
+
+
+
+	</script>
+
+</body>
+
+</html>

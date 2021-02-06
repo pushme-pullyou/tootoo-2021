@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang=en>
+
+<head>
+	<title></title>
+	<meta charset=utf-8 />
+	<style>
+		body {
+			font: 100% monospace;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h1>
+		<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/xxxxxx/" target="_blank"
+			title="source code on GitHub"><img
+				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
+		<a href="" id=aTitle title="Click this menu title to reset the model"></a>
+	</h1>
+
+	<p><button onclick=toggleHTML() >toggleHTML</button></p>
+
+	<div id=divContent contenteditable="true"></div>
+
+	<script>
+
+		let text = true;
+
+		init();
+
+		function init() {
+
+			aTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+
+			source = `
+<!doctype html>
+<html lang=en >
+<head>
+<title></title>
+<meta charset=utf-8 />
+</head>
+<body style="font: 100% monospace;" >
+	<h1>lorem ipsum</h1>quia dolor sit, <b>amet, consectetur</b>, adipisci velit, <a href="https://example.com" target="_blank">sed quia non numquam</a> eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?
+
+</body>
+</html>`;
+
+
+			divContent.innerHTML = source;
+
+			parser = new DOMParser();
+			doc = parser.parseFromString( source, "text/html" )
+
+			console.log( "doc", doc );
+
+		}
+
+
+		function toggleHTML() {
+
+
+			if ( text ) {
+
+				divContent.innerText = source
+
+			} else {
+
+				divContent.innerHTML = source
+
+			}
+
+			text = !text;
+		}
+
+	</script>
+
+
+</body>
+
+</html>

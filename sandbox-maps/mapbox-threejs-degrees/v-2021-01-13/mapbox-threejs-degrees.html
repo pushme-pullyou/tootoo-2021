@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>mbx threejs degrees</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+	<script src="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js"></script>
+	<link href="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css" rel="stylesheet" />
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+
+		#map {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			width: 100%;
+		}
+
+		.nav {
+			left: 1rem;
+			position: absolute;
+		}
+	</style>
+</head>
+
+<body>
+	<script src="https://unpkg.com/three@0.124.0/build/three.min.js"></script>
+	<script src="https://unpkg.com/three@0.124.0/examples/js/loaders/GLTFLoader.js"></script>
+
+	<div id="map"></div>
+
+	<nav class=nav >
+		<p><a href="" >mapbox threejs degrees</a></p>
+		<p><button onclick=map.setCenter([-122.431,37.803]); >San Francisco</button></p>
+
+		<p><button onclick=addBox() >addBox</button></p>
+	</nav>
+
+	<script>
+
+		mapboxgl.accessToken = 'pk.eyJ1IjoidGhlb2EiLCJhIjoiY2o1YXFra3V2MGIzbzJxb2lneDUzaWhtZyJ9.7bYFAQabMXiYmcqW8NLfwg';
+
+		var map = ( window.map = new mapboxgl.Map( {
+			container: 'map',
+			style: 'mapbox://styles/mapbox/light-v10',
+			zoom: 5,
+			//center: [ 148.9819, -35.3981 ],
+			center: [ -122.431, 37.803 ],
+			pitch: 60,
+			antialias: true // create the gl context with MSAA antialiasing, so custom layers are antialiased
+		} ) );
+
+		// parameters to ensure the model is georeferenced correctly on the map
+		var modelOrigin = [ 148.9819, -35.39847 ];
+		var modelOrigin = [ -122.431, 37.803  ];
+		var modelAltitude = 0;
+		var modelRotate = [ Math.PI / 2, 0, 0 ];
+		//var modelRotate = [ 0, 0, 0 ];
+
+		var modelAsMercatorCoordinate = mapboxgl.MercatorCoordinate.fromLngLat(
+			modelOrigin,
+			modelAltitude
+		);
+
+		// transformation parameters to position, rotate and scale the 3D model onto the map
+		var modelTransform = {
+			translateX: modelAsMercatorCoordinate.x,
+			translateY: modelAsMercatorCoordinate.y,
+			translateZ: modelAsMercatorCoordinate.z,
+			rotateX: modelRotate[ 0 ],
+			rotateY: modelRotate[ 1 ],
+			rotateZ: modelRotate[ 2 ],
+			/* Since our 3D model is in real world meters, a scale transform needs to be
+			 * applied since the CustomLayerInterface expects units in MercatorCoordinates.
+			 */
+			scale: modelAsMercatorCoordinate.meterInMercatorCoordinateUnits()
+		};
+
+		var THREE = window.THREE;
+
+		// configuration of the custom layer for a 3D model per the CustomLayerInterface
+		var customLayer = {
+			id: '3d-model',
+			type: 'custom',
+			renderingMode: '3d',
+			onAdd: function ( map, gl ) {
+				camera = this.camera = new THREE.Camera();
+				this.scene = new THREE.Scene();
+				//this.scene.scale.set( 0.0027, 0.0027, 0.0027 )
+
+				// create two three.js lights to illuminate the model
+				var directionalLight = new THREE.DirectionalLight( 0xffffff );
+				directionalLight.position.set( 0, -70, 100 ).normalize();
+				this.scene.add( directionalLight );
+
+				var directionalLight2 = new THREE.DirectionalLight( 0xffffff );
+				directionalLight2.position.set( 0, 70, 100 ).normalize();
+				this.scene.add( directionalLight2 );
+
+				// use the three.js GLTF loader to add the 3D model to the three.js scene
+				var loader = new THREE.GLTFLoader();
+				loader.load(
+					'https://docs.mapbox.com/mapbox-gl-js/assets/34M_17/34M_17.gltf',
+					function ( gltf ) {
+						//gltf.scene.scale.set( 0.01, 0.01, 0.01)
+						this.scene.add( gltf.scene );
+					}.bind( this )
+				);
+
+				const geometry = new THREE.BoxGeometry( 8000, 60000, 8000 );
+				geometry.translate( 0, 30000, 0 );
+				const material = new THREE.MeshPhongMaterial( { side: 2, wireframe: false });
+				const mesh = new THREE.Mesh( geometry, material );
+				mesh.position.set( -122, 38, 0);
+
+				scene = this.scene.add( mesh );
+
+				this.map = map;
+
+				// use the Mapbox GL JS map canvas for three.js
+				this.renderer = new THREE.WebGLRenderer( {
+					canvas: map.getCanvas(),
+					context: gl,
+					antialias: true
+				} );
+
+				this.renderer.autoClear = false;
+				//this.camera.near = 0.001;
+				//this.camera.updateProjectionMatrix();
+
+				renderer = this.renderer;
+			},
+			render: function ( gl, matrix ) {
+				var rotationX = new THREE.Matrix4().makeRotationAxis(
+					new THREE.Vector3( 1, 0, 0 ),
+					modelTransform.rotateX
+				);
+				var rotationY = new THREE.Matrix4().makeRotationAxis(
+					new THREE.Vector3( 0, 1, 0 ),
+					modelTransform.rotateY
+				);
+				var rotationZ = new THREE.Matrix4().makeRotationAxis(
+					new THREE.Vector3( 0, 0, 1 ),
+					modelTransform.rotateZ
+				);
+
+				var m = new THREE.Matrix4().fromArray( matrix );
+				var l = new THREE.Matrix4()
+					.makeTranslation(
+						modelTransform.translateX,
+						modelTransform.translateY,
+						// 0.5, //modelTransform.translateX,
+						// 0.5, //modelTransform.translateY,
+						modelTransform.translateZ
+					)
+					.scale(
+						new THREE.Vector3(
+							modelTransform.scale,
+							-modelTransform.scale,
+							modelTransform.scale
+						)
+					)
+					.multiply( rotationX )
+					.multiply( rotationY )
+					.multiply( rotationZ );
+
+				this.camera.projectionMatrix = m.multiply( l );
+				this.renderer.state.reset();
+				this.renderer.render( this.scene, this.camera );
+				this.map.triggerRepaint();
+			}
+		};
+
+		map.on( 'style.load', function () {
+			map.addLayer( customLayer, 'waterway-label' );
+		} );
+
+
+		function addBox() {
+
+			modelOrigin = [ -122.431, 37.803 ];
+
+			modelAsMercatorCoordinate = mapboxgl.MercatorCoordinate.fromLngLat(
+				modelOrigin,
+				modelAltitude
+			);
+
+			modelTransform = {
+				translateX: modelAsMercatorCoordinate.x,
+				translateY: modelAsMercatorCoordinate.y,
+				translateZ: modelAsMercatorCoordinate.z,
+				rotateX: modelRotate[ 0 ],
+				rotateY: modelRotate[ 1 ],
+				rotateZ: modelRotate[ 2 ],
+				/* Since our 3D model is in real world meters, a scale transform needs to be
+				 * applied since the CustomLayerInterface expects units in MercatorCoordinates.
+				 */
+				scale: 1 //modelAsMercatorCoordinate.meterInMercatorCoordinateUnits()
+			};
+			const geometry = new THREE.BoxGeometry( 10, 10, 10 );
+			const material = new THREE.MeshNormalMaterial();
+			const mesh = new THREE.Mesh( geometry, material );
+			mesh.position.set( 50, 20, 20 );
+
+			scene.add( mesh );
+
+		}
+	</script>
+
+</body>
+
+</html>

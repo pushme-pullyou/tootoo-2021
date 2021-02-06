@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>US County Votes</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+	<script src="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js"></script>
+	<link href="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css" rel="stylesheet" />
+	<style>
+		body {
+			font: 100% monospace;
+			margin: 0;
+			padding: 0;
+		}
+
+		#map {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			width: 100%;
+		}
+
+		.nav {
+			left: 1rem;
+			position: absolute;
+		}
+	</style>
+</head>
+
+<body>
+	<script src="https://unpkg.com/three@0.124.0/build/three.min.js"></script>
+	<script src="https://unpkg.com/three@0.124.0/examples/js/loaders/GLTFLoader.js"></script>
+	<script src="https://unpkg.com/three@0.124.0/examples/js/utils/BufferGeometryUtils.js"></script>
+
+	<!-- geo-->
+	<script src="../../../lib3d/glo-globe/v-2020-12-31/glo-globe.js"></script>
+	<script src="../../../lib3d/gjs-geojson/v-2020-12-16/gjs-geojson.js"></script>
+	<!-- votes -->
+	<script src="ufr-usa-fips-remix.js"></script>
+	<script src="us-county-votes.js"></script>
+
+	<div id="map"></div>
+
+	<nav class=nav>
+		<h1><a href="">US County Votes</a></h1>
+
+		<p><button onclick=map.setCenter([-122.431,37.803]);>San Francisco</button></p>
+
+		<p><button onclick=addBox()>addBox</button></p>
+	</nav>
+
+	<script>
+
+		let group = new THREE.Group();
+		group.name = "votes";
+
+		function lat2y( a ) { return 180 / Math.PI * Math.log( Math.tan( Math.PI / 4 + a * ( Math.PI / 180 ) / 2 ) ); }
+
+		mapboxgl.accessToken = 'pk.eyJ1IjoidGhlb2EiLCJhIjoiY2o1YXFra3V2MGIzbzJxb2lneDUzaWhtZyJ9.7bYFAQabMXiYmcqW8NLfwg';
+		var map = ( window.map = new mapboxgl.Map( {
+			container: 'map',
+			style: 'mapbox://styles/mapbox/light-v10',
+			zoom: 4,
+			center: [ -97, 37 ],
+			pitch: 30,
+			antialias: true // create the gl context with MSAA antialiasing, so custom layers are antialiased
+		} ) );
+
+		// parameters to ensure the model is georeferenced correctly on the map
+		const modelOrigin = [ 0, 0 ];
+		const modelAltitude = 0;
+		const modelRotate = [ Math.PI / 2, 0, 0 ];
+		//var modelRotate = [ 0, 0, 0 ];
+		var modelScale = 111000;
+
+		const modelAsMercatorCoordinate = mapboxgl.MercatorCoordinate.fromLngLat(
+			modelOrigin,
+			modelAltitude
+		);
+
+		// transformation parameters to position, rotate and scale the 3D model onto the map
+		var modelTransform = {
+			translateX: modelAsMercatorCoordinate.x,
+			translateY: modelAsMercatorCoordinate.y,
+			translateZ: modelAsMercatorCoordinate.z,
+			rotateX: modelRotate[ 0 ],
+			rotateY: modelRotate[ 1 ],
+			rotateZ: modelRotate[ 2 ],
+			/* Since our 3D model is in real world meters, a scale transform needs to be
+			 * applied since the CustomLayerInterface expects units in MercatorCoordinates.
+			 */
+			scale: modelAsMercatorCoordinate.meterInMercatorCoordinateUnits()
+		};
+
+		var THREE = window.THREE;
+
+		// configuration of the custom layer for a 3D model per the CustomLayerInterface
+		var customLayer = {
+			id: '3d-model',
+			type: 'custom',
+			renderingMode: '3d',
+			onAdd: function ( map, gl ) {
+				camera = new THREE.Camera();
+				scene = new THREE.Scene();
+
+				// create two three.js lights to illuminate the model
+				const directionalLight = new THREE.DirectionalLight( 0xffffff );
+				directionalLight.position.set( 0, -70, 100 ).normalize();
+				scene.add( directionalLight );
+
+				const directionalLight2 = new THREE.DirectionalLight( 0xffffff );
+				directionalLight2.position.set( 0, 70, 100 ).normalize();
+				scene.add( directionalLight2 );
+
+				// use the three.js GLTF loader to add the 3D model to the three.js scene
+				// var loader = new THREE.GLTFLoader();
+				// loader.load(
+				// 	'https://docs.mapbox.com/mapbox-gl-js/assets/34M_17/34M_17.gltf',
+				// 	function ( gltf ) {
+				// 		scene.add( gltf.scene );
+				// 	}.bind( this )
+				// );
+
+				const material = new THREE.MeshNormalMaterial( { side: 2 } );
+
+				// for ( let i = 0; i < 1; i++ ) {
+				// 	const geometry = new THREE.BoxBufferGeometry( 1, 1, 20 );
+				// 	geometry.translate( 0, 0, -10 );
+				// 	geometry.scale( modelScale, modelScale, modelScale );
+				// 	const mesh = new THREE.Mesh( geometry, material );
+				// 	mesh.position.set( modelScale * ( -96 + Math.random() * 100 - 50 ), 0, modelScale * ( lat2y( 38 ) - Math.random() * 100 + 50 ) );
+
+				// 	//mesh.position.set( 0, 0, 0 );
+
+				// 	mesh.lookAt( new THREE.Vector3( modelScale * -96, -50000000, modelScale * 38 ) );
+				// 	group.add( mesh );
+				// }
+
+				// const geometry2 = new THREE.BoxBufferGeometry( 5, 5, 50 );
+				// geometry2.translate( 0, 0, -25 );
+				// geometry2.scale( modelScale, modelScale, modelScale );
+				// //geometry.translate( Math.random() * 30 - 15, 500000, Math.random() * 10 - 5 );
+				// //const material2 = new THREE.MeshNormalMaterial();
+				// const mesh2 = new THREE.Mesh( geometry2, material );
+				// mesh2.position.set( modelScale * -122, 0, modelScale * lat2y( 38 ) );
+				// mesh2.lookAt( new THREE.Vector3( modelScale * -96, -50000000, -modelScale * 38 ) )
+				// group.add( mesh2 );
+
+				scene.add( group );
+
+				map = map;
+
+				// use the Mapbox GL JS map canvas for three.js
+				renderer = new THREE.WebGLRenderer( {
+					canvas: map.getCanvas(),
+					context: gl,
+					antialias: true
+				} );
+
+				renderer.autoClear = false;
+			},
+			render: function ( gl, matrix ) {
+				const rotationX = new THREE.Matrix4().makeRotationAxis(
+					new THREE.Vector3( 1, 0, 0 ),
+					modelTransform.rotateX
+				);
+				const rotationY = new THREE.Matrix4().makeRotationAxis(
+					new THREE.Vector3( 0, 1, 0 ),
+					modelTransform.rotateY
+				);
+				const rotationZ = new THREE.Matrix4().makeRotationAxis(
+					new THREE.Vector3( 0, 0, 1 ),
+					modelTransform.rotateZ
+				);
+
+				var m = new THREE.Matrix4().fromArray( matrix );
+				var l = new THREE.Matrix4()
+					.makeTranslation(
+						modelTransform.translateX,
+						modelTransform.translateY,
+						modelTransform.translateZ
+					)
+					.scale(
+						new THREE.Vector3(
+							modelTransform.scale,
+							modelTransform.scale,
+							modelTransform.scale
+						)
+					)
+					.multiply( rotationX )
+					.multiply( rotationY )
+					.multiply( rotationZ );
+
+				camera.projectionMatrix = m.multiply( l );
+				renderer.state.reset();
+				renderer.render( scene, camera );
+				map.triggerRepaint();
+			}
+		};
+
+		map.on( 'style.load', function () {
+			map.addLayer( customLayer, 'waterway-label' );
+		} );
+
+		init();
+
+	</script>
+
+</body>
+
+</html>
