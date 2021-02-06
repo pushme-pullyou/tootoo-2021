@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang=en>
+
+<head>
+	<title></title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="description"
+		content="TooToo 2021 uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
+	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
+	<meta name="date" content="2021-02-05">
+	<style>
+		html {height: 100%; }
+
+		:root{ --mnu-width: 15rem;}
+
+		body {
+
+			font: 100% monospace;
+			height: 100%;
+			margin: 0;
+		}
+
+		/*
+			left: var(--mnu-width);
+			width: calc(100% - var(--mnu-width));
+		*/
+
+		main {
+			border: 1px solid green;
+			height: 100%;
+			margin: 0 auto 0 calc( 4rem + var(--mnu-width) );
+		}
+
+		#divContent {
+			border: 1px solid red;
+			margin: 0 auto;
+			max-height: 60%;
+			width: 40rem;
+			overflow: auto;
+			resize: both;
+		}
+
+			#divHtml {
+			border: 1px solid red;
+			margin: 0 auto;
+			/* max-height: 90%; */
+			width: 40rem;
+			overflow: auto;
+			resize: both;
+		}
+
+
+		#divMessage {
+			border: 1px solid red;
+			margin: 1rem auto 0 auto;
+			max-width: 40rem;
+			overflow: auto;
+			resize: both;
+		}
+
+		.nav {
+			background: white;
+			border-radius: 10px;
+			box-shadow: 0 0 50px -25px black;
+			color: gray;
+			margin: 1rem;
+			width: var(--mnu-width);
+			overflow: hidden;
+			padding: 1rem;
+			position: absolute;
+			resize: both;
+		}
+
+		.full-width {
+			width: 100%;
+		}
+	</style>
+</head>
+
+<body>
+
+	<script src=" xgp-xhr-get-put.js">
+	</script>
+
+	<nav id=navMenu class=nav>
+
+		<details open>
+
+			<summary>show&darr; || hide&uarr; </summary>
+
+			<h1>
+				<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/cookbook/xgp-xhr-get-put/"
+					target="_blank" title="source code on GitHub"><img
+						src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
+				<a href="" title="Click this menu title to reset the model">
+					<span id=aTitle ></span>
+					<span id=spnVersion></span>
+				</a>
+
+			</h1>
+
+			<div id=XGPdivMenuDetails></div>
+
+		</details>
+
+	</nav>
+
+	<main id=main>
+
+		<div id=divContent tabindex="0" onblur='XGP.setStorage();' contenteditable ></div>
+
+		<div id=divHtml ></div>
+
+		<div id=divMessage></div>
+
+	</main>
+
+	<script>
+
+		init();
+
+		function init() {
+
+			aTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+
+			spnVersion.innerText = document.head.querySelector( "[ name=date ]" ).content;
+
+			const description = document.head.querySelector( "[ name=description ]" ).content;
+
+			XGP.init();
+
+		}
+
+	</script>
+
+	</body>
+
+</html>
