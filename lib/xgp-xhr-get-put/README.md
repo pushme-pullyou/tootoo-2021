@@ -6,10 +6,6 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 # [XGP XHR get put Read Me]( https://pushme-pullyou.github.io/tootoo-2021/lib/xgp-xhr-get-put/readme.html )
 
-<!--@@@
-<div class=iframe-resize ><iframe src=https://pushme-pullyou.github.io/tootoo-2021/lib/xgp-xhr-get-put/ height=100% width=100% ></iframe></div>
-_XGP XHR get put in a resizable window. One finger to rotate. Two to zoom._
-@@@-->
 
 ### Full Screen: [XGP XHR get put]( https://pushme-pullyou.github.io/tootoo-2021/lib/xgp-xhr-get-put/ )
 

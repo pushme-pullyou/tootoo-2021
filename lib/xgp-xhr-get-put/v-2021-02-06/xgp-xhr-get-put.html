@@ -30,11 +30,13 @@
 
 	<script src="../../../lib/fox-file-open-xhr/v-2021-01-21/fox-file-open-xhr.js"></script>
 
-	<script src="../../../lib/gor-github-organization-repos/v-2020-12-31/gor-github-organization-repos.js"></script>
+	<script src="../../../lib/gor-github-organization-repos/v-2021-02-06/gor-github-organization-repos.js"></script>
 
-	<script src="../../../lib/grv-github-repo-tree-view/v-2020-12-31/grv-github-repo-tree-view.js"></script>
+	<script src="../../../lib/grv-github-repo-tree-view/v-2021-02-06/grv-github-repo-tree-view.js"></script>
 
 	<script src="../../../lib/mnu-menu/v-2020-12-30/mnu-menu.js"></script>
+
+	<script src="../../../lib/xgp-xhr-get-put/v-2021-02-06/xgp-xhr-get-put.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
@@ -44,6 +46,8 @@
 		<nav id="navMenu" class="gmd-2">
 
 			<div id=MNUdivHeader></div>
+
+			<div id=XGPdivMenuDetails ></div>
 
 			<div id=GORdivDetails></div>
 
@@ -99,8 +103,9 @@
 
 			// FOX = File Open XHR
 			FOX.path = COR.path;
-			FOX.init( COR );
+			//FOX.init( COR );
 			FOX.defaultFile = "../" + COR.defaultFile;
+			//FOX.onHashChange();
 
 			// // GOR = GitHub Organization Repositories
 			// GOR.user = COR.user;
@@ -119,6 +124,15 @@
 			GRV.init();
 
 			GRV.getRepo();
+
+			XGP.init();
+
+			// XGP.url =  "../" + COR.defaultFile;
+
+			XGP.url = `https://api.github.com/repos/${ COR.user }/${ COR.repo }/contents/${ COR.defaultFile }`;
+
+			XGP.getFile();
+
 
 			// let's get going!
 
