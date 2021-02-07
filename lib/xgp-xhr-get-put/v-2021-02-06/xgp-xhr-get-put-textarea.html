@@ -8,7 +8,7 @@
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
 	<meta name="date" content="2021-02-06">
-	<title>XGP XHR Get Put</title>
+	<title>XGP XHR Get Put Textarea</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
 	<link rel="stylesheet" href="../../../lib/style/style-2020-12-29.css">
@@ -36,7 +36,7 @@
 
 	<script src="../../../lib/mnu-menu/v-2020-12-30/mnu-menu.js"></script>
 
-	<script src="../../../lib/xgp-xhr-get-put/v-2021-02-06/xgp-xhr-get-put.js"></script>
+	<script src="../../../lib/xgp-xhr-get-put/v-2021-02-06/xgp-xhr-get-put-textarea.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
@@ -62,7 +62,7 @@
 
 	<main>
 
-		<div id="divContentMain"></div>
+		<textarea id="divContentMain"></textarea>
 
 	</main>
 
@@ -130,6 +130,7 @@
 			// XGP.url =  "../" + COR.defaultFile;
 
 			//XGP.url = `https://api.github.com/repos/${ COR.user }/${ COR.repo }/contents/${ COR.defaultFile }`;
+			XGP.url = "https://api.github.com/repos/theo-armour/qdata/contents/journal/days-of-year-md/02/02-06.md";
 
 			XGP.getFile();
 
