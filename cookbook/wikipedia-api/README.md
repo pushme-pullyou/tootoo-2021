@@ -34,7 +34,7 @@ _basic-html.html_
 <details open >
 <summary>Links of interest</summary>
 
-wikipedia api
+## wikipedia api
 
 * https://en.wikipedia.org/w/api.php
 * https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Africa/daily/2017042700/201805170
@@ -48,12 +48,29 @@ wiki geography
 * https://en.wikipedia.org/wiki/2019%E2%80%9320_coronavirus_pandemic_by_country_and_territory
 * https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_the_United_States
 
-### Sustainable Development Goal
+## Sustainable Development Goals
 
 * https://sdgs.un.org/goals
 * https://en.wikipedia.org/wiki/List_of_Sustainable_Development_Goal_targets_and_indicators
+* https://www.cfr.org/backgrounder/sustainable-development-goals
 
-### JHU
+
+### About
+
+* https://www.futurelearn.com/info/courses/achieving-sustainable-development/0/steps/35496
+* https://www.researchgate.net/publication/320291340_A_Critical_Analysis_of_the_Sustainable_Development_Goals
+* https://www.weforum.org/agenda/2017/01/turns-out-sdg-critics-were-wrong/
+
+### Me
+
+* Where is the beauty?
+* Where is the security?
+* Where are the useful tags?
+* Where is aging?
+* Where are the ongoing metrics?
+* Links to UN Declaration of human rights?
+
+## JHU
 
 * https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv
 	* Has lat & lon

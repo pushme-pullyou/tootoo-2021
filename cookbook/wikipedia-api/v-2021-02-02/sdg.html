@@ -35,7 +35,7 @@
 
 			aTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
 
-			getSDGData()
+			getSDGData();
 
 		}
 
@@ -57,11 +57,13 @@
 
 		function requestFile( url = "https://example.com", callback = onLoad ) {
 
+			console.log( "url", url );
+
 			// urlDefaultFile = "https://cdn.jsdelivr.net/gh/pushme-pullyou/tootoo-2020@master/README.md";
 			const urlCORS = "https://cors-anywhere.herokuapp.com/";
 
 			xhr = new XMLHttpRequest();
-			xhr.open( "GET", urlCORS + url, true );
+			xhr.open( "GET", url, true );
 			//xhr.responseType = "json";
 			xhr.onerror = ( xhr ) => console.log( "error:", xhr );
 			//xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );

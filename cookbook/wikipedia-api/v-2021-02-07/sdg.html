@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang=en>
+
+<head>
+	<title>Sustainable Development Goals</title>
+	<meta charset=utf-8 />
+	<style>
+		body {
+			font: 100% monospace;
+		}
+		h2, h3 { margin-block-end: 0; }
+		.sum1 {
+			font-weight: 600;
+			font-size: 16pt;
+		}
+	</style>
+</head>
+
+<body>
+
+	<script src="sdg.js"></script>
+	<h1>
+		<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/main/cookbook/wikipedia-api/" target="_blank"
+			title="source code on GitHub"><img
+				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
+		<a href="" id=aTitle title="Click this menu title to reset the model"></a>
+	</h1>
+
+	<details>
+		<summary class=sum1 >Concept 2021-02-07</summary
+		<p>
+			This is a first pass at making the text of the <a href="https://sdgs.un.org/goals" target="_blank">United Nations Sustainable Development Goals (SDGs)</a>
+			 more accessible and responsive. The UN pages are handsome be require much clicking to navigate through all the goals. The <a href="https://en.wikipedia.org/wiki/List_of_Sustainable_Development_Goal_targets_and_indicators" target="_blank">Wikipedia list of the goals</a> requires much scrolling.
+		</p>
+		<p>
+			In the solution presented here, istead of having to open links to new pages, the data is revealed by single clicks.
+		</p>
+		<p>
+			The data freshly loaded from Wikipedia every time you use the app. Any changes there are automatically updated viewable here.
+		</p>
+		<p>
+			Further revisions of this effort will add: prettier CSS styling, links to pages with more details and references, tags to indicate appropriateness for a variety of circumstances such as manufacturing, constriction, healthcare, fitness, communications and more.
+		</p>
+		<p></p>
+	</details>
+
+	<div id=divContent ></div>
+
+
+
+	<div>
+		<hr>
+
+		<center><a href=javascript:window.scrollTo(0,0); class=aDingbat title="Scroll to top"> ❦ </a></center>
+	</div>
+
+	<script>
+
+		init();
+
+		function init() {
+
+			aTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+
+			getSDGData();
+
+		}
+
+
+	</script>
+
+
+</body>
+
+</html>
