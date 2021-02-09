@@ -29,7 +29,8 @@ use XMLHTTPRequest to GET or PUT any file in a GitHub repository
 ## Links of Interest
 
 * https://github.com/penge/my-notes
-
+* https://github.com/dropbox/dropbox-sdk-js
+* https://github.com/github-tools/github
 
 ## Change Log
 

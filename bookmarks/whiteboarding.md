@@ -17,6 +17,9 @@
 
 _A few of the sites listed in the portal pages_
 
+* https://www.yourworldoftext.com/home/
+	* Text only
+* https://www.groupboard.com/products/
 * https://awwapp.com/
 	* free/$$$
 * https://excalidraw.com/ !!!
