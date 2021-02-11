@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="date" content="2021-02-09">
+	<title></title>
+
+	<style>
+		body {
+			font: 100% monospace;
+			margin: 0 1rem;
+		}
+
+		h1 {
+			display: inline-block;
+			font-size: 160%;
+			margin: 0;
+		}
+
+		img {
+			vertical-align: middle;
+		}
+
+		textarea {
+			height: calc( 100vh - 5rem );
+			width: 100%;
+		}
+	</style>
+</head>
+
+<body>
+
+	<script src="xgp-basic.js"></script>
+	<h1>
+		<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/main/lib/xgp-xhr-get-put" target="_blank"
+			title="source code on GitHub"><img
+				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
+		<a href="" title="Click this menu title to reset the model">
+			<span id=spnTitle>${ MNU.title }</span>
+			<span id=spnVersion></span>
+		</a>
+	</h1>
+
+	<button onclick=XGP.getFile()>getFile</button>
+	<button onclick=XGP.putFile()>putFile</button>
+
+	token
+	<input id=inpGitHubApiKey onclick=this.select(); onblur=XGP.setGitHubAccessToken();
+		title="Obtain API Access Token" style=width:18.5rem;>
+
+				<button onclick=XGP.getStorage()>getStorage</button>
+				<button onclick=XGP.setStorage()>setStorage</button>
+	<br>
+	URL
+	<input id=inpUrl onclick=this.select(); onblur=XGP.requestFile(XGP.url); title="Obtain API Access Token"
+		style=width:30rem; value="">
+
+		Open: <input type=file id=inpFile onchange=XGP.readFile(this);>
+		<button onclick=XGP.saveFile()>saveFile</button>
+
+	<main>
+
+		<textarea id="textareaMain"></textarea>
+
+	</main>
+
+	<span id=divMessage></span>
+
+	<a href="#https://api.github.com/repos/theo-armour/qdata/contents/LICENSE" >license</a>
+
+	<a href="#https://api.github.com/repos/theo-armour/qdata/contents/README.md">read me</a>
+
+	<a href="#https://api.github.com/repos/theo-armour/qdata/contents/try.md">try</a>
+
+	<button onclick=getToday() >get today</button>
+
+
+
+	<script>
+
+		init();
+
+		function init() {
+
+			spnTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+
+			spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
+
+			XGP.init();
+
+
+
+		}
+
+
+	function getToday() {
+
+		dd = new Date();
+
+		day = ( dd.getDate() + "" ).padStart( 2, "0" );
+
+		month = ( dd.getMonth() + 1 + "" ).padStart( 2, "0" );
+
+		console.log( "", `${ month } -${ day }` );
+
+		location.hash =
+`#https://api.github.com/repos/theo-armour/qdata/contents/journal/days-of-year-md/${ month}/${ month}-${ day }.md`;
+
+	}
+
+	</script>
+
+
+</body>
+
+</html>
