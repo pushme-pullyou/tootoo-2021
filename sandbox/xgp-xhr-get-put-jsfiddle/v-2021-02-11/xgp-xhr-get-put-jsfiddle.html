@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang=en >
+<head>
+<title></title>
+<meta charset=utf-8 />
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<script src="xgp-xhr-get-put-jsfiddle.js"></script>
+
+<button onclick=getFileFromGitHub()>getFileFromGitHub</button>
+<button onclick=putFileToGitHub()>putFileToGitHub</button>
+<br>
+GitHub Access Token <input id=inpAccessToken onblur=setLocalStorage(this); style=width:20rem><br>
+GitHub user: <input id=inpUser onblur=setLocalStorage(this); style=width:8rem>
+GitHub repo: <input id=inpRepo onblur=setLocalStorage(this); style=width:8rem>
+GitHub branch: <input id=inpBranch onblur=setLocalStorage(this); style=width:6rem>
+GitHub path: <input  id=inpPath onblur=setLocalStorage(this); style=width:10rem>
+
+
+<main>
+
+	<textarea id="textareaMain"></textarea>
+
+	<div id=divMessage ></div>
+
+</main>
+
+</body>
+
+<script>
+
+	inpAccessToken.value = localStorage.getItem( "githubAccessToken" ) || "";
+	inpUser.value = localStorage.getItem( "githubUser" ) || "";
+	inpRepo.value = localStorage.getItem( "githubRepo" ) || "";
+	inpBranch.value = localStorage.getItem( "githubBranch" ) || "";
+	inpPath.value = localStorage.getItem( "githubPath" ) || "";
+
+	getFileFromGitHub();
+
+</script>
+</html>

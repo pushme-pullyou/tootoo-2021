@@ -50,8 +50,8 @@
 	<input id=inpGitHubApiKey onclick=this.select(); onblur=XGP.setGitHubAccessToken();
 		title="Obtain API Access Token" style=width:18.5rem;>
 
-				<button onclick=XGP.getStorage()>getStorage</button>
-				<button onclick=XGP.setStorage()>setStorage</button>
+		<button onclick=XGP.getStorage()>getStorage</button>
+		<button onclick=XGP.setStorage()>setStorage</button>
 	<br>
 	URL
 	<input id=inpUrl onclick=this.select(); onblur=XGP.requestFile(XGP.url); title="Obtain API Access Token"
@@ -89,8 +89,6 @@
 			spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
 
 			XGP.init();
-
-
 
 		}
 

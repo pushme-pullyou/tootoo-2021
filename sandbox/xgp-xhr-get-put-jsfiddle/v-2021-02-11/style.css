@@ -1,0 +1,19 @@
+body {
+	font: 100% monospace;
+	margin: 0 1rem;
+}
+
+h1 {
+	display: inline-block;
+	font-size: 160%;
+	margin: 0;
+}
+
+img {
+	vertical-align: middle;
+}
+
+textarea {
+	height: calc( 100vh - 6rem );
+	width: 100%;
+}
