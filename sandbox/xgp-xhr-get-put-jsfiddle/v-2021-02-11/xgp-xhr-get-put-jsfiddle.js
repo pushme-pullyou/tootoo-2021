@@ -7,7 +7,8 @@ function setLocalStorage( that = inpAccessToken) {
 
 }
 
-4147202293170591
+
+
 function getFileFromGitHub () {
 
 	url = `https://api.github.com/repos/${ inpUser.value }/${ inpRepo.value }/contents/${ inpPath.value }`;

@@ -7,11 +7,11 @@
 	<meta name="description"
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2021-02-06">
-	<title>XGP XHR Get Put Textarea</title>
+	<meta name="date" content="2021-02-11">
+	<title>XGP XHR Get Put</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
-	<link rel="stylesheet" href="../../../lib/style/style-2020-12-29.css">
+	<link rel="stylesheet" href="../../../lib/style/style-2021-02-11.css">
 
 	<style>
 		:root {
@@ -36,7 +36,7 @@
 
 	<script src="../../../lib/mnu-menu/v-2020-12-30/mnu-menu.js"></script>
 
-	<script src="../../../sandbox/xgp-xhr-get-put/v-2021-02-09/xgp-xhr-get-put-textarea.js"></script>
+	<script src="./xgp-xhr-get-put.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
@@ -47,11 +47,11 @@
 
 			<div id=MNUdivHeader></div>
 
-			<div id=XGPdivMenuDetails ></div>
-
 			<div id=GORdivDetails></div>
 
 			<div id=GRVdivDetails></div>
+
+			<div id=XGPdivMenuDetails ></div>
 
 			<div id=MNUdivFooter></div>
 
@@ -62,18 +62,13 @@
 
 	<main>
 
-		<textarea id="divContentMain"></textarea>
+		<div id="divContentMain"></div>
 
 	</main>
 
 
 	<script>
-
-		init();
-
-		function init() {
-
-			const COR = {
+			var COR = {
 				user: "pushme-pullyou",
 				repo: "tootoo-2021",
 				branch: "main",
@@ -81,6 +76,11 @@
 				ignoreFolders: [],
 				path: "../../../",
 			}
+		init();
+
+		function init() {
+
+
 			FOX.path = GOR.path = GRV.path = MNU.path = COR.path;
 
 			MNU.init();
@@ -111,29 +111,25 @@
 			// GOR.init();
 			//GOR.getOrganization();
 
-			// GRV = GitHub Repo treeView
-			// GRV.user = COR.user;
-			// GRV.repo = COR.repo;
-			// GRV.branch = COR.branch;
-			// GRV.path = COR.path;
+			//GRV = GitHub Repo treeView
+			GRV.user = COR.user;
+			GRV.repo = COR.repo;
+			GRV.branch = COR.branch;
+			GRV.path = COR.path;
 
-			// GRV.defaultFile = COR.defaultFile;
-			// GRV.ignoreFolders = COR.ignoreFolders;
-			// GRV.init();
+			GRV.defaultFile = COR.defaultFile;
+			GRV.ignoreFolders = COR.ignoreFolders;
+			GRV.init();
 
-			// GRV.getRepo();
+			GRV.getRepo();
 
 			XGP.init();
 
 			// XGP.url =  "../" + COR.defaultFile;
-
-			//XGP.url = `https://api.github.com/repos/${ COR.user }/${ COR.repo }/contents/${ COR.defaultFile }`;
+			// XGP.url = `https://api.github.com/repos/${ COR.user }/${ COR.repo }/contents/${ COR.defaultFile }`;
 			XGP.url = "https://api.github.com/repos/theo-armour/qdata/contents/notes.md";
 
-			XGP.getFile();
-
-
-			// let's get going!
+			//XGP.getFile();
 
 			// if running on server, keeps address bar pointed to latest dev
 

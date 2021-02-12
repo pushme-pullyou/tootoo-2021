@@ -24,6 +24,7 @@ _ZZZZZ in a resizable window. One finger to rotate. Two to zoom._
 
 ## Issues
 
+* Using textare to contain the text. Would prefer DIV contentEditable, but this seems to have issues with 8-bit and 16-bit text converting
 
 ## Links of Interest
 

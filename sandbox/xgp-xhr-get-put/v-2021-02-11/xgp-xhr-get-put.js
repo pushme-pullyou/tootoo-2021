@@ -22,20 +22,20 @@ XGP.init = function () {
 <details>
 <summary id=XGPsumDetails class="summary-primary gmd-1">Edit Files</summary>
 <p>
-	Access token
-	<input id=XGPinpGitHubApiKey onclick=this.select(); onblur=XGP.setGitHubAccessToken(); title="Obtain API Access Token"
+	Access token<br>
+	<input id=XGPinpAccessToken onclick=this.select(); onblur=XGP.setGitHubAccessToken(); title="Obtain GitHub API Access Token"
 	class=full-width >
 </p>
 
 <p>
-	URL
-	<input id=inpUrl onclick=this.select(); onblur=XGP.requestFile(XGP.url); title="Obtain API Access Token"
-	class=full-width value=${ XGP.url }>
+	<button onclick=XGP.getFileFromGitHub()>getFileFromGitHub</button>
+	<button onclick=XGP.putFile()>putFile</button>
 </p>
 
 <p>
-	<button onclick=XGP.getFile()>getFile</button>
-	<button onclick=XGP.putFile()>putFile</button>
+	URL
+	<input id=XGPinpUrl onclick=this.select(); onblur=XGP.requestFile(XGP.url); title="Obtain API Access Token"
+	class=full-width value=${ XGP.url }>
 </p>
 
 <p>
@@ -53,7 +53,7 @@ XGP.init = function () {
 
 	XGPdivMenuDetails.innerHTML = htm;
 
-	XGPinpGitHubApiKey.value = XGP.accessToken;
+	XGPinpAccessToken.value = XGP.accessToken;
 
 	//XGP.content = divContentMain.value = localStorage.getItem( "file-2021-02-05-text" ) || "";
 
@@ -65,11 +65,7 @@ XGP.init = function () {
 
 XGP.setGitHubAccessToken = function () {
 
-	//console.log( 'accessToken', GRVinpGitHubApiKey.value );
-
-	localStorage.setItem( "githubAccessToken", XGPinpGitHubApiKey.value );
-
-	//GRVT.accessToken = accessToken;
+	localStorage.setItem( "githubAccessToken", XGPinpAccessToken.value );
 
 };
 
@@ -77,74 +73,52 @@ XGP.setGitHubAccessToken = function () {
 
 //////////
 
-XGP.getStorage = function () {
 
-	XGP.content = localStorage.getItem( "file-2021-02-05-text" ) || "";
+XGP.getFileFromGitHub = function() {
 
-	divContentMain.value = XGP.content;
+	path = location.hash ? location.hash.slice( 1 ) : COR.defaultFile;
 
-};
+	XGP.url = `https://api.github.com/repos/${ COR.user }/${ COR.repo }/contents/${ path }`;
 
+	divContentMain.innerHTML = "<textarea id='textareaMain'style=height:100vh;width:100%; ></textarea>";
 
-
-XGP.setStorage = function() {
-
-	XGP.content = divContentMain.value;
-
-	localStorage.setItem( "file-2021-02-05-text", XGP.content );
-
-};
-
-
-
-
-//////////
-
-XGP.getFile = function () {
-
-	//XGP.url = inpUrl.value;
-	XGP.requestFile( XGP.url );
-
-};
-
-
-
-XGP.requestFile = function ( url = "https://example.com", callback = XGP.onLoad ) {
-
-	const urlCORS = "https://cors-anywhere.herokuapp.com/";
-
-	xhr = new XMLHttpRequest();
-	//xhr.open( "GET", urlCORS + url, true );
-	xhr.open( "GET", url, true );
-	xhr.setRequestHeader( "Authorization", "token " + XGP.accessToken );
+	XGPinpUrl.value = XGP.url;
+	
+	const xhr = new XMLHttpRequest();
+	xhr.open( "GET", XGP.url, true );
+	xhr.setRequestHeader( "Authorization", "token " + XGPinpAccessToken.value );
 	xhr.responseType = "json";
 	xhr.onerror = ( xhr ) => console.log( "error:", xhr );
 	//xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
-	xhr.onload = ( xhr ) => callback( xhr );
+	xhr.onload = onLoad;
 	xhr.send( null );
 
 };
 
+function onLoad ( xhr ) {
 
-
-XGP.onLoad = function ( xhr ) {
-
-	console.log( "response", xhr );
+	//console.log( "response", xhr );
 
 	XGP.sha = xhr.target.response.sha;
-	console.log( "sha", XGP.sha );
 
-	XGP.content = atob( xhr.target.response.content );
+	const content = atob( xhr.target.response.content );
 
-	divContentMain.value = XGP.content;
 
-	//divContentMain.contentEditable = true
 
-	//divHtml.innerHTML = XGP.content;
+	textareaMain.value = content;
 
-	//divMessage.innerText += `\nGet: ${ new Date().toISOString() } ${ Math.random() }`;
+	divMessage.innerText = `Get:${ new Date().toLocaleString() } bytes:${ content.length } sha:${ XGP.sha }`;
 
 };
+
+
+
+
+
+
+
+
+
 
 
 
@@ -156,9 +130,9 @@ XGP.requestSha = function () {
 	xhr.responseType = "json";
 	xhr.onerror = ( xhr ) => console.log( "error:", xhr );
 	//xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
-	xhr.onload = (xhr ) => {
+	xhr.onload = ( xhr ) => {
 		console.log( "", xhr ); XGP.sha = xhr.target.response.sha; XGP.putFile();
-	}
+	};
 	xhr.send( null );
 
 };
@@ -184,7 +158,7 @@ XGP.putFile = function () {
 
 	} ),
 
-	xhr = new XMLHttpRequest();
+		xhr = new XMLHttpRequest();
 	//xhr.open( "GET", urlCORS + url, true );
 	xhr.open( "PUT", XGP.url, true );
 	xhr.setRequestHeader( "Authorization", "token " + XGP.accessToken );
@@ -198,6 +172,29 @@ XGP.putFile = function () {
 	divMessage.innerText += `\nPut: ${ new Date().toISOString() } ${ Math.random() }`;
 
 };
+
+
+//////////
+
+XGP.getStorage = function () {
+
+	XGP.content = localStorage.getItem( "file-2021-02-05-text" ) || "";
+
+	divContentMain.value = XGP.content;
+
+};
+
+
+
+XGP.setStorage = function() {
+
+	XGP.content = divContentMain.value;
+
+	localStorage.setItem( "file-2021-02-05-text", XGP.content );
+
+};
+
+
 
 
 
