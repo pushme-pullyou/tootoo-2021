@@ -43,9 +43,11 @@ function onLoad ( xhr ) {
 
 function putFileToGitHub () {
 
-	if ( !sha ) { requestSha(); return; }
 
-	putFile();
+	requestSha();
+	// if ( !sha ) { requestSha(); return; }
+
+	// putFile();
 
 }
 
@@ -74,7 +76,7 @@ function putFile () {
 	const codedData = window.btoa( content ); // encode the string
 
 	const body = JSON.stringify( {
-		"branch": "master",
+		"branch": inpBranch.value,
 		"content": codedData,
 		"message": `add to file`,
 		"sha": sha
@@ -86,7 +88,7 @@ function putFile () {
 	xhr.setRequestHeader( "Authorization", "token " + inpAccessToken.value );
 	xhr.setRequestHeader( "Content-Type", "application/json" );
 	xhr.onerror = ( xhr ) => console.log( "error:", xhr );
-	xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
+	xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded, xhr );
 	xhr.send( body );
 
 	divMessage.innerText = `Put: ${ new Date().toLocaleString() } bytes:${ content.length } sha:${ sha }`;

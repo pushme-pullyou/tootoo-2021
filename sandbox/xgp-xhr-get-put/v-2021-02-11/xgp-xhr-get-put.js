@@ -29,7 +29,7 @@ XGP.init = function () {
 
 <p>
 	<button onclick=XGP.getFileFromGitHub()>getFileFromGitHub</button>
-	<button onclick=XGP.putFile()>putFile</button>
+	<button onclick=XGP.putFileToGitHub()>putFile</button>
 </p>
 
 <p>
@@ -73,7 +73,6 @@ XGP.setGitHubAccessToken = function () {
 
 //////////
 
-
 XGP.getFileFromGitHub = function() {
 
 	path = location.hash ? location.hash.slice( 1 ) : COR.defaultFile;
@@ -83,27 +82,27 @@ XGP.getFileFromGitHub = function() {
 	divContentMain.innerHTML = "<textarea id='textareaMain'style=height:100vh;width:100%; ></textarea>";
 
 	XGPinpUrl.value = XGP.url;
-	
+
 	const xhr = new XMLHttpRequest();
 	xhr.open( "GET", XGP.url, true );
 	xhr.setRequestHeader( "Authorization", "token " + XGPinpAccessToken.value );
 	xhr.responseType = "json";
 	xhr.onerror = ( xhr ) => console.log( "error:", xhr );
 	//xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
-	xhr.onload = onLoad;
+	xhr.onload = XGP.onLoad;
 	xhr.send( null );
 
 };
 
-function onLoad ( xhr ) {
+
+
+XGP.onLoad = function( xhr ) {
 
 	//console.log( "response", xhr );
 
 	XGP.sha = xhr.target.response.sha;
 
 	const content = atob( xhr.target.response.content );
-
-
 
 	textareaMain.value = content;
 
@@ -113,16 +112,62 @@ function onLoad ( xhr ) {
 
 
 
+XGP.putFileToGitHub = function () {
+
+	XGP.requestSha();
+
+	// if ( !XGP.sha ) { XGP.requestSha(); return; }
+
+	// XGP.putFile();
+
+}
+
+XGP.requestSha = function() {
+
+	const xhr = new XMLHttpRequest();
+	xhr.open( "GET", XGP.url, true );
+	xhr.setRequestHeader( "Authorization", "token " + XGP.accessToken );
+	xhr.responseType = "json";
+	xhr.onerror = ( xhr ) => console.log( "error:", xhr );
+	//xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
+	xhr.onload = ( xhr ) => {
+		//console.log( "", xhr );
+		XGP.sha = xhr.target.response.sha;
+		XGP.putFile();
+	};
+	xhr.send( null );
+
+};
 
 
+XGP.putFile = function () {
+
+	const content = textareaMain.value;
+
+	const codedData = window.btoa( content ); // encode the string
+
+	const body = JSON.stringify( {
+		"branch": "master",
+		"content": codedData,
+		"message": `add to file`,
+		"sha": XGP.sha
+
+	} );
+
+	xhr = new XMLHttpRequest();
+	xhr.open( "PUT", XGP.url, true );
+	xhr.setRequestHeader( "Authorization", "token " + XGP.accessToken );
+	xhr.setRequestHeader( "Content-Type", "application/json" );
+	xhr.onerror = ( xhr ) => console.log( "error:", xhr );
+	xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
+	xhr.send( body );
+
+	divMessage.innerText = `Put: ${ new Date().toLocaleString() } bytes:${ content.length } sha:${ XGP.sha }`;
+
+};
 
 
-
-
-
-
-
-XGP.requestSha = function () {
+XGP.vvvrequestSha = function () {
 
 	xhr = new XMLHttpRequest();
 	xhr.open( "GET", XGP.url, true );
@@ -138,7 +183,7 @@ XGP.requestSha = function () {
 };
 
 
-XGP.putFile = function () {
+XGP.nnnputFile = function () {
 
 	//const urlApi = "https://api.github.com/repos/theo-armour/qdata/contents/try.md";
 
