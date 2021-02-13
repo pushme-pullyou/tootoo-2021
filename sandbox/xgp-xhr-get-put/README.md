@@ -34,6 +34,9 @@ use XMLHTTPRequest to GET or PUT any file in a GitHub repository
 
 ## Change Log
 
+### 2021-02-12
+
+* Many fixes
 
 ### 2021-01-23
 
