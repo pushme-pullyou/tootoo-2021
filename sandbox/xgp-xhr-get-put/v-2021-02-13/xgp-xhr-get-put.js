@@ -105,7 +105,7 @@ XGP.getFileFromGitHub = function ( url ) {
 
 XGP.onLoad = function ( xhr ) {
 
-	//console.log( "response", xhr );
+	console.log( "response", xhr );
 
 	XGP.sha = xhr.target.response.sha;
 

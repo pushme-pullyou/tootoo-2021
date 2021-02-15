@@ -70,10 +70,8 @@
 
 		const dd = new Date();
 		const month = ( 1 + dd.getMonth() ).toString().padStart( 2, "0" );
-
 		const base = "https://api.github.com/repos/theo-armour/qdata/contents/";
 
-		XGP.accessToken = localStorage.getItem( 'githubAccessToken' ) || "";
 
 		init();
 
@@ -83,9 +81,11 @@
 
 			spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
 
-			XGP.getFileFromGitHub();
+			XGP.accessToken = localStorage.getItem( 'githubAccessToken' ) || "";
 
 			XGPinpAccessToken.value = XGP.accessToken;
+
+			XGP.getFileFromGitHub();
 
 		}
 
