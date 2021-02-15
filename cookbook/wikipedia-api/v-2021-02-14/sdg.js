@@ -12,6 +12,8 @@ function getSDGData () {
 
 	requestFile( api + query + article, onLoadSDG );
 
+	requestFile( "../api-result.json", onLoadSDG );
+
 }
 
 
@@ -84,7 +86,7 @@ function onLoadSDG ( xhr ) {
 	} ).join( "" );
 
 
-	divContent.innerHTML = text + "</details>";
+	divContent.innerText = text + "</details>";
 
 	//let vals = Array.from( trs ).slice( ).map( tr => tr.innerText ) //.trim().replace( /\[(.*?)\]/g, "" ).split( "\n" ) ).sort();
 	//console.log( 'vals', vals );
