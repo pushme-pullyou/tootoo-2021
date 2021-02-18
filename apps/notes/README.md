@@ -41,6 +41,9 @@ Realtime note-taking available on all your devices
 ### 2021-02-18
 
 * Put everything into HTML file
+* Alt-S to save
+* Message if exit without save
+
 
 ### 2021-02-15
 
