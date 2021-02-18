@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="description" content="">
+	<meta name="date" content="2021-02-09">
+
+	<head>
+		<title>notes</title>
+		<meta charset=utf-8 />
+		<style>
+			body, html {
+				font: 100% monospace;
+				height: 100%;
+				margin: 0;
+			}
+
+			h2 {
+				margin: 0;
+			}
+		</style>
+	</head>
+
+<body>
+
+	<script src="xgp-xhr-get-put.js"></script>
+
+	<main style="height:100%;margin: 0 auto;overflow:hidden;resize:both;width:50rem;">
+		<h2 style="display:inline-block;" ">
+			<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/main/sandbox/xgp-xhr-get-put" target="_blank"
+				title="source code on GitHub"><img
+					src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
+			<a href="" title="Click this menu title to reset the model">
+				<span id=spnTitle>${ MNU.title }</span>
+				<span id=spnVersion></span>
+			</a>
+		</h2>
+
+		<button onclick=getToday()>today</button>
+
+		<button onclick=getYesterday()>yesterday</button>
+
+		<!-- <button onclick=getNotes()>notes</button> -->
+
+		<button onclick=XGP.putFileToGitHub()>putFileToGitHub</button>
+
+		<input id=XGPinpAccessToken onclick=this.select(); onblur=XGP.setGitHubAccessToken(); >
+
+		<div id=divMessage style="width:100%;"></div>
+
+		<div id="divContentMain" style="height:calc( 100% - 5rem );width:100%;"></div>
+
+	</main>
+
+	<script>
+
+		var COR = {
+			user: "theo-armour",
+			repo: "qdata",
+			branch: "master",
+			defaultFile: "notes.md",
+			ignoreFolders: [],
+			path: "../../../",
+		};
+
+		const dd = new Date();
+		const month = ( 1 + dd.getMonth() ).toString().padStart( 2, "0" );
+
+		const base = "https://api.github.com/repos/theo-armour/qdata/contents/";
+
+		XGP.accessToken = localStorage.getItem( 'githubAccessToken' ) || "";
+
+		init();
+
+		function init() {
+
+			spnTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+
+			spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
+
+			XGP.getFileFromGitHub();
+
+		}
+
+		// Friday ~ 86.05
+		function getToday() {
+
+			COR.branch = "master";
+			const date = dd.getDate().toString().padStart( 2, "0" );
+
+			const path = `journal/days-of-year-md/${ month }/${ month }-${ date }.md`;
+			XGP.getFileFromGitHub( base + path );
+
+		}
+
+
+		function getYesterday() {
+
+			COR.branch = "master";
+
+			const date = ( dd.getDate() - 1 ).toString().padStart( 2, "0" );
+
+			const path = `journal/days-of-year-md/${ month }/${ month }-${ date }.md`;
+			XGP.getFileFromGitHub( base + path );
+
+		}
+
+
+		function getNotes() {
+
+
+			COR.branch = "master";
+
+			const path = `notes.md`;
+			XGP.getFileFromGitHub( base + path );
+		}
+
+	</script>
+
+
+</body>
+
+</html>
