@@ -37,13 +37,11 @@ Realtime note-taking available on all your devices
 </details>
 
 <details open >
-<summary> Things you can do using this script</summary>
+<summary> To do</summary>
 
-* Click the three bars( 'hamburger menu icon' ) to slide the menu in and out
-* Click the GitHub Octocat icon to view or edit the source code on GitHub
-* Click on title to reload te page
-* Press Control-U/Command-Option-U to view the source code
-* Press Control-Shift-J/Command-Option-J to see if the JavaScript console reports any errors
+* 2021-02-15 ~ Control-S to save
+* Multiple text areas
+* Save to local storage
 
 </details>
 
@@ -56,7 +54,13 @@ Realtime note-taking available on all your devices
 <details open >
 <summary>Change log </summary>
 
-### 123
+
+### 2021-02-15
+
+* new tNotes
+
+### 2020-05-18
+
 
 * First commit
 
