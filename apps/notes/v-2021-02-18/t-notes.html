@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="description" content="">
+	<meta name="date" content="2021-02-18">
+
+	<title>notes</title>
+
+	<style>
+		body,
+		html {
+			box-sizing: border-box;
+			font: 100% monospace;
+			height: 100%;
+			margin: 0;
+		}
+
+		main {
+			height: 100%;
+			margin: 0 auto;
+			overflow: hidden;
+			resize: both;
+			max-width: 50rem;
+		}
+
+		h1 {
+			margin: 0;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- <script src="xgp-xhr-get-put.js"></script> -->
+
+	<main>
+		<h1>
+			<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/main/apps/notes" target="_blank"
+				title="source code on GitHub"><img style=vertical-align:middle;
+					src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
+			<a href="" title="Click this menu title to reload the file">
+				tNotes
+				<span id=spnVersion></span>
+			</a>
+		</h1>
+
+		<button onclick=getToday()>today</button>
+
+		<button onclick=getYesterday()>yesterday</button>
+
+		<button onclick=getNotes()>notes</button>
+
+		<button onclick=XGP.putFileToGitHub() title="Press Alt-S">putFileToGitHub</button>
+
+		<input id=XGPinpAccessToken onclick=this.select(); onblur=XGP.setGitHubAccessToken();
+			title="Obtain GitHub API Access Token">
+
+		<div id=divMessage style="width:100%;"></div>
+
+		<div id="divContentMain" style="height:calc( 100% - 5rem );margin:0;padding:0;width:100%;"></div>
+
+	</main>
+
+	<script>
+
+		var XGP = {
+			user: "theo-armour",
+			repo: "qdata",
+			branch: "master",
+
+			base: "https://api.github.com/repos/theo-armour/qdata/contents/",
+			Date: new Date(),
+			defaultFile: "notes.md",
+		};
+
+
+
+		function init() {
+
+			spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
+
+			XGP.accessToken = localStorage.getItem( 'githubAccessToken' ) || "";
+
+			XGPinpAccessToken.value = XGP.accessToken;
+
+			XGP.month = ( 1 + XGP.Date.getMonth() ).toString().padStart( 2, "0" );
+
+			//XGP.getFileFromGitHub();
+
+			window.addEventListener( "beforeunload", XGP.checkForChange );
+			window.addEventListener( 'keyup', XGP.onKeyUp, false ); // Save file Alt--S
+			window.addEventListener( 'hashchange', XGP.onHashChange, false );
+
+			XGP.onHashChange();
+
+		}
+
+
+		// XGP.onHashChange = function() {
+
+		// 	fileName = location.hash ? location.hash.split( '#' )[ 1 ] : 'rea
+
+		// }
+
+
+		XGP.setGitHubAccessToken = function () {
+
+			localStorage.setItem( "githubAccessToken", XGPinpAccessToken.value );
+
+		};
+
+
+
+		function discardOK() {
+
+			let result;
+
+			if ( textareaMain.value !== XGP.content ) { result = confirm( "OK to discard?" ); }
+
+			return result;
+
+		}
+
+
+
+		function getToday() {
+
+			if ( discardOK() === false ) { return; };
+
+			const date = XGP.Date.getDate().toString().padStart( 2, "0" );
+
+			const path = `journal/days-of-year-md/${ XGP.month }/${ XGP.month }-${ date }.md`;
+
+			XGP.onHashChange( XGP.base + path );
+
+		}
+
+
+		function getYesterday() {
+
+			if ( discardOK() === false ) { return; };
+
+			const date = ( XGP.Date.getDate() - 1 ).toString().padStart( 2, "0" );
+
+			const path = `journal/days-of-year-md/${ XGP.month }/${ XGP.month }-${ date }.md`;
+
+			XGP.onHashChange( XGP.base + path );
+
+		}
+
+
+		function getNotes() {
+
+			if ( discardOK() === false ) { return; };
+
+			const path = XGP.defaultFile;
+
+			XGP.onHashChange( XGP.base + path );
+
+		}
+
+
+
+		XGP.onHashChange = function ( url ) {
+
+			const path = location.hash ? location.hash.slice( 1 ) : XGP.defaultFile;
+
+			urlDefault = `https://api.github.com/repos/${ XGP.user }/${ XGP.repo }/contents/${ path }`;
+
+			XGP.url = url ? url : urlDefault;
+
+			//divContentMain.innerHTML = "<textarea id=textareaMain style=height:100vh;width:95%; ></textarea>";
+
+			if ( window.XGPinpUrl ) {
+				XGPinpUrl.value = XGP.url;
+			}
+
+			const xhr = new XMLHttpRequest();
+			xhr.open( "GET", XGP.url, true );
+			xhr.setRequestHeader( "Authorization", "token " + XGP.accessToken );
+			xhr.responseType = "json";
+			xhr.onerror = ( xhr ) => console.log( "error:", xhr );
+			//xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
+			xhr.onload = XGP.onLoad;
+			xhr.send( null );
+
+		};
+
+
+
+		XGP.onLoad = function ( xhr ) {
+			//console.log( "response", xhr );
+
+			XGP.sha = xhr.target.response.sha;
+
+			const content = atob( xhr.target.response.content );
+
+			divContentMain.innerHTML = `<textarea id=textareaMain style="height:98%;width:98%;" ></textarea>`;
+
+			textareaMain.value = content;
+
+			XGP.content = content;
+
+			if ( window.divMessage ) {
+
+				divMessage.innerText = `Get:${ new Date().toLocaleString() } bytes:${ content.length } sha:${ XGP.sha }`;
+
+			}
+
+		};
+
+
+
+		XGP.putFileToGitHub = function () {
+
+			const xhr = new XMLHttpRequest();
+			xhr.open( "GET", XGP.url, true );
+			xhr.setRequestHeader( "Authorization", "token " + XGP.accessToken );
+			xhr.responseType = "json";
+			xhr.onerror = ( xhr ) => console.log( "error:", xhr );
+			//xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
+			xhr.onload = ( xhr ) => {
+				//console.log( "", xhr );
+				XGP.sha = xhr.target.response.sha;
+				XGP.putFile();
+			};
+			xhr.send( null );
+
+		};
+
+
+		XGP.putFile = function () {
+
+			XGP.content = textareaMain.value;
+
+			const codedData = window.btoa( XGP.content ); // encode the string
+
+			const body = JSON.stringify( {
+				"branch": XGP.branch,
+				"content": codedData,
+				"message": `add to file`,
+				"sha": XGP.sha
+
+			} );
+
+			xhr = new XMLHttpRequest();
+			xhr.open( "PUT", XGP.url, true );
+			xhr.setRequestHeader( "Authorization", "token " + XGP.accessToken );
+			xhr.setRequestHeader( "Content-Type", "application/json" );
+			xhr.onerror = ( xhr ) => console.log( "error:", xhr );
+			xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
+			xhr.send( body );
+
+			divMessage.innerText = `Put: ${ new Date().toLocaleString() } bytes:${ XGP.content.length } sha:${ XGP.sha }`;
+
+		};
+
+
+
+		XGP.checkForChange = function ( event ) {
+
+			if ( textareaMain.value === XGP.content ) { return; }
+
+			event.preventDefault();
+
+			//XGP.setStorage();
+
+			event.returnValue = "";
+
+
+		}
+
+		XGP.onKeyUp = function () {
+
+			//console.log( 'key', event.keyCode );
+
+			event.preventDefault();
+
+			if ( event.altKey && event.keyCode === 83 ) {
+
+				XGP.putFileToGitHub();
+
+			}
+
+		}
+
+
+		init();
+
+
+	</script>
+
+
+</body>
+
+</html>

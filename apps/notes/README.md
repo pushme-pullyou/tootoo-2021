@@ -22,13 +22,6 @@ Realtime note-taking available on all your devices
 
 </details>
 
-<details open >
-<summary>To do and wish list </summary>
-
-* Make 100% JavaScript - so can work in trayo nicely
-
-
-</details>
 
 <details open >
 <summary>Issues </summary>
@@ -36,24 +29,18 @@ Realtime note-taking available on all your devices
 
 </details>
 
-<details open >
-<summary> To do</summary>
+## To do
 
 * 2021-02-15 ~ Control-S to save
 * Multiple text areas
 * Save to local storage
+* Make 100% JavaScript - so can work in trayo nicely
 
-</details>
+## Change log
 
-<details open >
-<summary>Links of interest</summary>
+### 2021-02-18
 
-
-</details>
-
-<details open >
-<summary>Change log </summary>
-
+* Put everything into HTML file
 
 ### 2021-02-15
 
