@@ -86,7 +86,7 @@ function onLoadSDG ( xhr ) {
 	} ).join( "" );
 
 
-	divContent.innerText = text + "</details>";
+	divContent.innerHTML = text + "</details>";
 
 	//let vals = Array.from( trs ).slice( ).map( tr => tr.innerText ) //.trim().replace( /\[(.*?)\]/g, "" ).split( "\n" ) ).sort();
 	//console.log( 'vals', vals );
