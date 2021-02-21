@@ -11,11 +11,11 @@
 	<title>SDG 2021</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
-	<link rel="stylesheet" href="./lib/style/style-2020-02-11.css">
+	<link rel="stylesheet" href="./lib/style/style-2021-02-11.css">
 
 	<style>
 		:root {
-			/* --mnu-width: 15rem; */
+			--mnu-width: 20rem;
 			--main-hue: 0;
 			/* 0 to 360 0=red 120=green 240=blue */
 		}
@@ -29,13 +29,13 @@
 	<!-- https://github.com/showdownjs/showdown -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 
-	<script src="./lib/fox-file-open-xhr/v-2021-02-17fox-file-open-xhr.js"></script>
+	<script src="./lib/fox-file-open-xhr/v-2021-02-17/fox-file-open-xhr.js"></script>
 
-	<script src="./lib/gor-github-organization-repos/v-2020-02-06/gor-github-organization-repos.js"></script>
+	<script src="./lib/gor-github-organization-repos/v-2021-02-06/gor-github-organization-repos.js"></script>
 
-	<script src="./lib/grv-github-repo-tree-view/v-2020-02-06/grv-github-repo-tree-view.js"></script>
+	<script src="./lib/grv-github-repo-tree-view/v-2021-02-20/grv-github-repo-tree-view.js"></script>
 
-	<script src="./lib/mnu-menu/v-2020-01-31/mnu-menu.js"></script>
+	<script src="./lib/mnu-menu/v-2021-01-31/mnu-menu.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
@@ -75,7 +75,7 @@
 				repo: "sdg-2021",
 				branch: "master",
 				defaultFile: "README.md",
-				ignoreFolders: [],
+				ignoreFolders: ["lib", "lib-templates"],
 				path: "./", // "../../../",
 			}
 
@@ -97,14 +97,15 @@
 			divDescription.innerHTML = description;
 
 			// FOX = File Open XHR
-			//FOX.path = COR.path;
-			//FOX.defaultFile = COR.defaultFile;
+			FOX.path = COR.path;
+			FOX.defaultFile = COR.defaultFile;
 			FOX.init( COR );
+			FOX.onHashChange();
 
 			// GOR = GitHub Organization Repositories
-			GOR.user = COR.user;
-			GOR.repo = COR.repo;
-			GOR.init();
+			// GOR.user = COR.user;
+			// GOR.repo = COR.repo;
+			// GOR.init();
 
 			// GRV = GitHub Repo treeView
 			GRV.user = COR.user;
@@ -115,9 +116,12 @@
 			GRV.defaultFile = COR.defaultFile;
 			GRV.ignoreFolders = COR.ignoreFolders;
 			GRV.init();
+			GRV.getRepo();
+
+			//GRVdet2.open = true;
 
 			// let's get going!
-			GOR.getOrganization();
+			//GOR.getOrganization();
 
 			// if running on server, keeps address bar pointed to latest dev
 
@@ -128,6 +132,7 @@
 
 			}
 
+			setTimeout(() => {GRVdet2.open = true;}, 500 );
 		}
 
 	</script>
