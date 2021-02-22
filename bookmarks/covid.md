@@ -1,5 +1,9 @@
 # COVID
 
+## Immunity
+
+* https://www.wsj.com/articles/well-have-herd-immunity-by-april-11613669731
+
 ## Air
 
 * https://www.amazon.com/exec/obidos/ASIN/B00SY34B64/ctmakerupdate-20?th=1
