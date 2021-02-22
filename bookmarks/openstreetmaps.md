@@ -1,5 +1,10 @@
 # openStreetMap
 
+## Links of Interest
+
+* https://www.canadiangeographic.ca/article/9-great-map-quotes
+* https://www.bloomberg.com/news/articles/2021-02-19/openstreetmap-charts-a-controversial-new-direction
+
 ## Change Log
 
 ## 2021-01-12
@@ -94,6 +99,3 @@ The map shows what the territory does not show. The territory indicates where th
 
 
 
-### Links of Interest
-
-https://www.canadiangeographic.ca/article/9-great-map-quotes
