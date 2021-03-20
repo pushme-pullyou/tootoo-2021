@@ -85,6 +85,7 @@
 
 	<script>
 
+		let boxes = new THREE.Group()
 		var renderer, camera, controls, scene;
 		var geometry, material, mesh, axesHelper;
 
@@ -125,6 +126,11 @@
 			controls.minDistance = 1;
 			controls.maxDistance = 500;
 
+			controls.enableZoom = false;
+			//controls.maxPolarAngle = 0;
+			//controls.minAPolarAngle = 0;
+
+
 			window.addEventListener( 'resize', onWindowResize, false );
 			window.addEventListener( 'orientationchange', onWindowResize, false );
 			window.addEventListener( 'keyup', function () { controls.autoRotate = false; }, false );
@@ -133,11 +139,37 @@
 			axesHelper = new THREE.AxesHelper( 50 );
 			scene.add( axesHelper );
 
-			geometry = new THREE.BoxGeometry( 50, 50, 50 );
-			material = new THREE.MeshNormalMaterial();
-			mesh = new THREE.Mesh( geometry, material );
-			scene.add( mesh );
+			addBoxes();
 
+			window.addEventListener( "wheel", onWheel, true );
+
+		}
+
+
+		function onWheel( e ) {
+
+			console.log( "delta", e.wheelDeltaY, "z", boxes.position.z )
+
+			boxes.position.z -= e.wheelDeltaY / 60;
+			boxes.position.z = boxes.position.z < -50 ? -50 : boxes.position.z;
+			boxes.position.z = boxes.position.z > 350 ? 350 : boxes.position.z
+
+		}
+
+
+		function addBoxes( count = 20, size = 20 ) {
+			geometry = new THREE.BoxGeometry( size, size, 0.5 * size );
+			material = new THREE.MeshNormalMaterial();
+
+			for ( let i = 0; i < count; i++ ) {
+
+				const mesh = new THREE.Mesh( geometry, material );
+				mesh.position.z = 2.5 * size - i * 1.0 * size;
+				boxes.add( mesh );
+
+			}
+
+			scene.add( boxes );
 		}
 
 
@@ -203,7 +235,7 @@
 
 			requestAnimationFrame( animate );
 			renderer.render( scene, camera );
-			controls.update();
+			//controls.update();
 
 		}
 
