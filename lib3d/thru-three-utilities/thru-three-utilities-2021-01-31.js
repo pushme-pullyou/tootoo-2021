@@ -7,29 +7,29 @@ THRU.groupTellTale = new THREE.Group();
 
 THRU.setSceneNew = function () {
 
-	THR.scene.remove(THRU.group,THRU.groupTellTale );
+	THR.scene.remove( THRU.group, THRU.groupTellTale );
 
 	THRU.group = new THREE.Group();
 	THRU.groupTellTale = new THREE.Group();
 
-	THR.scene.add(THRU.group,THRU.groupTellTale);
+	THR.scene.add( THRU.group, THRU.groupTellTale );
 
 };
 
 
 
-THRU.removeLines = function() {
+THRU.removeLines = function () {
 
 	THRR.intersectObjects.forEach( item => {
 
-		const lines = item.children.filter( child => child.type === "Line") ;
-		item.remove( ... lines );
+		const lines = item.children.filter( child => child.type === "Line" );
+		item.remove( ...lines );
 
 	} );
 
 };
 
-THRU.addTellTale = function( siz = 0.5 ) {
+THRU.addTellTale = function ( siz = 0.5 ) {
 
 	const geometry = new THREE.BoxBufferGeometry( siz, siz, siz );
 	const material = new THREE.MeshNormalMaterial();
@@ -41,7 +41,7 @@ THRU.addTellTale = function( siz = 0.5 ) {
 };
 
 
-THRU.addLine = function( mesh, vertices, color = 0x000000 ) { // THRR-caster only
+THRU.addLine = function ( mesh, vertices, color = 0x000000 ) { // THRR-caster only
 
 	const geometry = new THREE.Geometry();
 	geometry.vertices = vertices;
@@ -53,21 +53,21 @@ THRU.addLine = function( mesh, vertices, color = 0x000000 ) { // THRR-caster onl
 
 };
 
-THRU.addMesh = function (size = 10) {
+THRU.addMesh = function ( size = 10 ) {
 	// CylinderGeometry( radiusTop, radiusBottom, height, radiusSegments, heightSegments, openEnded )
 	// SphereGeometry( radius, segmentsWidth, segmentsHeight, phiStart, phiLength, thetaStart, thetaLength )
 	// TorusGeometry( radius, tube, radialSegments, tubularSegments, arc )
 
 	types = [
-		new THREE.BoxBufferGeometry(size, size, size),
-		new THREE.CylinderBufferGeometry(5, 5, size),
-		new THREE.DodecahedronGeometry(5),
-		new THREE.SphereBufferGeometry(0.5 * size),
-		new THREE.TorusBufferGeometry(size, 0.5 * size),
-		new THREE.TorusKnotBufferGeometry(size, 0.5 * size),
+		new THREE.BoxBufferGeometry( size, size, size ),
+		new THREE.CylinderBufferGeometry( 5, 5, size ),
+		new THREE.DodecahedronGeometry( 5 ),
+		new THREE.SphereBufferGeometry( 0.5 * size ),
+		new THREE.TorusBufferGeometry( size, 0.5 * size ),
+		new THREE.TorusKnotBufferGeometry( size, 0.5 * size ),
 	];
 
-	const geometry = types[Math.floor(types.length * Math.random())];
+	const geometry = types[ Math.floor( types.length * Math.random() ) ];
 
 	// geometry.applyMatrix4( new THREE.Matrix4().makeRotationX( -0.5 * Math.PI ) );
 	// geometry.applyMatrix4( new THREE.Matrix4().makeScale( 1, 1, 1 ) );
@@ -75,8 +75,8 @@ THRU.addMesh = function (size = 10) {
 
 	//const material = new THREE.MeshNormalMaterial( { transparent: true });
 	//const geometry = new THREE.BoxBufferGeometry(size, size, size);
-	const material = new THREE.MeshPhongMaterial({ color: 0xffffff * Math.random(), opacity: 0.85, side: 1, specular: 0x444444, side: 2, transparent: true });
-	mesh = new THREE.Mesh(geometry, material);
+	const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random(), opacity: 0.85, side: 1, specular: 0x444444, side: 2, transparent: true } );
+	mesh = new THREE.Mesh( geometry, material );
 	mesh.userData.type = mesh.geometry.type;
 	mesh.receiveShadow = true;
 	mesh.castShadow = true;
@@ -86,28 +86,28 @@ THRU.addMesh = function (size = 10) {
 
 
 
-THRU.addMeshes = function (count = 100) {
+THRU.addMeshes = function ( count = 100 ) {
 	THR.group.add(
-		...Array(count)
+		...Array( count )
 			.fill()
-			.map(() => THRU.addMesh())
+			.map( () => THRU.addMesh() )
 	);
 
-	THR.group.children.forEach((mesh, i) => {
-		mesh.position.set(Math.random() * 100 - 50, Math.random() * 100 - 50, Math.random() * 100);
+	THR.group.children.forEach( ( mesh, i ) => {
+		mesh.position.set( Math.random() * 100 - 50, Math.random() * 100 - 50, Math.random() * 100 );
 		//mesh.rotation.set( 0.2 * Math.random(), 0.2 * Math.random(), 0.2 * Math.random() );
-		mesh.lookAt( 0, 0, 0 )
+		mesh.lookAt( 0, 0, 0 );
 		mesh.userData.index = i;
 		mesh.name = "mesh " + i;
 
-	});
+	} );
 };
 
 
 
 //////////
 
-THRU.toggleBoundingBoxHelper = function( { group = THR.group, visible = undefined } = {} ) {
+THRU.toggleBoundingBoxHelper = function ( { group = THR.group, visible = undefined } = {} ) {
 
 	if ( !THRU.boundingBoxHelper ) {
 
@@ -118,7 +118,7 @@ THRU.toggleBoundingBoxHelper = function( { group = THR.group, visible = undefine
 		THRU.boundingBoxHelper.name = "boundingBoxHelper";
 		THRU.group.add( THRU.boundingBoxHelper );
 
-	 } else {
+	} else {
 
 		THRU.boundingBoxHelper.visible = visible || !THRU.boundingBoxHelper.visible;
 
@@ -128,7 +128,7 @@ THRU.toggleBoundingBoxHelper = function( { group = THR.group, visible = undefine
 
 
 
-THRU.toggleWireframe = function( obj = THR.group ) {
+THRU.toggleWireframe = function ( obj = THR.group ) {
 
 	obj.traverse( child => {
 
@@ -144,7 +144,7 @@ THRU.toggleWireframe = function( obj = THR.group ) {
 
 
 
-THRU.toggleMeshEdges = function( obj = THR.group) {
+THRU.toggleMeshEdges = function ( obj = THR.group ) {
 
 	if ( !THR.group.userData.edges ) {
 
@@ -162,7 +162,7 @@ THRU.toggleMeshEdges = function( obj = THR.group) {
 
 		}
 
-		THR.group.userData.edges = true
+		THR.group.userData.edges = true;
 
 		return;
 
@@ -184,12 +184,12 @@ THRU.toggleMeshEdges = function( obj = THR.group) {
 
 // not
 
-THRU.toggleSurfaceNormalsVisible = function( obj = THR.group ) {
+THRU.toggleSurfaceNormalsVisible = function ( obj = THR.group ) {
 
 	let material = new THREE.MeshNormalMaterial();
 
 	const types = [ 'BoxBufferGeometry', 'BufferGeometry', 'ConeBufferGeometry', 'CylinderBufferGeometry',
-	'ShapeBufferGeometry', 'SphereBufferGeometry' ];
+		'ShapeBufferGeometry', 'SphereBufferGeometry' ];
 
 	if ( THR.scene.children.includes( THRU.helperNormalsFaces ) ) {
 
@@ -248,7 +248,7 @@ THRU.toggleSurfaceNormalsVisible = function( obj = THR.group ) {
 
 ////////// Material handling
 
-THRU.setObjectOpacity = function( obj = THR.group, range = THRrngOpacity ) {
+THRU.setObjectOpacity = function ( obj = THR.group, range = THRrngOpacity ) {
 
 	const opacity = parseInt( range.value, 10 );
 	//outOpacity.value = opacity + "%";
@@ -273,14 +273,14 @@ THRU.setObjectOpacity = function( obj = THR.group, range = THRrngOpacity ) {
 
 
 //THRU.drawPlacard = function( text = 'abc', scale = 0.05, color = Math.floor( Math.random() * 255 ), x = 0, y = 0, z = 10 ) {
-THRU.drawPlacard = function( text = 'abc', scale = 0.05, color = Math.floor( Math.random() * 255 ), position) {
+THRU.drawPlacard = function ( text = 'abc', scale = 0.05, color = Math.floor( Math.random() * 255 ), position ) {
 
 	// add update
 	// 2019-07-12 ~ https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-threejs/examples/placards
 
 	const placard = new THREE.Object3D();
 
-	const texture = canvasMultilineText( text, { backgroundColor: color  }  );
+	const texture = canvasMultilineText( text, { backgroundColor: color } );
 	const spriteMaterial = new THREE.SpriteMaterial( { map: texture, opacity: 0.9, transparent: true } );
 	const sprite = new THREE.Sprite( spriteMaterial );
 	sprite.position.copy( position );
@@ -298,28 +298,28 @@ THRU.drawPlacard = function( text = 'abc', scale = 0.05, color = Math.floor( Mat
 	return placard;
 
 
-	function canvasMultilineText( textArray, parameters ) {
+	function canvasMultilineText ( textArray, parameters ) {
 
-		parameters = parameters || {} ;
+		parameters = parameters || {};
 
 		const canvas = document.createElement( 'canvas' );
 		const context = canvas.getContext( '2d' );
 		let width = parameters.width ? parameters.width : 0;
 		const font = parameters.font ? parameters.font : '48px monospace';
-		const color = parameters.backgroundColor ? parameters.backgroundColor : 120 ;
+		const color = parameters.backgroundColor ? parameters.backgroundColor : 120;
 
 		if ( typeof textArray === 'string' ) textArray = [ textArray ];
 
 		context.font = font;
 
-		for ( let i = 0; i < textArray.length; i++) {
+		for ( let i = 0; i < textArray.length; i++ ) {
 
 			width = context.measureText( textArray[ i ] ).width > width ? context.measureText( textArray[ i ] ).width : width;
 
 		}
 
 		canvas.width = width + 20;
-		canvas.height =  parameters.height ? parameters.height : textArray.length * 60;
+		canvas.height = parameters.height ? parameters.height : textArray.length * 60;
 
 		//context.fillStyle = 'hsl( ' + color + ', 80%, 50% )' ;
 		//context.fillRect( 0, 0, canvas.width, canvas.height);
@@ -328,12 +328,12 @@ THRU.drawPlacard = function( text = 'abc', scale = 0.05, color = Math.floor( Mat
 		// context.strokeStyle = '#000';
 		// context.strokeRect( 0, 0, canvas.width, canvas.height );
 
-		context.fillStyle = '#000' ;
+		context.fillStyle = '#000';
 		context.font = font;
 
-		for ( let i = 0; i < textArray.length; i++) {
+		for ( let i = 0; i < textArray.length; i++ ) {
 
-			context.fillText( textArray[ i ], 10, 48  + i * 60 );
+			context.fillText( textArray[ i ], 10, 48 + i * 60 );
 
 		}
 
@@ -349,7 +349,7 @@ THRU.drawPlacard = function( text = 'abc', scale = 0.05, color = Math.floor( Mat
 
 
 
-THRU.addText = function( text = "Hello world!\n123", position = new THREE.Vector3() ) {
+THRU.addText = function ( text = "Hello world!\n123", position = new THREE.Vector3() ) {
 
 	textMesh = new troika_3d_text.TextMesh();
 	//textMesh.font = "../../asTHRUs/Inconsolata-Regular.ttf";
@@ -362,20 +362,20 @@ THRU.addText = function( text = "Hello world!\n123", position = new THREE.Vector
 
 	bbox = textMesh.geometry; //.computeBoundingBox();
 	console.log( "bbox", bbox );
-	THRU.group.add(textMesh);
+	THRU.group.add( textMesh );
 
 	// be sure to call sync() after all properties are THRU to update the rendering:
 	//textMesh.sync();
 
-  };
+};
 
 
 
-  THRU.addDoubleSidedText = function ( {
+THRU.addDoubleSidedText = function ( {
 	text = "Hello, World!\nThree.js\nabc 123",
 	color = 0xffffff * Math.random(),
 	size = 5,
-	position = new THREE.Vector3( 10, 10, 10)
+	position = new THREE.Vector3( 10, 10, 10 )
 
 } = {} ) {
 
@@ -418,23 +418,23 @@ THRU.addText = function( text = "Hello world!\n123", position = new THREE.Vector
 
 
 
-  THRU.toggleTitles = function() {
+THRU.toggleTitles = function () {
 
 	THR.group.children.map( child => {
 
 		text = child.name;
-		position = child.position.clone().add( new THREE.Vector3( 0, 0, 8 ) )
+		position = child.position.clone().add( new THREE.Vector3( 0, 0, 8 ) );
 
 		//THRU.addText( text, child.position );
-		child.add( ... THRU.addDoubleSidedText( { text: text, position: new THREE.Vector3( 0, 0, 8 )  }) );
+		child.add( ...THRU.addDoubleSidedText( { text: text, position: new THREE.Vector3( 0, 0, 8 ) } ) );
 
-	})
-  };
+	} );
+};
 
 
 ////////// camera
 
-THRU.toggleCameraOrthoPerspective = function() {
+THRU.toggleCameraOrthoPerspective = function () {
 
 
 	if ( THRU.cameraOrtho === undefined ) {
@@ -480,7 +480,7 @@ THRU.toggleCameraOrthoPerspective = function() {
 };
 
 
-THRU.setCameraPosition = function (view) {
+THRU.setCameraPosition = function ( view ) {
 
 	const v = ( x, y, z ) => new THREE.Vector3( x, y, z );
 
@@ -492,9 +492,9 @@ THRU.setCameraPosition = function (view) {
 		left: v( -2 * THR.radius, 0, 0 ),
 		bottom: v( 0, 0, -2 * THR.radius )
 
-	}
+	};
 
-	THR.camera.position.copy( THR.controls.target.clone().add( views[ view ]));
+	THR.camera.position.copy( THR.controls.target.clone().add( views[ view ] ) );
 
 	// THR.camera.up.set(0, 0, 1);
 
@@ -507,17 +507,17 @@ THRU.setCameraPosition = function (view) {
 };
 
 
-THRU.setFieldOfView = function( range ){
+THRU.setFieldOfView = function ( range ) {
 
-	angle = + range.value
+	angle = + range.value;
 
 	THR.camera.fov = angle;
-	THR.camera.updateProjectionMatrix ();
+	THR.camera.updateProjectionMatrix();
 
 };
 
 
-THRU.setCameraNear = function( range) {
+THRU.setCameraNear = function ( range ) {
 
 	//console.log( "", range.value );
 
@@ -527,23 +527,25 @@ THRU.setCameraNear = function( range) {
 
 	//console.log( "THR.camera.near", THR.camera.near );
 
-	THR.camera.updateProjectionMatrix ();
+	THR.camera.updateProjectionMatrix();
 };
 
 
 //////////
 
-THRU.setObjectExplode = function( range ) {
+THRU.setObjectExplode = function ( range ) {
 
 	const scale = range.value / 100;
 
 	THR.group.children.forEach( obj => {
-		if ( !obj.position.original) { obj.position.original = obj.position.clone();
-	} } );
+		if ( !obj.position.original ) {
+			obj.position.original = obj.position.clone();
+		}
+	} );
 
 	THR.group.children.forEach( obj => {
 
-		obj.position.copy( obj.position.original.clone().multiplyScalar( 1 + scale ) )
+		obj.position.copy( obj.position.original.clone().multiplyScalar( 1 + scale ) );
 
 	} );
 

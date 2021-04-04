@@ -28,22 +28,19 @@ _basic-html.html_
 
 </details>
 
-<details open >
-<summary> Things you can do using this script</summary>
-
-* Click the three bars( 'hamburger menu icon' ) to slide the menu in and out
-* Click the GitHub Octocat icon to view or edit the source code on GitHub
-* Click on title to reload te page
-* Press Control-U/Command-Option-U to view the source code
-* Press Control-Shift-J/Command-Option-J to see if the JavaScript console reports any errors
-
-</details>
 
 <details open >
 <summary>Links of interest</summary>
 
 * https://github.com/protectwise/troika
-
+* https://github.com/protectwise/troika/tree/master/packages/troika-3d-text
+* https://troika-examples.netlify.app/#text
+* https://www.npmjs.com/package/troika-3d-text
+* https://github.com/lojjic/aframe-troika-text
+* `<script src="https://cdn.jsdelivr.net/npm/troika-three-utils@0.40.0"></script>`
+* `<script src="https://cdn.jsdelivr.net/npm/troika-worker-utils@0.40.0"></script>`
+* `<script src="https://cdn.jsdelivr.net/npm/troika-three-text@0.40.0"></script>`
+* https://github.com/lojjic/aframe-troika-text
 </details>
 
 <details open >
