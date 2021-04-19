@@ -1,9 +1,10 @@
 <!doctype html>
 <html lang=en>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
-	<meta name="description" content="">
-	<meta name="date" content="2021-02-09">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+<meta name="description" content="">
+<meta name="date" content="2021-02-09">
+
 <head>
 	<title></title>
 	<meta charset=utf-8 />
@@ -13,9 +14,19 @@
 			margin: 0;
 		}
 
+		summary {
+			font-size: 150%;
+			font-weight: 800;
+
+		}
+
+		/* details[open] summary {
+			display: none;
+		*/
+
 		#main {
 			border: 1px solid red;
-			margin: 0 auto 0 20rem;
+			/* margin: ; */
 			max-width: 40rem;
 
 		}
@@ -41,12 +52,12 @@
 
 <body>
 
-	<nav id=navMenu class=nav>
 
-		<details open>
+	<details open>
 
-			<summary>show&darr; || hide&uarr; </summary>
+		<summary>☰</summary>
 
+		<nav id=navMenu class=nav>
 			<h1>
 				<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/xxxxxx/" target="_blank"
 					title="source code on GitHub"><img
@@ -54,11 +65,23 @@
 				<a href="" id=aTitle title="Click this menu title to reset the model"></a>
 			</h1>
 
-		</details>
+			<p>lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora
+				incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum
+				exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem
+				vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum,
+				qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>
+		</nav>
+	</details>
 
-	</nav>
 
-	<main id=main></main>
+	<main id=main>
+
+		<p>lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora
+			incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum
+			exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel
+			eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui
+			dolorem eum fugiat, quo voluptas nulla pariatur?</p>
+	</main>
 
 	<script>
 
@@ -68,7 +91,7 @@
 
 			aTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
 
-			requestFile();
+			//requestFile();
 
 		}
 
@@ -77,7 +100,7 @@
 		function requestFile( url = "https://example.com", callback = onLoad ) {
 
 			// urlDefaultFile = "https://cdn.jsdelivr.net/gh/pushme-pullyou/tootoo-2020@master/README.md";
-			const urlCORS = "https://cors-anywhere.herokuapp.com/";
+			const urlCORS = ""; //"https://cors-anywhere.herokuapp.com/";
 
 			xhr = new XMLHttpRequest();
 			xhr.open( "GET", urlCORS + url, true );
