@@ -1,0 +1,29 @@
+<head>
+	<title>hello</title>
+
+</head>
+
+<body>
+	<script src="https://rawcdn.githack.com/nextapps-de/winbox/0.1.7/dist/winbox.bundle.js"></script>
+	<div id="backstore" style="display: none">
+		<div id="content">
+			<h1>Lorem Ipsum</h1>
+			<p>Lorem ipsum [...]</p>
+			<p>Duis autem vel [...]</p>
+			<p>Ut wisi enim [...]</p>
+		</div>
+	</div>
+
+	<script>
+
+		//https://nextapps-de.github.io/winbox/
+
+		new WinBox( "Mount DOM", {
+
+			mount: document.getElementById( "content" )
+				.cloneNode( true )
+		} );
+	</script>
+</body>
+
+</html>
