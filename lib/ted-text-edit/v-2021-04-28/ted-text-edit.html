@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>TED Text Editor</title>
+
+	<style type="text/css">
+		* {
+			box-sizing: border-box;
+		}
+
+		.intLink {
+			cursor: pointer;
+		}
+
+		img.intLink {
+			border: 0;
+		}
+
+		#toolBar1 select {
+			font-size: 1rem;
+		}
+
+		html,
+		body,
+		form {
+			height: 100%;
+		}
+
+		#divTEDtext {
+			width: 100%;
+			height: calc(100% - 8rem);
+			border: 1px #000000 solid;
+			padding: 12px;
+			overflow: auto;
+		}
+
+		#editMode label {
+			cursor: pointer;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<script src=ted-text-edit.js> </script>
+
+
+	<div id="divTEDtext" contenteditable="true">
+		<p>Lorem ipsum</p>
+	</div>
+
+	<div id=divTEDmenu></div>
+
+	<div id=menuOpenFile></div>
+
+	<script>
+
+		TED.init();
+
+	</script>
+
+</body>
+
+</html>

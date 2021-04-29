@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="description"
+		content="TooToo 2021 uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
+	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
+	<meta name="date" content="2021-04-28">
+	<title></title>
+
+	<!-- Copyright 2021 Theo Armour. MIT license -->
+	<link rel="stylesheet" href="../../../lib/style/style-2021-04-23.css">
+
+	<style>
+		:root {
+			/* --mnu-width: 15rem; */
+			--main-hue: 240;
+			/* 0 to 360 0=red 120=green 240=blue */
+		}
+
+
+		#textareaMain {
+			height: calc(100vh - 5rem);
+			padding: 0 0.5rem;
+			width: 95%;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<!-- https://github.com/showdownjs/showdown -->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script> -->
+
+	<script src="../../../lib/mnu-menu/v-2021-04-28/mnu-menu.js"></script>
+
+	<script src="../../../lib/gra-github-repo-accesss/v-2021-04-28/gra-github-repo-accesss.js"></script>
+
+	<script src="../../../lib/grvt-gh-repo-view-token/v-2021-04-28/grvt-gh-repo-view-token.js"></script>
+
+	<script src="../../../lib/xgp-xhr-github-push/v-2021-04-28/xgp-xhr-github-push.js"></script>
+
+
+	<script src="../../../lib/ted-text-edit/v-2021-04-28/ted-text-edit.js"> </script>
+
+	<script src="../../../sandbox/notesy/v-2021-04-28/notesy.js"></script>
+
+
+	<details id=detNavMenu class="gmd-4">
+
+		<summary id=sumNavMenu class="summary-secondary gmd-1">☰ <span id=spnMenuHelp>show || hide menu</span></summary>
+
+		<nav id="navMenu" class="gmd-2">
+
+			<div id=MNUdivHeader></div>
+
+			<div id=GRAdivGitHubRepoAccess></div>
+
+			<div id=GRVTdivGitHubRepoViewToken></div>
+
+			<div id=XGPdivTemplate></div>
+
+			<div id=TMPdivTemplate></div>
+
+			<div id=MNUdivFooter></div>
+
+		</nav>
+
+	</details>
+
+
+	<main>
+
+		<div id="divContentMainbb">
+
+			<div id="divTEDtext" contenteditable="true">
+				<p>Lorem ipsum</p>
+			</div>
+
+			<div id=divTEDmenu>mmmmmm</div>
+
+			<div id=menuOpenFile></div>
+		</div>
+
+	</main>
+
+
+	<script>
+
+		const COR = {
+			// user: "theo-armour",
+			// repo: "qdata",
+			// branch: "master",
+			// user: "pushme-pullyou",
+			// repo: "tootoo-2021",
+			// branch: "main",
+			path: "../../../",
+			defaultFile: "README.md",
+			ignoreFolders: [],
+			version: document.head.querySelector( "[ name=date ]" ).content,
+			description: document.head.querySelector( "[ name=description ]" ).content,
+		};
+
+		init();
+
+		function init() {
+
+			const strParameter = localStorage.getItem( "githubParametersAPI" ) || "{}";
+			//console.log( "strParameter", strParameter );
+			const parameters = JSON.parse( strParameter );
+			//console.log( "parameters", parameters );
+
+			COR.token = parameters.token;
+			COR.user = parameters.user;
+			COR.repo = parameters.repo;
+			COR.branch = parameters.branch;
+			COR.source = `https://github.com/${ COR.user }/${ COR.repo }/tree/main/lib/0-basic-lib`;
+
+			COR.source = `https://github.com/${ COR.user }/${ COR.repo }/tree/main/sandbox/notesy`;
+
+			MNU.init();
+
+			// let's get going!
+
+			GRA.init();
+			COR.token = GRA.parameters.token;
+
+			GRVT.init();
+
+			GRVT.getRepo();
+
+
+			XGP.init();
+
+			TED.init();
+
+			//TMP.init();
+
+			// if running on server, keeps address bar pointed to latest dev
+
+			//if ( !location.hash && location.protocol === "https:" ) {
+			if ( location.protocol === "https:" ) {
+
+				window.history.pushState( "", "", "./" + location.hash );
+
+			}
+
+			if ( window.innerWidth > 640 && window.innerHeight > 500 ) {
+
+				detNavMenu.open = true;
+
+				GRVTdetMenu.open=true;
+
+
+			}
+
+		}
+
+	</script>
+</body>
+
+</html>
