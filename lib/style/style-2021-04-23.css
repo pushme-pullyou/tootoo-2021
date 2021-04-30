@@ -374,7 +374,7 @@ pre {
 	padding: 0 1ch;
 	scrollbar-color: red yellow;
 	/* width */
-	width: var(--mnu-width);
+	width: calc( var(--mnu-width) - 2.3rem);
 
 
 }
