@@ -1,13 +1,18 @@
-Famous French Philosophers
+# Famous French Philosophers
 or famous frog filosofers.
 
 or nearly French.
 
 I add to this paper from time to time.
 
-2011-10-05 ~ latest update mostly to Deleuze.
+## 2021-03-07
 
-The List
+* Is This the End of French Intellectual Life? https://nyti.ms/3uWjKIv
+
+
+## 2011-10-05 ~ latest update mostly to Deleuze.
+
+## The List
 
 Louis Althusser - 6 October 1918 – 22 October 1990) was a French Marxist philosopher.
 
@@ -32,8 +37,6 @@ Marcel Duchamp ~
 Michel Foucault ~ (15 October 1926 – 25 June 1984), French philosopher, sociologist, and historian. Madness and Civilization.
 
 Jacques Lacan ~ (April 13, 1901 – September 9, 1981) was a French psychoanalyst and psychiatrist who made prominent contributions to psychoanalysis, philosophy, and literary theory.
-
-
 
 
 Claude Lévi-Strauss ~
@@ -77,16 +80,20 @@ Spinoza
 
 
 ### Modern Ones
-Walter Benjamin
-CS Peirce
-Habemas
-Popper
-Bertrand Russell
-Wittgenstein
-John Berger
-Marshall McLuhan
+
+* Walter Benjamin
+* CS Peirce
+* Habemas
+* Popper
+* Dewey
+* Bertrand Russell
+* Wittgenstein
+* John Berger
+* Marshall McLuhan
+* Heidegger
 
 
+## Lists
 
-
-
+* https://en.wikipedia.org/wiki/Lists_of_philosophers
+* https://en.wikipedia.org/wiki/List_of_philosophies

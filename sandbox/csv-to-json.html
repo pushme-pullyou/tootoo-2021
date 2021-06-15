@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="description" content="">
+	<meta name="date" content="2021-02-09">
+
+	<head>
+		<title></title>
+		<meta charset=utf-8 />
+		<style>
+			body {
+				font: 100% monospace;
+			}
+		</style>
+	</head>
+
+<body>
+
+	<h1>
+		<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/xxxxxx/" target="_blank"
+			title="source code on GitHub"><img
+				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
+		<a href="" title="Click this menu title to reset the model">
+			<span id=spnTitle>${ MNU.title }</span>
+			<span id=spnVersion></span>
+		</a>
+	</h1>
+
+	<script>
+
+		init();
+
+		function init() {
+
+			spnTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+
+			spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
+
+			url = "../assets/Global Indicator Framework after 2021 refinement_English.xlsx - A.RES.71.313 Annex.tsv"
+			requestFile( url );
+
+		}
+
+
+
+		function requestFile( url = "https://example.com", callback = onLoad ) {
+
+			// urlDefaultFile = "https://cdn.jsdelivr.net/gh/pushme-pullyou/tootoo-2020@master/README.md";
+			const urlCORS = "https://cors-anywhere.herokuapp.com/";
+
+			xhr = new XMLHttpRequest();
+			xhr.open( "GET", url, true );
+			xhr.responseType = "text";
+			xhr.onerror = ( xhr ) => console.log( "error:", xhr );
+			//xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
+			xhr.onload = ( xhr ) => callback( xhr.target.response );
+			xhr.send( null );
+
+		}
+
+
+
+		function onLoad( response ) {
+			//console.log( "response", response );
+
+			lines = response.split( /\r?\n/ ).slice( 3 ).map( txt => txt.split( "\t" ) );
+			//console.log( 'lines',  lines);
+
+			goals = [];
+			let goal;
+			let target;
+
+			for ( let i = 0; i < lines.length; i++ ) {
+
+				const line = lines[ i ];
+
+				if ( line[ 1 ].includes( "Goal " ) ) {
+
+					goal = { goal: line[ 1 ], targets: [] };
+					goals.push( goal );
+
+				} else if ( line[ 1 ] && line[ 2 ] ) {
+
+					goal.targets.push( { target: line[ 1 ], indicators: [ { indicator: line[ 2 ], id: line[ 3 ] } ] } )
+
+				} else if ( !line[ 1 ] ) {
+
+					//console.log( "line", line );
+					//console.log( "goal", goal );
+
+					goal.targets[ goal.targets.length - 1 ].indicators.push( { indicator: line[ 2 ], id: line[ 3 ] } );
+
+				}
+			}
+
+			console.log( "goals", goals );
+
+		}
+
+	</script>
+
+
+</body>
+
+</html>

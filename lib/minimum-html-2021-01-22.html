@@ -13,7 +13,12 @@
 
 <body>
 
-	<a href="" >ZZZZZ</a>
+	<h1>
+		<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/xxxxxx/" target="_blank"
+			title="source code on GitHub"><img
+				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
+		<a href="" id=aTitle title="Click this menu title to reset the model"></a>
+	</h1>
 
 	<script>
 
@@ -21,9 +26,13 @@
 
 		function init() {
 
+			aTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+
 			requestFile();
 
 		}
+
+
 
 		function requestFile( url = "https://example.com", callback = onLoad ) {
 

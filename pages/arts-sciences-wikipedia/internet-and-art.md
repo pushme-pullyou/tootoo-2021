@@ -1,7 +1,4 @@
-
-
-Internet and Art
-===
+# Internet and Art
 
 
 
@@ -24,4 +21,3 @@ I have an EO1. 'Discover and display more than 20,000 works of art'
 
 
 
- 
