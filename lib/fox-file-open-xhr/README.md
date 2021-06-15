@@ -3,9 +3,9 @@
 
 <!--@@@
 <div class=ifrResize ><iframe src=https://pushme-pullyou.github.io/tootoo-2021/lib/fox-file-open-xhr/ height=100% width=100% ></iframe></div>
-_ZZZZZ in a resizable window. One finger to rotate. Two to zoom._
+_FOX File Open XHR in a resizable window. One finger to rotate. Two to zoom._
 
-### Full Screen: [ZZZZZ]( https://pushme-pullyou.github.io/tootoo-2021/lib/fox-file-open-xhr/ )
+### Full Screen: [FOX File Open XHR]( https://pushme-pullyou.github.io/tootoo-2021/lib/fox-file-open-xhr/ )
 @@@-->
 
 
