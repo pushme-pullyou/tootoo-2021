@@ -1,4 +1,4 @@
-/* Copyright 2020 Theo Armour. MIT License */
+/* Copyright 2021 Theo Armour. MIT License */
 
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,700");
 
@@ -8,7 +8,7 @@
 
 	--mnu-width: 19rem;
 	--main-hue: 206; /* 0 to 360 0=red 120=green 240=blue */
-
+	--margin: 0.5rem;
 	--saturation: 89%;
 	--lightness1: 20%;
 	--lightness2: 30%;
@@ -60,7 +60,7 @@ a:active {
 aside {
 	border: 1px solid lightgray;
 	font-weight: 300;
-	margin-top: 15px;
+	margin-top: 1rem;
 	padding: 1rem;
 	float:right;
 	max-width:20rem;
@@ -68,7 +68,7 @@ aside {
 
 blockquote {
 	background-color: #ddd;
-	padding: 1ch;
+	padding: 1rem;
 }
 
 button,
@@ -76,7 +76,7 @@ input[type="button"] {
 	background-color: var(--color-2-background);
 	/* border: none; */
 	border: solid 1px;
-	border-radius: 0.5rem;
+	border-radius: var(--margin);
 	color: var(--color-1-text);
 	cursor: pointer;
 	padding: 3px 5px;
@@ -119,8 +119,6 @@ input[type="range"]::-webkit-slider-thumb {
 	width: 10px;
 }
 
-
-
 input,
 select,
 option {
@@ -129,7 +127,7 @@ option {
 
 pre {
 	background-color: #eee;
-	padding: 5px;
+	padding: var(--margin);
 }
 
 
@@ -140,26 +138,56 @@ pre {
 }
 
 .aDingbat {
-	font-size: 3ch;
+	font-size: 3rem;
 	text-decoration:none;
 }
+
+.full-width {
+	width: 100%;
+}
+
 .highlight {
 	background-color: var(--color-2-background);
 }
 
-.divContent {
-	border: 0px solid red;
-	margin: 0 auto;
-	width: 40rem;
+.iframe-resize {
+	height: 400px;
+	overflow: hidden;
+	resize: both;
+	width: 100%;
 }
-.divResize, .divNavResize {
+
+.resize {
 	border-right: 1px solid teal;
 	overflow: auto;
 	resize: vertical;
 }
 
-.full-width {
+.select-resize {
+	/* overflow: hidden; */
+	resize: both;
 	width: 100%;
+}
+
+/* Details & Summary */
+
+.summary-primary {
+	background-color: var(--color-2-background);
+	border-radius: 0.5rem;
+	color: var(--color-2-text);
+	cursor: pointer;
+	margin: 0 0 1px 0;
+	outline: none;
+	padding: 1ch;
+}
+
+.summary-secondary {
+	background-color: var(--color-3-background);
+	color: var(--color-3-text);
+	border-radius: 0.5ch;
+	cursor: pointer;
+	outline: none;
+	margin: 0.5rem 0;
 }
 
 
@@ -189,26 +217,6 @@ pre {
 	box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 
-
-/* GRV GitHub Repo View */
-.GRVsum {
-	font-size: 120%;
-	margin: 0 0 0.5rem 0;
-}
-.GRVdet {
-	margin: 0 0.2rem 0.5rem 1rem;
-}
-.GRVdiv {
-	font-size: 110%;
-	margin: 0 0 0.5rem 1rem;
-}
-
-.iframe-resize {
-	height: 400px;
-	overflow: hidden;
-	resize: both;
-	width: 100%;
-}
 
 
 /* info box */
@@ -243,176 +251,58 @@ pre {
 }
 
 
-.select-resize {
-	/* overflow: hidden; */
-	resize: both;
-	width: 100%;
-}
-
-.summary-primary {
-	background-color: var(--color-2-background);
-	border-radius: 0.5rem;
-	color: var(--color-2-text);
-	cursor: pointer;
-	margin: 0 0 1px 0;
-	outline: none;
-	padding: 1ch;
-}
-
-.summary-secondary {
-	background-color: var(--color-3-background);
-	color: var(--color-3-text);
-	border-radius: 0.5ch;
-	cursor: pointer;
-	outline: none;
-	margin: 0.5rem 0;
-}
-
-
-/* THR Three.js footer menu bar */
-.THRbutChild {
-	border-radius: 0.5rem;
-	margin: 0.5rem 0;
-}
-.THRbutParent {
-	/* border: 1px solid red; */
-	background-color: var(--color-3-background);
-	border-radius: 0.5ch;
-	font-size: 2rem;
-	margin: 0 1rem;
-	vertical-align: bottom;
-	z-index: 2;
-}
-.THRdivButtonGroup {
-	display: inline-block;
-	position: relative;
-	z-index: 1;
-}
-.THRdivButtonGroup:hover > .THRdivChild {
-	display: block;
-}
-.THRdivChild,
-.THRdivChildParent {
-	background-color: var(--color-3-background);
-	border-radius: 1rem;
-	bottom: 2.5rem;
-	display: none;
-	/* left: 5rem; */
-	padding: 0.5rem;
-	position: absolute;
-	text-align: left;
-	width: 8rem;
-	z-index: -1;
-}
-.THRdivChildChild {
-	background-color: #fafffa;
-	border-radius: 0.5ch;
-	bottom: 2.9rem;
-	left: 4rem;
-	padding: 1rem;
-	position: absolute;
-	text-align: left;
-	width: 18rem;
-}
-#THRftr {
-	background-color: rgba(0, 0, 0, 0.05);
-	border-radius: 1rem;
-	bottom: 1ch;
-	left: 0;
-	margin: 0 auto;
-	opacity: 0.85;
-	position: fixed;
-	right: 0;
-	text-align: center;
-	max-width: 40%;
-	z-index: 1;
-}
-
-
 /* IDs */
 
 
-
 #main {
-	border: 1px solid green;
-	/* eight: 100vh;h */
-	left: var(--mnu-width);
-	margin: 0;
+	/* border: 1px solid green;
 	padding: 0 1rem;
-	/* position: absolute; */
-	width: calc(100% - var(--mnu-width));
-}
+	/* position: absolute;
+	*/
 
-#divContentMain {
-	border: 0 solid blue;
-	/* height: 100vh; */
-	margin: 0 auto;
-	max-width: 40rem;
-	/* overflow: hidden; */
-	width: 100%;
-}
-
-
-
-#MNUdivPopUp {
-	background-color: var(--color-2-background);
-	border-radius: 0.5ch;
-	margin: 1ch 0;
-	max-height: 30vh;
-	padding: 1ch;
-	overflow: auto;
+	border: 0px solid red;
+	box-sizing: border-box;
+	height: 100vh;
+	left: calc( var(--mnu-width) + var(--margin) );
 	position: absolute;
-	left: 30%;
-	top: 30%;
-	z-index: 10;
+	width: calc(100% - var(--mnu-width) - var(--margin));
+
 }
+
+
+#divMainContent {
+	border: 2px solid blue;
+	margin: 0 auto;
+	padding: 0 1rem;
+	max-width: 40rem;
+}
+
 
 
 #detNavMenu {
 	background-color: var(--color-2-background);
 	border: 1px solid #8a8;
-	border-radius: 0.5rem;
+	border-radius: var( --margin);
 	max-height: 95vh;
-	margin: 0.5rem;
+	margin: var( --margin);
 	overflow: auto;
-	padding: 0.5rem;
+	padding: var( --margin);
 	position: fixed;
 	resize: both;
-	width: var(--mnu-width);
+	/* max-width: var(--mnu-width); */
 	z-index: 5;
 }
 
 
 #navMenu {
 	background-color: var(--color-1-background);
-	border: 0 solid red;
-	border-radius: 0.5rem;
-	padding: 0 0.5rem;
+	border: 1px solid #8a8;
+	border-radius: var( --margin);
+	padding: 0 var( --margin);
 	/* width */
-	width: 100%; /* calc( var(--mnu-width) - 2.3rem); */
+	/* width: 100%; /* calc( var(--mnu-width) - 2.3rem); */
 
 }
-
-
-
-
-::-webkit-scrollbar {
-	color: yellow;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background:var(--color-1-background);
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: var(--color-3-background);
-}
-
-
-
-
 
 
 
@@ -434,27 +324,22 @@ pre {
 		padding: 0.5ch;
 	}
 	#navMenu {
-		width: 100%;
+		/* width: 100%; */
 	}
 	#spnMenuHelp { display: none; }
 
-
-	#THRftr {
-		max-width: 100%;
-	}
-
-	main {
+	#main {
 		left: 0;
-		padding: 1rem;
+		padding: var( --margin);
 		width: 100%;
 	}
 }
 
 @media all and (max-height: 500px) {
 	#detNavMenu {
-		width: 35%;
+
 	}
-	main {
+	#main {
 		left: 0;
 		padding: 1rem;
 		width: 100%;
