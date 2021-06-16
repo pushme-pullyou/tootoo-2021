@@ -148,7 +148,7 @@
 	</details>
 
 
-<main>
+<main id=main >
 
 	<div id="divContentMain" >
 
@@ -164,13 +164,13 @@
 		</details> -->
 
 
-		<article id=artMain >
+		<!-- <article id=artMain >
 
 				<iframe id=ifr src="style-sample-tags.html" style="border: 0 solid red;height:100vh;width:100%;" ></iframe>
 
 			</div>
 
-		</article>
+		</article> -->
 
 
 
@@ -228,6 +228,11 @@ function init() {
 		detNavMenu.open = true;
 
 	}
+
+	//divContentMain.innerHTML = `<iframe id=ifr src="style-sample-tags.html" style="border: 0 solid red; height=${ window.innerHeight };width:100%;" ></iframe>`;
+
+
+	divContentMain.innerHTML = `<iframe src="style-sample-tags.html" height=${ window.innerHeight } width=100% ></iframe>`;
 
 }
 
