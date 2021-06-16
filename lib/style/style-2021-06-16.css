@@ -255,10 +255,6 @@ pre {
 
 
 #main {
-	/* border: 1px solid green;
-	padding: 0 1rem;
-	/* position: absolute;
-	*/
 
 	border: 0px solid red;
 	box-sizing: border-box;
@@ -271,7 +267,7 @@ pre {
 
 
 #divMainContent {
-	border: 2px solid blue;
+	border: 0px solid blue;
 	margin: 0 auto;
 	padding: 0 1rem;
 	max-width: 40rem;
