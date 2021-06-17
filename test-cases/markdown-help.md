@@ -61,15 +61,15 @@ http://alvinalexander.com/technology/markdown-comments-syntax-not-in-generated-o
 
 The <abbr title="World Health Organization">WHO</abbr> was founded in 1948.
 
-Small: 
+Small:
 
-	abc ABC <small>abc def 123</small> ABC abc 
-	
-abc ABC <small>abc def 123</small> ABC abc 
+	abc ABC <small>abc def 123</small> ABC abc
+
+abc ABC <small>abc def 123</small> ABC abc
 
 <a>thing</a>
 
-<img height=10 width=1000 style="border: 1px solid red" >
+<img height=10 width=100% style="border: 1px solid red" >
 
 
 iframe test
@@ -210,11 +210,11 @@ text `text` text
 
 ### Audio
 
-<audio controls="">
+<!-- <audio controls="">
 	<source src="https://simpl.info/audio/audio/audio.ogv" type="audio/ogg">
 	<source src="https://simpl.info/audio/audio/audio.mp3" type="audio/mpeg">
 	Your browser does not support the audio element.
-</audio>
+</audio> -->
 
 ### Images
 
