@@ -41,6 +41,7 @@ body {
 	/* overflow: hidden; */
 }
 
+
 /* tags in abc order */
 
 a {
@@ -138,7 +139,7 @@ pre {
 }
 
 .aDingbat {
-	font-size: 3rem;
+	font-size: 2rem;
 	text-decoration:none;
 }
 
@@ -257,20 +258,19 @@ pre {
 #main {
 
 	border: 0px solid red;
-	box-sizing: border-box;
 	height: 100vh;
-	left: calc( var(--mnu-width) + var(--margin) );
+	left: calc( var(--mnu-width) + var(--margin) + var(--margin) + var(--margin) );
 	position: absolute;
-	width: calc(100% - var(--mnu-width) - var(--margin));
+	width: calc(100% - var(--mnu-width)  - 3 * var(--margin) );
 
 }
 
 
 #divMainContent {
-	border: 0px solid blue;
+	/* border: 0px solid blue;
 	margin: 0 auto;
 	padding: 0 1rem;
-	max-width: 40rem;
+	max-width: 40rem; */
 }
 
 

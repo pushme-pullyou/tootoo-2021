@@ -7,8 +7,8 @@
 	<meta name="description"
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2021-06-15">
-	<title>FOX 2021</title>
+	<meta name="date" content="2021-06-16">
+	<title>FOX</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
 	<link rel="stylesheet" href="../../../lib/style/style-2021-06-16.css">
@@ -30,13 +30,7 @@
 
 	<script src="../../../lib/fox-file-open-xhr/v-2021-06-16/fox-file-open-xhr.js"></script>
 
-<!--
-	<script src="../../../lib/gor-github-organization-repos/v-2020-12-31/gor-github-organization-repos.js"></script>
-
-	<script src="../../../lib/grv-github-repo-tree-view/v-2020-12-31/grv-github-repo-tree-view.js"></script>
--->
-
-	<script src="../../../lib/mnu-menu/v-2020-12-30/mnu-menu.js"></script>
+	<script src="../../../lib/mnu-menu/v-2021-04-28/mnu-menu.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
@@ -46,46 +40,41 @@
 		<nav id="navMenu" class="gmd-2">
 
 			<div id=MNUdivHeader></div>
-			<!--
-			<div id=GORdivDetails></div>
 
-			<div id=GRVdivDetails></div>
--->
+			<div style=width:15rem;overflow:hidden; >
 
-			<p><a href="#test-cases/heritage-front.jpg">heritage-front.jpg</a></p>
+				<p><a href="#test-cases/heritage-front.jpg">heritage-front.jpg</a></p>
 
-			<p><a href="#test-cases/Photo Album_Example Auckland.pdf" target="_blank">Photo Album_Example Auckland.pdf</a></p>
+				<p><a href="#test-cases/Photo Album_Example Auckland.pdf" target="_blank">Photo Album_Example Auckland.pdf</a></p>
 
-			<p><a href="#test-cases/style-sample-tags.html">style-sample-tags.html</a></p>
+				<p><a href="#test-cases/style-sample-tags.html">style-sample-tags.html</a></p>
 
-			<p><a href="#test-cases/the-scream.jpg">the-scream.jpg</a></p>
+				<p><a href="#test-cases/the-scream.jpg">the-scream.jpg</a></p>
 
-			<p><a href="#test-cases/system-map.gif">system-map.gif</a></p>
+				<p><a href="#test-cases/system-map.gif">system-map.gif</a></p>
 
-			<p><a href="#test-cases/noun_Information_585560.svg">noun_Information_585560.svg</a></p>
+				<p><a href="#test-cases/noun_Information_585560.svg">noun_Information_585560.svg</a></p>
 
-			<p><a href="#test-cases/markdown-help.md" >markdown-help.md</a></p>
+				<p><a href="#test-cases/markdown-help.md" >markdown-help.md</a></p>
 
-			<p><a href="#edittest-cases/markdown-help.md">edit markdown-help.md</a></p>
+				<p><a href="#edittest-cases/markdown-help.md">edit markdown-help.md</a></p>
 
-			<p><a href="#test-cases/Structural_MRI_animation.ogv.240p.webm">Structural_MRI_animation.ogv.240p.webm</a></p>
+				<p><a href="#test-cases/Structural_MRI_animation.ogv.240p.webm">Structural_MRI_animation.ogv.240p.webm</a></p>
 
-			<p><a href="#test-cases/Riverside_Metro_Area_housing2b_week1.csv">Riverside_Metro_Area_housing2b_week1.csv</a></p>
+				<p><a href="#test-cases/Riverside_Metro_Area_housing2b_week1.csv">Riverside_Metro_Area_housing2b_week1.csv</a></p>
 
-			<p><a href="#test-cases/pano.mp4">pano.mp4</a></p>
+				<p><a href="#test-cases/pano.mp4">pano.mp4</a></p>
 
-			<p><a href="#test-cases/ca_cs.xls">ca_cs.xls</a></p>
+				<p><a href="#test-cases/ca_cs.xls">ca_cs.xls</a></p>
 
-			<p><a href="#test-cases/"></a></p>
+				<p><a href="#test-cases/"></a></p>
 
+				<p><a href="#test-cases/"></a></p>
 
+				<div id=MNUdivFooter></div>
+			</div>
 
-			<p><a href="#test-cases/"></a></p>
-
-
-			<div id=MNUdivFooter></div>
-
-		</nav>
+			</nav>
 
 	</details>
 
@@ -98,11 +87,6 @@
 
 
 	<script>
-
-		init();
-
-		function init() {
-
 			const COR = {
 				user: "pushme-pullyou",
 				repo: "tootoo-2021",
@@ -110,50 +94,24 @@
 				defaultFile: "README.md",
 				ignoreFolders: [],
 				path: "../../../",
+				version: document.head.querySelector( "[ name=date ]" ).content,
+				description: document.head.querySelector( "[ name=description ]" ).content
 			}
 
+		init();
 
-			const source = `https://github.com/${ COR.user }/${ COR.repo }/`;
+		function init() {
 
-			const version = document.head.querySelector( "[ name=date ]" ).content;
-
-			const description = document.head.querySelector( "[ name=description ]" ).content;
-
-			//FOX.path = GOR.path = GRV.path =
-			MNU.path = COR.path;
+			//MNU.path = COR.path;
 
 			MNU.init();
 
-			aGithub.href = source;
-
-			spnVersionInfo.innerHTML = version;
-
-			divDescription.innerHTML = description;
-
-			// FOX = File Open XHR
-			FOX.path = COR.path;
-			FOX.defaultFile = COR.defaultFile;
+			// FOX: File Open XHR
+			//FOX.path = COR.path;
+			//FOX.defaultFile = COR.defaultFile;
 			FOX.init();
 
 			FOX.onHashChange();
-
-			// // GOR = GitHub Organization Repositories
-			// GOR.user = COR.user;
-			// GOR.repo = COR.repo;
-			// GOR.init();
-
-			// // GRV = GitHub Repo treeView
-			// GRV.user = COR.user;
-			// GRV.repo = COR.repo;
-			// GRV.branch = COR.branch;
-			// GRV.path = COR.path;
-
-			// GRV.defaultFile = COR.defaultFile;
-			// GRV.ignoreFolders = COR.ignoreFolders;
-			// GRV.init();
-
-			// // let's get going!
-			// GOR.getOrganization();
 
 			// if running on server, keeps address bar pointed to latest dev
 
@@ -161,6 +119,17 @@
 			if ( location.protocol === "https:" ) {
 
 				window.history.pushState( "", "", "./" + location.hash );
+
+			}
+
+			if ( window.innerWidth < 800 || window.innerHeight < 500 ) {
+
+				document.documentElement.style.setProperty( "--mnu-width", "35%" );
+
+			} else {
+
+				detNavMenu.style.maxWidth = "50%";
+				detNavMenu.open = true;
 
 			}
 

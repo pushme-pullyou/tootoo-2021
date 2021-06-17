@@ -6,32 +6,33 @@
 	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
 	<meta name="description" content="Basic TooToo HTML template">
 	<meta name="keywords" content="JavaScript,GitHub,FOSS">
-
+	<meta name="date" content="2021-04-28">
 	<link rel="stylesheet" href="../style/style-2021-06-16.css">
+
 
 	<style>
 
 	</style>
 
-	<title></title>
+	<title>Style Test</title>
 
 </head>
 
 <body>
 
-	<!-- <script src="../fo-file-open/foo-file-open-object-2020-07-17.js"></script>
-	<script src="../fo-file-open/foz-file-open-zip-2020-06-12.js"></script>
-	<script src="../fo-file-open/fr-file-reader-2020-06-12.js"></script> -->
+	<script src="../../lib/mnu-menu/v-2021-04-28/mnu-menu.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
 
-		<summary id=navMenuSum class="summary-secondary gmd-1">☰ <span id=spnMenuHelp>show || hide menu</span></summary>
+		<summary id=sumNavMenu class="summary-secondary gmd-1">☰ <span id=spnMenuHelp>show || hide menu</span></summary>
 
-		<nav id="navMenu" class="gmd-4" open>
+		<nav id="navMenu" class="gmd-2">
 
-			<header id="hdrTitle">
-				<!-- copy of mnu-menu.js header -->
+			<div id=MNUdivHeader></div>
+
+			<!-- <header id="hdrTitle">
+				<!-- copy of mnu-menu.js header
 
 				<h2>
 
@@ -49,10 +50,10 @@
 						<span id="divDescription" class="infoTooltip gmd-5">
 
 						</span></span>
+					</header>
 
-				</h2>
+				</h2> -->
 
-			</header>
 
 
 			<div id=divNavLog></div>
@@ -148,59 +149,15 @@
 
 			</details>
 
-			<br>
-
-			<footer>
-
-				<div title="go to top of menu" style=text-align:center;>
-					<a class=aDingbat href=javascript:navMenu.scrollTo(0,0);>❦</a>
-				</div>
-
-			</footer>
-
+			<div id=MNUdivFooter></div>
 		</nav>
 
 	</details>
 
 
-	<main id=main >
+	<main id=main>
 
-		<div id="divMainContent">
-
-			<!-- <details open >
-
-			<summary class=sumMenuTitle >
-				Summary
-				<span class="info" >&#x24d8;<span id=divDetails class="infoTooltip" >How can I help you?</span></span>
-			</summary>
-
-			<p>Can be here or in the menu</p>
-
-		</details> -->
-
-
-			<!-- <article id=artMain >
-
-				<iframe id=ifr src="style-sample-tags.html" style="border: 0 solid red;height:100vh;width:100%;" ></iframe>
-
-			</div>
-
-		</article> -->
-
-
-
-			<!-- <footer>
-
-			<hr>
-
-			<div title="go to top of menu" style=text-align:center; >
-				<a class=aDingbat href=javascript:window.scrollTo(0,0); >❦</a>
-			</div>
-
-		</footer> -->
-		</div>
-
-
+		<div id="divMainContent"></div>
 
 	</main>
 
@@ -208,15 +165,26 @@
 
 	<script>
 
-
-		divDescription.innerHTML = document.head.querySelector( "[ name=description ]" ).content;
-
+		const COR = {
+			user: "pushme-pullyou",
+			repo: "tootoo-2021",
+			branch: "main",
+			defaultFile: "README.md",
+			ignoreFolders: [],
+			path: "../../",
+			version: document.head.querySelector( "[ name=date ]" ).content,
+			description: document.head.querySelector( "[ name=description ]" ).content,
+		};
 
 		init();
 
 		function init() {
 
-			txt = "<h3>Title</h3><p>orem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>";
+			COR.source = `https://github.com/${ COR.user }/${ COR.repo }/tree/main/lib/0-basic-lib`;
+
+			MNU.init();
+
+			txt = "<h3>Title</h3><p>Lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>";
 
 			txtX = Array( 1 ).fill( txt ).join( "<hr>" );
 
@@ -240,19 +208,36 @@
 
 			} else {
 
-				detNavMenu.style.maxWidth =  "50%";
+				detNavMenu.style.maxWidth = "50%";
 				detNavMenu.open = true;
 
 			}
 
 			//divMainContent.innerHTML = `<iframe id=ifr src="style-sample-tags.html" style="border: 0 solid red; height=${ window.innerHeight };width:100%;" ></iframe>`;
 
-			//divMainContent.innerHTML = `<iframe src="style-sample-tags.html" height=${ window.innerHeight } width=100% ></iframe>`;
+			// divMainContent.style.cssText =
+			// "border: 0px solid blue; margin: 0 auto; padding: 0;";
 
-			const arrText = () => "<h1>Test</h1><p>lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>"
+			divMainContent.innerHTML =
+			`<iframe id=ifr src="style-sample-tags.html" style="border:none;width:100%" ></iframe>`;
 
-			divMainContent.innerHTML = Array.from( { length: 10 }, ( arrText ) ).join( "" );
+			ifr.onload = () => {
 
+				ifr.contentWindow.document.body.style.overflow= "hidden";
+
+				const height = ifr.contentWindow.document.body.offsetHeight + "px;";
+				ifr.height = height;
+				//console.log( "offset", height);
+
+			}
+
+
+			// const arrText = () => "<h1>Test</h1><p>lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>"
+			// divMainContent.innerHTML = Array.from( { length: 10 }, ( arrText ) ).join( "" );
+
+			// divMainContent.style.cssText =
+			// "border: 0px solid blue; margin: 0 auto; padding: 0 1rem; max-width: 40rem;"
+			// divMainContent.innerHTML = Array( 10 ).fill( txt ).join( "<hr>" );
 
 
 		}
@@ -287,9 +272,8 @@
 
 		}
 
-
-
 	</script>
+
 </body>
 
 </html>

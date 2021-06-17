@@ -84,8 +84,13 @@
 
 			}
 
-			if ( window.innerWidth > 640 && window.innerHeight > 500 ) {
+			if ( window.innerWidth < 800 || window.innerHeight < 500 ) {
 
+				document.documentElement.style.setProperty( "--mnu-width", "35%" );
+
+			} else {
+
+				detNavMenu.style.maxWidth = "50%";
 				detNavMenu.open = true;
 
 			}
