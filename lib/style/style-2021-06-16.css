@@ -179,7 +179,7 @@ pre {
 	cursor: pointer;
 	margin: 0 0 1px 0;
 	outline: none;
-	padding: 1ch;
+	padding: var( --margin) ;
 }
 
 .summary-secondary {
