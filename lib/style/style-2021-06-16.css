@@ -296,7 +296,7 @@ pre {
 	border-radius: var( --margin);
 	padding: 0 var( --margin);
 	/* width */
-	/* width: 100%; /* calc( var(--mnu-width) - 2.3rem); */
+	/* width: var(--mnu-width); */
 
 }
 

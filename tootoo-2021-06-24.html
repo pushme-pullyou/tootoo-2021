@@ -8,10 +8,10 @@
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
 	<meta name="date" content="2021-06-24">
-	<title>GOR</title>
+	<title>TooToo</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
-	<link rel="stylesheet" href="../../../lib/style/style-2021-06-16.css">
+	<link rel="stylesheet" href="./lib/style/style-2021-06-16.css">
 
 	<style>
 		:root {
@@ -19,31 +19,27 @@
 			--main-hue: 0;
 			/* 0 to 360 0=red 120=green 240=blue */
 		}
-
-		#MNUdivPopUp {
-			max-height: 40vh;
-		}
 	</style>
 
 </head>
 
 <body>
+
 	<!-- https://github.com/showdownjs/showdown -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 
-	<script src="../../../lib/fox-file-open-xhr/v-2021-06-24/fox-file-open-xhr.js"></script>
+	<script src="./lib/fox-file-open-xhr/v-2021-06-24/fox-file-open-xhr.js"></script>
 
-	<script src="../../../lib/gor-github-organization-repos/v-2020-12-30/gor-github-organization-repos.js"></script>
+	<script src="./lib/gor-github-organization-repos/v-2021-06-24/gor-github-organization-repos.js"></script>
 
-	<!-- <script src="../../../lib/grv-github-repo-tree-view/v-2020-12-30/grv-github-repo-tree-view.js"></script> -->
+	<script src="./lib/grv-github-repo-tree-view/v-2021-06-24/grv-github-repo-tree-view.js"></script>
 
-
-	<script src="../../../lib/mnu-menu/v-2021-04-28/mnu-menu.js"></script>
+	<script src="./lib/mnu-menu/v-2021-04-28/mnu-menu.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
 
-		<summary id=sumNavMenu class="summary-secondary gmd-1">show || hide menu</summary>
+		<summary id=sumNavMenu class="summary-secondary gmd-1">☰ <span id=spnMenuHelp>show || hide menu</span></summary>
 
 		<nav id="navMenu" class="gmd-2">
 
@@ -60,7 +56,7 @@
 	</details>
 
 
-	<main id=main >
+	<main id=main>
 
 		<div id="divMainContent"></div>
 
@@ -69,40 +65,31 @@
 
 	<script>
 
-			const COR = {
-				user: "pushme-pullyou",
-				repo: "tootoo-2021",
-				branch: "main",
-				defaultFile: "README.md",
-				ignoreFolders: [],
-				path: "../../../",
-				version: document.head.querySelector( "[ name=date ]" ).content,
-				description: document.head.querySelector( "[ name=description ]" ).content,
-			};
+		const COR = {
+			user: "pushme-pullyou",
+			repo: "tootoo-2021",
+			branch: "main",
+			defaultFile: "README.md",
+			ignoreFolders: [],
+			path: "./", // "../../../",
+			version: document.head.querySelector( "[ name=date ]" ).content,
+			description: document.head.querySelector( "[ name=description ]" ).content,
+		};
 
 		init();
 
 		function init() {
-			MNU.init();
 
-			//FOX.path = GOR.path = MNU.path = COR.path;
+			MNU.init();
 
 			FOX.init();
 			FOX.onHashChange();
 
 			GOR.init();
-			GOR.getOrganization(); // let's get going!
+			GOR.getOrganization();
 
-
-
-			// if running on server, keeps address bar pointed to latest dev
-
-			//if ( !location.hash && location.protocol === "https:" ) {
-			// if ( location.protocol === "https:" ) {
-
-			// 	window.history.pushState( "", "", "./" + location.hash );
-
-			// }
+			GRV.init();
+			GRV.getRepo();
 
 			if ( window.innerWidth < 800 || window.innerHeight < 500 ) {
 
@@ -114,6 +101,16 @@
 				detNavMenu.open = true;
 
 			}
+
+			// if running on server, keeps address bar pointed to latest dev
+
+			//if ( !location.hash && location.protocol === "https:" ) {
+			if ( location.protocol === "https:" ) {
+
+				window.history.pushState( "", "", "./" + location.hash );
+
+			}
+
 		}
 
 	</script>
