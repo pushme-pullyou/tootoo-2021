@@ -70,7 +70,7 @@
 			repo: "heretics-sf.github.io",
 			branch: "master",
 			defaultFile: "README.md",
-			ignoreFolders: ["archive", "drafts", "journal", "lib", "lib-templates", "zzz-residents"],
+			ignoreFolders: ["archive", "drafts", "journal", "images", "2020", "2021", "lib", "lib-templates", "zzz-residents"],
 			path: "https://heretics-sf.github.io/", //./", // "../../../",
 			version: document.head.querySelector( "[ name=date ]" ).content,
 			description: document.head.querySelector( "[ name=description ]" ).content,
@@ -88,6 +88,7 @@
 			GOR.init();
 			GOR.getOrganization();
 
+			GRV.getFiles = GRV.getFilesSimple;
 			GRV.init();
 			GRV.getRepo();
 
