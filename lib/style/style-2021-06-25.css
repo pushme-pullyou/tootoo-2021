@@ -171,6 +171,15 @@ pre {
 	padding: var( --margin);
 }
 
+.summary-secondary {
+	background-color: var(--color-3-background);
+	color: var(--color-3-text);
+	border-radius: 0.5ch;
+	cursor: pointer;
+	outline: none;
+	margin: 0.5rem 0;
+}
+
 /* gmd = Google Material Design */
 
 .gmd-1 {
@@ -302,7 +311,6 @@ pre {
 		font-size: 120%;
 		padding: var( --margin);
 	}
-
 }
 
 @media all and (max-height: 500px) {
