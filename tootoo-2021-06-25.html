@@ -91,6 +91,8 @@
 			GRV.init();
 			GRV.getRepo();
 
+
+
 			if ( window.innerWidth < 800 || window.innerHeight < 500 ) {
 
 				//document.documentElement.style.setProperty( "--mnu-width", "35%" );
@@ -102,7 +104,7 @@
 				detNavMenu.style.width = value;
 				detNavMenu.style.maxWidth = "50%";
 				detNavMenu.open = true;
-
+				sumNavMenu.hidden=true;
 			}
 
 			// if running on server, keeps address bar pointed to latest dev
