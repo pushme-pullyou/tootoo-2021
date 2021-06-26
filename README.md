@@ -13,6 +13,7 @@ _/lib/style_
 
 ## To Do / Wish List
 
+* Update info-box and menu text
 * Update access token code
 * Separate info-box module
 * Center small images?
