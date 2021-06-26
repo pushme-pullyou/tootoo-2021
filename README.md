@@ -13,6 +13,7 @@ _/lib/style_
 
 ## To Do / Wish List
 
+* Remove outer box in nav menu?
 * Update info-box and menu text
 * Update access token code
 * Separate info-box module
