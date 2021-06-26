@@ -20,8 +20,10 @@
 			/* 0 to 360 0=red 120=green 240=blue */
 		}
 
-		#sumNavMenu, #GRVsumRepo {display: none; }
-
+		#sumNavMenu,
+		#GRVsumRepo {
+			display: none;
+		}
 	</style>
 
 </head>
@@ -41,6 +43,8 @@
 		src="https://pushme-pullyou.github.io/tootoo-2021/lib/grv-github-repo-tree-view/v-2021-06-24/grv-github-repo-tree-view.js"></script>
 
 	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/mnu-menu/v-2021-04-28/mnu-menu.js"></script>
+
+
 
 	<details id=detNavMenu class="gmd-4">
 
@@ -75,7 +79,7 @@
 			repo: "heretics-sf.github.io",
 			branch: "master",
 			defaultFile: "README.md",
-			ignoreFolders: ["archive", "drafts", "journal", "/2020", "2021", "lib", "lib-templates", "zzz-residents"],
+			ignoreFolders: [ "archive", "drafts", "journal", "/2020", "2021", "lib", "lib-templates", "zzz-residents" ],
 			path: "https://heretics-sf.github.io/", //./", // "../../../",
 			version: document.head.querySelector( "[ name=date ]" ).content,
 			description: document.head.querySelector( "[ name=description ]" ).content,
