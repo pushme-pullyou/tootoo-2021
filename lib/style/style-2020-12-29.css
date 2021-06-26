@@ -120,7 +120,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 main {
-	border: 0 solid green;
+	border: 1px solid green;
 	height: 100vh;
 	left: var(--mnu-width);
 	margin: 0;
