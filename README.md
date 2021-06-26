@@ -13,14 +13,19 @@ _/lib/style_
 
 ## To Do / Wish List
 
+* Update access token code
+* Separate info-box module
+
+* Better handling for images
+* Main enlarges when menu slides
+* Better handling of images
 * Add GubGub-like GitHub search utility modules
 
 ## Issues
 
+* Scroll to top not working ~ fixed?
 
 ## Links of Interest
-
-
 
 Web
 
@@ -37,6 +42,12 @@ Switching themes
 
 ## Change Log
 
+### 2021-06-25
+
+Happy!
+
+* Add scrollbars and more
+* Beginning to be easy to maintain maybe?
 
 ### 2021-02-11
 
@@ -61,5 +72,5 @@ Switching themes
 
 ***
 
-<center><a href=javascript:window.scrollTo(0,0); class=aDingbat > ❦ </a></center>
+<center><a href=javascript:window.main.scrollTo(0,0); class=aDingbat > ❦ </a></center>
 

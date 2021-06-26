@@ -32,4 +32,4 @@ _ZZZZZ_
 
 ***
 
-<center><a href=javascript:window.scrollTo(0,0); class=aDingbat title="Scroll to top" > ❦ </a></center>
+<center><a href=javascript:window.main.scrollTo(0,0); class=aDingbat title="Scroll to top" > ❦ </a></center>
