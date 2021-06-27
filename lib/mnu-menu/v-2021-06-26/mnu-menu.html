@@ -80,12 +80,18 @@
 			//const htm = "Hello, World!";
 			//MNU.init( { description: htm } );
 
-			MNUaSource.hidden = true;
-			MNUspnVersion.hidden = true;
+			//MNUaSource.hidden = true;
+			//MNUspnVersion.hidden = true;
+
 
 			MNUdivSample.innerHTML = MNU.sample;
 
+			detView.open = true;
+
 			MNU.unhidePopUpCentered();
+
+			FOX.init();
+			FOX.onHashChange();
 
 
 			// if running on server, keeps address bar pointed to latest dev
@@ -99,9 +105,6 @@
 
 		}
 
-
-		divMainContent.innerHTML =
-			`<iframe id=ifr src="../README.md" style="border:none;width:100%" ></iframe>`;
 
 	</script>
 </body>
