@@ -52,5 +52,5 @@ Switching themes
 
 ***
 
-<center title="hello! Click me to go up to the top" ><a href=javascript:window.scrollTo(0,0); class=aDingbat > ❦ </a></center>
+<center title="hello! Click me to go up to the top" ><a href=javascript:window.main.scrollTo(0,0); class=aDingbat > ❦ </a></center>
 

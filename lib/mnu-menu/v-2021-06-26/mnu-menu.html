@@ -7,7 +7,7 @@
 	<meta name="description"
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2021-04-28">
+	<meta name="date" content="2021-06-26">
 	<title></title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
@@ -27,6 +27,8 @@
 
 	<!-- https://github.com/showdownjs/showdown -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
+
+	<script src="../../../lib/fox-file-open-xhr/v-2021-06-24/fox-file-open-xhr.js"></script>
 
 	<script src="../../../lib/mnu-menu/v-2021-06-26/mnu-menu.js"></script>
 
@@ -53,14 +55,14 @@
 		<div id="divMainContent">MNU Menu</div>
 
 	</main>
-	
+
 
 	<script>
 		const COR = {
 			user: "pushme-pullyou",
 			repo: "tootoo-2021",
 			branch: "main",
-			defaultFile: "README.md",
+			defaultFile: "lib/mnu-menu/README.md",
 			ignoreFolders: [],
 			path: "../../../",
 			version: document.head.querySelector( "[ name=date ]" ).content,
@@ -71,15 +73,13 @@
 
 		function init() {
 
-			COR.source = `https://github.com/${ COR.user }/${ COR.repo }/tree/main/lib/mnu-menu`;
-
+			MNU.description = "Hello, World!";
 			MNU.init();
 
 			MNUdivSample.innerHTML = MNU.sample;
 
 			MNU.unhidePopUpCentered();
 
-			// let's get going!
 
 			// if running on server, keeps address bar pointed to latest dev
 
@@ -90,32 +90,11 @@
 
 			}
 
-			if ( window.innerWidth < 800 || window.innerHeight < 500 ) {
-
-				document.documentElement.style.setProperty( "--mnu-width", "35%" );
-
-			} else {
-
-				detNavMenu.style.maxWidth = "50%";
-				detNavMenu.open = true;
-
-			}
-
 		}
 
 
 		divMainContent.innerHTML =
 			`<iframe id=ifr src="../README.md" style="border:none;width:100%" ></iframe>`;
-
-		ifr.onload = () => {
-
-			ifr.contentWindow.document.body.style.overflow = "hidden";
-
-			const height = ifr.contentWindow.document.body.offsetHeight + "px;";
-			ifr.height = height;
-			//console.log( "offset", height);
-
-		}
 
 	</script>
 </body>
