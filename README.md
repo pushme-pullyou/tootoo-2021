@@ -14,9 +14,7 @@ _/lib/style_
 ## To Do / Wish List
 
 * MNU popUp hide
-* Update info-box and menu text
 * Update access token code
-* Separate info-box module
 * Center small images?
 * Better handling for images ~ next previous?
 * Exclude subfolders
@@ -58,6 +56,8 @@ Switching themes
 
 * Remove outer box in nav menu?
 * Simplify style and MNU files
+* Update info-box and menu text
+* Separate info-box module
 
 ### 2021-06-25
 
