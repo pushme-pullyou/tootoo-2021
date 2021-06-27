@@ -14,17 +14,17 @@ _/lib/style_
 ## To Do / Wish List
 
 * MNU popUp hide
-* Update access token code
+* Main enlarges when menu slides
+* Better handling of images
 * Center small images?
 * Better handling for images ~ next previous?
+* Update access token code
 * Exclude subfolders
 * Better ignore and include file types
 * Toggle ignore files
 * Double check style.css for unused items
 * Slight margin for main
 * Select files by clicking anywhere in line
-* Main enlarges when menu slides
-* Better handling of images
 * Add GubGub-like GitHub search utility modules
 
 Editor
