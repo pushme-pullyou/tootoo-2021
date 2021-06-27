@@ -58,6 +58,7 @@
 
 
 	<script>
+
 		const COR = {
 			user: "pushme-pullyou",
 			repo: "tootoo-2021",
@@ -66,6 +67,7 @@
 			ignoreFolders: [],
 			path: "../../../",
 			version: document.head.querySelector( "[ name=date ]" ).content,
+			title: document.title ? document.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " ),
 			description: document.head.querySelector( "[ name=description ]" ).content,
 		};
 
@@ -73,8 +75,13 @@
 
 		function init() {
 
-			MNU.description = "Hello, World!";
 			MNU.init();
+
+			//const htm = "Hello, World!";
+			//MNU.init( { description: htm } );
+
+			MNUaSource.hidden = true;
+			MNUspnVersion.hidden = true;
 
 			MNUdivSample.innerHTML = MNU.sample;
 

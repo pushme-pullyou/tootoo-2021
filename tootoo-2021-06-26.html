@@ -73,6 +73,7 @@
 			ignoreFolders: [],
 			path: "./", // "../../../",
 			version: document.head.querySelector( "[ name=date ]" ).content,
+			title: document.title ? document.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " ),
 			description: document.head.querySelector( "[ name=description ]" ).content,
 		};
 
