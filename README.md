@@ -13,7 +13,7 @@ _/lib/style_
 
 ## To Do / Wish List
 
-* Remove outer box in nav menu?
+* MNU popUp hide
 * Update info-box and menu text
 * Update access token code
 * Separate info-box module
@@ -53,6 +53,11 @@ Switching themes
 
 
 ## Change Log
+
+## 2021-06-26
+
+* Remove outer box in nav menu?
+* Simplify style and MNU files
 
 ### 2021-06-25
 
