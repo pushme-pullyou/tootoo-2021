@@ -33,7 +33,7 @@ Editor
 
 ## Issues
 
-* Scroll to top not working ~ fixed?
+
 
 ## Links of Interest
 
@@ -51,6 +51,13 @@ Switching themes
 
 
 ## Change Log
+
+## 2021-06-27
+
+Done
+
+* Heritage-sf & Residents working OK
+* Scroll to top not working ~ fixed
 
 ## 2021-06-26
 

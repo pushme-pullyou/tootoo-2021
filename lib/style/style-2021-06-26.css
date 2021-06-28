@@ -8,7 +8,7 @@
 	/* 0 to 360 0=red 120=green 240=blue */
 	--margin: 0.5rem;
 	--saturation: 89%;
-	--lightness1: 20%;
+	--lightness0: 1% --lightness1: 20%;
 	--lightness2: 30%;
 	--lightness3: 50%;
 	--lightness4: 80%;
@@ -187,6 +187,7 @@ pre {
 	color: var(--color-2-text);
 	cursor: pointer;
 	outline: none;
+	margin: 0 0 0.5rem 0;
 	padding: var( --margin);
 }
 
@@ -300,8 +301,6 @@ pre {
 #navMenu {
 	/* padding: 0 var( --margin); */
 	/* width */
-
-
 }
 
 #sumNavMenu {
@@ -313,7 +312,6 @@ pre {
 	border-radius: var( --margin); */
 	cursor: pointer;
 	outline: none;
-
 	z-index: 2;
 }
 
