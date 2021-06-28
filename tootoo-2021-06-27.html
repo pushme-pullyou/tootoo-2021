@@ -7,7 +7,7 @@
 	<meta name="description"
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2021-06-26">
+	<meta name="date" content="2021-06-27">
 	<title>TooToo</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
@@ -81,18 +81,24 @@
 
 		function init() {
 
-			//MNU.description = "hhhhh"
 			MNU.init();
+
+			//const htm = "Hello, World!";
+			//MNU.init( { description: htm } );
+			//MNUaSource.hidden = true;
+			//MNUspnVersion.hidden = true;
 
 			FOX.init();
 			FOX.onHashChange();
 
-			GOR.init();
-			GOR.getOrganization();
+			//GOR.init();
+			//GOR.getOrganization();
 
-			GRV.directions = `Numerous folders and files for you to look at!`;
+			//GRV.getFiles = GRV.getFilesSimple;
+			//GRV.directions = `Numerous folders and files for you to look at!`;
 			GRV.init();
 			GRV.getRepo();
+			//GRVsumRepo.hidden = true;
 
 			// if running on server, keeps address bar pointed to latest dev
 
