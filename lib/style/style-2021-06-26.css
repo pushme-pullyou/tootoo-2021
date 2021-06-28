@@ -179,6 +179,11 @@ pre {
 	width: 100%;
 }
 
+.subheading {
+	font-style: italic;
+	margin: 0 0 1.5rem 0;
+}
+
 /* Details & Summary */
 
 .summary-primary {
