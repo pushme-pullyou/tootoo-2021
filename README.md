@@ -1,4 +1,5 @@
-# [TooToo 2021 Read Me]( ./index.html#README.md )
+# [![](https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg )](https://github.com/pushme-pullyou/tootoo-2021/ "Source code on GitHub" )  [TooToo 2021 Read Me]( https://pushme-pullyou.github.io/tootoo-2021/#README.md)
+
 
 <!--ddfddd
 <div style=height:300px;overflow:hidden;width:100%;resize:both; ><iframe src=https://pushme-pullyou.github.io/lib/style/style-sample-tags.html height=100% width=100% ></iframe></div>
@@ -13,6 +14,7 @@ _/lib/style_
 
 ## To Do / Wish List
 
+* Simple <> full menu switch
 * MNU popUp hide
 * Main enlarges when menu slides
 * Better handling of images
@@ -51,6 +53,11 @@ Switching themes
 
 
 ## Change Log
+
+## 2021-06-29
+
+* Continue with menu and link fixes
+* Updating COR usage
 
 ## 2021-06-27
 
