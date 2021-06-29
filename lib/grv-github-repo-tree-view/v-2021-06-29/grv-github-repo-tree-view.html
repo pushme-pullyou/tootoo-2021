@@ -34,7 +34,7 @@
 
 	<script src="../../../lib/grv-github-repo-tree-view/v-2021-06-29/grv-github-repo-tree-view.js"></script>
 
-	<script src="../../../lib/mnu-menu/v-2021-06-28/mnu-menu.js"></script>
+	<script src="../../../lib/mnu-menu/v-2021-06-29/mnu-menu.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
@@ -44,8 +44,9 @@
 		<nav id="navMenu" class="">
 
 			<p>
-				<button onclick='GRV.getRepo("ladybug-tools","spider-2020","master")' >ladybug-tools</button><br>
-				<button onclick='GRV.getRepo("theo-armour","2020","master")' >theo-armour</button><br>
+				<button onclick='GRV.getRepo("ladybug-tools","spider-2021","main")' >ladybug-tools spider-2021</button><br>
+				<button onclick='GRV.getRepo("theo-armour","2021","main")' >theo-armour</button><br>
+
 			</p>
 
 			<div id=MNUdivHeader></div>
@@ -72,17 +73,16 @@
 			user: "pushme-pullyou",
 			repo: "tootoo-2021",
 			branch: "main",
-			defaultFile: "README.md",
-			ignoreFolders: [],
 			path: "../../../",
-			version: document.head.querySelector( "[ name=date ]" ).content,
+			defaultFile: "README.md",
+			urlSource: "https://github.com/pushme-pullyou/tootoo-2021/",
+			urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
+			ignoreFolders: [],
 			title: document.title ? document.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " ),
-
+			version: document.head.querySelector( "[ name=date ]" ).content,
 			description: document.head.querySelector( "[ name=description ]" ).content,
-			assets: `https://pushme-pullyou.github.io/tootoo-2021/`,
 		};
 
-		COR.source = `https://github.com/${ COR.user }/${ COR.repo }/`;
 
 		init();
 
@@ -95,9 +95,6 @@
 
 			GRV.init();
 			GRV.getRepo();
-
-
-
 
 			// if running on server, keeps address bar pointed to latest dev
 
