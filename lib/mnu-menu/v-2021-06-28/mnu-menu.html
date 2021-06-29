@@ -8,10 +8,10 @@
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
 	<meta name="date" content="2021-06-28">
-	<title>TooToo</title>
+	<title></title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
-	<link rel="stylesheet" href="./lib/style/style-2021-06-26.css">
+	<link rel="stylesheet" href="../../../lib/style/style-2021-06-26.css">
 
 	<style>
 		:root {
@@ -28,13 +28,9 @@
 	<!-- https://github.com/showdownjs/showdown -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 
-	<script src="./lib/fox-file-open-xhr/v-2021-06-24/fox-file-open-xhr.js"></script>
+	<script src="../../../lib/fox-file-open-xhr/v-2021-06-24/fox-file-open-xhr.js"></script>
 
-	<script src="./lib/gor-github-organization-repos/v-2021-06-26/gor-github-organization-repos.js"></script>
-
-	<script src="./lib/grv-github-repo-tree-view/v-2021-06-26/grv-github-repo-tree-view.js"></script>
-
-	<script src="./lib/mnu-menu/v-2021-06-26/mnu-menu.js"></script>
+	<script src="../../../lib/mnu-menu/v-2021-06-28/mnu-menu.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
@@ -45,9 +41,7 @@
 
 			<div id=MNUdivHeader></div>
 
-			<div id=GORdivDetails></div>
-
-			<div id=GRVdivDetails></div>
+			<div id=MNUdivSample></div>
 
 			<div id=MNUdivFooter></div>
 
@@ -69,9 +63,9 @@
 			user: "pushme-pullyou",
 			repo: "tootoo-2021",
 			branch: "main",
-			defaultFile: "README.md",
+			defaultFile: "lib/mnu-menu/README.md",
 			ignoreFolders: [],
-			path: "./", // "../../../",
+			path: "../../../",
 			version: document.head.querySelector( "[ name=date ]" ).content,
 			title: document.title ? document.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " ),
 			description: document.head.querySelector( "[ name=description ]" ).content,
@@ -94,17 +88,14 @@
 			//MNUaSource.hidden = true;
 			//MNUspnVersion.hidden = true;
 
+			MNUdivSample.innerHTML = MNU.sample;
+
+			detView.open = true;
+
+			MNU.unhidePopUpCentered();
+
 			FOX.init();
 			FOX.onHashChange();
-
-			//GOR.init();
-			//GOR.getOrganization();
-
-			//GRV.getFiles = GRV.getFilesSimple;
-			//GRV.directions = `Numerous folders and files for you to look at!`;
-			GRV.init();
-			GRV.getRepo();
-			//GRVsumRepo.hidden = true;
 
 			// if running on server, keeps address bar pointed to latest dev
 
