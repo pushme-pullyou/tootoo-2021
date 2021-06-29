@@ -7,7 +7,7 @@
 	<meta name="description"
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2021-06-28">
+	<meta name="date" content="2021-06-29">
 	<title>Heretics Happenings</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
@@ -55,7 +55,7 @@
 	<script
 		src="https://pushme-pullyou.github.io/tootoo-2021/lib/fox-file-open-xhr/v-2021-06-24/fox-file-open-xhr.js"></script>
 
-	<script src="https://pushme-pullyou.github.io/tootoo-2021//lib/mnu-menu/v-2021-06-28/mnu-menu.js"></script>
+	<script src="https://pushme-pullyou.github.io/tootoo-2021//lib/mnu-menu/v-2021-06-29/mnu-menu.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
@@ -192,20 +192,22 @@
 			user: "heretics-sf/",
 			repo: "residents",
 			branch: "main",
-			defaultFile: "README.md",
-			ignoreFolders: [],
 			path: "https://heretics-sf.github.io/residents/", // //../../../",
-			version: document.head.querySelector( "[ name=date ]" ).content,
+			defaultFile: "README.md",
+			urlSource: "https://github.com/heretics-sf/residents/",
+			urlAssets: "https://heretics-sf.github.io/residents/",
+			ignoreFolders: [],
 			title: document.title ? document.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " ),
+			version: document.head.querySelector( "[ name=date ]" ).content,
 			description: document.head.querySelector( "[ name=description ]" ).content,
-			assets: `https://pushme-pullyou.github.io/tootoo-2021/`,
 		};
 
-		COR.source = `https://github.com/${ COR.user }/${ COR.repo }/`;
 
 		init();
 
 		function init() {
+		
+		
 
 			MNU.init( { description: "<p?>The online version!</p>Published by the residents of the Heritage on the Marina - for our residents and our friends" } );
 

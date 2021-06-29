@@ -7,7 +7,7 @@
 	<meta name="description"
 		content="Built by residents with abilities - for residents with needs">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2021-06-28">
+	<meta name="date" content="2021-06-29">
 	<title>Heretics</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
@@ -35,9 +35,9 @@
 		src="https://pushme-pullyou.github.io/tootoo-2021/lib/gor-github-organization-repos/v-2021-06-26/gor-github-organization-repos.js"></script>
 
 	<script
-		src="https://pushme-pullyou.github.io/tootoo-2021/lib/grv-github-repo-tree-view/v-2021-06-26/grv-github-repo-tree-view.js"></script>
+		src="https://pushme-pullyou.github.io/tootoo-2021/lib/grv-github-repo-tree-view/v-2021-06-29/grv-github-repo-tree-view.js"></script>
 
-	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/mnu-menu/v-2021-06-28/mnu-menu.js"></script>
+	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/mnu-menu/v-2021-06-29/mnu-menu.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
@@ -72,16 +72,16 @@
 			user: "heretics-sf",
 			repo: "heretics-sf.github.io",
 			branch: "master",
-			defaultFile: "README.md",
-			ignoreFolders: [ "archive", "drafts", "journal", "lib", "lib-templates", "zzz-residents" ],
 			path: "https://heretics-sf.github.io/", //./", // "../../../",
-			version: document.head.querySelector( "[ name=date ]" ).content,
+			defaultFile: "README.md",
+			urlSource: "https://github.com/pushme-pullyou/tootoo-2021/",
+			urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
+			ignoreFolders: [ "archive", "drafts", "journal", "lib", "lib-templates", "zzz-residents"],
 			title: document.title ? document.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " ),
+			version: document.head.querySelector( "[ name=date ]" ).content,
 			description: document.head.querySelector( "[ name=description ]" ).content,
-			assets: `https://pushme-pullyou.github.io/tootoo-2021/`,
 		};
 
-		COR.source = `https://github.com/${ COR.user }/${ COR.repo }/`;
 
 		init();
 
