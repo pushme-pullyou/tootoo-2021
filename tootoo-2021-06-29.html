@@ -32,9 +32,9 @@
 
 	<script src="./lib/gor-github-organization-repos/v-2021-06-26/gor-github-organization-repos.js"></script>
 
-	<script src="./lib/grv-github-repo-tree-view/v-2021-06-27/grv-github-repo-tree-view.js"></script>
+	<script src="./lib/grv-github-repo-tree-view/v-2021-06-29/grv-github-repo-tree-view.js"></script>
 
-	<script src="./lib/mnu-menu/v-2021-06-28/mnu-menu.js"></script>
+	<script src="./lib/mnu-menu/v-2021-06-29/mnu-menu.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
@@ -69,16 +69,16 @@
 			user: "pushme-pullyou",
 			repo: "tootoo-2021",
 			branch: "main",
-			defaultFile: "README.md",
-			ignoreFolders: [],
 			path: "./", // "../../../",
-			version: document.head.querySelector( "[ name=date ]" ).content,
+			defaultFile: "README.md",
+			urlSource:`https://github.com/pushme-pullyou/tootoo-2021/`,
+			urlAssets: `https://pushme-pullyou.github.io/tootoo-2021/`,
+			ignoreFolders: [],
 			title: document.title ? document.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " ),
+			version: document.head.querySelector( "[ name=date ]" ).content,
 			description: document.head.querySelector( "[ name=description ]" ).content,
-			assets: `https://pushme-pullyou.github.io/tootoo-2021/`,
 		};
 
-		COR.source = `https://github.com/${ COR.user }/${ COR.repo }/`;
 
 		init();
 

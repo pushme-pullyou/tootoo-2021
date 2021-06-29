@@ -5,36 +5,35 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
 	<meta name="description"
-		content="TooToo 2021 uses the GitHub API to provide access to all the current folders and files hosted with GitHub Pages.">
+		content="TooToo 2021 uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
 	<meta name="date" content="2021-06-29">
-	<title>GRV</title>
+	<title>MNU</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
 	<link rel="stylesheet" href="../../../lib/style/style-2021-06-26.css">
 
 	<style>
 		:root {
-			/* --mnu-width: 15rem; */
-			/*--main-hue: 0; */
+			/* --mnu-width: 20rem; */
+			--main-hue: 240;
 			/* 0 to 360 0=red 120=green 240=blue */
 		}
-
-
 	</style>
 
 </head>
 
 <body>
-	<!-- https://github.com/showdownjs/showdown -->
 
+	<!-- https://github.com/showdownjs/showdown -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 
 	<script src="../../../lib/fox-file-open-xhr/v-2021-06-24/fox-file-open-xhr.js"></script>
 
-	<script src="../../../lib/grv-github-repo-tree-view/v-2021-06-29/grv-github-repo-tree-view.js"></script>
 
-	<script src="../../../lib/mnu-menu/v-2021-06-28/mnu-menu.js"></script>
+
+
+	<script src="../../../lib/mnu-menu/v-2021-06-29/mnu-menu.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
@@ -43,14 +42,9 @@
 
 		<nav id="navMenu" class="">
 
-			<p>
-				<button onclick='GRV.getRepo("ladybug-tools","spider-2020","master")' >ladybug-tools</button><br>
-				<button onclick='GRV.getRepo("theo-armour","2020","master")' >theo-armour</button><br>
-			</p>
-
 			<div id=MNUdivHeader></div>
 
-			<div id=GRVdivDetails></div>
+			<div id=MNUdivSample></div>
 
 			<div id=MNUdivFooter></div>
 
@@ -68,36 +62,46 @@
 
 	<script>
 
-	const COR = {
+		const COR = {
 			user: "pushme-pullyou",
 			repo: "tootoo-2021",
 			branch: "main",
-			defaultFile: "README.md",
-			ignoreFolders: [],
 			path: "../../../",
-			version: document.head.querySelector( "[ name=date ]" ).content,
+			defaultFile: "lib/mnu-menu/README.md",
+			urlSource: "https://github.com/pushme-pullyou/tootoo-2021/",
+			urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
+			ignoreFolders: [],
 			title: document.title ? document.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " ),
-
+			version: document.head.querySelector( "[ name=date ]" ).content,
 			description: document.head.querySelector( "[ name=description ]" ).content,
-			assets: `https://pushme-pullyou.github.io/tootoo-2021/`,
 		};
 
-		COR.source = `https://github.com/${ COR.user }/${ COR.repo }/`;
 
 		init();
 
 		function init() {
 
+			//COR.path = COR.assets;
+			//COR.assets = COR.path;
+
 			MNU.init();
+
+			//const htm = "Hello, World!";
+			//MNU.init( { description: htm } );
+			//MNUaSource.hidden = true;
+			//MNUspnVersion.hidden = true;
+
+			MNUdivSample.innerHTML = MNU.sample;
+
+			detView.open = true;
+
+			MNUspnFile.innerHTML = MNU.addInfoBox( "Hello, World!");
+			
+
+			MNU.unhidePopUpCentered();
 
 			FOX.init();
 			FOX.onHashChange();
-
-			GRV.init();
-			GRV.getRepo();
-
-
-
 
 			// if running on server, keeps address bar pointed to latest dev
 
