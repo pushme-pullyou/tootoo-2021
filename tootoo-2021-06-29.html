@@ -7,16 +7,16 @@
 	<meta name="description"
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2021-06-28">
-	<title>Spider</title>
+	<meta name="date" content="2021-06-29">
+	<title>TooToo</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
 	<link rel="stylesheet" href="./lib/style/style-2021-06-26.css">
 
 	<style>
 		:root {
-			--mnu-width: 20rem;
-			--main-hue: 0;
+			/* --mnu-width: 20rem; */
+			--main-hue: 240;
 			/* 0 to 360 0=red 120=green 240=blue */
 		}
 	</style>
@@ -32,16 +32,16 @@
 
 	<script src="./lib/gor-github-organization-repos/v-2021-06-26/gor-github-organization-repos.js"></script>
 
-	<script src="./lib/grv-github-repo-tree-view/v-2021-06-26/grv-github-repo-tree-view.js"></script>
+	<script src="./lib/grv-github-repo-tree-view/v-2021-06-27/grv-github-repo-tree-view.js"></script>
 
-	<script src="./lib/mnu-menu/v-2021-06-26/mnu-menu.js"></script>
+	<script src="./lib/mnu-menu/v-2021-06-28/mnu-menu.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
 
 		<summary id=sumNavMenu class="summary-nav gmd-1">☰ <span id=spnMenuHelp>show || hide menu</span></summary>
 
-		<nav id="navMenu" class="mmmgmd-2">
+		<nav id="navMenu" class="">
 
 			<div id=MNUdivHeader></div>
 
@@ -66,20 +66,26 @@
 	<script>
 
 		const COR = {
-			user: "ladybug-tools",
-			repo: "spider-2021",
-			branch: "master",
+			user: "pushme-pullyou",
+			repo: "tootoo-2021",
+			branch: "main",
 			defaultFile: "README.md",
-			ignoreFolders: ["archive", "style"],
-			path: "https://www.ladybug.tools/spider-2021/", //"./", // "../../../",
+			ignoreFolders: [],
+			path: "./", // "../../../",
 			version: document.head.querySelector( "[ name=date ]" ).content,
 			title: document.title ? document.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " ),
 			description: document.head.querySelector( "[ name=description ]" ).content,
+			assets: `https://pushme-pullyou.github.io/tootoo-2021/`,
 		};
+
+		COR.source = `https://github.com/${ COR.user }/${ COR.repo }/`;
 
 		init();
 
 		function init() {
+
+			//COR.path = COR.assets;
+			//COR.assets = COR.path;
 
 			MNU.init();
 
@@ -91,8 +97,8 @@
 			FOX.init();
 			FOX.onHashChange();
 
-			//GOR.init();
-			//GOR.getOrganization();
+			GOR.init();
+			GOR.getOrganization();
 
 			//GRV.getFiles = GRV.getFilesSimple;
 			//GRV.directions = `Numerous folders and files for you to look at!`;
