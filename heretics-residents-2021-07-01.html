@@ -39,10 +39,6 @@
 			margin: 0 0 0.5rem 0;
 		}
 
-		.subheading {
-			font-style: italic;
-			margin: 0 0 1.5rem 0;
-		}
 	</style>
 
 </head>
@@ -55,7 +51,7 @@
 	<script
 		src="https://pushme-pullyou.github.io/tootoo-2021/lib/fox-file-open-xhr/v-2021-07-01/fox-file-open-xhr.js"></script>
 
-	<script src="https://pushme-pullyou.github.io/tootoo-2021//lib/mnu-menu/v-2021-06-29/mnu-menu.js"></script>
+	<script src="https://pushme-pullyou.github.io/tootoo-2021//lib/mnu-menu/v-2021-07-01/mnu-menu.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
@@ -200,9 +196,12 @@
 			branch: "main",
 			path: "https://heretics-sf.github.io/residents/", // //../../../",
 			defaultFile: "README.md",
-			urlSource: "https://github.com/heretics-sf/residents/",
-			urlAssets: "https://heretics-sf.github.io/residents/",
 			ignoreFolders: [],
+			urlSource: "https://github.com/pushme-pullyou/tootoo-2021/",
+			urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
+			iconGitHub: `<img src="https://pushme-pullyou.github.io/tootoo-2021//lib/assets/icons/mark-github.svg">`,
+			iconInfo: `<img src="https://pushme-pullyou.github.io/tootoo-2021//lib/assets/icons/noun_Information_585560.svg.svg">`,
+			iconExternalFile: `<img src="https://pushme-pullyou.github.io/tootoo-2021//lib/assets/icons/icon-external-link.svg">`,
 			title: document.title ? document.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " ),
 			version: document.head.querySelector( "[ name=date ]" ).content,
 			description: document.head.querySelector( "[ name=description ]" ).content,
