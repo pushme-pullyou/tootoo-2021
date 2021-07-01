@@ -17,8 +17,6 @@ _/lib/style_
 * Simple <> full menu switch
 * MNU popUp hide
 * Main enlarges when menu slides
-* Better handling of images
-* Center small images?
 * Better handling for images ~ next previous?
 * Update access token code
 * Exclude subfolders

@@ -14,15 +14,25 @@ _FOX File Open XHR in a resizable window. One finger to rotate. Two to zoom._
 
 ## To Do / Wish List
 
+* Better handling of images
+* Center small images?
 
 ## Issues
 
 
 ## Links of Interest
 
+* https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+* https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest
+* https://en.wikipedia.org/wiki/XMLHttpRequest
 
 ## Change Log
 
+### 2021-07-01
+
+* update readme
+* Update html
+* js: cleanup & jsHint
 
 ### 2021-06-15
 
