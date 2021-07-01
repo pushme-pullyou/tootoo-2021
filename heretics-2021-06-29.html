@@ -7,8 +7,8 @@
 	<meta name="description"
 		content="Built by residents with abilities - for residents with needs">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2021-06-29">
-	<title>Heretics</title>
+	<meta name="date" content="2021-07-01">
+	<title>TooToo</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
 	<link rel="stylesheet" href="https://pushme-pullyou.github.io/tootoo-2021/lib/style/style-2021-06-26.css">
@@ -29,15 +29,15 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 
 	<script
-		src="https://pushme-pullyou.github.io/tootoo-2021/lib/fox-file-open-xhr/v-2021-06-24/fox-file-open-xhr.js"></script>
+		src="https://pushme-pullyou.github.io/tootoo-2021/lib/fox-file-open-xhr/v-2021-07-01/fox-file-open-xhr.js"></script>
 
 	<script
 		src="https://pushme-pullyou.github.io/tootoo-2021/lib/gor-github-organization-repos/v-2021-06-26/gor-github-organization-repos.js"></script>
 
 	<script
-		src="https://pushme-pullyou.github.io/tootoo-2021/lib/grv-github-repo-tree-view/v-2021-06-29/grv-github-repo-tree-view.js"></script>
+		src="https://pushme-pullyou.github.io/tootoo-2021/lib/grv-github-repo-tree-view/v-2021-07-01/grv-github-repo-tree-view.js"></script>
 
-	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/mnu-menu/v-2021-06-29/mnu-menu.js"></script>
+	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/mnu-menu/v-2021-07-01/mnu-menu.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
@@ -74,9 +74,12 @@
 			branch: "master",
 			path: "https://heretics-sf.github.io/", //./", // "../../../",
 			defaultFile: "README.md",
+			ignoreFolders: [ "archive", "drafts", "journal", "lib", "lib-templates", "zzz-residents"],
 			urlSource: "https://github.com/pushme-pullyou/tootoo-2021/",
 			urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
-			ignoreFolders: [ "archive", "drafts", "journal", "lib", "lib-templates", "zzz-residents"],
+			iconGitHub: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`,
+			iconInfo: `<img class=infoImg src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/noun_Information_585560.svg">`,
+			iconExternalFile: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/icon-external-link.svg">`,
 			title: document.title ? document.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " ),
 			version: document.head.querySelector( "[ name=date ]" ).content,
 			description: document.head.querySelector( "[ name=description ]" ).content,
