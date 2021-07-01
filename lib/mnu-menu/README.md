@@ -15,9 +15,12 @@ _mnu-menu.html_
 
 ## To Do / Wish List
 
+* Search
+* Right menu
+* Cursor keys select items ~ tab key?
 * InfoBox easier to enter
-Simple <> full menu switch
-MNU popUp hide
+* Simple <> full menu switch
+* MNU popUp hide
 
 ## Issues
 
