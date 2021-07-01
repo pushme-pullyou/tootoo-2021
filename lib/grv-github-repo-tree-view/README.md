@@ -21,6 +21,11 @@ _GRV GitHub Repo Tree View_
 
 ## To Do / Wish List
 
+* 2021-07-01 ~ right-click menu
+* Cursor key supporrt
+* Exclude subfolders
+* Toggle ignore files
+* Better ignore and include file types
 * 2020-09-18 ~ add search
 
 ## Issues
@@ -30,6 +35,12 @@ _GRV GitHub Repo Tree View_
 
 
 ## Change Log
+
+### 2021-07-01
+
+* update readme
+* html: cleanup, add description
+* js: jsHint
 
 ### 2020-12-29
 

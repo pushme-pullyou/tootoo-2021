@@ -19,9 +19,6 @@ _/lib/style_
 * Main enlarges when menu slides
 * Better handling for images ~ next previous?
 * Update access token code
-* Exclude subfolders
-* Better ignore and include file types
-* Toggle ignore files
 * Double check style.css for unused items
 * Slight margin for main
 * Select files by clicking anywhere in line

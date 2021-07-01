@@ -26,6 +26,7 @@ _FOX File Open XHR in a resizable window. One finger to rotate. Two to zoom._
 * https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest
 * https://en.wikipedia.org/wiki/XMLHttpRequest
 
+
 ## Change Log
 
 ### 2021-07-01
