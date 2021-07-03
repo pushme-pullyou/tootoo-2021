@@ -14,6 +14,7 @@ _gor-github-organization-repos in a resizable window. One finger to rotate. Two 
 
 ## To Do / Wish List
 
+* 2021-07-03 ~ Improve the documentation
 * 2021-07-03 ~ update user & repo using location hash
 
 ## Issues
