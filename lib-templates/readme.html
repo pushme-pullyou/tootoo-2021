@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=contain" >
 <meta name="description" content="File wrangler. Default index.html file. Opens HTML or Markdown files. Passes location.hash." >
 <meta name="keywords" content="ShowDown,Markdown,AJAX,JavaScript,HTML,CSS,GitHub,FOSS" >
-<meta name="version" content="2021-04-25" >
+<meta name="version" content="2021-05-19" >
 
 <style>
 /* Copyright 2021 Theo Armour. MIT License */
@@ -20,13 +20,15 @@ a:hover, a:focus, a:active { text-decoration: underline; }
 aside { border: 1px solid lightgray; margin-top: 15px; padding: 2px; }
 button, input[type=button] { background-color: #eee; border: 2px #eee solid; color: #888; }
 blockquote { background-color: #ddd; padding: 1rem; }
-center { text-decoration:none; font-size: 2rem;}
 code { background-color: #eee; }
 pre { background-color: #eee; padding: 0.5rem; }
 summary { cursor: pointer; font-size: 2.5rem; font-weight: bold; outline: none; }
 
 ::-webkit-scrollbar { background: #333; }
 ::-webkit-scrollbar-thumb { background: crimson; }
+
+.aDingbat { text-decoration:none; font-size: 2rem; }
+.ifrResize { height:400px;overflow:hidden;resize:both;width:100%; }
 
 </style>
 
@@ -60,6 +62,7 @@ summary { cursor: pointer; font-size: 2.5rem; font-weight: bold; outline: none; 
 		window.addEventListener( "hashchange", onHashChange, false );
 
 	}
+
 
 	function onHashChange() {
 
