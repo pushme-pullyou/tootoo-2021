@@ -7,7 +7,7 @@
 	<meta name="description"
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2021-07-01">
+	<meta name="date" content="2021-07-04">
 	<title>Heretics Happenings</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
@@ -48,9 +48,9 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 
 	<script
-		src="https://pushme-pullyou.github.io/tootoo-2021/lib/fox-file-open-xhr/v-2021-07-01/fox-file-open-xhr.js"></script>
+		src="https://pushme-pullyou.github.io/tootoo-2021/lib/fox-file-open-xhr/v-2021-07-03/fox-file-open-xhr.js"></script>
 
-	<script src="https://pushme-pullyou.github.io/tootoo-2021//lib/mnu-menu/v-2021-07-01/mnu-menu.js"></script>
+	<script src="https://pushme-pullyou.github.io/tootoo-2021//lib/mnu-menu/v-2021-07-04/mnu-menu.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
@@ -220,14 +220,14 @@
 			user: "heretics-sf/",
 			repo: "residents",
 			branch: "main",
-			path: "https://heretics-sf.github.io/residents/", // //../../../",
+			path: "https://heretics-sf.github.io/residents/",
 			defaultFile: "README.md",
 			ignoreFolders: [],
 			urlSource: "https://github.com/pushme-pullyou/tootoo-2021/",
 			urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
 			iconGitHub: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`,
 			iconInfo: `<img class=infoImg src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/noun_Information_585560.svg">`,
-			iconExternalFile: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/icon-external-link.svg">`,
+			iconExternalFile: `<img class=infoImg  src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/icon-external-link.svg">`,
 			title: document.title ? document.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " ),
 			version: document.head.querySelector( "[ name=date ]" ).content,
 			description: document.head.querySelector( "[ name=description ]" ).content,
@@ -238,24 +238,27 @@
 
 		function init() {
 
-
+			//COR.path = COR.assets;
+			//COR.assets = COR.path;
 
 			MNU.init( { description: "<p?>The online version!</p>Published by the residents of the Heritage on the Marina - for our residents and our friends" } );
+			//MNUdivSample.innerHTML = MNU.getSample();
 
+			//const htm = "Hello, World!";
+			//MNU.init( { description: htm } );
 			MNUaSource.hidden = true;
 			MNUspnVersion.hidden = true;
 
 
 			// FOX = File Open XHR
-			// FOX.defaultFile = COR.defaultFile;
-
 			FOX.init();
-
+			//FOXdivDetails.innerHTML = FOX.getMenu();
 			FOX.onHashChange();
 
 
 			spanMorrison.innerHTML = `${ MNU.addInfoBox( "Tip of the hat to Morrison!" ) }`;
 			spanMJ.innerHTML = `${ MNU.addInfoBox( "Tip of the hat to Margaret!" ) }`;
+
 
 			// if running on server, keeps address bar pointed to latest dev
 
