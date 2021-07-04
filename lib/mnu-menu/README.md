@@ -15,11 +15,11 @@ _mnu-menu.html_
 
 ## To Do / Wish List
 
+* 2021-07-04 ~ Add test menu with links to readme files
 * Search
-* Right menu
+* Context menu
 * Cursor keys select items ~ tab key?
 * InfoBox easier to enter
-* Simple <> full menu switch
 * MNU popUp hide
 
 ## Issues
@@ -29,6 +29,8 @@ _mnu-menu.html_
 
 
 ## Change Log
+
+* Add ID to infobox
 
 ### 2021-06-29
 

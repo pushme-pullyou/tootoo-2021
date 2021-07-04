@@ -36,6 +36,12 @@ _GRV GitHub Repo Tree View_
 
 ## Change Log
 
+### 2021-07-04
+
+### 2021-07-04
+
+* Simple <> full menu switch: added
+
 ### 2021-07-01
 
 * update readme
