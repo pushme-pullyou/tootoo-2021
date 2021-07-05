@@ -2,8 +2,9 @@
 
 
 <!--@@@
-<div class=ifrResize ><iframe src=https://pushme-pullyou.github.io/tootoo-2021/ xxxxx/ height=100% width=100% ></iframe></div>
+<div class=ifram-resize ><iframe src=https://pushme-pullyou.github.io/tootoo-2021/ xxxxx/ height=100% width=100% ></iframe></div>
 _ZZZZZ in a resizable window. One finger to rotate. Two to zoom._
+
 
 ### Full Screen: [ZZZZZ]( https://pushme-pullyou.github.io/tootoo-2021/xxxxx/ )
 @@@-->
