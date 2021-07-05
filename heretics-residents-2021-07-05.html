@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="description"
+		content="TooToo 2021 uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
+	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
+	<meta name="date" content="2021-07-05">
+	<title>Heretics Happenings</title>
+
+	<!-- Copyright 2021 Theo Armour. MIT license -->
+	<link rel="stylesheet" href="https://pushme-pullyou.github.io/tootoo-2021/lib/style/style-2021-06-26.css">
+
+	<style>
+		:root {
+			--mnu-width: 21rem;
+			--main-hue: 0;
+			/* 0 to 360 0=red 120=green 240=blue */
+		}
+
+		li a,
+		p a,
+		button {
+			font-size: 1.3rem;
+		}
+
+		h1 {
+			font-size: 180%;
+		}
+
+		p {
+			margin: 0 0 0.5rem 0;
+		}
+
+		summary {
+			font-size: 150%;
+			margin: 0 0 0.5rem 0;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<!-- https://github.com/showdownjs/showdown -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
+
+	<script
+		src="https://pushme-pullyou.github.io/tootoo-2021/lib/fox-file-open-xhr/v-2021-07-03/fox-file-open-xhr.js"></script>
+
+	<script src="https://pushme-pullyou.github.io/tootoo-2021//lib/mnu-menu/v-2021-07-04/mnu-menu.js"></script>
+
+
+	<details id=detNavMenu class="gmd-4">
+
+		<summary id=sumNavMenu class="summary-nav gmd-1">☰ <span id=spnMenuHelp>show || hide menu</span></summary>
+
+		<nav id="navMenu" class="">
+
+			<div id=MNUdivHeader></div>
+
+			<!--
+
+			<p><input id=inpPW class="full-width" placeholder="Input password (same as Heritage WiFi)" .></p>
+-->
+			<hr>
+
+			<p>
+				<a href="#happenings/2021/2021-07-happenings.pdf"
+					title="Click to view the PDF of the current issue"><i>Happenings</i> ~ July 2021</a>
+			</p>
+
+			<div class=subheading>Monthly publication produced by residents</div>
+
+			<details>
+				<summary class="summary-primary gmd-1" title="Click to view previous issues">Past <i>Happenings</i>
+				</summary>
+
+				<div class=subheading>PDF files of the <i>Happenings</i> viewable online</i></dov>
+					<p><a href="#happenings/2021/2021-07-happenings.pdf"><i>Happenings</i>
+							July 2021</a></p>
+					<p><a href="#happenings/2021/2021-06-happenings.pdf"><i>Happenings</i>
+							June 2021</a></p>
+					<p><a href="#happenings/2021/2021-05-happenings.pdf"><i>Happenings</i>
+							May 2021</a></p>
+					<p><a href="#happenings/2021/2021-04-happenings.pdf"><i>Happenings</i>
+							April 2021</a></p>
+					<p><a href="#happenings/2021/2021-03-happenings.pdf"><i>Happenings</i>
+							March 2021</a></p>
+					<p><a href="#happenings/2021/2021-02-happenings.pdf"><i>Happenings</i>
+							February 2021</a></p>
+					<p><a href="#happenings/2021/2021-01-happenings.pdf"><i>Happenings</i>
+							January 2021</a></p>
+					<p><a href="#happenings/2020/2020-10-happenings.pdf"><i>Happenings</i>
+							October 2020</a></p>
+
+			</details>
+
+			<details>
+				<summary class="summary-primary gmd-1" title="Click to view the various menus">Dining Service Menus
+					<span id=spanMorrison></span>
+				</summary>
+
+				<div class=subheading>Spreadsheets with nutrient analysis for all the dishes to be
+					served during the week.<br>Click the title to view the menu in main window. Click this icon: <img
+						class=infoImg
+						src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/icon-link-external.svg"> to
+					download the file or view it in a separate window.</i>
+				</div>
+				</p>
+				2021 Second Session Menus
+				<ul>
+					<li><a href="#food-service/2021/2021-q2-nutrient-analysis-wk1.xlsx">Week
+							1 ~ June 27</a>
+
+						&nbsp; <a href="food-service/2021/2021-q2-nutrient-analysis-wk1.xlsx" target="_blank">
+							<img class=infoImg
+								src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/icon-link-external.svg">
+						</a>
+					</li>
+
+					<li><a href="#food-service/2021/2021-q2-nutrient-analysis-wk2.xlsx">Week
+							2 ~ July 4 </a>
+						&nbsp; <a href="food-service/2021/2021-q2-nutrient-analysis-wk2.xlsx" target="_blank">
+							<img class=infoImg
+								src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/icon-link-external.svg">
+						</a></li>
+					<li><a href="#food-service/2021/2021-q2-nutrient-analysis-wk3.xlsx">Week
+							3 ~ July 11</a>
+						&nbsp; <a href="food-service/2021/2021-q2-nutrient-analysis-wk3.xlsx" target="_blank">
+							<img class=infoImg
+								src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/icon-link-external.svg">
+						</a>
+
+					</li>
+					<li><a href="#food-service/2021/2021-q2-nutrient-analysis-wk4.xlsx">Week
+							4 ~ July 18</a>
+						&nbsp; <a href="food-service/2021/2021-q2-nutrient-analysis-wk4.xlsx" target="_blank">
+							<img class=infoImg
+								src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/icon-link-external.svg">
+						</a>
+					</li>
+
+				</ul>
+				</p>
+				<p>
+					2021 First Session Food Menus
+				<ul>
+					<li><a href="#food-service/2021/2021-nutrient-analysis-week-1.xlsx">Week
+							1</a></li>
+					<li><a href="#food-service/2021/2021-nutrient-analysis-week-2.xlsx">Week
+							2</a></li>
+					<li><a href="#food-service/2021/2021-nutrient-analysis-week-3.xlsx">Week
+							3</a></li>
+					<li><a href="#food-service/2021/2021-nutrient-analysis-week-4.xlsx">Week
+							4</a></li>
+				</ul>
+				</p>
+				<p>
+					<a href="food-service/2021/Always Available Menu Nutrient Analysis.xlsx" target="_blank">Always
+						Available Menu Nutrient Analysis</a>
+				</p>
+			</details>
+
+			<details>
+				<summary class="summary-primary gmd-1">Saturday Shorts <span id=spanMJ></span></summary>
+				<div class=subheading title="Click to view the programs">The website links for the Saturday afternoon
+					entertainment program </div>
+				<p><a
+						href="https://docs.google.com/presentation/d/1qOJVOWD5wxzLeCm5QaVSuAvYC7CAF10bYl8nAQbuCWY/edit?ts=60ce881c#slide=id.ge0afdf83fe_0_14">
+						Saturday Shorts June 19 2021</a></p>
+
+				<p><a
+						href="https://docs.google.com/presentation/d/1wmC3l9EpWiE6Juk-wvW52ORVMyxAdTR7u4fDrmVlyOQ/edit#slide=id.gc9ace9c165_0_0">Saturday
+						Shorts
+						March 27 2021</a></p>
+
+				<hr>
+			</details>
+
+			<p><a href="#2021-residents-manual.pdf" title="Click to view the PDF">Residents Manual</a></p>
+
+			<div class=subheading>Guidelines and useful information </div>
+
+			<p><button onclick=openFile() title="Click to enter the password prior to viewing">Residents
+					Directory</button></p>
+
+			<div class=subheading>Phone numbers and addresses</div>
+
+			<hr>
+
+			<p style=margin-top:0><i>A small start to providing useful links from around the Internet</i></p>
+
+			<p><a href="#books.md">Books available online</a></p>
+
+			<p><a href="#news.md">News sources</a></p>
+
+			<p><a href="#weather.md">Weather websites</a></p>
+
+			<p><a href="#test-cases/"></a></p>
+
+			<div id=MNUdivFooter></div>
+
+		</nav>
+
+	</details>
+
+
+	<main id=main>
+
+		<div id="divMainContent"></div>
+
+	</main>
+
+
+	<script>
+		const COR = {
+			user: "heretics-sf/",
+			repo: "residents",
+			branch: "main",
+			path: "https://heretics-sf.github.io/residents/",
+			defaultFile: "README.md",
+			ignoreFolders: [],
+			urlSource: "https://github.com/pushme-pullyou/tootoo-2021/",
+			urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
+			iconGitHub: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`,
+			iconInfo: `<img class=infoImg src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/noun_Information_585560.svg">`,
+			iconExternalFile: `<img class=infoImg  src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/icon-external-link.svg">`,
+			title: document.title ? document.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " ),
+			version: document.head.querySelector( "[ name=date ]" ).content,
+			description: document.head.querySelector( "[ name=description ]" ).content,
+		};
+
+
+		init();
+
+		function init() {
+
+			//COR.path = COR.assets;
+			//COR.assets = COR.path;
+
+			MNU.init( { description:
+				"<p>The online version!</p><p>Published by the residents of the Heritage on the Marina - for our residents and our friends</p>" } );
+			//MNUdivSample.innerHTML = MNU.getSample();
+
+			//const htm = "Hello, World!";
+			//MNU.init( { description: htm } );
+			MNUaSource.hidden = true;
+			MNUspnVersion.hidden = true;
+
+
+			// FOX = File Open XHR
+			FOX.init();
+			//FOXdivDetails.innerHTML = FOX.getMenu();
+			FOX.onHashChange();
+
+
+			spanMorrison.innerHTML = `${ MNU.addInfoBox( "Tip of the hat to Morrison!" ) }`;
+			spanMJ.innerHTML = `${ MNU.addInfoBox( "Tip of the hat to Margaret!" ) }`;
+
+
+			// if running on server, keeps address bar pointed to latest dev
+
+			//if ( !location.hash && location.protocol === "https:" ) {
+			if ( location.protocol === "https:" ) {
+
+				window.history.pushState( "", "", "./" + location.hash );
+
+			}
+
+		}
+
+		function openFile() {
+
+			let sign = prompt( "Complete entering the password - same as the Heritage WiFi password", "red" );
+
+			if ( sign.toLowerCase() === "redbricks1" ) {
+				location.hash = "#2020-residents-directory.pdf";
+			}
+
+
+		}
+	</script>
+</body>
+
+</html>
