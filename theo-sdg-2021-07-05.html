@@ -7,8 +7,8 @@
 	<meta name="description"
 		content="Browse the SDGs">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2021-07-04">
-	<title>SDG</title>
+	<meta name="date" content="2021-07-05">
+	<title>Sustainable Development Goals</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
 	<link rel="stylesheet" href="https://pushme-pullyou.github.io/tootoo-2021/lib/style/style-2021-06-26.css">
@@ -76,6 +76,7 @@
 			path: "https://theo-armour.github.io/sdg-2021/",
 			defaultFile: "README.md",
 			ignoreFolders: ["assets", "images", "lib", "lib-templates", "sandbox"],
+			filterFiles:  [ "gif", "md", "jpg", "license", "pdf", "png", "svg", "txt" ],
 			urlSource: "https://github.com/pushme-pullyou/tootoo-2021/",
 			urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
 			iconGitHub: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`,
@@ -118,6 +119,7 @@
 			GRVsumRepo.hidden = true;
 			GRV.getRepo();
 
+			setTimeout( () => { GRVdet1.open = true }, 100);
 			// if running on server, keeps address bar pointed to latest dev
 
 			//if ( !location.hash && location.protocol === "https:" ) {
