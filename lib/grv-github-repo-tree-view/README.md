@@ -21,6 +21,7 @@ _GRV GitHub Repo Tree View_
 
 ## To Do / Wish List
 
+* 2021-07-05Refactor includeFiles function
 * 2021-07-01 ~ right-click menu
 * Cursor key support
 * Exclude sub-folders

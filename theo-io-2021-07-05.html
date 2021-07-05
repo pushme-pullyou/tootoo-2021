@@ -15,8 +15,8 @@
 
 	<style>
 		:root {
-			/* --mnu-width: 15rem; */
-			--main-hue: 0;
+			--mnu-width: 23rem;
+			--main-hue: 120;
 			/* 0 to 360 0=red 120=green 240=blue */
 		}
 	</style>
@@ -25,7 +25,6 @@
 
 <body>
 
-	<base href="http://www.example.com/">
 	<!-- https://github.com/showdownjs/showdown -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 
@@ -76,7 +75,7 @@
 			branch: "master",
 			path: "https://theo-armour.github.io/",
 			defaultFile: "README.md",
-			ignoreFolders: [],
+			ignoreFolders: [".vscode", "aceit"],
 			urlSource: "https://github.com/theo-armour/theo-armour.github.io/",
 			urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
 			iconGitHub: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`,
@@ -96,7 +95,7 @@
 			//COR.assets = COR.path;
 
 			MNU.init();
-			MNUdivSample.innerHTML = MNU.getSample();
+			//MNUdivSample.innerHTML = MNU.getSample();
 
 			//const htm = "Hello, World!";
 			//MNU.init( { description: htm } );
@@ -105,19 +104,19 @@
 
 			// FOX = File Open XHR
 			FOX.init();
-			FOXdivDetails.innerHTML = FOX.getMenu();
+			//FOXdivDetails.innerHTML = FOX.getMenu();
 			FOX.onHashChange();
 
-			GOR.init();
-			GORinpUser.value = COR.user + "/" + COR.repo;
-			GOR.getOrganization();
+			// GOR.init();
+			// GORinpUser.value = COR.user + "/" + COR.repo;
+			// GOR.getOrganization();
 			//GORdet.open = true;
 
-			GRV.getFiles = GRV.getFilesAll;
-			//GRV.getFiles = GRV.getFilesCurated;
+			//GRV.getFiles = GRV.getFilesAll;
+			GRV.getFiles = GRV.getFilesCurated;
 			GRV.init();
 			GRVdet.open = true;
-			//GRVsumRepo.hidden = true;
+			GRVsumRepo.hidden = true;
 			GRV.getRepo();
 
 
