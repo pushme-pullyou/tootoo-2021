@@ -1,15 +1,4 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://www.ladybug.tools/spider-2020/lib/style/readme.html "View file as a web page." ) </span>
-
-
-
-# [/lib/style Read Me]( ./readme.html )
-
-<!--
-<div style=height:300px;overflow:hidden;width:100%;resize:both; ><iframe src=https://www.ladybug.tools/spider-2020/lib/style/ height=100% width=100% ></iframe></div>
-_Spider /lib/style_
-
-### Full Screen: [Spider /lib/style]( https://www.ladybug.tools/spider-2020/lib/style/ )
--->
+# [![](https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg )](https://github.com/pushme-pullyou/tootoo-2021/tree/main/lib/style "Source code on GitHub" ) [TT 2021]( https://pushme-pullyou.github.io/tootoo-2021/ "Home page" ) / [Style Read Me]( https://pushme-pullyou.github.io/tootoo-2021/#lib/style/README.md)
 
 
 ## Concept
@@ -17,14 +6,14 @@ _Spider /lib/style_
 
 ## To Do / Wish List
 
+* 2021-07-08 ~ better tree view classes
 
 ## Issues
 
 
 ## Links of Interest
 
-* https://github.com/pushme-pullyou/templates-01/tree/master/html-hamburger-plus << latest
-* https://www.ladybug.tools/spider-gbxml-tools/spider-gbxml-viewer/
+
 
 Web
 
@@ -40,6 +29,10 @@ Switching themes
 
 
 ## Change Log
+
+### 2021-07-08
+
+* Add class summary tertiary
 
 ### 2020-09-17
 
