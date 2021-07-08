@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=contain" >
 <meta name="description" content="File wrangler. Default index.html file. Opens HTML or Markdown files. Passes location.hash." >
 <meta name="keywords" content="ShowDown,Markdown,AJAX,JavaScript,HTML,CSS,GitHub,FOSS" >
-<meta name="version" content="2021-05-19" >
+<meta name="version" content="2021-07-08" >
 
 <style>
 /* Copyright 2021 Theo Armour. MIT License */
@@ -28,7 +28,7 @@ summary { cursor: pointer; font-size: 2.5rem; font-weight: bold; outline: none; 
 ::-webkit-scrollbar-thumb { background: crimson; }
 
 .aDingbat { text-decoration:none; font-size: 2rem; }
-.ifrResize { height:400px;overflow:hidden;resize:both;width:100%; }
+.iframe-resize { height:400px;overflow:hidden;resize:both;width:100%; }
 
 </style>
 
@@ -73,7 +73,8 @@ summary { cursor: pointer; font-size: 2.5rem; font-weight: bold; outline: none; 
 		const xhr = new XMLHttpRequest();
 		xhr.open( "get", url, true );
 		xhr.onload = () => {
-			const txt = xhr.responseText.replace( /\<!--@@@/, "").replace( /\@@@-->/, "");
+			let txt = response = xhr.responseText;
+			txt = txt.replace( /\<!--@@@/, "").replace( /\@@@-->/, "");
 			divContent.innerHTML = new showdown.Converter( options ).makeHtml( txt );
 			window.scrollTo( 0, 0 );
 		}
