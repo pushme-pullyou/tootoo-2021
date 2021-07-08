@@ -21,12 +21,11 @@ _GRV GitHub Repo Tree View_
 
 ## To Do / Wish List
 
-* 2021-07-05Refactor includeFiles function
+* 2021-07-08 ~ different class for teriary details card
+* 2021-07-05 Refactor includeFiles function
 * 2021-07-01 ~ right-click menu
 * Cursor key support
 * Exclude sub-folders
-* Toggle ignore files
-* Better ignore and include file types
 * 2020-09-18 ~ add search
 
 ## Issues
@@ -37,11 +36,16 @@ _GRV GitHub Repo Tree View_
 
 ## Change Log
 
-### 2021-07-04
+### 2021-07-08
 
 ### 2021-07-04
 
 * Simple <> full menu switch: added
+
+Done
+
+* Toggle ignore files
+* Better ignore and include file types
 
 ### 2021-07-01
 
