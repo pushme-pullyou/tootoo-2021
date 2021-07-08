@@ -5,18 +5,18 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
 	<meta name="description"
-		content="Built by residents with abilities - for residents with needs">
+		content="theo-armour.github.io uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
 	<meta name="date" content="2021-07-08">
-	<title>Heretics</title>
+	<title>Theo Armour</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
 	<link rel="stylesheet" href="https://pushme-pullyou.github.io/tootoo-2021/lib/style/style-2021-07-08.css">
 
 	<style>
 		:root {
-			--mnu-width: 22rem;
-			--main-hue: 0;
+			--mnu-width: 23rem;
+			--main-hue: 120;
 			/* 0 to 360 0=red 120=green 240=blue */
 		}
 	</style>
@@ -28,14 +28,11 @@
 	<!-- https://github.com/showdownjs/showdown -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 
-	<script
-		src="https://pushme-pullyou.github.io/tootoo-2021/lib/fox-file-open-xhr/v-2021-07-03/fox-file-open-xhr.js"></script>
+	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/fox-file-open-xhr/v-2021-07-03/fox-file-open-xhr.js"></script>
 
-	<script
-		src="https://pushme-pullyou.github.io/tootoo-2021/lib/gor-github-organization-repos/v-2021-07-03/gor-github-organization-repos.js"></script>
+	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/gor-github-organization-repos/v-2021-07-03/gor-github-organization-repos.js"></script>
 
-	<script
-		src="https://pushme-pullyou.github.io/tootoo-2021/lib/grv-github-repo-tree-view/v-2021-07-08/grv-github-repo-tree-view.js"></script>
+	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/grv-github-repo-tree-view/v-2021-07-08/grv-github-repo-tree-view.js"></script>
 
 	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/mnu-menu/v-2021-07-04/mnu-menu.js"></script>
 
@@ -73,14 +70,14 @@
 	<script>
 
 		const COR = {
-			user: "heretics-sf",
-			repo: "heretics-sf.github.io",
+			user: "theo-armour",
+			repo: "theo-armour.github.io",
 			branch: "master",
-			path: "https://heretics-sf.github.io/", //./", // "../../../",
+			path: "https://theo-armour.github.io/",
 			defaultFile: "README.md",
-			ignoreFolders: [ "archive", "drafts", "journal", "lib", "lib-templates", "zzz-residents"],
+			ignoreFolders: [".vscode", "aceit"],
 			filterFiles:  [ "gif", "md", "jpg", "license", "pdf", "png", "svg", "txt" ],
-			urlSource: "https://github.com/pushme-pullyou/tootoo-2021/",
+			urlSource: "https://github.com/theo-armour/theo-armour.github.io/",
 			urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
 			iconGitHub: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`,
 			iconInfo: `<img class=infoImg src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/noun_Information_585560.svg">`,
@@ -106,13 +103,14 @@
 			//MNUaSource.hidden = true;
 			//MNUspnVersion.hidden = true;
 
+			// FOX = File Open XHR
 			FOX.init();
 			//FOXdivDetails.innerHTML = FOX.getMenu();
 			FOX.onHashChange();
 
-			//GOR.init();
-			//GORinpUser.value = COR.user + "/" + COR.repo;
-			//GOR.getOrganization();
+			// GOR.init();
+			// GORinpUser.value = COR.user + "/" + COR.repo;
+			// GOR.getOrganization();
 			//GORdet.open = true;
 
 			//GRV.getFiles = GRV.getFilesAll;
@@ -122,7 +120,6 @@
 			GRVsumRepo.hidden = true;
 			GRV.getRepo();
 
-			setTimeout( () => { GRVdet3.open = true }, 800 );
 
 			// if running on server, keeps address bar pointed to latest dev
 
