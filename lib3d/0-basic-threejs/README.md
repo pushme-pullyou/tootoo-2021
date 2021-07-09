@@ -12,6 +12,8 @@ _Basic Three.js in a resizable window. One finger to rotate. Two to zoom._
 
 ## Concept
 
+The template I often use to get a minor project underway
+
 
 ## To Do / Wish List
 
@@ -20,6 +22,19 @@ _Basic Three.js in a resizable window. One finger to rotate. Two to zoom._
 
 
 ## Links of Interest
+
+### Three.js
+
+* https://threejs.org/
+* https://threejs.org/docs/
+* https://threejs.org/examples/
+* https://github.com/mrdoob/three.js/
+* https://discourse.threejs.org/
+* https://en.wikipedia.org/wiki/Three.js
+* https://stackoverflow.com/tags/three.js/info
+* https://www.reddit.com/r/threejs/
+* https://threejsfundamentals.org/
+* https://developer.mozilla.org/en-US/docs/Glossary/Three_js
 
 
 ## Change Log
