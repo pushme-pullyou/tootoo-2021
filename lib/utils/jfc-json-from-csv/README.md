@@ -6,7 +6,7 @@
 _JFC JON from CSV in a resizable window. One finger to rotate. Two to zoom._
 
 
-### Full Screen: [JFC JON from CSV]( https://pushme-pullyou.github.io/tootoo-2021/xxxxx/ )
+### Full Screen: [JFC JSON from CSV]( https://pushme-pullyou.github.io/tootoo-2021/lib/utils/jfc-json-from-csv/ )
 @@@-->
 
 
