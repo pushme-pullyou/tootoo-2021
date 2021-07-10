@@ -1,10 +1,10 @@
 # [GLO Globe Read Me]( ./readme.html )
 
 <!--@@@
-<div class=iframe-resize ><iframe src=https://pushme-pullyou.github.io/tootoo-2020/lib3d/glo-globe/ height=100% width=100% ></iframe></div>
+<div class=iframe-resize ><iframe src=https://pushme-pullyou.github.io/tootoo-2021/libgeo/glo-globe/ height=100% width=100% ></iframe></div>
 _GLO Globe_
 
-### Full Screen: [GLO Globe]( https://pushme-pullyou.github.io/tootoo-2020/lib3d/glo-globe/ )
+### Full Screen: [GLO Globe]( https://pushme-pullyou.github.io/tootoo-2021/libgeo/glo-globe/ )
 @@@-->
 
 
