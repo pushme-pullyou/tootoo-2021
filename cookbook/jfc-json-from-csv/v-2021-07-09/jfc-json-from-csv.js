@@ -1,10 +1,11 @@
 
 const JFC = {};
 
-JFC.url = "https://theo-armour.github.io/maps-2021/data/soil-carbon-coalition/indemnities1979_2017.csv"
+
+JFC.url = "https://pushme-pullyou.github.io/tootoo-2021/data/jhu-csse/us-county-state-latlon-pop.csv";
 
 
-JFC.requestFile = function ( url = JFC.url, callback = JFC.onLoad ) {
+JFC.requestFile = function ( url = JFC.url, callback = JFC.onLoadCsv, onParse = JFC.onParseCsv  ) {
 
 	// urlDefaultFile = "https://cdn.jsdelivr.net/gh/pushme-pullyou/tootoo-2020@master/README.md";
 	const urlCORS = ""; //https://cors-anywhere.herokuapp.com/";
@@ -14,22 +15,32 @@ JFC.requestFile = function ( url = JFC.url, callback = JFC.onLoad ) {
 	xhr.responseType = "text";
 	xhr.onerror = ( xhr ) => console.log( "error:", xhr );
 	//xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
-	xhr.onload = ( xhr ) => callback( xhr.target.response );
+	xhr.onload = ( xhr ) => callback( xhr.target.response, onParse );
 	xhr.send( null );
 
 };
 
 
 
-JFC.onLoad = function ( response ) {
+JFC.onLoadCsv = function ( response, onParse ) {
 
 	//console.log( "response", response );
 
 	lines = response.split( /\n/ ).map( line => line.split( "," ) );
 
-	console.log( "lines", lines );
+	JFC.json = lines;
 
-	divMainContent.textContent = lines;
+	onParse();
 
 
 };
+
+JFC.onParseCsv = function () {
+	
+	console.log( "", 33 );
+
+	console.log( "JFC.json", JFC.json );
+
+	divMainContent.textContent = JFC.json;
+
+}
