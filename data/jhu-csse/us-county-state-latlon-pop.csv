@@ -1,4 +1,4 @@
-fips,county,stat
+fips,county,state,lat,lon,population
 72001,Adjuntas,PR,18.180117,-66.754367,17363
 72003,Aguada,PR,18.360255,-67.175131,36694
 72005,Aguadilla,PR,18.459681,-67.120815,50265
