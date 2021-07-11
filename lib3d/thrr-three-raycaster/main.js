@@ -6,7 +6,7 @@ const COR = {
 	defaultFile: "README.md",
 	ignoreFolders: [],
 	filterFiles: [ "gif", "md", "jpg", "license", "pdf", "png", "svg", "txt" ],
-	urlSource: "https://github.com/pushme-pullyou/tootoo-2021/tree/main/lib-geo/glc-globe-csv",
+	urlSource: "https://github.com/pushme-pullyou/tootoo-2021/",
 	urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
 	iconGitHub: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`,
 	iconInfo: `<img class=infoImg src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/noun_Information_585560.svg">`,
@@ -19,25 +19,12 @@ const COR = {
 
 function init () {
 
+
 	//COR.path = COR.assets;
 	//COR.assets = COR.path;
 
 	MNU.init();
-
-	selYear.innerHTML = "<option>Total ( 1/10 scale of other)</option>";
-
 	//MNUdivSample.innerHTML = MNU.getSample();
-
-	for ( var i = 0; i < 39; i++ ) {
-
-		selYear.innerHTML += `<option>${ 2017 - i }</option>`;
-
-	}
-
-	selYear.selectedIndex = 1;
-
-	selYear.focus();
-
 
 	//const htm = "Hello, World!";
 	//MNU.init( { description: htm } );
@@ -63,45 +50,46 @@ function init () {
 
 	//setTimeout( () => { GRVdet253.open = true }, 200 );
 
+	// if running on server, keeps address bar pointed to latest dev
+
+	//if ( !location.hash && location.protocol === "https:" ) {
+	if ( location.protocol === "https:" ) {
+
+
+
+	}
+
 	THR.init();
 
 	THR.animate();
 
 	THR.addLights();
 
-	//THR.addGround();
+	THR.addGround();
 
 	THR.group = THR.getGroupNew();
 
-//	THRU.addMeshes( 100 );
+	THRU.addMeshes(100);
 
-	// geometry = new THREE.SphereGeometry( 50, 50, 25 );
-	// material = new THREE.MeshNormalMaterial();
-	// mesh = new THREE.Mesh( geometry, material );
-	// THR.group.add( mesh );
+	THR.zoomObjectBoundingSphere();
 
-	GLO.initGlobeWithBitmap();
+	RAY.init();
 
-	GJS.initGeoJson();
+	// FOO.init();
 
-	const urlGeoJson = "https://pushme-pullyou.github.io/tootoo-2021/lib/assets/geojson/cb_2019_us_county_20m.geojson";
+	// FOO.extension = "json";
+	// FOO.responseType = "json";
+	// FOO.onLoadFile = PP.onLoadJson;
 
-	GJS.requestFile( urlGeoJson, GJS.onLoadGeoJson );
+	// path = "../../assets/json/";
 
-	//THR.zoomObjectBoundingSphere();
+	// FOO.requestFile( path + "lab_building_result.json" );
 
-	THR.camera.position.set( -20, -65, 60 )
+	// JTV.init();
 
-	JFC.url = "https://pushme-pullyou.github.io/tootoo-2021/data/simplemaps/worldcities.csv";
-	JFC.url = "https://theo-armour.github.io/maps-2021/data/soil-carbon-coalition/indemnity-geodata.csv";
+	//HRT.init();
 
-	JFC.requestFile( JFC.url, JFC.onLoadCsv, JFConParseCsv );
-
-	GLC.init();
-
-	// HRT.init();
-
-
+	// if running on server, keeps address bar pointed to latest dev
 
 	CORdivStats.innerHTML = `
 <p
@@ -109,47 +97,15 @@ function init () {
 	<button onclick="THR.setStats()">setStats</button>
 </p>`;
 
-	THR.controls.autoRotate = false;
-
-	// if running on server, keeps address bar pointed to latest dev
-
 	if ( !location.hash && location.protocol === "https:" ) {
 
 		window.history.pushState( "", "", "../" + location.hash );
 		COR.path = "./";
-
 	} else {
 
+		THR.controls.autoRotate = false;
 
 	}
 
 };
 
-function JFConParseCsv ( index = 1) {
-
-	//console.log( "", 23 );
-
-	//console.log( "JFC.json", JFC.json );
-
-	//barData = JFC.json.map( line => [ line[ 9 ], line[ 2 ], line[ 3 ] ] );
-
-	THR.group.remove( GLC.group );
-
-	GLC.group.geometry
-
-	GLC.group = new THREE.Group();
-	GLC.group.name = "instances";
-	THR.group.add( GLC.group );
-
-	const scale = index === 0 ? 0.05 : 0.5;
-
-	const barData = JFC.json.map( line => [ scale * line[ 45 - index ], +line[ 3 ], +line[ 4 ] ] );
-	//console.log( "barData", barData );
-
-	data = GLC.getPoints( barData )
-	console.log( "", data );
-	GLC.group.add( data );
-
-	//RAY.init( GLC.group.children );
-
-}

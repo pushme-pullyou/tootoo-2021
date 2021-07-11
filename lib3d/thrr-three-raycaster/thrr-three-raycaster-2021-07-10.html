@@ -8,10 +8,10 @@
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files in a repository hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
 	<meta name="date" content="2021-07-10">
-	<title>GLC Globe CSV</title>
+	<title>TooToo</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
-	<link rel="stylesheet" href="https://pushme-pullyou.github.io/tootoo-2021/lib/style/style-2021-07-08.css">
+	<link rel="stylesheet" href="https://pushme-pullyou.github.io/tootoo-2021//lib/style/style-2021-07-08.css">
 
 	<style>
 		:root {
@@ -30,7 +30,7 @@
 
 	<!-- https://github.com/showdownjs/showdown -->
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script> -->
-<!--
+	<!--
 	<script src="../../../lib/fox-file-open-xhr/v-2021-07-03/fox-file-open-xhr.js"></script>
 
 	<script src="../../../lib/gor-github-organization-repos/v-2021-07-03/gor-github-organization-repos.js"></script>
@@ -40,25 +40,16 @@
 
 	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/mnu-menu/v-2021-07-04/mnu-menu.js"></script>
 
-	<!-- <script src="https://pushme-pullyou.github.io/tootoo-2021/cookbook/jfc-json-from-csv/v-2021-07-09/jfc-json-from-csv.js"></script> -->
-
-	<script
-		src="https://pushme-pullyou.github.io/tootoo-2021/cookbook/jfc-json-from-csv/v-2021-07-09/jfc-json-from-csv.js"></script>
-
 	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib3d/thr-three/thr-threejs-2021-07-09.js"></script>
+	<!-- <script src="../../lib3d/thrc-three-set-colors/thrc-three-set-colors-2020-07-11.js"></script> -->
+	<!-- <script src="../../lib3d/thrr-three-raycaster/thrr-three-raycaster-mousedown-2020-09-11.js"></script> -->
 
-	<!-- <script src="../../../lib3d/thrc-three-set-colors/thrc-three-set-colors-2020-07-11.js"></script>
-	-->
-	<!-- <script src="../../../lib3d/thrr-three-raycaster/thrr-three-raycaster-mousedown-2020-09-11.js"></script> -->
-	<script src="../../../lib3d/thrr-three-raycaster/ray-raycaster-mousemove-2021-01-16.js"></script>
+	<!-- <script src="../../lib3d/thr-three/thr-threejs-2020-12-23.js"></script> -->
+	<script src="../../lib3d/thrr-three-raycaster/ray-raycaster-mousemove-2021-01-16.js"></script>
 
-	<script src="../../../lib3d/thru-three-utilities/thru-three-utilities-2021-01-30.js"></script>
+	<script src="../../lib3d/thru-three-utilities/thru-three-utilities-2021-07-10.js"></script>
 
 	<script src="main.js"></script>
-	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib-geo/glo-globe/v-2021-07-09-2023/glo-globe.js"></script>
-	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib-geo/gjs-geojson/v-2021-07-10/gjs-geojson.js"></script>
-
-	<script src="glc-globe.csv.js"></script>
 
 	<details id=detNavMenu class="gmd-4">
 
@@ -76,10 +67,6 @@
 
 			<div id=MNUdivSample></div>
 
-			<p>
-				<select id=selYear onchange=JFConParseCsv(this.selectedIndex) class=select-resize  size=10 ></select>
-			</p>
-
 			<div id=CORdivStats></div>
 
 			<div id=MNUdivFooter></div>
@@ -89,7 +76,7 @@
 	</details>
 
 
-	<main id=main hidden >
+	<main id=main hidden>
 
 		<div id="divMainContent"></div>
 
