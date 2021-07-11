@@ -19,12 +19,25 @@ const COR = {
 
 function init () {
 
-
 	//COR.path = COR.assets;
 	//COR.assets = COR.path;
 
 	MNU.init();
+
+	selYear.innerHTML = "<option>Total ( 1/10 scale of other)</option>";
+
 	//MNUdivSample.innerHTML = MNU.getSample();
+
+	for ( var i = 0; i < 39; i++ ) {
+
+		selYear.innerHTML += `<option>${ 2017 - i }</option>`;
+
+	}
+
+	selYear.selectedIndex = 1;
+
+	selYear.focus();
+
 
 	//const htm = "Hello, World!";
 	//MNU.init( { description: htm } );
@@ -75,14 +88,16 @@ function init () {
 
 	GJS.requestFile( urlGeoJson, GJS.onLoadGeoJson );
 
-	THR.zoomObjectBoundingSphere();
+	//THR.zoomObjectBoundingSphere();
+
+	THR.camera.position.set( -20, -65, 60 )
 
 	JFC.url = "https://pushme-pullyou.github.io/tootoo-2021/data/simplemaps/worldcities.csv";
 	JFC.url = "https://theo-armour.github.io/maps-2021/data/soil-carbon-coalition/indemnity-geodata.csv";
 
 	JFC.requestFile( JFC.url, JFC.onLoadCsv, JFConParseCsv );
 
-
+	GLC.init();
 
 	// HRT.init();
 
@@ -107,21 +122,24 @@ function init () {
 
 };
 
-function JFConParseCsv () {
+function JFConParseCsv ( index = 1) {
 
 	//console.log( "", 23 );
 
 	//console.log( "JFC.json", JFC.json );
 
-	//divMainContent.textContent = JFC.json;
-
-	GLC.init();
-
 	//barData = JFC.json.map( line => [ line[ 9 ], line[ 2 ], line[ 3 ] ] );
 
-	barData = JFC.json.map( line => [ +line[ 35 ], +line[ 3 ], +line[ 4 ] ] );
+	THR.group.remove( GLC.group );
 
-	console.log( "barData", barData );
+	GLC.group = new THREE.Group();
+	GLC.group.name = "instances";
+	THR.group.add( GLC.group );
+
+	const scale = index === 0 ? 0.05 : 0.5;
+
+	const barData = JFC.json.map( line => [ scale * line[ 45 - index ], +line[ 3 ], +line[ 4 ] ] );
+	//console.log( "barData", barData );
 
 	GLC.group.add( GLC.getPoints( barData ) );
 
