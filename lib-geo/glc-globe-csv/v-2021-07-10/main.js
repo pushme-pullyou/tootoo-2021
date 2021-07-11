@@ -78,6 +78,7 @@ function init () {
 	THR.zoomObjectBoundingSphere();
 
 	JFC.url = "https://pushme-pullyou.github.io/tootoo-2021/data/simplemaps/worldcities.csv";
+	JFC.url = "https://theo-armour.github.io/maps-2021/data/soil-carbon-coalition/indemnity-geodata.csv";
 
 	JFC.requestFile( JFC.url, JFC.onLoadCsv, JFConParseCsv );
 
@@ -112,10 +113,20 @@ function init () {
 
 function JFConParseCsv () {
 
-	console.log( "", 23 );
+	//console.log( "", 23 );
 
-	console.log( "lines", JFC.json );
+	//console.log( "JFC.json", JFC.json );
 
 	//divMainContent.textContent = JFC.json;
+
+	GLC.init();
+
+	//barData = JFC.json.map( line => [ line[ 9 ], line[ 2 ], line[ 3 ] ] );
+
+	barData = JFC.json.map( line => [ +line[ 35 ], +line[ 3 ], +line[ 4 ] ] );
+
+	console.log( "barData", barData );
+
+	GLC.group.add( GLC.getPoints( barData ) );
 
 }
