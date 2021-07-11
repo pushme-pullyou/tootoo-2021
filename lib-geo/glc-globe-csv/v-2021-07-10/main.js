@@ -6,7 +6,7 @@ const COR = {
 	defaultFile: "README.md",
 	ignoreFolders: [],
 	filterFiles: [ "gif", "md", "jpg", "license", "pdf", "png", "svg", "txt" ],
-	urlSource: "https://github.com/pushme-pullyou/tootoo-2021/",
+	urlSource: "https://github.com/pushme-pullyou/tootoo-2021/tree/main/lib-geo/glc-globe-csv",
 	urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
 	iconGitHub: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`,
 	iconInfo: `<img class=infoImg src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/noun_Information_585560.svg">`,
@@ -108,7 +108,7 @@ function init () {
 </p>`;
 
 	THR.controls.autoRotate = false;
-	
+
 	// if running on server, keeps address bar pointed to latest dev
 
 	if ( !location.hash && location.protocol === "https:" ) {
