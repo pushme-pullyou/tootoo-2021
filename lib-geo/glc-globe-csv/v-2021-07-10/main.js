@@ -107,6 +107,8 @@ function init () {
 	<button onclick="THR.setStats()">setStats</button>
 </p>`;
 
+	THR.controls.autoRotate = false;
+	
 	// if running on server, keeps address bar pointed to latest dev
 
 	if ( !location.hash && location.protocol === "https:" ) {
@@ -116,7 +118,7 @@ function init () {
 
 	} else {
 
-		THR.controls.autoRotate = false;
+
 
 	}
 
@@ -131,6 +133,8 @@ function JFConParseCsv ( index = 1) {
 	//barData = JFC.json.map( line => [ line[ 9 ], line[ 2 ], line[ 3 ] ] );
 
 	THR.group.remove( GLC.group );
+
+	GLC.group.geometry
 
 	GLC.group = new THREE.Group();
 	GLC.group.name = "instances";
