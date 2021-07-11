@@ -154,6 +154,10 @@ pre {
 	text-decoration: none;
 }
 
+.feature {
+	font-weight: bold;
+}
+
 .full-width {
 	width: 100%;
 }
@@ -283,7 +287,7 @@ pre {
 	right: 0;
 	padding: var( --margin);
 	position: absolute;
-	width: calc( 0.75 * var(--mnu-width) );
+	width: calc( 0.75 * var(--mnu-width));
 	z-index: 1000;
 }
 

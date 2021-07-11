@@ -164,11 +164,11 @@ RAY.getHtm = function ( intersected ) {
 
 	const htm = `
 	<div>
-		county: <span ${ county[ 0 ]}<br>
-		state: ${ county[ 1 ]}<br>
-		population: ${( +county[ 5 ] ).toLocaleString() }</br>
-		year: ${ 2018 - selYear.selectedIndex }<br>
-		indemnity: $${ ( +county[ 45- selYear.selectedIndex ] ) } million<br>
+		county: <span class=feature >${ county[ 0 ]}<br>
+		state: <span class=feature >${ county[ 1 ]}<br>
+		population: <span class=feature >${( +county[ 5 ] ).toLocaleString() }</br>
+		year: <span class=feature >${ 2018 - selYear.selectedIndex }<br>
+		indemnity: <span class=feature >$${ ( +county[ 45- selYear.selectedIndex ] ) } million<br>
 	</div>`;
 
 	return htm;
