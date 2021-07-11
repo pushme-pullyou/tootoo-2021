@@ -106,7 +106,7 @@ function init () {
 	CORdivStats.innerHTML = `
 <p
 	title="View number of objects that need rendering and total number of triangles used to create objects">
-	<button onclick="THR.setStats()">setStats</button>
+	<button onclick="THR.setStats()">View the rendering statistics</button>
 </p>`;
 
 	THR.controls.autoRotate = false;
@@ -141,13 +141,15 @@ function JFConParseCsv ( index = 1) {
 	GLC.group.name = "instances";
 	THR.group.add( GLC.group );
 
-	const scale = index === 0 ? 0.05 : 0.5;
+	let scale = index === 0 ? 0.05 : 0.5;
+
+	scale = scale * rngScale.value / 50;
 
 	const barData = JFC.json.map( line => [ scale * line[ 45 - index ], +line[ 3 ], +line[ 4 ] ] );
 	//console.log( "barData", barData );
 
 	const mesh = GLC.getPoints( barData )
-	console.log( "mesh", mesh );
+	//console.log( "mesh", mesh );
 	GLC.group.add( mesh );
 
 	RAY.init( GLC.group );
@@ -156,19 +158,20 @@ function JFConParseCsv ( index = 1) {
 
 
 RAY.getHtm = function ( intersected ) {
-	console.log( "main intersected", intersected.instanceId );
+	//console.log( "main intersected", intersected.instanceId );
 
 	const county = JFC.json[ intersected.instanceId ];
-	console.log( "county", county);
+	//console.log( "county", county);
 	// const mesh = RAY.intersected.object;
 
 	const htm = `
 	<div>
-		county: <span class=feature >${ county[ 0 ]}<br>
-		state: <span class=feature >${ county[ 1 ]}<br>
-		population: <span class=feature >${( +county[ 5 ] ).toLocaleString() }</br>
-		year: <span class=feature >${ 2018 - selYear.selectedIndex }<br>
-		indemnity: <span class=feature >$${ ( +county[ 45- selYear.selectedIndex ] ) } million<br>
+		county: <span class=feature style=float:right;>
+		<a href="https://www.google.com/search?q=${ county[ 0 ] }+county+${ county[ 1 ] }" target="_blank">${ county[ 0 ]}</a></span><br>
+		state: <span class=feature >${ county[ 1 ]}</span><br>
+		population: <span class=feature>${( +county[ 5 ] ).toLocaleString() }</span></br>
+		year: <span class=feature >${ 2018 - selYear.selectedIndex }</span><br>
+		indemnity: <span class=feature > $${ ( +county[ 45 - selYear.selectedIndex ] ) } million</span><br>
 	</div>`;
 
 	return htm;

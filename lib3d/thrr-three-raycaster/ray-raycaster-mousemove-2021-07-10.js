@@ -66,9 +66,10 @@ RAY.onMouseMove = function (event) {
 		// }
 
 		MNUdivPopUp.hidden = false;
-		MNUdivPopUp.style.left = event.clientX + 30 + "px";
+		MNUdivPopUp.style.left = event.clientX - 10 + "px";
 		MNUdivPopUp.style.top = event.clientY + "px";
-		MNUdivPopUp.innerHTML = RAY.getHtm( RAY.intersected);
+		MNUdivPopUp.innerHTML = RAY.getHtm( RAY.intersected );
+		MNUdivPopUp.classList.add( "gmd-1" );
 
 		renderer.domElement.addEventListener("click", RAY.onClick);
 
