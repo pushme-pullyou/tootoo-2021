@@ -18,12 +18,13 @@ const RAY = {
 
 RAY.init = function ( group = THR.group ) {
 
-	RAY.intersectObjects = group; //.children;
+	RAY.intersectObjects = group.children;
 
 	RAY.addMouseMove();
 
 
 }
+
 
 RAY.addMouseMove = function ( renderer = THR.renderer.domElement ) {
 
@@ -49,23 +50,25 @@ RAY.onMouseMove = function (event) {
 
 	RAY.raycaster.setFromCamera( RAY.mouse, camera );
 
-	console.log( "RAY.intersectObjects", RAY.intersectObjects );
+	//console.log( "RAY.intersectObjects", RAY.intersectObjects );
 
-	let intersects = RAY.raycaster.intersectObject(RAY.intersectObjects);
+	let intersects = RAY.raycaster.intersectObjects(RAY.intersectObjects);
 
-	console.log( "int", intersects );
+	//console.log( "int", intersects );
 
 	if (intersects.length) {
 		RAY.intersected = intersects[0];
 
-		//if ( intersected.instanceId ) {
+		// if ( RAY.intersected.instanceId ) {
 
-		//console.log( "intersected", RAY.intersected );
+		// 	console.log( "intersected", RAY.intersected.instanceId );
+
+		// }
 
 		MNUdivPopUp.hidden = false;
 		MNUdivPopUp.style.left = event.clientX + 30 + "px";
 		MNUdivPopUp.style.top = event.clientY + "px";
-		MNUdivPopUp.innerHTML = RAY.getHtm(RAY.intersected);
+		MNUdivPopUp.innerHTML = RAY.getHtm( RAY.intersected);
 
 		renderer.domElement.addEventListener("click", RAY.onClick);
 
@@ -88,6 +91,8 @@ RAY.onClick = function () {
 	renderer.domElement.removeEventListener("click", RAY.onClick);
 };
 
+
+
 RAY.getHtm = function (intersected) {
 	//const htm = JSON.stringify( intersected.object, null, "<br>" ).slice( 1, - 1 ).replace( /[",]/g, "");
 
@@ -102,7 +107,8 @@ RAY.getHtm = function (intersected) {
 };
 
 RAY.getHtm = function (intersected) {
-	console.log("intersected", RAY.intersected);
+	//console.log("intersected", RAY.intersected);
+
 	const mesh = RAY.intersected.object;
 
 	const htm = `

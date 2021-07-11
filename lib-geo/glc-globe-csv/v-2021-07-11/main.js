@@ -146,10 +146,30 @@ function JFConParseCsv ( index = 1) {
 	const barData = JFC.json.map( line => [ scale * line[ 45 - index ], +line[ 3 ], +line[ 4 ] ] );
 	//console.log( "barData", barData );
 
-	data = GLC.getPoints( barData )
-	console.log( "", data );
-	GLC.group.add( data );
+	const mesh = GLC.getPoints( barData )
+	console.log( "mesh", mesh );
+	GLC.group.add( mesh );
 
-	//RAY.init( GLC.group.children );
+	RAY.init( GLC.group );
 
 }
+
+
+RAY.getHtm = function ( intersected ) {
+	console.log( "main intersected", intersected.instanceId );
+
+	const county = JFC.json[ intersected.instanceId ];
+	console.log( "county", county);
+	// const mesh = RAY.intersected.object;
+
+	const htm = `
+	<div>
+		county: <span ${ county[ 0 ]}<br>
+		state: ${ county[ 1 ]}<br>
+		population: ${( +county[ 5 ] ).toLocaleString() }</br>
+		year: ${ 2018 - selYear.selectedIndex }<br>
+		indemnity: $${ ( +county[ 45- selYear.selectedIndex ] ) } million<br>
+	</div>`;
+
+	return htm;
+};

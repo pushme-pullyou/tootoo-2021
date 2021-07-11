@@ -46,7 +46,7 @@ GLC.getPoints = function ( data = JFC.json ) {
 
 	//group = new THREE.Group();
 
-	console.log( "mesh", mesh );
+	//console.log( "mesh", mesh );
 
 	return mesh;
 

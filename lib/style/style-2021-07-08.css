@@ -255,9 +255,7 @@ pre {
 	box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 
-
-
-/* info box */
+/* info box ~ See mnu-menu.js */
 
 .info {
 	cursor: pointer;
@@ -276,16 +274,16 @@ pre {
 
 .infoTooltip {
 	border: 1px double #888;
-	border-radius: 1rem;
+	border-radius: var( --margin);
 	background: white;
 	display: none;
 	font: 100% monospace;
 	font-size: 1rem;
 	font-weight: normal;
 	right: 0;
-	padding: 1rem;
+	padding: var( --margin);
 	position: absolute;
-	width: 12rem;
+	width: calc( 0.75 * var(--mnu-width) );
 	z-index: 1000;
 }
 
