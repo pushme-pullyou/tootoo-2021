@@ -330,6 +330,7 @@ pre {
 	border-radius: var( --margin); */
 	cursor: pointer;
 	outline: none;
+	width: 8rem;
 	z-index: 2;
 }
 

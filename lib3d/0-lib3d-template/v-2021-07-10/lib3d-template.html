@@ -7,7 +7,7 @@
 	<meta name="description"
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files in a repository hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2021-07-09">
+	<meta name="date" content="2021-07-10">
 	<title>TooToo</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
@@ -30,7 +30,7 @@
 
 	<!-- https://github.com/showdownjs/showdown -->
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script> -->
-<!--
+	<!--
 	<script src="../../../lib/fox-file-open-xhr/v-2021-07-03/fox-file-open-xhr.js"></script>
 
 	<script src="../../../lib/gor-github-organization-repos/v-2021-07-03/gor-github-organization-repos.js"></script>
@@ -40,12 +40,12 @@
 
 	<script src="../../../lib/mnu-menu/v-2021-07-04/mnu-menu.js"></script>
 
-		<script src="../../../lib3d/thr-three/thr-threejs-2020-12-23.js"></script>
-		<script src="../../../lib3d/thrc-three-set-colors/thrc-three-set-colors-2020-07-11.js"></script>
-		<script src="../../../lib3d/thrr-three-raycaster/thrr-three-raycaster-mousedown-2020-09-11.js"></script>
-		<script src="../../../lib3d/thru-three-utilities/thru-three-utilities-2021-01-30.js"></script>
+	<script src="../../../lib3d/thr-three/thr-threejs-2020-12-23.js"></script>
+	<script src="../../../lib3d/thrc-three-set-colors/thrc-three-set-colors-2020-07-11.js"></script>
+	<script src="../../../lib3d/thrr-three-raycaster/thrr-three-raycaster-mousedown-2020-09-11.js"></script>
+	<script src="../../../lib3d/thru-three-utilities/thru-three-utilities-2021-01-30.js"></script>
 
-<script src="main.js"></script>
+	<script src="main.js"></script>
 
 	<details id=detNavMenu class="gmd-4">
 
@@ -63,6 +63,8 @@
 
 			<div id=MNUdivSample></div>
 
+			<div id=CORdivStats></div>
+
 			<div id=MNUdivFooter></div>
 
 		</nav>
@@ -70,7 +72,7 @@
 	</details>
 
 
-	<main id=main>
+	<main id=main hidden>
 
 		<div id="divMainContent"></div>
 
@@ -79,11 +81,7 @@
 
 	<script>
 
-
-
-
 		init();
-
 
 	</script>
 </body>

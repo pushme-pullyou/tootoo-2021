@@ -11,7 +11,7 @@
 	<title>Globe</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
-	<link rel="stylesheet" href="https://pushme-pullyou.github.io/tootoo-2021/lib/style/style-2021-07-08.css">
+	<link rel="stylesheet" href="../../../lib/style/style-2021-07-08.css">
 
 	<style>
 		:root {
@@ -38,16 +38,15 @@
 	<script src="../../../lib/grv-github-repo-tree-view/v-2021-07-08/grv-github-repo-tree-view.js"></script>
 -->
 
-	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/mnu-menu/v-2021-07-04/mnu-menu.js"></script>
+	<script src="../../../lib/mnu-menu/v-2021-07-04/mnu-menu.js"></script>
 
-	<script src="../../../lib3d/thr-three/thr-threejs-2021-07-09.js"></script>
-	<!-- <script src="../../../lib3d/thrc-three-set-colors/thrc-three-set-colors-2020-07-11.js"></script>
-	<script src="../../../lib3d/thrr-three-raycaster/thrr-three-raycaster-mousedown-2020-09-11.js"></script> -->
+	<script src="../../../lib3d/thr-three/thr-threejs-2020-12-23.js"></script>
+	<script src="../../../lib3d/thrc-three-set-colors/thrc-three-set-colors-2020-07-11.js"></script>
+	<script src="../../../lib3d/thrr-three-raycaster/thrr-three-raycaster-mousedown-2020-09-11.js"></script>
 	<script src="../../../lib3d/thru-three-utilities/thru-three-utilities-2021-01-30.js"></script>
 
 	<script src="main.js"></script>
-	<script src="../../../lib-geo/glo-globe/v-2021-07-09-2023/glo-globe.js"></script>
-	<script src="../../../lib-geo/gjs-geojson/v-2021-07-10/gjs-geojson.js"></script>
+	<script src="glo-globe.js"></script>
 
 	<details id=detNavMenu class="gmd-4">
 
@@ -57,6 +56,12 @@
 
 			<div id=MNUdivHeader></div>
 
+				<p>
+					<button onclick=GLO.setGlobeElevation3D()>globe with elevations</button>
+
+					<button onclick=GLO.initGlobeWithBitmap()>globe with bitmap</button>
+				</p>
+
 			<div id=FOXdivDetails></div>
 
 			<div id=GORdivDetails></div>
@@ -65,33 +70,8 @@
 
 			<div id=MNUdivSample></div>
 
-			<p>
-				<button
-					onclick=GJS.requestFile("https://pushme-pullyou.github.io/tootoo-2020/lib/assets/geojson/ne_110m_admin_0_countries_lakes.geojson")>world</button>
-			</p>
-
-			<p>
-				<button
-					onclick=GJS.requestFile("https://pushme-pullyou.github.io/tootoo-2020/lib/assets/geojson/china.geojson")>china</button>
-			</p>
-
-			<p>
-				<button
-					onclick=GJS.requestFile("https://pushme-pullyou.github.io/tootoo-2020/lib/assets/geojson/ne_50m_admin_1_states_provinces_lines.geojson")>states</button>
-			</p>
-
-			<p>
-				<button
-					onclick=GJS.requestFile("https://pushme-pullyou.github.io/tootoo-2020/lib/assets/geojson/cb_2019_us_county_20m.geojson")>us
-					counties</button>
-			</p>
-			<p>
-				<button onclick=GJS.initGeoJson()>reset</button>
-			</p>
-
-			<p title="View the number of objects that need rendering and the total number of triangles used to create the
-						objects">
-				<button onclick="setStats()">setStats</button>
+			<p title="View the number of objects that need rendering and the total number of triangles used to create the objects">
+				<button onclick="THR.setStats()">setStats</button>
 			</p>
 
 			<div id=MNUdivFooter></div>
@@ -101,7 +81,7 @@
 	</details>
 
 
-	<main id=main>
+	<main id=main hidden >
 
 		<div id="divMainContent"></div>
 

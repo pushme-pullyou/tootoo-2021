@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Basic HTML template">
 	<meta name="keywords" content="JavaScript,GitHub,FOSS">
-	<meta name=version content="2021-01-16">
+	<meta name=version content="2021-07-10">
 	<!-- Copyright 2021 Theo Armour. MIT License -->
 
 	<title></title>
@@ -30,7 +30,12 @@
 			padding: 1rem;
 			position: absolute;
 			resize: both;
-			/* height: 90%; */
+		}
+
+
+		input[type=range],
+		.full-width {
+			width: 100%;
 		}
 	</style>
 </head>
@@ -41,15 +46,12 @@
 	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r130/examples/js/controls/OrbitControls.js"></script>
 
 	<script src="../../lib3d/thr-three/thr-threejs-2021-07-09.js"></script>
-	<script src="../../lib3d/thru-three-utilities/thru-three-utilities-2020-07-13.js"></script>
 	<!-- <script src="../../lib/thru-three-utilities/hrt-heart-2020-05-27.js"></script> -->
 
-
-	<nav id=navMenu class="nav">
+	<nav id=navMenu class=nav>
 
 		<details open>
-
-			<summary>show &uarr; || hide &darr; </summary>
+			<summary>show/hide</summary>
 
 			<h1>
 				<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/lib3d/" target="_blank"
@@ -58,13 +60,18 @@
 				<a href="" id=aTitle title="Click this menu title to reset the model"></a>
 			</h1>
 
-			<p><button onclick=map.setCenter([-122.431,37.803]);>San Francisco</button></p>
+			<div>
 
-			<p><button onclick=addBox()>addBox</button></p>
+				<label class=full title="Slide me">
+					Opacity: <output id=outO>1</output><br>
+					<input id=rngX type=range
+						oninput=mesh.material.opacity=+this.value/100;outO.value=(+this.value/100).toFixed(2); value=100
+						step=0.01>
+				</label>
+
+			</div>
 
 			<div id=CORdivStats></div>
-
-			<pre id="coordinates" class="coordinates"></pre>
 
 		</details>
 
@@ -77,43 +84,34 @@
 
 		THR.animate();
 
-		//THR.addGround();
-
-		THR.group = THR.getGroupNew();
-
-		THR.axesHelper.visible = false;
+		THR.axesHelper.visible = true;
 
 		THR.addGround();
 
 		THR.addLights();
 
-		// const geometry = new THREE.BoxGeometry(10, 10, 10);
-		// const material = new THREE.MeshNormalMaterial();
-		// const mesh = new THREE.Mesh(geometry, material);
-		// mesh.castShadow = true;
-		// THR.group.add(mesh);
+		THR.group = THR.getGroupNew();
 
-		THRU.setSceneNew();
+		for ( let i = 0; i < 100; i++ ) {
 
-		THRU.addMeshes();
+			const material = new THREE.MeshPhongMaterial( { color: Math.random() * 0xffffff } );
+			const geometry = new THREE.BoxGeometry( 10, 10, 10 );
+			const mesh = new THREE.Mesh( geometry, material );
+			mesh.position.set( Math.random() * 100 - 50, Math.random() * 100 - 50, Math.random() * 100 - 50 );
+			mesh.lookAt( THR.scene.position );
+			mesh.receiveShadow = mesh.castShadow = true;
+			THR.group.add( mesh );
 
-		THRU.toggleBoundingBoxHelper();
+		}
 
-		THRU.toggleMeshEdges();
-
-		//THRU.toggleSurfaceNormalsVisible()
 
 		THR.zoomObjectBoundingSphere();
 
-		CORdivStats.innerHTML = `
+			CORdivStats.innerHTML = `
 <p
 	title="View number of objects that need rendering and total number of triangles used to create objects">
 	<button onclick="THR.setStats()">setStats</button>
 </p>`;
-
-//HRT.init();
-
-//THR.updateScene();
 
 	</script>
 </body>

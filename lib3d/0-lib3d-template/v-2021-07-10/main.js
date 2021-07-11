@@ -89,6 +89,12 @@ function init () {
 
 	// if running on server, keeps address bar pointed to latest dev
 
+	CORdivStats.innerHTML = `
+<p
+	title="View number of objects that need rendering and total number of triangles used to create objects">
+	<button onclick="THR.setStats()">setStats</button>
+</p>`;
+
 	if ( !location.hash && location.protocol === "https:" ) {
 
 		window.history.pushState( "", "", "../" + location.hash );
