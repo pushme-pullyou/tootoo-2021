@@ -84,5 +84,13 @@ function init () {
 
 	}
 
+
+	CORdivStats.innerHTML = `
+<p
+	title="View number of objects that need rendering and total number of triangles used to create objects">
+	<button onclick="THR.setStats()">setStats</button>
+</p>`;
+
+
 };
 

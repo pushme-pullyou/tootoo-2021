@@ -82,19 +82,15 @@ function init () {
 
 	JFC.requestFile( JFC.url, JFC.onLoadCsv, JFConParseCsv );
 
-	// FOO.init();
 
-	// FOO.extension = "json";
-	// FOO.responseType = "json";
-	// FOO.onLoadFile = PP.onLoadJson;
-
-	// path = "../../assets/json/";
-
-	// FOO.requestFile( path + "lab_building_result.json" );
-
-	// JTV.init();
 
 	// HRT.init();
+
+	CORdivStats.innerHTML = `
+<p
+	title="View number of objects that need rendering and total number of triangles used to create objects">
+	<button onclick="THR.setStats()">setStats</button>
+</p>`;
 
 	// if running on server, keeps address bar pointed to latest dev
 
