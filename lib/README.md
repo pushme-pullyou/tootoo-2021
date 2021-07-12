@@ -1,16 +1,10 @@
-<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]( https://theo-armour.github.io/2020/lib/readme.html  "View file as a web page." ) </span>
-
-<div><input type=button onclick=window.location.href="https://github.com/theo-armour/2020/tree/master/lib/";
-value='You are now in a GitHub web page view - Click this button to view this read me file as source code' ></div>
-
-
-# [Lib Read Me]( ../index.html#lib/README.md )
+# [![](https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg )](https://github.com/pushme-pullyou/tootoo-2021/ "Source code on GitHub" ) [TT 2021]( https://pushme-pullyou.github.io/tootoo-2021/ "Home page" ) / [lib Read Me]( https://pushme-pullyou.github.io/tootoo-2021/#lib/README.md)
 
 <!--@@@
-<div style=height:300px;overflow:hidden;width:100%;resize:both; ><iframe src=https://pushme-pullyou.github.io/tootoo-2020/ height=100% width=100% ></iframe></div>
-_https://pushme-pullyou.github.io/tootoo-2020/_
+<div style=height:500px;overflow:hidden;width:100%;resize:both; ><iframe src=https://pushme-pullyou.github.io/tootoo-2021/ height=100% width=100% ></iframe></div>
+_https://pushme-pullyou.github.io/tootoo-2021/_
 
-### Full Screen: [tootoo 2020]( https://pushme-pullyou.github.io/tootoo-2020// )
+### Full Screen: [tootoo 2021]( https://pushme-pullyou.github.io/tootoo-2021// )
 @@@-->
 
 
@@ -18,11 +12,11 @@ _https://pushme-pullyou.github.io/tootoo-2020/_
 
 If a file type is used in two or more places, it should be available in lib
 
-Canonical lib is at https://github.com/theo-armour/2020/tree/master/lib/
+Canonical lib is at https://github.com/pushme-pullyou/tootoo-2021
 
 Not every repo needs all the lib files
 
-Always make it easy to do a file compare and sync
+Always make it easy to do a file compare and sync.
 
 Why not a single lib for all users and repos?
 
@@ -30,7 +24,24 @@ Why not a single lib for all users and repos?
 * Makes it difficult for new users
 * Discourages simplicity, individuality and customization
 
+Anyway here we go again.
+
 ## To Do / Wish List
+
+* 2021-07-11 ~ TT ~ ignore 404, readme.html and other similar files, but keep other html files in curated tree view; hide old lib folders in other repos
+* Simple <> full menu switch
+* MNU popUp hide
+* Main enlarges when menu slides
+* Better handling for images ~ next previous?
+* Update access token code
+* Double check style.css for unused items
+* Slight margin for main
+* Select files by clicking anywhere in line
+* Add GubGub-like GitHub search utility modules
+
+Editor
+
+* Edit and save HTML
 
 
 ## Issues
@@ -55,6 +66,10 @@ Switching themes
 
 
 ## Change Log
+
+### 2021-07-11
+
+* update readme
 
 ### 2020-12-17
 

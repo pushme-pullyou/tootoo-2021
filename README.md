@@ -14,19 +14,6 @@ _"Map: in lib3d_
 
 ## To Do / Wish List
 
-* Simple <> full menu switch
-* MNU popUp hide
-* Main enlarges when menu slides
-* Better handling for images ~ next previous?
-* Update access token code
-* Double check style.css for unused items
-* Slight margin for main
-* Select files by clicking anywhere in line
-* Add GubGub-like GitHub search utility modules
-
-Editor
-
-* Edit and save HTML
 
 ## Issues
 

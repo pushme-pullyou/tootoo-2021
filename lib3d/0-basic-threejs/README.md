@@ -30,11 +30,12 @@ The template I often use to get a minor project underway
 * https://threejs.org/examples/
 * https://github.com/mrdoob/three.js/
 * https://discourse.threejs.org/
-* https://en.wikipedia.org/wiki/Three.js
+* https://en.wikipedia.org/wiki/Three.js << I wrote the original article
+* https://twitter.com/threejs
 * https://stackoverflow.com/tags/three.js/info
 * https://www.reddit.com/r/threejs/
-* https://threejsfundamentals.org/
 * https://developer.mozilla.org/en-US/docs/Glossary/Three_js
+* https://threejsfundamentals.org/
 
 
 ## Change Log
