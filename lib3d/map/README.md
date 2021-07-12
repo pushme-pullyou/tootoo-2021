@@ -6,6 +6,10 @@ value='You are now in a GitHub web page view - Click this button to view this re
 
 # [MAP Read Me]( https://theo-armour.github.io/2020/lib/map/readme.html )
 
+DEPRECATED
+
+see new fork in lib-geo
+
 <!--@@@
 <div style=height:500px;overflow:hidden;width:100%;resize:both; ><iframe src=https://theo-armour.github.io/2020/lib/map/ height=100% width=100% ></iframe></div>
 _MAP in a resizable window. One finger to rotate. Two to zoom._

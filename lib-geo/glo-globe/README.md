@@ -1,10 +1,10 @@
 # [GLO Globe Read Me]( ./readme.html )
 
 <!--@@@
-<div class=iframe-resize ><iframe src=https://pushme-pullyou.github.io/tootoo-2021/libgeo/glo-globe/ height=100% width=100% ></iframe></div>
+<div class=iframe-resize ><iframe src=https://pushme-pullyou.github.io/tootoo-2021/lib-geo/glo-globe/ height=100% width=100% ></iframe></div>
 _GLO Globe_
 
-### Full Screen: [GLO Globe]( https://pushme-pullyou.github.io/tootoo-2021/libgeo/glo-globe/ )
+### Full Screen: [GLO Globe]( https://pushme-pullyou.github.io/tootoo-2021/lib-geo/glo-globe/ )
 @@@-->
 
 
@@ -23,6 +23,10 @@ _GLO Globe_
 
 
 ## Change Log
+
+### 2021-07-11
+
+* update readme
 
 ### 2020-12-24
 
