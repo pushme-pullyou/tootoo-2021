@@ -126,15 +126,15 @@ function JFConParseCsv ( index = 1) {
 	GLC.group.name = "instances";
 	THR.group.add( GLC.group );
 
-	let scale = 0.000002;
+	let scale = 0.005;
 
 	scale = scale * rngScale.value / 50;
 
 	//
 
 	barData = JFC.json.map( line => {
-		const pop = + line[ 9 ] < 500000 ? 500000 : line[ 9 ];
-		return [ scale * pop, line[ 2 ], line[ 3 ] ];
+		const pop = + line[ 9 ] < 100000 ? 100000 : line[ 9 ];
+		return [ scale * Math.sqrt( pop) , line[ 2 ], line[ 3 ] ];
 
 	} );
 

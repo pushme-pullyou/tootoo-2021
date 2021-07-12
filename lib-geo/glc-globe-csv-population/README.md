@@ -1,12 +1,12 @@
-# [![](https://theo-armour.github.io/maps-2021/lib/assets/icons/mark-github.svg )](https://github.com/theo-armour/maps-2021/ "Source code on GitHub" ) [Maps 2021]( https://theo-armour.github.io/maps-2021/ "Home page" ) / [Globe CSV Population Read Me]( https://theo-armour.github.io/maps-2021/#lib-geo/sandbox/glc-globe-csv-population/README.md)
+# [![](https://theo-armour.github.io/maps-2021/lib/assets/icons/mark-github.svg )](https://github.com/theo-armour/maps-2021/ "Source code on GitHub" ) [Maps 2021]( https://theo-armour.github.io/maps-2021/ "Home page" ) / [Globe CSV Population Read Me]( https://pushme-pullyou.github.io/tootoo-2021/#lib-geo/glc-globe-csv-population/README.md)
 
 
 <!--@@@
-<div class=iframe-resize ><iframe src=https://theo-armour.github.io/maps-2021/lib-geo/sandbox/glc-globe-csv-population/ height=100% width=100% ></iframe></div>
+<div class=iframe-resize ><iframe src=https://pushme-pullyou.github.io/tootoo-2021/lib-geo/glc-globe-csv-population/ height=100% width=100% ></iframe></div>
 _Globe CSV Population in a resizable window. One finger to rotate. Two to zoom._
 
 
-### Full Screen: [Globe CSV Population]( https://theo-armour.github.io/maps-2021/lib-geo/sandbox/glc-globe-csv-population/ )
+### Full Screen: [Globe CSV Population]( https://pushme-pullyou.github.io/tootoo-2021/lib-geo/glc-globe-csv-population/ )
 @@@-->
 
 
