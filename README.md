@@ -3,20 +3,24 @@
 
 <!--@@@
 <div style=height:300px;overflow:hidden;width:100%;resize:both; ><iframe src=https://pushme-pullyou.github.io/tootoo-2021/lib3d/map/ height=100% width=100% ></iframe></div>
-_"Map: in lib3d_
+_"Map": in lib3d_
 
-### Full Screen: ["Map: in lib3d]( https://pushme-pullyou.github.io/tootoo-2021/lib3d/map/ )
+### Full Screen: ["Map": in lib3d]( https://pushme-pullyou.github.io/tootoo-2021/lib3d/map/ )
 @@@-->
 
 ## Concept
 
-* Invite all the GitHub peeps over to your place
+"lib" or libraries of of files for other repositories to use
+
+* lib - contains files that may be used to build a basic and test simple content management system for GitHub pages
+* "lib3d" - contains files that may be used to build apps based on [Thrree.js]( https://threejs.org )
+* "lib-geo' - contains files that may used to build 3D maps and globes based on Three.js
+
 
 ## To Do / Wish List
 
 
 ## Issues
-
 
 
 ## Links of Interest
