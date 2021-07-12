@@ -6,7 +6,7 @@ const COR = {
 	defaultFile: "README.md",
 	ignoreFolders: [],
 	filterFiles: [ "gif", "md", "jpg", "license", "pdf", "png", "svg", "txt" ],
-	urlSource: "https://github.com/pushme-pullyou/tootoo-2021/tree/main/lib-geo/glc-globe-csv",
+	urlSource: "https://github.com/pushme-pullyou/tootoo-2021/tree/main/lib-geo/glc-globe-csv-population",
 	urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
 	iconGitHub: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`,
 	iconInfo: `<img class=infoImg src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/noun_Information_585560.svg">`,
@@ -58,7 +58,7 @@ function init () {
 
 	THR.group = THR.getGroupNew();
 
-//	THRU.addMeshes( 100 );
+	//	THRU.addMeshes( 100 );
 
 	// geometry = new THREE.SphereGeometry( 50, 50, 25 );
 	// material = new THREE.MeshNormalMaterial();
@@ -75,7 +75,7 @@ function init () {
 
 	//THR.zoomObjectBoundingSphere();
 
-	THR.camera.position.set( -20, -65, 60 )
+	THR.camera.position.set( -20, -65, 60 );
 
 	JFC.url = "https://pushme-pullyou.github.io/tootoo-2021/data/simplemaps/worldcities.csv";
 	//JFC.url = "https://theo-armour.github.io/maps-2021/data/soil-carbon-coalition/indemnity-geodata.csv";
@@ -94,7 +94,6 @@ function init () {
 	<button onclick="THR.setStats()">View the rendering statistics</button>
 </p>`;
 
-	THR.controls.autoRotate = false;
 
 	// if running on server, keeps address bar pointed to latest dev
 
@@ -105,6 +104,7 @@ function init () {
 
 	} else {
 
+		THR.controls.autoRotate = false;
 
 	}
 
@@ -112,7 +112,7 @@ function init () {
 
 
 
-function JFConParseCsv ( index = 1) {
+function JFConParseCsv ( index = 1 ) {
 
 	//console.log( "", 23 );
 
@@ -120,7 +120,7 @@ function JFConParseCsv ( index = 1) {
 
 	THR.group.remove( GLC.group );
 
-	GLC.group.geometry
+	GLC.group.geometry;
 
 	GLC.group = new THREE.Group();
 	GLC.group.name = "instances";
@@ -134,14 +134,14 @@ function JFConParseCsv ( index = 1) {
 
 	barData = JFC.json.map( line => {
 		const pop = + line[ 9 ] < 100000 ? 100000 : line[ 9 ];
-		return [ scale * Math.sqrt( pop) , line[ 2 ], line[ 3 ] ];
+		return [ scale * Math.sqrt( pop ), line[ 2 ], line[ 3 ] ];
 
 	} );
 
 	//const barData = JFC.json.map( line => [ scale * line[ 45 - index ], +line[ 3 ], +line[ 4 ] ] );
 	//console.log( "barData", barData );
 
-	const mesh = GLC.getPoints( barData )
+	const mesh = GLC.getPoints( barData );
 	//console.log( "mesh", mesh );
 	GLC.group.add( mesh );
 
@@ -160,9 +160,9 @@ RAY.getHtm = function ( intersected ) {
 	const htm = `
 	<div>
 		county: <span class=feature style=float:right;>
-		<a href="https://www.google.com/search?q=${ county[ 0 ] }+county+${ county[ 1 ] }" target="_blank">${ county[ 0 ]}</a></span><br>
-		state: <span class=feature >${ county[ 1 ]}</span><br>
-		population: <span class=feature>${( +county[ 5 ] ).toLocaleString() }</span></br>
+		<a href="https://www.google.com/search?q=${ county[ 0 ] }+county+${ county[ 1 ] }" target="_blank">${ county[ 0 ] }</a></span><br>
+		state: <span class=feature >${ county[ 1 ] }</span><br>
+		population: <span class=feature>${ ( +county[ 5 ] ).toLocaleString() }</span></br>
 		year: <span class=feature >${ 2018 - selYear.selectedIndex }</span><br>
 		indemnity: <span class=feature > $${ ( +county[ 45 - selYear.selectedIndex ] ) } million</span><br>
 	</div>`;
