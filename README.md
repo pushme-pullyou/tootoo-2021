@@ -12,9 +12,9 @@ _"Map": in lib3d_
 
 "lib" or libraries of of files for other repositories to use
 
-* lib - contains files that may be used to build a basic and test simple content management system for GitHub pages
-* "lib3d" - contains files that may be used to build apps based on [Thrree.js]( https://threejs.org )
-* "lib-geo' - contains files that may used to build 3D maps and globes based on Three.js
+* ["lib"]( https://pushme-pullyou.github.io/tootoo-2021/#lib/README.md ) - contains files that may be used to build a basic and test simple content management system for GitHub pages
+* ["lib3d"]( https://pushme-pullyou.github.io/tootoo-2021/#lib3d/README.md ) - contains files that may be used to build apps based on [Thrree.js]( https://threejs.org )
+* ["lib-geo"]( https://pushme-pullyou.github.io/tootoo-2021/#lib-geo/README.md ) - contains files that may used to build 3D maps and globes based on Three.js
 
 
 ## To Do / Wish List
