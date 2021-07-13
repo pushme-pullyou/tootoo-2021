@@ -319,7 +319,7 @@ pre {
 	border: 1px solid #8a8;
 	border-radius: var( --margin);
 	left: 0.25rem;
-	height: calc( 100vh - 2rem);
+	max-height: calc( 100vh - 2rem);
 	padding: var( --margin);
 	position: fixed;
 	top: 1rem;
