@@ -7,11 +7,11 @@
 	<meta name="description"
 		content="Browse the SDGs">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2021-07-05">
+	<meta name="date" content="2021-07-12">
 	<title>Sustainable Development Goals</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
-	<link rel="stylesheet" href="https://pushme-pullyou.github.io/tootoo-2021/lib/style/style-2021-06-26.css">
+	<link rel="stylesheet" href="https://pushme-pullyou.github.io/tootoo-2021/lib/style/style-2021-07-12.css">
 
 	<style>
 		:root {
@@ -32,14 +32,14 @@
 
 	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/gor-github-organization-repos/v-2021-07-03/gor-github-organization-repos.js"></script>
 
-	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/grv-github-repo-tree-view/v-2021-07-05/grv-github-repo-tree-view.js"></script>
+	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/grv-github-repo-tree-view/v-2021-07-08/grv-github-repo-tree-view.js"></script>
 
 	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/mnu-menu/v-2021-07-04/mnu-menu.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
 
-		<summary id=sumNavMenu class="summary-nav gmd-1">☰ <span id=spnMenuHelp>show || hide menu</span></summary>
+		<summary id=sumNavMenu class="summary-nav gmd-1">☰ <span id=spnMenuHelp>show&darr; || hide&uarr; menu</span></summary>
 
 		<nav id="navMenu" class="">
 
@@ -126,6 +126,7 @@
 			if ( location.protocol === "https:" ) {
 
 				window.history.pushState( "", "", "./" + location.hash );
+				COR.path = "./";
 
 			}
 
