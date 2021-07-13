@@ -5,18 +5,25 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
 	<meta name="description"
-		content="Browse the SDGs">
+		content="A website for Theo's current projects - based on TooToo 2021 which uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
 	<meta name="date" content="2021-07-12">
-	<title>Sustainable Development Goals</title>
+	<title>Theo Armour</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
 	<link rel="stylesheet" href="https://pushme-pullyou.github.io/tootoo-2021/lib/style/style-2021-07-12.css">
 
 	<style>
 		:root {
-			--mnu-width: 20rem;
+			--mnu-width: 22rem;
 			--main-hue: 120;
+			--saturation: 70%;
+			--color-1-text: hsl(var(--main-hue), var(--saturation), 1%);
+			--color-1-background: hsl(var(--main-hue), var(--saturation), 99.9%);
+			--color-2-text: hsl(var(--main-hue), var(--saturation), 10%);
+			--color-2-background: hsl(var(--main-hue), var(--saturation), 50%);
+			--color-3-text: hsl(var(--main-hue), var(--saturation), 30%);
+			--color-3-background: hsl(var(--main-hue), var(--saturation),70%);
 			/* 0 to 360 0=red 120=green 240=blue */
 		}
 	</style>
@@ -71,13 +78,14 @@
 
 		const COR = {
 			user: "theo-armour",
-			repo: "sdg-2021",
-			branch: "master",
-			path: "https://theo-armour.github.io/sdg-2021/",
+			repo: "2021",
+			branch: "main",
+			path: "https://theo-armour.github.io/2021/",
 			defaultFile: "README.md",
-			ignoreFolders: ["assets", "images", "lib", "lib-templates", "sandbox"],
+			//ignoreFolders: [],
+			ignoreFolders: ["archive", "lib", "lib3d", "lib-templates"],
 			filterFiles:  [ "gif", "md", "jpg", "license", "pdf", "png", "svg", "txt" ],
-			urlSource: "https://github.com/pushme-pullyou/tootoo-2021/",
+			urlSource: "https://github.com/theo-armour/2021/",
 			urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
 			iconGitHub: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`,
 			iconInfo: `<img class=infoImg src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/noun_Information_585560.svg">`,
@@ -102,32 +110,32 @@
 			//const htm = "Hello, World!";
 			//MNU.init( { description: htm } );
 			//MNUaSource.hidden = true;
-			MNUspnVersion.hidden = true;
+			//MNUspnVersion.hidden = true;
 
 			FOX.init();
 			//FOXdivDetails.innerHTML = FOX.getMenu();
 			FOX.onHashChange();
 
-			//GOR.init();
-			//GORinpUser.value = COR.user + "/" + COR.repo;
-			//GOR.getOrganization();
+			// GOR.init();
+			// GORinpUser.value = COR.user + "/" + COR.repo;
+			// GOR.getOrganization();
 			//GORdet.open = true;
 
-			//GRV.getFiles = GRV.getFilesAll;
-			GRV.getFiles = GRV.getFilesCurated;
+			GRV.getFiles = GRV.getFilesAll;
+			//GRV.getFiles = GRV.getFilesCurated;
 			GRV.init();
 			GRVdet.open = true;
-			GRVsumRepo.hidden = true;
+			//GRVsumRepo.hidden = true;
 			GRV.getRepo();
 
-			setTimeout( () => { GRVdet1.open = true }, 100);
+			//setTimeout( () => { GRVdet57.open = true }, 500 );
+
 			// if running on server, keeps address bar pointed to latest dev
 
 			//if ( !location.hash && location.protocol === "https:" ) {
 			if ( location.protocol === "https:" ) {
 
 				window.history.pushState( "", "", "./" + location.hash );
-				COR.path = "./";
 
 			}
 

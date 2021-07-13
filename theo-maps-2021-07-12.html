@@ -11,7 +11,7 @@
 	<title>Maps</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
-	<link rel="stylesheet" href="https://pushme-pullyou.github.io/tootoo-2021/lib/style/style-2021-07-08.css">
+	<link rel="stylesheet" href="https://pushme-pullyou.github.io/tootoo-2021/lib/style/style-2021-07-12.css">
 
 	<style>
 		:root {
@@ -40,7 +40,7 @@
 
 	<details id=detNavMenu class="gmd-4">
 
-		<summary id=sumNavMenu class="summary-nav gmd-1">☰ <span id=spnMenuHelp>show || hide menu</span></summary>
+		<summary id=sumNavMenu class="summary-nav gmd-1">☰ <span id=spnMenuHelp>show&darr; || hide&uarr; menu</span></summary>
 
 		<nav id="navMenu" class="">
 
@@ -78,6 +78,7 @@
 			path: "https://theo-armour.github.io/maps-2021/",
 			defaultFile: "README.md",
 			ignoreFolders: [],
+			ignoreFolders: ["archive", "lib", "lib3d", "lib-templates"],
 			filterFiles:  [ "gif", "md", "jpg", "license", "pdf", "png", "svg", "txt" ],
 			urlSource: "https://github.com/theo-armour/maps-2021/",
 			urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
@@ -99,6 +100,7 @@
 
 			MNU.init();
 			//MNUdivSample.innerHTML = MNU.getSample();
+			//sumNavMenu.hidden = false;
 
 			//const htm = "Hello, World!";
 			//MNU.init( { description: htm } );
@@ -130,6 +132,7 @@
 			if ( location.protocol === "https:" ) {
 
 				window.history.pushState( "", "", "./" + location.hash );
+				COR.path = "./";
 
 			}
 

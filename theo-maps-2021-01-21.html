@@ -8,10 +8,10 @@
 		content="Maps 2021 uses the GitHub API to provide access to all the current files hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
 	<meta name="date" content="2021-01-21">
-	<title>Maps 2021</title>
+	<title>Maps</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
-	<link rel="stylesheet" href="./lib/style/style-2020-12-29.css">
+	<link rel="stylesheet" href="./lib/style/style-2021-07-12.css">
 
 	<style>
 		:root {
@@ -29,26 +29,30 @@
 	<!-- https://github.com/showdownjs/showdown -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 
-	<script src="./lib/fox-file-open-xhr/v-2021-01-21/fox-file-open-xhr.js"></script>
+	<script src="./lib/fox-file-open-xhr/v-2021-07-03/fox-file-open-xhr.js"></script>
 
-	<script src="./lib/gor-github-organization-repos/v-2020-12-31/gor-github-organization-repos.js"></script>
+	<script src="./lib/gor-github-organization-repos/v-2021-07-03/gor-github-organization-repos.js"></script>
 
-	<script src="./lib/grv-github-repo-tree-view/v-2020-12-31/grv-github-repo-tree-view.js"></script>
+	<script src="./lib/grv-github-repo-tree-view/v-2021-07-08/grv-github-repo-tree-view.js"></script>
 
-	<script src="./lib/mnu-menu/v-2020-12-30/mnu-menu.js"></script>
+	<script src="./lib/mnu-menu/v-2021-07-04/mnu-menu.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
 
-		<summary id=sumNavMenu class="summary-secondary gmd-1">show || hide menu</summary>
+		<summary id=sumNavMenu class="summary-nav gmd-1">☰ <span id=spnMenuHelp>show&darr; || hide&uarr; menu</span></summary>
 
-		<nav id="navMenu" class="gmd-2">
+		<nav id="navMenu" class="">
 
 			<div id=MNUdivHeader></div>
+
+			<div id=FOXdivDetails></div>
 
 			<div id=GORdivDetails></div>
 
 			<div id=GRVdivDetails></div>
+
+			<div id=MNUdivSample ></div>
 
 			<div id=MNUdivFooter></div>
 
@@ -57,9 +61,9 @@
 	</details>
 
 
-	<main>
+	<main id=main>
 
-		<div id="divContentMain"></div>
+		<div id="divMainContent"></div>
 
 	</main>
 
