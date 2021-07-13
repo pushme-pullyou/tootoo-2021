@@ -306,14 +306,9 @@ pre {
 }
 
 #detNavMenu {
-	background-color: var(--color-1-background);
-	border: 1px solid #8a8;
-	border-radius: var( --margin);
-	max-height: 98vh;
-	margin: var( --margin);
-	padding: var( --margin);
+	max-height: 90vh;
+	/* padding: var( --margin); */
 	position: fixed;
-	overflow: auto;
 	resize: both;
 	z-index: 1;
 }
@@ -321,29 +316,31 @@ pre {
 #navMenu {
 	/* padding: 0 var( --margin); */
 	/* width */
+	background-color: var(--color-1-background);
+	border: 1px solid #8a8;
+	border-radius: var( --margin);
+	left: 0.25rem;
+	padding: var( --margin);
+	position: fixed;
+	top: 1rem;
+	overflow: auto;
+	max-height: calc( 100vh - 2rem);
 }
 
 #sumNavMenu {
-	/* position: fixed; */
 	/* display: none; */
-	/* background-color: var(--color-1-background);
+	background-color: var(--color-1-background);
 	border: 1px solid #8a8;
 	color: var(--color-3-text);
-	border-radius: var( --margin); */
+	border-radius: var( --margin);
 	cursor: pointer;
+	left: var( --margin);
 	outline: none;
-	width: 8zrem;
-	z-index: 2;
-}
-
-@media (prefers-color-scheme: dark) {
-	:root {
-		background-color: #1e1f23;
-		color: #aaa;
-	}
-	#navMenu {
-		background-color: #555;
-	}
+	padding: var( --margin);
+	position: fixed;
+	top: var( --margin);
+	width: 12rem;
+	z-index: 1;
 }
 
 @media all and (max-width: 800px) {
@@ -358,6 +355,7 @@ pre {
 	#sumNavMenu {
 		font-size: 120%;
 		padding: var( --margin);
+		width: 3.5rem;
 	}
 }
 
@@ -373,5 +371,16 @@ pre {
 	#sumNavMenu {
 		font-size: 120%;
 		padding: var( --margin);
+		width: 4rem;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		background-color: #1e1f23;
+		color: #aaa;
+	}
+	#navMenu {
+		background-color: #555;
 	}
 }

@@ -28,6 +28,7 @@ Anyway here we go again.
 
 ## To Do / Wish List
 
+* 2021-07-12 ~ dingbat has a color
 * 2021-07-11 ~ TT ~ ignore 404, readme.html and other similar files, but keep other html files in curated tree view; hide old lib folders in other repos
 * Simple <> full menu switch
 * MNU popUp hide

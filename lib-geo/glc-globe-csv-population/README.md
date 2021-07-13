@@ -18,6 +18,7 @@ _Globe CSV Population in a resizable window. One finger to rotate. Two to zoom._
 
 ## Issues
 
+* Intersections on other side of globe are found
 
 ## Links of Interest
 
@@ -25,7 +26,7 @@ _Globe CSV Population in a resizable window. One finger to rotate. Two to zoom._
 ## Change Log
 
 
-### 123
+### 2021-07-11
 
 * First commit
 

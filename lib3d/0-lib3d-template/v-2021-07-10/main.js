@@ -26,6 +26,8 @@ function init () {
 	MNU.init();
 	//MNUdivSample.innerHTML = MNU.getSample();
 
+	sumNavMenu.hidden = false;
+
 	//const htm = "Hello, World!";
 	//MNU.init( { description: htm } );
 	//MNUaSource.hidden = true;
