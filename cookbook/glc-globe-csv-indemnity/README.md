@@ -52,6 +52,14 @@ From Peter Donovan
 
 ## Change Log
 
+### 2021-07-14
+
+* Move folder
+* Rename
+* Add indemnity by year bar chrt to popup
+* Add fips and total indemnity to popup
+* Fix bug showing total indemnity not year indemnity in popu
+
 ### 2021-07-11
 
 * First commit
