@@ -28,7 +28,7 @@ This is a first pass at displaying the data. Further revisions might add more da
 * Arable acres per county is added to data set; indemnity per acre is displayed
 * Current year color indicates the difference with a moving averages pf the data
 * Rainfall or other weather difference with moving average is indicated
-* Crop types are indicated
+* Crop types and acres of crop areas are indicated
 * Legends and colors developed in more detail
 * Popups display statistics such as average and total indemnity for the entire rand and or decade
 * Data from more recent years is added
@@ -58,7 +58,8 @@ From Peter Donovan
 * Rename
 * Add indemnity by year bar chrt to popup
 * Add fips and total indemnity to popup
-* Fix bug showing total indemnity not year indemnity in popu
+* Fix bug showing total indemnity not year indemnity in popup
+* Update text in menu and popup
 
 ### 2021-07-11
 
