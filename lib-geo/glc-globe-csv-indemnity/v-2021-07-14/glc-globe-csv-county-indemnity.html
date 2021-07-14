@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="description"
+		content="Losses due to declines in price, hail, and earthquakes, tornadoes, and hurricanes have been excluded from this accounting as having little to do with soil health or function.">
+	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
+	<meta name="date" content="2021-07-14">
+	<title>US Crop Insurance Indemnities by County 1979-2017</title>
+
+	<!-- Copyright 2021 Theo Armour. MIT license -->
+	<link rel="stylesheet" href="https://pushme-pullyou.github.io/tootoo-2021/lib/style/style-2021-07-08.css">
+
+	<style>
+		:root {
+			--mnu-width: 20rem;
+			--main-hue: 240;
+			/* 0 to 360 0=red 120=green 240=blue */
+		}
+
+		.feature {
+			float: right;
+		}
+
+		ul {
+			padding-left: 1rem
+		}
+	</style>
+
+</head>
+
+<body>
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r130/build/three.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r130/examples/js/controls/OrbitControls.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r130/examples/js/utils/BufferGeometryUtils.js"></script>
+
+	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/mnu-menu/v-2021-07-04/mnu-menu.js"></script>
+
+	<script
+		src="https://pushme-pullyou.github.io/tootoo-2021/cookbook/jfc-json-from-csv/v-2021-07-09/jfc-json-from-csv.js"></script>
+
+	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib3d/thr-three/thr-threejs-2021-07-09.js"></script>
+	<script
+		src="../../../lib3d/thrr-three-raycaster/ray-raycaster-mousemove-2021-07-14.js"></script>
+	<script
+		src="https://pushme-pullyou.github.io/tootoo-2021/lib3d/thru-three-utilities/thru-three-utilities-2021-01-30.js"></script>
+
+	<script
+		src="https://pushme-pullyou.github.io/tootoo-2021/lib-geo/glo-globe/v-2021-07-09-2023/glo-globe.js"></script>
+	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib-geo/gjs-geojson/v-2021-07-10/gjs-geojson.js"></script>
+
+	<script src="main.js"></script>
+	<script src="glc-globe.csv.js"></script>
+
+	<details id=detNavMenu class="gmd-4">
+
+		<summary id=sumNavMenu class="summary-nav gmd-1">☰ <span id=spnMenuHelp>show || hide menu</span></summary>
+
+		<nav id="navMenu" class="">
+
+			<div id=MNUdivHeader></div>
+
+			<div id=FOXdivDetails></div>
+
+			<div id=GORdivDetails></div>
+
+			<div id=GRVdivDetails></div>
+
+			<div id=MNUdivSample></div>
+
+			<p>
+				Height of bar = size of indemnity
+			</p>
+			<p>
+				Vision+source: <a href="https://soilcarboncoalition.org/html/RMA_indemnities_1979_2017.html"
+					target="_blank">soilcarboncoalition.org</a>
+			</p>
+
+			<p>
+				<label title="Use the cursor keys to speed through the years!">Select a year to display the indemnities:
+
+					<select id=selYear onchange=JFConParseCsv(this.selectedIndex) class=select-resize size=10></select>
+				</label>
+			</p>
+
+			<p>
+				<label title="Slide the little box left and right!"> Scale of indicator bars: <output
+						id=outInp>50</output>
+					<input [ type=range ] id=rngScale oninput=JFConParseCsv(selYear.selectIndex);outInp.value=value;>
+				</label>
+			</p>
+
+			<div style=font-size:80%; >
+				Things you can do:<br>
+				<ul>
+					<li>Touch a bar to view its details</li>
+					<li>In popup: click county or fips to Google</li>
+					<li>Use the cursor keys to scroll the years</li>
+					<li>Rotate = one finger / left mouse</li>
+					<li>Zoom = two fingers / scroll wheel</li>
+					<li>Pan = three fingers / right mouse</li>
+					<li>Reset page = click title at menu top</li>
+				</ul>
+			</div>
+
+			<div id=CORdivStats></div>
+
+			<div id=MNUdivFooter></div>
+
+		</nav>
+
+	</details>
+
+
+	<main id=main hidden >
+
+		<div id="divMainContent"></div>
+
+	</main>
+
+
+	<script>
+
+		init();
+
+	</script>
+</body>
+
+</html>
