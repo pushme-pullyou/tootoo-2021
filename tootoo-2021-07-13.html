@@ -28,6 +28,8 @@
 	<!-- https://github.com/showdownjs/showdown -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 
+	<script src="./lib/gra-github-repo-access/v-2021-07-13/gra-github-repo-access.js"></script>
+
 	<script src="./lib/fox-file-open-xhr/v-2021-07-03/fox-file-open-xhr.js"></script>
 
 	<script src="./lib/gor-github-organization-repos/v-2021-07-03/gor-github-organization-repos.js"></script>
@@ -44,6 +46,8 @@
 		<nav id="navMenu" class="">
 
 			<div id=MNUdivHeader></div>
+
+			<div id=GRAdivDetails></div>
 
 			<div id=FOXdivDetails></div>
 
@@ -104,6 +108,8 @@
 			//MNU.init( { description: htm } );
 			//MNUaSource.hidden = true;
 			//MNUspnVersion.hidden = true;
+
+			GRA.init();
 
 			// FOX = File Open XHR
 			FOX.init();
