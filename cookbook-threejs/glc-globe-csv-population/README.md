@@ -2,12 +2,12 @@
 
 
 <!--@@@
-<div class=iframe-resize ><iframe src=https://pushme-pullyou.github.io/tootoo-2021/lib-geo/glc-globe-csv-population/ height=100% width=100% ></iframe></div>
+<div class=iframe-resize ><iframe src=https://pushme-pullyou.github.io/tootoo-2021/cookbook-threejs/glc-globe-csv-population/ height=100% width=100% ></iframe></div>
 _Globe CSV Population in a resizable window. One finger to rotate. Two to zoom._
 
-
-### Full Screen: [Globe CSV Population]( https://pushme-pullyou.github.io/tootoo-2021/lib-geo/glc-globe-csv-population/ )
 @@@-->
+
+### Full Screen: [Globe CSV Population]( https://pushme-pullyou.github.io/tootoo-2021/cookbook-threejs/glc-globe-csv-population/ )
 
 
 ## Concept
