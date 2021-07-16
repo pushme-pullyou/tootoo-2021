@@ -94,6 +94,7 @@ A3H.init = function () {
 	axes.add( negYAxisHelper );
 	axes.add( negZAxisHelper );
 
+
 	interactiveObjects.push( posXAxisHelper );
 	interactiveObjects.push( posYAxisHelper );
 	interactiveObjects.push( posZAxisHelper );
@@ -114,8 +115,6 @@ A3H.init = function () {
 
 		point.set( 0, 0, 1 );
 		point.applyQuaternion( THR.camera.quaternion );
-
-		console.log( "poiny", point );
 
 		if ( point.x >= 0 ) {
 
