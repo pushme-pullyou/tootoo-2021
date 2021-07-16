@@ -1,3 +1,8 @@
+// copyright 2021 Theo Armour. MIT license.
+/* global THR, THREE, A3Haxes */
+// jshint esversion: 6
+// jshint loopfunc: true
+
 const A3H = {
 
 	dim: 200,
@@ -6,12 +11,11 @@ const A3H = {
 
 const axes = new THREE.Group();
 axes.animating = false;
-axes.controls = null;
 const point = new THREE.Vector3();
 
-let x = [ "posXAxisHelper", "posYAxisHelper", "posZAxisHelper", "negXAxisHelper", "negYAxisHelper", "negZAxisHelper" ]
+let x = [ "posXAxisHelper", "posYAxisHelper", "posZAxisHelper", "negXAxisHelper", "negYAxisHelper", "negZAxisHelper" ];
 
-x.forEach( item => window[ item ] = undefined )
+x.forEach( item => window[ item ] = undefined );
 
 //let posXAxisHelper, posYAxisHelper, posZAxisHelper, negXAxisHelper, negYAxisHelper, negZAxisHelper;
 
@@ -131,6 +135,7 @@ A3H.init = function () {
 };
 
 
+
 A3H.render = function () {
 
 	axes.quaternion.copy( THR.camera.quaternion ).invert();
@@ -177,12 +182,6 @@ A3H.render = function () {
 
 	}
 
-	//
-	//const x = A3Haxes.offsetWidth - dim;
-
-	//axesRenderer.clearDepth();
-	//axesRenderer.setViewport( x, 0, dim, dim );
-	// axesRenderer.render( axes, camera );
 	axesRenderer.render( axesScene, axesCamera );
 
 };
@@ -196,21 +195,19 @@ A3H.handleClick = function ( event ) {
 	//console.log( "rect", rect );
 	const offsetX = rect.left + ( A3Haxes.offsetWidth - A3H.dim );
 	const offsetY = rect.top + ( A3Haxes.offsetHeight - A3H.dim );
-	console.log( "offsetX", offsetX );
-	console.log( "event.clientX", event.clientX );
+	//console.log( "offsetX", offsetX );
+	//console.log( "event.clientX", event.clientX );
 	const mouse = new THREE.Vector2();
 	mouse.x = ( ( event.clientX - offsetX ) / ( rect.width ) ) * 2 - 1;
 	mouse.y = - ( ( event.clientY - offsetY ) / ( rect.bottom - offsetY ) ) * 2 + 1;
-	console.log( "mouse", mouse.x, mouse.y );
+	//console.log( "mouse", mouse.x, mouse.y );
 
 	const raycaster = new THREE.Raycaster();
 	raycaster.setFromCamera( mouse, axesCamera );
 
 	const intersects = raycaster.intersectObjects( A3H.interactiveObjects );
 
-	console.log( "intersects", intersects );
-
-	//update( 0.1 );
+	//console.log( "intersects", intersects );
 
 	A3H.render();
 
@@ -223,7 +220,7 @@ A3H.handleClick = function ( event ) {
 
 		A3H.prepareAnimationData( object, THR.controls.target );
 
-		axes.animating = true;
+		//axes.animating = true;
 
 		return true;
 
@@ -239,8 +236,6 @@ A3H.handleClick = function ( event ) {
 A3H.prepareAnimationData = function ( object, focusPoint ) {
 
 	const targetPosition = new THREE.Vector3();
-
-	const dummy = new THREE.Object3D();
 
 	switch ( object.userData.type ) {
 
@@ -279,11 +274,11 @@ A3H.prepareAnimationData = function ( object, focusPoint ) {
 
 	}
 
-	//
 
 	radius = THR.camera.position.distanceTo( focusPoint = THR.controls.target );
 	targetPosition.multiplyScalar( radius ).add( focusPoint );
 
+	const dummy = new THREE.Object3D();
 	dummy.position.copy( focusPoint );
 
 	dummy.lookAt( THR.camera.position );
@@ -292,12 +287,12 @@ A3H.prepareAnimationData = function ( object, focusPoint ) {
 	dummy.lookAt( targetPosition );
 	q2.copy( dummy.quaternion );
 
-	A3H.update()
+	A3H.update();
 
 };
 
 
-A3H.update = function( delta = 0.1 ) {
+A3H.update = function( delta = 1 ) {
 
 	const step = delta * turnRate;
 	const focusPoint = THR.controls.target;
@@ -313,7 +308,7 @@ A3H.update = function( delta = 0.1 ) {
 
 	if ( q1.angleTo( q2 ) === 0 ) {
 
-		axes.animating = false;
+		//axes.animating = false;
 
 	}
 
