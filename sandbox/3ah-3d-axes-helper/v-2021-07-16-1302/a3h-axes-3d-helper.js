@@ -13,12 +13,26 @@ A3H.init = function () {
 	axes.controls = null;
 
 	A3Haxes.addEventListener( 'mouseup', function ( event ) {
+		console.log( "event", event );
 
 		event.stopPropagation();
 
 		axes.handleClick( event );
 
+
 	} );
+
+
+	THR.renderer.domElement.addEventListener( 'mouseup', function ( event ) {
+		console.log( "event", event );
+
+		//event.stopPropagation();
+
+		axes.handleClick( event );
+
+
+	} );
+
 
 	A3Haxes.addEventListener( 'mousedown', function ( event ) {
 
@@ -115,6 +129,8 @@ A3H.init = function () {
 		point.set( 0, 0, 1 );
 		point.applyQuaternion( THR.camera.quaternion );
 
+		console.log( "point", point );
+
 		if ( point.x >= 0 ) {
 
 			posXAxisHelper.material.opacity = 1;
@@ -168,33 +184,39 @@ A3H.init = function () {
 	const q2 = new THREE.Quaternion();
 	let radius = 0;
 
+
 	axes.handleClick = function ( event ) {
 
-		if ( axes.animating === true ) return false;
+		//if ( axes.animating === true ) return false;
 
 		const rect = A3Haxes.getBoundingClientRect();
+		//console.log( "rect", rect );
 		const offsetX = rect.left + ( A3Haxes.offsetWidth - dim );
 		const offsetY = rect.top + ( A3Haxes.offsetHeight - dim );
-		mouse.x = ( ( event.clientX - offsetX ) / ( rect.width - offsetX ) ) * 2 - 1;
+		console.log( "offsetX", offsetX );
+		console.log( "event.clientX", event.clientX );
+		mouse.x = ( ( event.clientX - offsetX ) / ( rect.width ) ) * 2 - 1 ;
 		mouse.y = - ( ( event.clientY - offsetY ) / ( rect.bottom - offsetY ) ) * 2 + 1;
-		console.log( "", mouse.x, mouse.y );
+		console.log( "mouse", mouse.x, mouse.y );
 
 		raycaster.setFromCamera( mouse, axesCamera );
 
 		const intersects = raycaster.intersectObjects( interactiveObjects );
 
-		console.log( "", raycaster );
+		console.log( "intersects", intersects );
 
-		console.log( "", intersects );
+		//update( 0.1 );
 
-		update( 0.1 );
+		axes.render();
 
 		if ( intersects.length > 0 ) {
 
 			const intersection = intersects[ 0 ];
 			const object = intersection.object;
 
-			prepareAnimationData( object, THR.controls.target );
+			console.log( "object", object.userData.type );
+
+			//prepareAnimationData( object, THR.controls.target );
 
 			axes.animating = true;
 
@@ -222,6 +244,7 @@ A3H.init = function () {
 
 		// animate orientation
 
+
 		THR.camera.quaternion.rotateTowards( targetQuaternion, step );
 
 		if ( q1.angleTo( q2 ) === 0 ) {
@@ -229,6 +252,8 @@ A3H.init = function () {
 			axes.animating = false;
 
 		}
+
+
 
 	};
 

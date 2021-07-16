@@ -16,6 +16,7 @@ const COR = {
 	description: document.head.querySelector( "[ name=description ]" ).content,
 };
 
+var axes;
 
 function init () {
 
@@ -43,7 +44,7 @@ function init () {
 
 	THR.zoomObjectBoundingSphere();
 
-	//axes = new THREE.Group();
+	axes = new THREE.Group();
 	//console.log( "axes", axes );
 
 	A3H.init();
