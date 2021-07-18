@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="description" content="Get, edit and put text from and to a file in a GitHub repo">
+	<meta name="date" content="2021-07-18-1200">
+
+	<head>
+		<title>GTB GitHub Text Box</title>
+		<meta charset=utf-8 />
+		<style>
+			body {
+				font: 100% monospace;
+			}
+
+			#GTBdivTextBox {
+				left: 10rem;
+				position: absolute;
+				top: 10rem;
+				width: 30rem;
+			}
+
+			#GTBdivTextBox2 {
+				left: 50rem;
+				position: absolute;
+				top: 10rem;
+				width: 30rem;
+			}
+		</style>
+	</head>
+
+<body onbeforeunload="alert('function alrt WORKS !!!!')">
+
+	<script src="gtb-github-text-box.js"></script>
+
+	<h1>
+		<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/main/lib/gtb-github-text-box" target="_blank"
+			title="source code on GitHub"><img
+				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
+		<a href="" title="Click this menu title to reset the model">
+			GTB GitHub Text Box
+			<span id=spnVersion></span>
+		</a>
+	</h1>
+
+	<label>token
+		<input id=inpAccessToken onclick=this.select(); onblur=setGitHubAccessToken();
+			title="Obtain GitHub API Access Token">
+	</label>
+
+	<main>
+		<div id=GTBdivTextBox></div>
+
+		<div id=GTBdivTextBox2></div>
+	</main>
+
+
+	<script>
+
+		let accessToken = localStorage.getItem( 'githubAccessToken' ) || "";
+		inpAccessToken.value = accessToken;
+
+		let obj = {
+
+			//divTextBox: "GTBdivTextBox"
+
+		};
+
+		let obj2 = {
+
+
+			file: "test-cases/text-to-hack-3.html",
+			divTextBox: "GTBdivTextBox2",
+			idContent: "GTBdivContent2",
+			idMessage: "GTBdivMessage2",
+			idButPut: "GTBbutPut2"
+
+		};
+
+		init();
+
+		function init() {
+
+			spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
+
+			GTB1 = new GTB();
+			GTB1.init();
+
+			GTB2 = new GTB();
+			GTB2.init( obj2 );
+
+			window.addEventListener( "beforeunload", checkForChange );
+		}
+
+
+		setGitHubAccessToken =
+			() => localStorage.setItem( "githubAccessToken", inpAccessToken.value );
+
+
+		function checkForChange( event ) {
+
+			console.log( "event", GTBdivContent.innerHTML, GLB1.contentHtm );
+
+			if ( GTBdivContent.innerHTML === GTB1.contentHtm ) {
+				console.log( "equal" );
+				return;
+			} else {
+
+				console.log( "not equal" );
+			}
+
+			event.preventDefault();
+
+			event.returnValue = "Are you sure you want to exit?";
+
+		};
+
+	</script>
+
+</body>
+
+</html>

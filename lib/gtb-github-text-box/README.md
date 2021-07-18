@@ -14,6 +14,10 @@ _GTB GitHub Text Box in a resizable window. One finger to rotate. Two to zoom._
 
 ## To Do / Wish List
 
+* Toggle contentEditable ~ so can use links
+* Add HTML tags ~ details
+* Add HTML toggle
+
 
 ## Issues
 

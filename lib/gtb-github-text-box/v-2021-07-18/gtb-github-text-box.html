@@ -4,8 +4,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
-	<meta name="description" content="">
-	<meta name="date" content="2021-02-09">
+	<meta name="description" content="Get, edit and put text from and to a file in a GitHub repo">
+	<meta name="date" content="2021-07-18">
 <head>
 	<title>GTB GitHub Text Box</title>
 	<meta charset=utf-8 />
@@ -13,6 +13,8 @@
 		body {
 			font: 100% monospace;
 		}
+
+		#GTBdivTextBox { left: 10rem; position: absolute; top: 10rem; width: 40rem; }
 	</style>
 </head>
 
@@ -24,19 +26,13 @@
 		<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/main/lib/gtb-github-text-box" target="_blank"
 			title="source code on GitHub"><img
 				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
-				<a href="" title="Click this menu title to reset the model">
-					GTB GitHub Text Box
+		<a href="" title="Click this menu title to reset the model">
+			GTB GitHub Text Box
 			<span id=spnVersion></span>
 		</a>
 	</h1>
 
-	<div>
-		<label>GitHub access token
-			<input id=GTBinpAccessToken onclick=this.select(); onblur=GTB.setGitHubAccessToken();
-			title="Obtain GitHub API Access Token">
 
-		</label>
-	</div>
 
 
 	<main>
@@ -48,6 +44,8 @@
 
 		let obj = {
 
+			file: "test-cases/style-sample-tags.html",
+			divContent: "GTBdivTextBox"
 
 		};
 
