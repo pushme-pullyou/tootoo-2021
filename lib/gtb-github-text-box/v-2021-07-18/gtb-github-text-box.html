@@ -7,7 +7,7 @@
 	<meta name="description" content="">
 	<meta name="date" content="2021-02-09">
 <head>
-	<title></title>
+	<title>GTB GitHub Text Box</title>
 	<meta charset=utf-8 />
 	<style>
 		body {
@@ -24,8 +24,8 @@
 		<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/main/lib/gtb-github-text-box" target="_blank"
 			title="source code on GitHub"><img
 				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
-		<a href="" title="Click this menu title to reset the model">
-			<span id=spnTitle>${ MNU.title }</span>
+				<a href="" title="Click this menu title to reset the model">
+					GTB GitHub Text Box
 			<span id=spnVersion></span>
 		</a>
 	</h1>
@@ -38,31 +38,30 @@
 		</label>
 	</div>
 
-	<div id=divMessage ></div>
+
 	<main>
-		<div id=divMainContent></div>
+		<div id=GTBdivTextBox ></div>
 	</main>
 
 
 	<script>
 
+		let obj = {
+
+
+		};
+
 		init();
 
 		function init() {
 
-			spnTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
-
 			spnVersion.innerHTML =  document.head.querySelector( "[ name=date ]" ).content;
 
-			//requestFile();
-
-			GTB.init();
+			GTB.init( obj );
 
 		}
 
-
 	</script>
-
 
 </body>
 
