@@ -1,8 +1,9 @@
-# Text Editor Theo Read Me
+# [![](https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg )](https://github.com/pushme-pullyou/tootoo-2021/ "Source code on GitHub" ) [TT 2021]( https://pushme-pullyou.github.io/tootoo-2021/ "Home page" ) / [Text Editor Read Me]( https://pushme-pullyou.github.io/tootoo-2021/#cookbook/ted-text-edit/README.md)
 
-<div style=height:510px;width:100%;resize:both; ><iframe src="https://theo-armour.github.io/qdata/apps/text-editor/" style=height:100%;width:100%; ></iframe></div>
 
-## Full screen: [ Text Editor Theo ]( https://theo-armour.github.io/qdata/apps/text-editor/ )
+<div style=height:510px;width:100%;resize:both; ><iframe src="https://pushme-pullyou.github.io/tootoo-2021/cookbook/ted-text-edit/" style=height:100%;width:100%; ></iframe></div>
+
+## Full screen: [ Text Editor Theo ]( https://pushme-pullyou.github.io/tootoo-2021/cookbook/ted-text-edit/ )
 
 ## Wish list
 
