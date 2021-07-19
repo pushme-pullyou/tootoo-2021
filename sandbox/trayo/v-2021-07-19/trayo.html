@@ -36,7 +36,7 @@
 	<script src="gtb-github-text-box.js"></script>
 
 	<h1>
-		<a href="https://github.com/theo-armour/qdata/tree/master/apps/trayo" target="_blank"
+		<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/sandbox/trayo" target="_blank"
 			title="source code on GitHub"><img
 				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
 		<a href="" title="Click this menu title to reset the model">
@@ -69,27 +69,34 @@
 		inpAccessToken.value = accessToken;
 
 		let tips = {
-			user: "theo-armour",
-			repo: "qdata",
+			user: "pushme-pullyou",
+			repo: "tootoo-2021",
 			branch: "main",
-			file: "apps/trayo/tips.md",
-			idDivTextBox: "GTBdivTextBox1",
-			idContent: "GTBdivContent1",
-			idMessage: "GTBdivMessage1",
-			idButPut: "GTBbutPut1"
+			file: "sandbox/trayo/tips.md",
+			id: 1,
 
 		};
 
+		// let tips = {
+		// 		user: "theo-armour",
+		// 		repo: "qdata",
+		// 		branch: "main",
+		// 		file: "apps/trayo/tips.md",
+		// 		id: 1,
+		// 		idDivTextBox: "GTBdivTextBox1",
+		// 		idContent: "GTBdivContent1",
+		// 		idMessage: "GTBdivMessage1",
+		// 		idButPut: "GTBbutPut1"
+
+		// };
+
 		let shortcuts= {
 
-			user: "theo-armour",
-			repo: "qdata",
+			user: "pushme-pullyou",
+			repo: "tootoo-2021",
 			branch: "main",
-			file: "apps/trayo/shortcuts2.md",
-			idDivTextBox: "GTBdivTextBox2",
-			idContent: "GTBdivContent2",
-			idMessage: "GTBdivMessage2",
-			idButPut: "GTBbutPut2"
+			file: "sandbox/trayo/shortcuts2.md",
+			id: 2,
 
 		};
 
@@ -100,12 +107,12 @@
 			spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
 
 			GTB1 = new GTB();
-			GTB1.init();
+			GTB1.init( tips);
 
 			GTB2 = new GTB();
 			GTB2.init( shortcuts );
 
-			window.addEventListener( "beforeunload", checkForChange );
+			//window.addEventListener( "beforeunload", checkForChange );
 
 		}
 

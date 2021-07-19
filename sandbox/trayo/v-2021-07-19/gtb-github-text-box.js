@@ -9,50 +9,52 @@ function GTB() {
 	this.repo = "tootoo-2021";
 	this.branch = "master";
 	this.file = "test-cases/text-to-hack.html";
-	this.idDivTextBox = "GTBdivTextBox1";
-	this.idMessage = "GTBdivMessage";
-	this.idContent = "GTBdivContent";
-	this.idButPut = "GTBbutPut";
+	this.id = 1;
 
 
 	this.init = ( params = {} ) => {
 		//console.log( "params", params );
 
 		this.accessToken = localStorage.getItem( 'githubAccessToken' ) || "";
-
+		//console.log( "params", params );
 		this.user = params.user || this.user;
 		this.repo = params.repo || this.repo;
 		this.branch = params.branch || this.branch;
 		this.file = params.file || this.file;
-		this.idDivTextBox = params.idDivTextBox || this.idDivTextBox;
-		this.idMessage = params.idMessage || this.idMessage;
-		this.idContent = params.idContent || this.idContent;
-		this.idButPut = params.idButPut || this.idButPut;
+		this.id = params.id || this.id;
+		console.log( "this.id", this.id );
 
 		this.url = `https://api.github.com/repos/${ this.user }/${ this.repo }/contents/${ this.file }`;
 
-		this.divTextBox = window[ this.idDivTextBox ];
+		this.divTextBox = window[ `GTBdivTextBox${ this.id }` ];
 
 		const htm = `
 <div>
-	<button id=${ this.idButPut } title="Press Alt-S">putToGitHub</button>
-	<div id=${ this.idMessage } style=display:inline; ></div>
+	<button id=idButPut${ this.id }>putToGitHub</button>
+	<div id=idMessage${ this.id } style=display:inline; ></div>
+	<input type=checkbox id=idChkEdit${ this.id } checked>
 </div>
-<div id=${ this.idContent } style="border: 1px #888 solid;overflow:auto;padding: 0.5em;resize:both;" contentEditable ></div>
+<div id=idContent${ this.id } style="border: 1px #888 solid;overflow:auto;padding: 0.5em;resize:both;" contentEditable ></div>
 	`;
 
 		this.divTextBox.innerHTML = htm;
 
-		this.divContent = window[ this.idContent ];
+		this.divContent = window[ `idContent${ this.id }` ];
 		//console.log( "this.divContent ", this.divContent );
 
-		this.divMessage = window[ this.idMessage ];
+		this.divMessage = window[ `idMessage${ this.id }` ];
 
-		window[ this.idButPut ].onclick = () => this.putFileToGitHub( this.url );
+		const put = window[ `idButPut${ this.id }` ];
+
+		put.onclick = () => { this.putFileToGitHub( this.url ); };
+
+		const chk = window[ `idChkEdit${ this.id }` ];
+
+		chk.onclick = () => { this.divContent.contentEditable = chk.checked; };
 
 		this.requestFile();
 
-		window.addEventListener( "beforeunload", this.checkForChange, false );
+		//window.addEventListener( "beforeunload", this.checkForChange, false );
 
 	};
 
