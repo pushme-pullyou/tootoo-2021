@@ -1,7 +1,6 @@
-nnnnnn
+nnnnnn<div>mmm<br>&nbsp;
 
-<div><a href="https://www.google.com/collections/s/list/aC4sz9C4MSG7ImIoVgGN1w/pJGl3_zBt7I"
-					target="_blank">google favorites</a></div>
+<div><a href="https://www.google.com/collections/s/list/aC4sz9C4MSG7ImIoVgGN1w/pJGl3_zBt7I" target="_blank">google favorites</a></div>
 
 			<div><a href="https://www.30secondsofcode.org/js/p/1/" target="_blank">30secondsofcode</a></div>
 
@@ -10,15 +9,12 @@ nnnnnn
 
 			<div><a href="https://htmldom.dev/" target="_blank">htmldom.dev</a></div>
 
-			<div><a href="https://dev.to/vasanthv/use-css-to-automatically-enable-dark-mode-in-your-web-app-based-on-system-settings-2jlp"
-					target="_blank">CSS automatic enable dark mod</a></div>
+			<div><a href="https://dev.to/vasanthv/use-css-to-automatically-enable-dark-mode-in-your-web-app-based-on-system-settings-2jlp" target="_blank">CSS automatic enable dark mod</a></div>
 
-			<div><a href="https://www.w3schools.com/colors/colors_names.asp"
-					target="_blank">w3schools color names</a>~<a href="https://www.w3schools.com/colors/colors_groups.asp" target="_blank">groups</a>
+			<div><a href="https://www.w3schools.com/colors/colors_names.asp" target="_blank">w3schools color names</a>~<a href="https://www.w3schools.com/colors/colors_groups.asp" target="_blank">groups</a>
 			</div>
 
-			<div><a href="https://html.spec.whatwg.org/multipage/named-characters.html#named-character-references"
-					target="_blank">named character references all</a></div>
+			<div><a href="https://html.spec.whatwg.org/multipage/named-characters.html#named-character-references" target="_blank">named character references all</a></div>
 
 			<div><a href="https://simpl.info/" target="_blank">simple.info</a> try their CORS</div>
 
@@ -30,9 +26,9 @@ nnnnnn
 				<a href="https://zapier.com/learn/customer-support/improv-customer-support/" target="_blank">4 rules
 					of
 					improv</a>
-				<button onclick=dia4rules.open=!dia4rules.open;>4r</button>
+				<button onclick="dia4rules.open=!dia4rules.open;">4r</button>
 
-				<dialog id=dia4rules onclick=this.open=false;>
+				<dialog id="dia4rules" onclick="this.open=false;">
 					<p>
 						4 Rules of Improv
 					</p>
@@ -54,3 +50,4 @@ nnnnnn
 
 				</dialog>
 			</div>
+</div>
