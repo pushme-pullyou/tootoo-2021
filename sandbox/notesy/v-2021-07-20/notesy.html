@@ -5,12 +5,11 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
 	<meta name="description" content="">
-	<meta name="date" content="2021-07-19">
+	<meta name="date" content="2021-07-20">
 
 	<title>notes</title>
 
 	<style>
-
 		body {
 			box-sizing: border-box;
 			font: 100% monospace;
@@ -29,7 +28,6 @@
 		input {
 			vertical-align: middle;
 		}
-
 	</style>
 </head>
 
@@ -41,13 +39,10 @@
 				title="source code on GitHub"><img
 					src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
 			<a href="" title="Click this menu title to reload the file">
-				<span id=spnTitle></span>
-				<span id=spnVersion></span></a>
-
+				<span id=spnTitle></span><span id=spnVersion></span></a>
 			<input id=XGPinpAccessToken onclick=this.select(); onblur=XGP.setGitHubAccessToken();
-				title="Obtain GitHub API Access Token">
-
-			<button onclick=XGP.putFileToGitHub() title="Press Alt-S">putToGitHub</button>
+				title="Obtain GitHub API Access Token" size=5>
+			<button onclick=XGP.putFileToGitHub() title="Press Alt-S">putGitHub</button>
 		</h2>
 
 		<div id=divMessage style=display:inline;></div>
@@ -67,11 +62,12 @@
 
 
 
-		init = function ( url = XGP.url ) {
+
+		function init( url = XGP.url ) {
 
 			XGP.url = url;
 
-			spnTitle.innerHTML = XGP.url.split( "/").pop().split( ".").shift();
+			spnTitle.innerHTML = XGP.url.split( "/" ).pop().split( "." ).shift();
 
 			//spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
 
@@ -125,14 +121,21 @@
 
 			const content = atob( xhr.target.response.content );
 
-			divContent.innerHTML = content;
+			ext = XGP.url.split( ".").pop().toLowerCase();
+			console.log( "ext", ext );
+			if ( ext === "md" ) {
+				divContent.innerText = content;
+			} else {
+
+				divContent.innerHTML = content;
+			}
 
 			XGP.content = content;
 
 			if ( window.divMessage ) {
 
 				//divMessage.innerText = `Get:${ new Date().toLocaleString() } bytes:${ content.length } sha:${ XGP.sha }`;
-				divMessage.innerText = `Get:${ new Date().toLocaleString() } bytes:${ content.length }`;
+				divMessage.innerText = `Get${ new Date().toLocaleString().split( "," ).pop() } bytes:${ content.length }`;
 
 			}
 
@@ -184,7 +187,7 @@
 			xhr.send( body );
 
 			//divMessage.innerText = `Put: ${ new Date().toLocaleString() } bytes:${ XGP.content.length } sha:${ XGP.sha }`;
-			divMessage.innerText = `Put: ${ new Date().toLocaleString() } bytes:${ XGP.content.length }`;
+			divMessage.innerText = `Put: ${ new Date().toLocaleString().split(",").pop() } bytes:${ XGP.content.length }`;
 
 		};
 
@@ -216,9 +219,7 @@
 
 		};
 
-
-		//init();
-
+		if ( window.self === window.top ) init();
 
 	</script>
 
