@@ -32,9 +32,10 @@ function GTB() {
 <div>
 	<button id=idButPut${ this.id }>putToGitHub</button>
 	<div id=idMessage${ this.id } style=display:inline; ></div>
-	<input type=checkbox id=idChkEdit${ this.id } checked>
+	Ed<input type=checkbox id=idChkEdit${ this.id } checked>
+	Htm<input type=checkbox id=idChkHtml${ this.id }>
 </div>
-<div id=idContent${ this.id } style="border: 1px #888 solid;overflow:auto;padding: 0.5em;resize:both;" contentEditable ></div>
+<div id=idContent${ this.id } style="border: 1px #888 solid;padding: 0.5em;" contentEditable ></div>
 	`;
 
 		this.divTextBox.innerHTML = htm;
@@ -51,6 +52,24 @@ function GTB() {
 		const chk = window[ `idChkEdit${ this.id }` ];
 
 		chk.onclick = () => { this.divContent.contentEditable = chk.checked; };
+
+		this.chkHtm = window[ `idChkHtml${ this.id }` ];
+
+		this.chkHtm.onclick = () => {
+
+			console.log( "chkHtm.checked", this.chkHtm.checked );
+
+			if ( this.chkHtm.checked ) {
+
+				this.divContent.innerText = this.divContent.innerHTML;
+
+			} else {
+
+				this.divContent.innerHTML = this.divContent.innerText;
+
+			};
+
+		};
 
 		this.requestFile();
 
@@ -136,7 +155,7 @@ function GTB() {
 
 	this.putFile = function () {
 
-		this.content = this.divContent.innerHTML;
+		this.content = this.chkHtm.checked ? this.divContent.innerText : this.divContent.innerHTML;
 
 		const codedData = window.btoa( this.content ); // encode the string
 

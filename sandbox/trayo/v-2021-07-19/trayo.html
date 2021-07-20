@@ -15,15 +15,19 @@
 
 		h1 { margin: 0; padding: 0}
 
+		.resize { background-color: #fff; overflow: auto; resize:both; }
+
 		#GTBdivTextBox1 {
 			left: 1rem;
 			position: absolute;
 			top: 3rem;
 			width: 15rem;
+			z-index: 1;
 		}
 
 		#GTBdivTextBox2 {
 			left: 18rem;
+			max-height: 90vh;
 			position: absolute;
 			top: 3rem;
 			width: 25rem;
@@ -57,9 +61,9 @@
 
 
 	<main>
-		<div id=GTBdivTextBox1></div>
+		<div id=GTBdivTextBox1 class=resize ></div>
 
-		<div id=GTBdivTextBox2></div>
+		<div id=GTBdivTextBox2 class=resize ></div>
 	</main>
 
 
