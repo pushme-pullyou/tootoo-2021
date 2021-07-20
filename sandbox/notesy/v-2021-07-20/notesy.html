@@ -57,7 +57,10 @@
 		// XMLHTTPRequest GitHub Push (XGP)
 
 		const XGP = {
-			url: "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/sandbox/trayo/tips.md",
+
+			url: "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/sandbox/trayo/shortcuts2.md",
+
+			//url: "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/sandbox/trayo/tips.html",
 		};
 
 
@@ -121,13 +124,17 @@
 
 			const content = atob( xhr.target.response.content );
 
-			ext = XGP.url.split( ".").pop().toLowerCase();
-			console.log( "ext", ext );
-			if ( ext === "md" ) {
+			XGP.ext = XGP.url.split( "." ).pop().toLowerCase();
+			console.log( "ext", XGP.ext );
+
+			if ( XGP.ext === "md" ) {
+
 				divContent.innerText = content;
+
 			} else {
 
 				divContent.innerHTML = content;
+
 			}
 
 			XGP.content = content;
@@ -135,7 +142,7 @@
 			if ( window.divMessage ) {
 
 				//divMessage.innerText = `Get:${ new Date().toLocaleString() } bytes:${ content.length } sha:${ XGP.sha }`;
-				divMessage.innerText = `Get${ new Date().toLocaleString().split( "," ).pop() } bytes:${ content.length }`;
+				divMessage.innerText = `Get${ new Date().toLocaleString().split( "," ).pop() } bytes:${ XGP.content.length }`;
 
 			}
 
@@ -166,7 +173,16 @@
 
 		XGP.putFile = function () {
 
-			XGP.content = divContent.innerHTML;
+			if ( XGP.ext === "md" ) {
+
+				XGP.content = divContent.innerText;
+
+
+			} else {
+
+				XGP.content = divContent.innerHTML;
+
+			}
 
 			const codedData = window.btoa( XGP.content ); // encode the string
 
@@ -187,7 +203,7 @@
 			xhr.send( body );
 
 			//divMessage.innerText = `Put: ${ new Date().toLocaleString() } bytes:${ XGP.content.length } sha:${ XGP.sha }`;
-			divMessage.innerText = `Put: ${ new Date().toLocaleString().split(",").pop() } bytes:${ XGP.content.length }`;
+			divMessage.innerText = `Put: ${ new Date().toLocaleString().split( "," ).pop() } bytes:${ XGP.content.length }`;
 
 		};
 
@@ -195,7 +211,7 @@
 
 		XGP.checkForChange = function ( event ) {
 
-			if ( divContent.innerHTML === XGP.content ) { return; }
+			if ( divContent.innerHTML === XGP.content || XGP.content === divContent.innerText) { return; }
 
 			event.preventDefault();
 
