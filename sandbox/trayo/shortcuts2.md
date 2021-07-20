@@ -1,7 +1,7 @@
-win10:<br>
+<div>emmet <a href="https://docs.emmet.io/cheat-sheet/">Cheat Sheet</a><br>* html:5<br>* lorem100<br>* ul&gt;li.item$*5 &lt;&lt; type this then press tab<br></div><div><br></div>win10:<br>
 * Keyboard shortcuts in Windows<br>
 * dictation<br>
-* darkmode: settings > personalization<br>
+* darkmode: settings &gt; personalization<br>
 gMail:<br>
 * keyboard shortcuts: ?<br>
 * space bar: scroll preview<br>
@@ -19,7 +19,7 @@ chromebook: blog<br>
 * accessibility features - dictation<br>
 <br>
 vs code:<br>
-* >> keyboard shortcuts: Ctrl + K Ctrl + R<br>
+* &gt;&gt; keyboard shortcuts: Ctrl + K Ctrl + R<br>
 * Curser add select next: Ctrl + D<br>
 * Cursor add below: alt-ctrl-↓<br>
 * Definition: F12<br>
@@ -32,8 +32,4 @@ vs code:<br>
 * Word wrap: alt + z<br>
 Custom<br>
 * Title Case: ctrl + i<br>
-* home||end: alt + lArr||rArr<br>
-emmet cheat-sheet<br>
-* html:5<br>
-* lorem100<br>
-* ul>li.item$*5 << type this then press tab<br>
+* home||end: alt + lArr||rArr<br><br>
