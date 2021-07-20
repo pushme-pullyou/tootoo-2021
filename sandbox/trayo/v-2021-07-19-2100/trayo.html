@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Trayo</title>
+
+	<style>
+		body {
+			font: 100% monospace;
+			margin: 0;
+		}
+
+		h1 {
+			margin: 0;
+			padding: 0
+		}
+
+		iframe {
+			height: 100%;
+			width: 100%;
+			margin: 0;
+		}
+
+		.resize {
+			background-color: #ffc;
+			overflow: auto;
+			resize: both;
+		}
+
+		#divNotes1 {
+			height: 76vh;
+			left: 1rem;
+			position: absolute;
+			width: 15rem;
+			z-index: 1;
+		}
+
+		#divNotes2 {
+			left: 18rem;
+			height: 90vh;
+			position: absolute;
+			width: 28rem;
+		}
+
+		#divNotes3 {
+			position: absolute;
+			height: 80vh;
+			left: 50rem;
+			width: 20rem;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h1>
+		<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/sandbox/trayo" target="_blank"
+			title="source code on GitHub"><img
+				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
+		<a href="" title="Click this menu title to reset the model">
+			trayo
+			<span id=spnVersion></span></a>
+		<label>
+			<input id=inpAccessToken onclick=this.select(); onblur=setGitHubAccessToken();
+				title="Obtain GitHub API Access Token">
+		</label>
+
+		<span
+			title="#164; curren; times; deg; bull; middot; mdash; euro; hellip; vellip; #x1801; ❦ #x2766; ❧ phone; spades; starf; bigstar; xcirc; block; marker; FilledSmallSquare;">
+			&#164; &curren; &times; &deg; &bull; &middot; &mdash; &euro; &hellip; &vellip; &#x1801; ❦ &#x2766; ❧ &phone;
+			&spades; &starf; &bigstar; <span title="xcirc;">&xcirc;</span> &block; &marker; &FilledSmallSquare;
+		</span>
+	</h1>
+
+	<div id=divNotes1 class=resize>
+		<iframe id=ifrNotes1 onload=ifrNotes1.contentWindow.init(); src="../../notesy/v-2021-07-19/notesy.html"
+			frameborder="0"></iframe>
+	</div>
+
+	<div id=divNotes2 class=resize>
+		<iframe id=ifrNotes2
+			onload=ifrNotes2.contentWindow.init("https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/sandbox/trayo/shortcuts2.md");
+			src="../../notesy/v-2021-07-19/notesy.html" frameborder="0"></iframe>
+	</div>
+
+	<div id=divNotes3 class=resize>
+		<iframe id=ifrNotes3
+			onload=ifrNotes3.contentWindow.init("https://api.github.com/repos/theo-armour/qdata/contents/0-to-do/0-to-do.md");
+			src="../../notesy/v-2021-07-19/notesy.html" frameborder="0"></iframe>
+	</div>
+
+		<!-- <div id=divNotes3 class=resize>
+			<iframe id=ifrNotes3
+				onload=ifrNotes3.contentWindow.init("https://api.github.com/repos/theo-armour/qdata/contents/0-to-do/0-to-do.md");
+				src="https://theo-armour.github.io/qdata/0-to-do/readme.html#0-to-do.md" frameborder="0"></iframe>
+		</div> -->
+</body>
+
+</html>

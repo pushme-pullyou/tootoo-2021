@@ -30,18 +30,10 @@
 			vertical-align: middle;
 		}
 
-		#divMainContent{
-			margin: 0;
-			padding: 0;
-			width: 100%;
-		}
-
 	</style>
 </head>
 
 <body>
-
-	<!-- <script src="xgp-xhr-get-put.js"></script> -->
 
 	<main>
 		<h2>
@@ -49,7 +41,7 @@
 				title="source code on GitHub"><img
 					src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
 			<a href="" title="Click this menu title to reload the file">
-				notesy
+				<span id=spnTitle></span>
 				<span id=spnVersion></span></a>
 
 			<input id=XGPinpAccessToken onclick=this.select(); onblur=XGP.setGitHubAccessToken();
@@ -61,7 +53,7 @@
 		<div id=divMessage style=display:inline;></div>
 
 
-		<div id="divMainContent" contentEditable></div>
+		<div id="divContent" contentEditable></div>
 
 	</main>
 
@@ -70,28 +62,24 @@
 		// XMLHTTPRequest GitHub Push (XGP)
 
 		const XGP = {
-			user: "pushme-pullyou",
-			repo: "tootoo-2021",
-			branch: "main",
-			url: "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/test-cases/text-to-hack.html",
-			Date: new Date(),
-			defaultFile: "notes.md"
+			url: "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/sandbox/trayo/tips.md",
 		};
 
 
 
-		XGP.init = function ( url = XGP.url ) {
+		init = function ( url = XGP.url ) {
 
 			XGP.url = url;
-			
-			spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
+
+			spnTitle.innerHTML = XGP.url.split( "/").pop().split( ".").shift();
+
+			//spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
 
 			XGP.accessToken = localStorage.getItem( 'githubAccessToken' ) || "";
 			XGPinpAccessToken.value = XGP.accessToken;
 
 			window.addEventListener( "beforeunload", XGP.checkForChange );
 			window.addEventListener( 'keyup', XGP.onKeyUp, false ); // Save file Alt--S
-
 
 			XGP.requestFile();
 
@@ -137,7 +125,7 @@
 
 			const content = atob( xhr.target.response.content );
 
-			divMainContent.innerHTML = content;
+			divContent.innerHTML = content;
 
 			XGP.content = content;
 
@@ -175,7 +163,7 @@
 
 		XGP.putFile = function () {
 
-			XGP.content = divMainContent.innerHTML;
+			XGP.content = divContent.innerHTML;
 
 			const codedData = window.btoa( XGP.content ); // encode the string
 
@@ -204,7 +192,7 @@
 
 		XGP.checkForChange = function ( event ) {
 
-			if ( divMainContent.innerHTML === XGP.content ) { return; }
+			if ( divContent.innerHTML === XGP.content ) { return; }
 
 			event.preventDefault();
 
@@ -229,7 +217,7 @@
 		};
 
 
-		XGP.init();
+		//XGP.init();
 
 
 	</script>
