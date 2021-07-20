@@ -58,7 +58,11 @@
 
 		const XGP = {
 
-			url: "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/sandbox/trayo/shortcuts2.md",
+			url: "https://api.github.com/repos/theo-armour/qdata/contents/journal/days-of-year-md/07/07-20.md",
+
+			//url: "https://api.github.com/repos/theo-armour/qdata/contents/0-to-do/0-to-do.md",
+
+			//url: "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/sandbox/trayo/shortcuts2.md",
 
 			//url: "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/sandbox/trayo/tips.html",
 		};
@@ -212,6 +216,8 @@
 		XGP.checkForChange = function ( event ) {
 
 			if ( divContent.innerHTML === XGP.content || XGP.content === divContent.innerText) { return; }
+
+			console.log( "", XGP.content );
 
 			event.preventDefault();
 

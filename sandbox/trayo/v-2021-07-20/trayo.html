@@ -30,25 +30,36 @@
 		}
 
 		#divNotes1 {
-			height: 76vh;
-			left: 1rem;
-			position: absolute;
-			width: 15rem;
+			float: left;
+			height: 93vh;
+			margin-left: 1rem;
+			overflow: hidden;
+			width: 25%;
 			z-index: 1;
 		}
 
 		#divNotes2 {
-			left: 18rem;
-			height: 90vh;
-			position: absolute;
-			width: 28rem;
+			float: left;
+			margin-left: 1rem;
+			height: 93vh;
+			overflow: hidden;
+			width: 20%;
 		}
 
 		#divNotes3 {
-			position: absolute;
-			height: 80vh;
-			left: 50rem;
-			width: 20rem;
+			float: left;
+			height: 93vh;
+			margin-left: 1rem;
+			width: 25%;
+			overflow: hidden;
+		}
+
+		#divNotes4 {
+			float: left;
+			height: 93vh;
+			margin-left: 1rem;
+			width: 20%;
+			overflow: hidden;
 		}
 	</style>
 </head>
@@ -74,22 +85,30 @@
 		</span>
 	</h1>
 
-	<div id=divNotes1 class=resize>
-		<iframe id=ifrNotes1 onload=ifrNotes1.contentWindow.init(); src="../../notesy/index.html"
-			frameborder="0"></iframe>
+	<div id=divNotes1 class=resize >
+		<iframe id=ifrNotes1
+			onload=ifrNotes1.contentWindow.init("https://api.github.com/repos/theo-armour/qdata/contents/0-to-do/0-to-do.md");
+			src="../../notesy/index.html" frameborder="0"></iframe>
 	</div>
 
 	<div id=divNotes2 class=resize>
 		<iframe id=ifrNotes2
-			onload=ifrNotes2.contentWindow.init("https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/sandbox/trayo/shortcuts2.md");
-			src="../../notesy/index.html" frameborder="0"></iframe>
+			onload=ifrNotes2.contentWindow.init(); src="../../notesy/index.html"
+			frameborder="0"></iframe>
 	</div>
 
 	<div id=divNotes3 class=resize>
 		<iframe id=ifrNotes3
-			onload=ifrNotes3.contentWindow.init("https://api.github.com/repos/theo-armour/qdata/contents/0-to-do/0-to-do.md");
+			onload=ifrNotes3.contentWindow.init("https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/sandbox/trayo/shortcuts2.html");
 			src="../../notesy/index.html" frameborder="0"></iframe>
 	</div>
+
+	<div id=divNotes4 class=resize>
+		<iframe id=ifrNotes4
+			onload=ifrNotes4.contentWindow.init("https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/sandbox/trayo/tips.html");
+			src="../../notesy/index.html" frameborder="0"></iframe>
+	</div>
+
 
 	<!-- <div id=divNotes3 class=resize>
 		<iframe id=ifrNotes4
