@@ -1,8 +1,4 @@
-win10:
-* Keyboard shortcuts in Windows
-* dictation
-* darkmode: settings > personalization
-gMail:
+win10:&nbsp;<div>* Keyboard shortcuts in Windows&nbsp;</div><div>* dictation&nbsp;</div><div>* darkmode: settings &gt; personalization&nbsp;</div><div><br></div><div>gMail:
 * keyboard shortcuts: ?
 * space bar: scroll preview
 * cursor keys: scroll messages
@@ -19,7 +15,7 @@ chromebook: blog
 * accessibility features - dictation
 
 vs code:
-* >> keyboard shortcuts: Ctrl + K Ctrl + R
+* &gt;&gt; keyboard shortcuts: Ctrl + K Ctrl + R
 * Curser add select next: Ctrl + D
 * Cursor add below: alt-ctrl-↓
 * Definition: F12
@@ -36,4 +32,5 @@ Custom
 emmet cheat-sheet
 * html:5
 * lorem100
-* ul>li.item$*5 << type this then press tab
+* ul&gt;li.item$*5 &lt;&lt; type this then press tab
+</div>
