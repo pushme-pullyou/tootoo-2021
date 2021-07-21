@@ -47,6 +47,9 @@
 
 		<div id=divMessage style=display:inline;></div>
 
+			Ed<input type=checkbox onclick =divContent.contentEditable=this.checked; checked>
+			Htm<input type=checkbox id=chkHtml onclick=XGP.toggleHtml() >
+
 
 		<div id="divContent" contentEditable></div>
 
@@ -103,6 +106,26 @@
 		};
 
 
+		XGP.toggleHtml = function() {
+
+			//chkHtml.onclick = () => {
+
+				console.log( "chkHtm.checked",chkHtml.checked );
+
+				if ( chkHtml.checked ) {
+
+					divContent.innerHTML = divContent.innerText;
+
+				} else {
+
+					divContent.innerText = divContent.innerHTML;
+
+				};
+
+			//};
+
+
+		}
 
 		XGP.requestFile = function ( event ) {
 
@@ -134,10 +157,12 @@
 			if ( XGP.ext === "md" ) {
 
 				divContent.innerText = content;
+				chkHtml.checked = false;
 
 			} else {
 
 				divContent.innerHTML = content;
+				chkHtml.checked = true;
 
 			}
 
