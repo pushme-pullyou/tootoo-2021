@@ -11,14 +11,14 @@ _"Trayo" in a resizable window. One finger to rotate. Two to zoom._
 
 ## Concept
 
+* A dashboard of editable files
 
 ## To Do / Wish List
 
-* Open today's journal entry
-* Figure out DOM parsing - going cleanly from innerText to innerHTML and back
+* In ToDo want summaries to be links to related ToDo on GitHub in edit mode
 * Add dialogs; cheat sheets inside dialogs
 * Iframes inside details and dialogs
-* Move closer to HTML as the base format
+
 
 ## Issues
 
@@ -28,7 +28,11 @@ _"Trayo" in a resizable window. One finger to rotate. Two to zoom._
 
 ## Change Log
 
+### 2021-07-22
 
+Done
+* Move closer to HTML as the base format
+* Open today's journal entry
 ### 2021-07-20
 
 * First commit

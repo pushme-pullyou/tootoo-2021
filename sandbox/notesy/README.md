@@ -11,9 +11,15 @@ _"notesy" in a resizable window. One finger to rotate. Two to zoom._
 
 ## Concept
 
+* Edit files on GitHub
+* Links to source for better editing tools
+
 
 ## To Do / Wish List
 
+* Links to source on GitHub
+* Links to vs code local files
+* Figure out DOM parsing - going cleanly from innerText to innerHTML and back
 
 ## Issues
 
