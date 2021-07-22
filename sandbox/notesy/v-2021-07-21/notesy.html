@@ -21,6 +21,15 @@
 			margin: 0;
 		}
 
+		header { background-color: #ddd; position: fixed; top: 0;}
+
+
+		.content {
+			background-color: #ffc;
+			margin: 3.3rem 0 0 0;
+			padding: 0 0.1rem 0 0.5rem;
+		}
+
 		img {
 			vertical-align: middle;
 		}
@@ -33,14 +42,15 @@
 
 <body>
 
-	<main>
+	<header>
+
 		<h2>
 			<a href="" id=aSource target="_blank" title="source code on GitHub"><img
 					src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
 			<a href="" title="Click this menu title to reload the file">
 				<span id=spnTitle></span><span id=spnVersion></span></a>
 			<input id=XGPinpAccessToken onclick=this.select(); onblur=XGP.setGitHubAccessToken();
-				title="Obtain GitHub API Access Token" size=5>
+				title="Obtain GitHub API Access Token" size=3>
 			<button onclick=XGP.putFileToGitHub() title="Press Alt-S">putGitHub</button>
 		</h2>
 
@@ -49,7 +59,10 @@
 		Ed<input type=checkbox onclick=divContent.contentEditable=this.checked; checked>
 		Htm<input type=checkbox id=chkHtml onclick=XGP.toggleHtml()>
 
-		<div id="divContent" contentEditable></div>
+	</header>
+
+	<main>
+		<div id="divContent" class=content contentEditable></div>
 
 	</main>
 
