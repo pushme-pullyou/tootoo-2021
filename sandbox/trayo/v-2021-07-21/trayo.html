@@ -122,8 +122,8 @@ background-color: #ffc;
 		const notesy = "../../notesy/v-2021-07-21/notesy.html";
 
 		const obj1 = {
-			url: "https://api.github.com/repos/theo-armour/qdata/contents/0-to-do/0-to-do.md",
-			source: "https://github.com/theo-armour/qdata/tree/master/0-to-do/0-to-do.md"
+			url: "https://api.github.com/repos/theo-armour/qdata/contents/0-to-do/0-to-do.html",
+			source: "https://github.com/theo-armour/qdata/tree/master/0-to-do/0-to-do.html"
 		}
 		ifrNotes1.onload = () => { ifrNotes1.contentWindow.init( obj1 ); }
 		ifrNotes1.src = notesy;
@@ -133,7 +133,7 @@ background-color: #ffc;
 		const month = ( 1 + aDate.getMonth() ).toString().padStart( 2, "0" );
 		const date = aDate.getDate().toString().padStart( 2, "0" );
 
-		//console.log( "date", date );
+		console.log( "date", date );
 
 		const path = `${ month }/${ month }-${ date }.md`;
 
