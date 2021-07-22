@@ -77,7 +77,7 @@
 
 			url: "https://api.github.com/repos/theo-armour/qdata/contents/journal/days-of-year-md/07/07-20.md",
 
-			url: "../lorem.html",
+			url: "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/sandbox/notesy/lorem.html",
 			//url: "https://api.github.com/repos/theo-armour/qdata/contents/0-to-do/0-to-do.md",
 
 			//url: "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/sandbox/trayo/shortcuts2.md",
@@ -133,11 +133,11 @@
 
 			if ( chkHtml.checked ) {
 
-				divContent.innerHTML = divContent.innerText;
+				divContent.innerText = divContent.innerHTML;
 
 			} else {
 
-				divContent.innerText = divContent.innerHTML;
+				divContent.innerHTML = divContent.innerText;
 
 			};
 
@@ -181,7 +181,7 @@
 			} else {
 
 				divContent.innerHTML = content;
-				chkHtml.checked = true;
+				chkHtml.checked = false;
 
 			}
 
@@ -228,10 +228,18 @@
 
 			} else {
 
+				if ( chkHtml.checked ) {
+
+					divContent.innerHTML = divContent.innerText;
+
+					chkHtml.checked = false;
+				}
+
 				XGP.content = divContent.innerHTML;
 
 			}
 
+			console.log( "XGP.content", XGP.content );
 			const codedData = window.btoa( XGP.content ); // encode the string
 
 			const body = JSON.stringify( {
