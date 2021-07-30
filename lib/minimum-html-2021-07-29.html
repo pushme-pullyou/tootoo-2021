@@ -5,10 +5,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
 	<meta name="description" content="">
-	<meta name="date" content="2021-02-09">
-<head>
+	<meta name="date" content="2021-07-29">
 	<title></title>
-	<meta charset=utf-8 />
 	<style>
 		body {
 			font: 100% monospace;
@@ -23,10 +21,13 @@
 			title="source code on GitHub"><img
 				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
 		<a href="" title="Click this menu title to reset the model">
-			<span id=spnTitle>${ MNU.title }</span>
+			<span id=spnTitle></span>
 			<span id=spnVersion></span>
 		</a>
 	</h1>
+
+	<div id="divContent"></div>
+
 
 	<script>
 
@@ -46,7 +47,7 @@
 
 		function requestFile( url = "https://example.com", callback = onLoad ) {
 
-			// urlDefaultFile = "https://cdn.jsdelivr.net/gh/pushme-pullyou/tootoo-2020@master/README.md";
+			url = "https://cdn.jsdelivr.net/gh/pushme-pullyou/tootoo-2021@master/README.md";
 			const urlCORS = ""; //https://cors-anywhere.herokuapp.com/";
 
 			xhr = new XMLHttpRequest();
@@ -64,6 +65,8 @@
 		function onLoad( response ) {
 
 			console.log( "response", response );
+
+			divContent.innerText = response;
 
 		}
 
