@@ -1,4 +1,4 @@
-[
+{ data: [
 ["Kolkāta","Kolkata","22.5411","88.3378","India","IN","IND","West Bengal","admin","17560000","1356060520"],
 ["Moscow","Moscow","55.7558","37.6178","Russia","RU","RUS","Moskva","primary","17125000","1643318494"],
 ["Bangkok","Bangkok","13.7500","100.5167","Thailand","TH","THA","Krung Thep Maha Nakhon","primary","17066000","1764068610"],
@@ -26555,4 +26555,4 @@
 ["Cheremoshna","Cheremoshna","51.3894","30.0989","Ukraine","UA","UKR","Kyyivs’ka Oblast’","","0","1804043438"],
 ["Ambarchik","Ambarchik","69.6510","162.3336","Russia","RU","RUS","Sakha (Yakutiya)","","0","1643739159"],
 ["Nordvik","Nordvik","74.0165","111.5100","Russia","RU","RUS","Krasnoyarskiy Kray","","0","1643587468"]
-]
+] }
