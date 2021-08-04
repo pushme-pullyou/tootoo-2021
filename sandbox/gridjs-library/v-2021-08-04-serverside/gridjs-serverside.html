@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+</head>
+
+<body>
+	<div id="wrapper"></div>
+
+	<script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+
+</body>
+
+<script>
+
+	new gridjs.Grid( {
+			columns: [ "Name", "Email", "Phone Number" ],
+			sort: true,
+			pagination: { limit: 3 },
+			fixedHeader: true,
+			height: '400px',
+		server: {
+			url: "https://pushme-pullyou.github.io/tootoo-2021/data/simplemaps/worldcities.csv",
+			then: data => data.split( /\n/ ).map( line => line.split( "," ) )
+		}
+		} ).render( wrapper );
+
+</script>
+
+</html>

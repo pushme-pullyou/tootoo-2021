@@ -3,6 +3,7 @@
 ## JHU
 
 * https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/UID_ISO_FIPS_LookUp_Table.csv
+* https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/UID_ISO_FIPS_LookUp_Table.csv
 * Updated daily
 * Provides FIPS & othedr IDa
 * Lat, Lon, population
