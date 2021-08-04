@@ -71,8 +71,12 @@
 			pagination: { limit: 20 },
 			search: true,
 			sort: true,
-			data: data.slice( 1 ),
-
+			//data: data.slice( 1 ),
+			data: Array( 50 ).fill().map( x => [
+				faker.name.findName(),
+				faker.internet.email(),
+				faker.name.title(),
+			] )
 		} ).render( document.getElementById( "wrapper" ) );
 
 	}
