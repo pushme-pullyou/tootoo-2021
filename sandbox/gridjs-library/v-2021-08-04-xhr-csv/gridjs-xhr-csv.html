@@ -85,11 +85,14 @@
 
 		lines = response.split( /\r\n/ ).map( ( line ) => line.replace( /"/g, "" ).split( ",") );
 
-		//lines.forEach( line => line[ 9 ] = +line[ 9 ] )
+		lines.slice( 1 ).forEach( line => line[ 9 ] = line[ 9 ] === "" || isNaN( line[ 9 ] ) ? "0" : line[ 9 ] )
 		console.log( "lines", lines );
 
 		//filter = lines.filter( line => line.length !== 11);
 		//console.log( "filter", filter );
+
+		filter = lines.filter( line => isNaN( line[ 9 ]) );
+		console.log( "filter", filter );
 
 
 
