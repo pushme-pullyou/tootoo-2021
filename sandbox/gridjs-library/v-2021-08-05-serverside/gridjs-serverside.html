@@ -18,14 +18,14 @@
 	//url = "https://pushme-pullyou.github.io/tootoo-2021/data/simplemaps/worldcities-173.json";
 
 	new gridjs.Grid( {
-			columns: [ "Name", "Email", "Phone Number" ],
+			//columns: data[ 0 ],
 			sort: true,
-			pagination: { limit: 3 },
+			pagination: { limit: 10 },
 			fixedHeader: true,
 			height: '400px',
 		server: {
 			url: url,
-			then: data => data.map( line =>  line )
+			then: data => data.map( line => line )
 		}
 		} ).render( wrapper );
 
