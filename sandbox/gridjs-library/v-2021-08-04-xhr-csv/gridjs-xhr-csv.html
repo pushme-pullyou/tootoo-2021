@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+</head>
+
+<body>
+	<div id="wrapper"></div>
+
+	<script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+
+</body>
+
+<script>
+
+	init();
+
+	function init() {
+
+		const url = "../../../data/simplemaps/worldcities-174.csv";
+		//const url = "https://pushme-pullyou.github.io/tootoo-2021/data/simplemaps/worldcities.json"
+		requestFile( url );
+
+	}
+
+	function requestFile( fileName, callback, index ) {
+
+		var xhr;
+
+		xhr = new XMLHttpRequest();
+		xhr.responseType = "text";
+		xhr.open( 'GET', fileName, true );
+		xhr.onerror = function ( xhr ) { console.log( 'error', xhr ); };
+		xhr.onload = ( xhr ) => { renderGrid( xhr.target.response ) };
+		xhr.send( null );
+
+	}
+
+
+	function renderGrid( response  ) {
+
+		//console.log( "response", response );
+
+		response = response.replace( /Korea,/g, "Korea -");
+
+		response = response.replace( /, Ciudad/g, "- Ciudad" );
+
+		response = response.replace( /, City/g, "- City" );
+
+		response = response.replace( /, The/g, "- The" );
+
+		response = response.replace( /, Federat/g, "- Federat" );
+
+		response = response.replace( /, Avtonomn/g, "- Avtonomn" );
+
+		response = response.replace( /, Misto/g, "- Misto" );
+
+		response = response.replace( /, Hlavní/g, "- Hlavní" );
+
+		response = response.replace( /, Republika/g, "- Republika" );
+
+		response = response.replace( /, Ascension/g, "- Ascension" );
+
+		response = response.replace( /, Village/g, "- Village" );
+
+		response = response.replace( /, Grad/g, "- Grad" );
+
+		response = response.replace( /, And/g, "- And" );
+
+		response = response.replace( /, British/g, "- British" );
+
+		response = response.replace( /, Mourne/g, "- Mourne" );
+
+		response = response.replace( /, Banbridge/g, "- Banbridge" );
+
+		response = response.replace( /, Antártida/g, "- Antártida" );
+
+
+		// list = [" South", "North", "Ciudad", "City", "The", "Federated", "Avtonomn", "Misto",
+		// "Hlavní", "And" ]
+		// for( item of list ) {
+		// 	response = response.replace( `, /g, "- Federated" );
+		// }
+
+		lines = response.split( /\r\n/ ).map( ( line ) => line.replace( /"/g, "" ).split( ",") );
+
+		//lines.forEach( line => line[ 9 ] = +line[ 9 ] )
+		console.log( "lines", lines );
+
+		//filter = lines.filter( line => line.length !== 11);
+		//console.log( "filter", filter );
+
+
+
+		// ||
+		// [
+		// 	[ "city", "city_ascii", "lat", "lng", "country", "iso2", "iso3", "admin_name", "capital", "population", "id" ],
+		// 	[ "Kolkāta", "Kolkata", "22.5411", "88.3378", "India", "IN", "IND", "West Bengal", "admin", "17560000", "1356060520" ],
+		// 	[ "Moscow", "Moscow", "55.7558", "37.6178", "Russia", "RU", "RUS", "Moskva", "primary", "17125000", "1643318494" ],
+		// 	[ "Bangkok", "Bangkok", "13.7500", "100.5167", "Thailand", "TH", "THA", "Krung Thep Maha Nakhon", "primary", "17066000", "1764068610" ],
+		// 	[ "Buenos Aires", "Buenos Aires", "-34.5997", "-58.3819", "Argentina", "AR", "ARG", "Buenos Aires", " Ciudad Autónoma de", "primary", "16157000", "1032717330" ],
+		// 	[ "Shenzhen", "Shenzhen", "22.5350", "114.0540", "China", "CN", "CHN", "Guangdong", "minor", "15929000", "1156158707" ],
+		// 	[ "Dhaka", "Dhaka", "23.7161", "90.3961", "Bangladesh", "BD", "BGD", "Dhaka", "primary", "15443000", "1050529279" ],
+		// 	[ "Lagos", "Lagos", "6.4500", "3.4000", "Nigeria", "NG", "NGA", "Lagos", "minor", "15279000", "1566593751" ],
+		// 	[ "Istanbul", "Istanbul", "41.0100", "28.9603", "Turkey", "TR", "TUR", "İstanbul", "admin", "15154000", "1792756324" ],
+		// 	[ "Ōsaka", "Osaka", "34.6936", "135.5019", "Japan", "JP", "JPN", "Ōsaka", "admin", "14977000", "1392419823" ],
+		// 	[ "Karachi", "Karachi", "24.8600", "67.0100", "Pakistan", "PK", "PAK", "Sindh", "admin", "14835000", "1586129469" ],
+		// 	[ "Bangalore", "Bangalore", "12.9699", "77.5980", "India", "IN", "IND", "Karnātaka", "admin", "13707000", "1356410365" ],
+		// 	[ "Tehran", "Tehran", "35.7000", "51.4167", "Iran", "IR", "IRN", "Tehrān", "primary", "13633000", "1364305026" ],
+		// 	[ "Kinshasa", "Kinshasa", "-4.3317", "15.3139", "Congo (Kinshasa)", "CD", "COD", "Kinshasa", "primary", "13528000", "1180000363" ],
+		// 	[ "Ho Chi Minh City", "Ho Chi Minh City", "10.8167", "106.6333", "Vietnam", "VN", "VNM", "Hồ Chí Minh", "admin", "13312000", "1704774326" ],
+		// 	[ "Los Angeles", "Los Angeles", "34.1139", "-118.4068", "United States", "US", "USA", "California", "", "12750807", "1840020491" ],
+		// 	[ "Rio de Janeiro", "Rio de Janeiro", "-22.9083", "-43.1964", "Brazil", "BR", "BRA", "Rio de Janeiro", "admin", "12272000", "1076887657" ],
+		// ];
+		//console.log( "data", data );
+
+		new gridjs.Grid( {
+			columns: lines[ 0 ],
+			fixedHeader: true,
+			//height: "30rem",
+			pagination: { limit: 20 },
+			search: true,
+			sort: true,
+			data: lines.slice( 1 )
+		} ).render( document.getElementById( "wrapper" ) );
+
+	}
+</script>
+
+</html>
