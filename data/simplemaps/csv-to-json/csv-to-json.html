@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="description" content="">
+	<meta name="date" content="2021-08-05">
+	<title></title>
+	<style>
+		body {
+			font: 100% monospace;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h1>
+		<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/xxxxxx/" target="_blank"
+			title="source code on GitHub"><img
+				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
+		<a href="" title="Click this menu title to reset the model">
+			<span id=spnTitle></span>
+			<span id=spnVersion></span>
+		</a>
+	</h1>
+
+	<button onclick=saveFile();>Save File</button>
+
+	<div id="divContent"></div>
+
+
+	<script>
+
+		let url;
+
+		init();
+
+		function init() {
+
+			spnTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+
+			spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
+
+			url = "../worldcities-original.csv";
+			//const url = "https://pushme-pullyou.github.io/tootoo-2021/data/simplemaps/worldcities.json"
+			//url = "https://cdn.jsdelivr.net/gh/pushme-pullyou/tootoo-2021@master/README.md";
+			const urlCORS = ""; //https://cors-anywhere.herokuapp.com/";
+
+			requestFile( url );
+
+		}
+
+
+
+		function requestFile( url = "https://example.com", callback = onLoad ) {
+
+			xhr = new XMLHttpRequest();
+			xhr.open( "GET", url, true );
+			xhr.responseType = "text";
+			xhr.onerror = ( xhr ) => console.log( "error:", xhr );
+			xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
+			xhr.onload = ( xhr ) => callback( xhr.target.response );
+			xhr.send( null );
+
+		}
+
+
+
+		function onLoad( response ) {
+
+			const list = [ "South", "North", "Ciudad", "City", "The", "Federat", "Avtonomn", "Misto",
+				"Hlavní", "And", "Republika", "Ascension", "Village", "Grad", "And", "British", "Mourne",
+				"Banbridge", "Antártida" ]
+
+			for ( word of list ) {
+
+				str = `, (${ word })`;
+				var re = new RegExp( str, "g" );
+				console.log( "re", re );
+				response = response.replace( re, " - $1" );
+
+			}
+
+
+			lines = response.split( /\r\n/ ); //.map( ( line ) => line.replace( /"/g, "" ).split( "," ) );
+			lines = lines.map( line => `[${ line }],` )
+
+			//lines.slice( 1 ).forEach( line => line[ 9 ] = line[ 9 ] === "" || isNaN( line[ 9 ] ) ? "0" : line[ 9 ] )
+			console.log( "lines", lines );
+
+			// filterComma = lines.filter( line => line.length !== 11 );
+			// console.log( "filterComma", filterComma );
+
+			// filterEmpty = lines.filter( line => isNaN( line[ 9 ]) );
+			// console.log( "filterEmpty", filterEmpty );
+
+			//console.log( "response", response );
+
+			divContent.innerText = "[\n" + lines.join( "\n" ).slice( 0, -1 ) + "\n]";
+
+		}
+
+
+		function saveFile() {
+
+			const blob = new Blob( [ divContent.innerText ] );
+			let a = document.body.appendChild( document.createElement( 'a' ) );
+			a.href = window.URL.createObjectURL( blob );
+			a.download = `worldcities-174-fixed.json`;
+			a.click();
+			a = null;
+
+		}
+	</script>
+
+
+</body>
+
+</html>

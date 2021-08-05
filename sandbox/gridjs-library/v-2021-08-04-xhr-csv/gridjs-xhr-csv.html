@@ -18,7 +18,7 @@
 
 	function init() {
 
-		const url = "../../../data/simplemaps/worldcities-174.csv";
+		const url = "../../../data/simplemaps/worldcities-original.csv";
 		//const url = "https://pushme-pullyou.github.io/tootoo-2021/data/simplemaps/worldcities.json"
 		requestFile( url );
 
@@ -39,60 +39,67 @@
 
 
 	function renderGrid( response  ) {
-
 		//console.log( "response", response );
 
-		response = response.replace( /Korea,/g, "Korea -");
+		//response = response.replace( /Korea,/g, "Korea -");
 
-		response = response.replace( /, Ciudad/g, "- Ciudad" );
+		// response = response.replace( /, Ciudad/g, "- Ciudad" );
 
-		response = response.replace( /, City/g, "- City" );
+		// response = response.replace( /, City/g, "- City" );
 
-		response = response.replace( /, The/g, "- The" );
+		// response = response.replace( /, The/g, "- The" );
 
-		response = response.replace( /, Federat/g, "- Federat" );
+		// response = response.replace( /, Federat/g, "- Federat" );
 
-		response = response.replace( /, Avtonomn/g, "- Avtonomn" );
+		// response = response.replace( /, Avtonomn/g, "- Avtonomn" );
 
-		response = response.replace( /, Misto/g, "- Misto" );
+		// response = response.replace( /, Misto/g, "- Misto" );
 
-		response = response.replace( /, Hlavní/g, "- Hlavní" );
+		// response = response.replace( /, Hlavní/g, "- Hlavní" );
 
-		response = response.replace( /, Republika/g, "- Republika" );
+		// response = response.replace( /, Republika/g, "- Republika" );
 
-		response = response.replace( /, Ascension/g, "- Ascension" );
+		// response = response.replace( /, Ascension/g, "- Ascension" );
 
-		response = response.replace( /, Village/g, "- Village" );
+		// response = response.replace( /, Village/g, "- Village" );
 
-		response = response.replace( /, Grad/g, "- Grad" );
+		// response = response.replace( /, Grad/g, "- Grad" );
 
-		response = response.replace( /, And/g, "- And" );
+		// response = response.replace( /, And/g, "- And" );
 
-		response = response.replace( /, British/g, "- British" );
+		// response = response.replace( /, British/g, "- British" );
 
-		response = response.replace( /, Mourne/g, "- Mourne" );
+		// response = response.replace( /, Mourne/g, "- Mourne" );
 
-		response = response.replace( /, Banbridge/g, "- Banbridge" );
+		// response = response.replace( /, Banbridge/g, "- Banbridge" );
 
-		response = response.replace( /, Antártida/g, "- Antártida" );
+		// response = response.replace( /, Antártida/g, "- Antártida" );
 
 
-		// list = [" South", "North", "Ciudad", "City", "The", "Federated", "Avtonomn", "Misto",
-		// "Hlavní", "And" ]
-		// for( item of list ) {
-		// 	response = response.replace( `, /g, "- Federated" );
-		// }
+		list = ["South", "North", "Ciudad", "City", "The", "Federat", "Avtonomn", "Misto",
+		"Hlavní", "And", "Republika", "Ascension", "Village", "Grad", "And", "British", "Mourne",
+		 "Banbridge", "Antártida" ]
+
+		for ( word of list ) {
+
+			str = `, (${word })`;
+			var re = new RegExp( str, "g" );
+			console.log( "re", re );
+			response = response.replace( re, "- $1" );
+
+		}
+
 
 		lines = response.split( /\r\n/ ).map( ( line ) => line.replace( /"/g, "" ).split( ",") );
 
 		lines.slice( 1 ).forEach( line => line[ 9 ] = line[ 9 ] === "" || isNaN( line[ 9 ] ) ? "0" : line[ 9 ] )
-		console.log( "lines", lines );
+		//console.log( "lines", lines );
 
-		//filter = lines.filter( line => line.length !== 11);
-		//console.log( "filter", filter );
-
-		filter = lines.filter( line => isNaN( line[ 9 ]) );
+		filter = lines.filter( line => line.length !== 11);
 		console.log( "filter", filter );
+
+		// filter = lines.filter( line => isNaN( line[ 9 ]) );
+		// console.log( "filter", filter );
 
 
 
