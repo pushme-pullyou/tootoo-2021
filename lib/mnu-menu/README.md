@@ -12,6 +12,11 @@ _mnu-menu.html_
 
 ## Concept
 
+``` js
+
+${ MNU.addInfoBox( "Files to try" ) }
+
+```
 
 ## To Do / Wish List
 
