@@ -20,7 +20,8 @@ _"CKEditor" in a resizable window. One finger to rotate. Two to zoom._
 
 ## Links of Interest
 
-
+* https://ckeditor.com/
+* https://ckeditor.com/docs/
 ## Change Log
 
 
