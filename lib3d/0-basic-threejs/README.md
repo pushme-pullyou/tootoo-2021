@@ -9,6 +9,49 @@ _Basic Three.js in a resizable window. One finger to rotate. Two to zoom._
 ### Full Screen: [Basic Three.js]( https://pushme-pullyou.github.io/tootoo-2021/lib3d/0-basic-threejs/ )
 @@@-->
 
+``` html
+			<div>
+
+				<label title="Slide me">
+					X: <output id=outX>1</output><br>
+					<input id=rngX type=range oninput=outX.value=this.value;updateModel(this); min=0 max=10 value=1
+						step=0.1 class=full-width >
+				</label>
+
+			</div>
+
+```
+
+### JavaScript
+
+
+``` js
+
+
+		function requestFile( url, callback ) {
+
+			const xhr = new XMLHttpRequest();
+			xhr.open( 'GET', url, true );
+			xhr.onerror = ( xhr ) => console.log( 'error:', xhr );
+			//xhr.onprogress = ( xhr ) => console.log( 'bytes loaded:', xhr.loaded );
+			xhr.onload = ( xhr ) => callback( xhr.target.response );
+			xhr.send( null );
+
+		}
+
+		scene.add( new THREE.ArrowHelper( normalZ, scene.position, 5, 0x00ffff ) ); // aqua
+
+
+		const pointsObj = new THREE.Points( geom, new THREE.PointsMaterial( {
+			color: "red"
+		} ) );
+		scene.add( pointsObj );
+
+		const line = new THREE.LineLoop( geom, new THREE.LineBasicMaterial( {
+			color: "aqua"
+		} ) );
+		scene.add( line );
+```
 
 ## Concept
 

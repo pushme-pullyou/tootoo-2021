@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no,minimum-scale=1.0,maximum-scale=1.0">
+	<meta name=description content="Real-time 3D in your browser with menu hiding">
+	<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM">
+	<meta name="date" content="2021-08-13">
+	<title></title>
+	<style>
+		/* Copyright 2021 Theo Armour. MIT License */
+
+		body {
+			font: 100% monospace;
+			margin: 0;
+		}
+
+		#main {
+			border: 1px solid red;
+			margin: 0 auto 0 20rem;
+			max-width: 40rem;
+
+		}
+
+		.nav {
+			background: white;
+			border-radius: 10px;
+			box-shadow: 0 0 50px -25px black;
+			color: gray;
+			margin: 1rem;
+			width: 16rem;
+			overflow: auto;
+			padding: 1rem;
+			position: absolute;
+			resize: both;
+		}
+
+		.full-width {
+			width: 100%;
+		}
+	</style>
+</head>
+
+<body>
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r131/build/three.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r131/examples/js/controls/OrbitControls.js"></script>
+
+
+	<nav id=navMenu class=nav>
+
+		<details open>
+
+			<summary>show&darr; || hide&uarr; </summary>
+
+			<h1>
+				<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/lib3d/" target="_blank"
+					title="source code on GitHub"><img
+						src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
+				<a href="" id=aTitle title="Click this menu title to reset the model"></a>
+			</h1>
+
+			<div id=divMessage></div>
+
+			<button onclick=test()>test</button>
+			<p
+
+				title="View the number of objects that need rendering and the total number of triangles used to create the objects">
+				<button onclick="setStats()">setStats</button>
+			</p>
+
+		</details>
+
+	</nav>
+
+
+	<script>
+
+		//https://stackoverflow.com/questions/49020699/how-to-draw-a-flat-shape-in-3-space-in-three-js
+
+		let renderer, camera, controls, scene;
+		let geometry, material, mesh, axesHelper;
+
+		const obj = [
+
+			[ [ 0, 20, 10 ], [ 0, 10, 20 ], [ 10, 10, 20 ], [ 10, 20, 10 ] ],
+			[ [ 0, 0, 10 ], [ 0, 10, 20 ], [ 10, 10, 20 ], [ 10, 0, 10 ] ],
+			[ [ 0, 0, 0 ], [ 0, 0, 10 ], [ 10, 0, 10 ], [ 10, 0, 0 ] ],
+			[ [ 0, 0, 0 ], [ 0, 20, 0 ], [ 0, 20, 10 ], [ 0, 10, 20 ], [ 0, 0, 10 ] ],
+
+			[ [ 5, 30, 5 ], [ 25, 30, 5 ], [ 25, 30, 15 ], [ 15, 30, 15 ], [ 15, 30, 25 ], [ 5, 30, 25 ], [ 5, 30, 5 ] ]
+
+		];
+
+		const TS3 = {};
+
+		TS3.getGeometryShape3D = function ( pointsArrays = obj ) {
+
+			for ( let points of pointsArrays ) {
+
+				const vertices = points.map( pts => new THREE.Vector3().fromArray( pts ) )
+
+				const geom = new THREE.BufferGeometry().setFromPoints( vertices );
+
+				//console.log( "norm", normal );
+
+				const pointsObj = new THREE.Points( geom, new THREE.PointsMaterial( { color: "red" } ) );
+				scene.add( pointsObj );
+
+				line = new THREE.LineLoop( geom, new THREE.LineBasicMaterial( { color: "aqua" } ) );
+				scene.add( line );
+
+				// normals
+				geom.computeVertexNormals();
+				console.log( "geom", geom );
+
+				const normal = new THREE.Vector3().fromBufferAttribute( geom.attributes.normal, 0 );
+				scene.add( new THREE.ArrowHelper( normal, new THREE.Vector3( 10, 0, 10 ), 5, 0xffff00 ) ); //yellow
+
+				const normalZ = new THREE.Vector3( 0, 0, 1 ); // base normal of xy-plane
+				scene.add( new THREE.ArrowHelper( normalZ, scene.position, 5, 0x00ffff ) ); // aqua
+
+				const quaternion = new THREE.Quaternion().setFromUnitVectors( normal, normalZ );
+
+				const vertices2D = vertices.slice().map( v => v.applyQuaternion( quaternion ) );
+
+				const shape = new THREE.Shape( vertices2D );
+				const shapeGeom = new THREE.ShapeGeometry( shape );
+				shapeGeom.attributes.position = geom.attributes.position
+
+				const shapeMaterial = new THREE.MeshBasicMaterial( { color: 0x404040, side: 2 } )
+				const shapeMesh = new THREE.Mesh( shapeGeom, shapeMaterial );
+				scene.add( shapeMesh );
+
+			}
+		}
+
+
+
+
+		init();
+		animate();
+
+		function init() {
+
+			//aTitle.innerHTML = document.title = location.href.split( "/" ).pop();
+
+			aTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+
+			const fov = 40;
+			const aspect = window.innerWidth / window.innerHeight;
+			const near = 1;
+			const far = 1000;
+			camera = new THREE.PerspectiveCamera( fov, aspect, near, far );
+			camera.position.set( -100, -100, 100 );
+			camera.up.set( 0, 0, 1 );
+
+			scene = new THREE.Scene();
+			scene.background = new THREE.Color( 0xcce0ff );
+			//scene.fog = new THREE.Fog( 0xcce0ff, 550, 800 );
+			scene.add( camera );
+
+			renderer = new THREE.WebGLRenderer( { antialias: true, alpha: false } );
+			//renderer.setPixelRatio( window.devicePixelRatio );
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+			renderer.outputEncoding = THREE.sRGBEncoding;
+			renderer.shadowMap.enabled = true;
+			renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+			controls = new THREE.OrbitControls( camera, renderer.domElement );
+			//controls.autoRotate = true;
+			controls.autoRotateSpeed = 2;
+			controls.enableDamping = true;
+			controls.enablePan = true;
+			controls.dampingFactor = 0.08;
+			controls.minDistance = 1;
+			controls.maxDistance = 500;
+
+			window.addEventListener( 'resize', onWindowResize, false );
+			window.addEventListener( 'orientationchange', onWindowResize, false );
+			window.addEventListener( 'keyup', function () { controls.autoRotate = false; }, false );
+			renderer.domElement.addEventListener( 'click', function () { controls.autoRotate = false; }, false );
+
+			axesHelper = new THREE.AxesHelper( 50 );
+			scene.add( axesHelper );
+
+			geometry = new THREE.BoxGeometry( 50, 50, 50 );
+			material = new THREE.MeshNormalMaterial();
+			mesh = new THREE.Mesh( geometry, material );
+			//scene.add( mesh );
+
+			TS3.getGeometryShape3D()
+
+		}
+
+
+		function test() {
+
+			const vertices = [ [ 0, 0, 0 ], [ 0, 0, 10 ], [ 10, 0, 10 ], [ 10, 0, 0 ] ]
+			.map(p => new THREE.Vector3().fromArray( p ) );
+
+			const geom = new THREE.BufferGeometry().setFromPoints( vertices );
+
+				for ( let i = 0; i < 5 ; i++ ) {
+
+					const line = new THREE.LineLoop( geom, new THREE.LineBasicMaterial( { color: "aqua" } ) );
+					line.rotation.set( Math.random() * 4, Math.random() * 4, Math.random() * 4 );
+					line.position.set( Math.random() * 40, Math.random() * 50, Math.random() * 50 );
+					scene.add( line );
+
+					line.updateMatrix();
+					line.geometry.attributes.position.needsUpdate = true;
+
+					points = []
+						for ( let j = 0; j < 4; j++ ) {
+							position = new THREE.Vector3().fromBufferAttribute( line.geometry.attributes.position, j )
+							points.push( position );
+
+						}
+
+
+					console.log( "points", points );
+					TS3.getGeometryShape3D( [points]  )
+				}
+
+
+		}
+
+		// original code from stackoverflow - broken
+
+		TS3.getGeometryShape3DOriginal = function () {
+
+			var points = [ // all of them are on the xz-plane
+				new THREE.Vector3( 5, 0, 5 ),
+				new THREE.Vector3( 25, 0, 5 ),
+				new THREE.Vector3( 25, 0, 15 ),
+				new THREE.Vector3( 15, 0, 15 ),
+				new THREE.Vector3( 15, 0, 25 ),
+				new THREE.Vector3( 5, 0, 25 ),
+				new THREE.Vector3( 5, 0, 5 )
+			]
+
+			var geom = new THREE.BufferGeometry().setFromPoints( points );
+			var pointsObj = new THREE.Points( geom, new THREE.PointsMaterial( {
+				color: "red"
+			} ) );
+			scene.add( pointsObj );
+
+			var line = new THREE.LineLoop( geom, new THREE.LineBasicMaterial( {
+				color: "aqua"
+			} ) );
+			scene.add( line );
+
+			// normals
+			var normal = new THREE.Vector3( 0, 1, 0 ); // I already know the normal of xz-plane ;)
+			scene.add( new THREE.ArrowHelper( normal, new THREE.Vector3( 10, 0, 10 ), 5, 0xffff00 ) ); //yellow
+
+			var normalZ = new THREE.Vector3( 0, 0, 1 ); // base normal of xy-plane
+			scene.add( new THREE.ArrowHelper( normalZ, scene.position, 5, 0x00ffff ) ); // aqua
+
+			// 1 quaternions
+			var quaternion = new THREE.Quaternion().setFromUnitVectors( normal, normalZ );
+			var quaternionBack = new THREE.Quaternion().setFromUnitVectors( normalZ, normal );
+
+			// 2 make it parallel to xy-plane
+			points.forEach( p => {
+				p.applyQuaternion( quaternion )
+			} );
+
+			// 3 create shape and shapeGeometry
+			var shape = new THREE.Shape( points );
+			var shapeGeom = new THREE.ShapeGeometry( shape );
+
+			// 4 put our points back to their origins
+			points.forEach( p => {
+				p.applyQuaternion( quaternionBack )
+			} );
+
+			// 5 assign points to .vertices
+			shapeGeom.vertices = points;
+
+			var shapeMesh = new THREE.Mesh( shapeGeom, new THREE.MeshBasicMaterial( {
+				color: 0x404040
+			} ) );
+			scene.add( shapeMesh );
+
+		}
+
+
+
+
+
+		function setStats() {
+
+			const script = document.head.appendChild( document.createElement( "script" ) );
+			script.onload = () => {
+
+				const stats = new Stats();
+				const sts = document.body.appendChild( stats.dom );
+				sts.style.left = "";
+				sts.style.right = "0px";
+				requestAnimationFrame( function loop() {
+
+					stats.update(); requestAnimationFrame( loop );
+
+				} );
+
+			};
+
+			script.src = "https://raw.githack.com/mrdoob/stats.js/master/build/stats.min.js";
+
+			const render = renderer.info.render;
+			if ( !window.divRendererInfo ) divRendererInfo = navMenu.appendChild( document.createElement( "div" ) );
+			divRendererInfo.innerHTML = `
+<div>
+	Renderer Info<br>
+	Calls: ${ render.calls }<br>
+	Lines: ${ render.lines }<br>
+	Triangles: ${ render.triangles.toLocaleString() }<br>
+</div>`;
+
+		}
+
+
+		function onWindowResize() {
+
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+
+			renderer.setSize( window.innerWidth, window.innerHeight );
+
+			//console.log( 'onWindowResize  window.innerWidth', window.innerWidth );
+
+		}
+
+
+		function animate() {
+
+			requestAnimationFrame( animate );
+			renderer.render( scene, camera );
+			controls.update();
+
+		}
+
+	</script>
+
+</body>
+
+</html>
