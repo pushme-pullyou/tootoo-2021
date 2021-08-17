@@ -16,9 +16,7 @@ _GRV GitHub Repo Tree View_
 
 ## To Do / Wish List
 
-* 2021-07-08 ~ add GRV classes? or div-secondary?
-* 2021-07-05 Refactor includeFiles function
-* 2021-07-01 ~ right-click menu
+* 2021-07-05 Refactor includeFiles function to ignotre sub-folders
 * Cursor key support
 * Exclude sub-folders
 * 2020-09-18 ~ add search
@@ -31,9 +29,15 @@ _GRV GitHub Repo Tree View_
 
 ## Change Log
 
-* 2021-07-08 ~ different class for tertiary details card << done
+### 2021-08-17
+
+* Fix bug: link to source broken for files in root
+* Update infoBox
+* 2021-07-01 ~ right-click menu *** working again
 
 ### 2021-07-08
+
+* 2021-07-08 ~ different class for tertiary details card << done
 
 ### 2021-07-04
 

@@ -34,7 +34,7 @@
 
 	<script src="./lib/gor-github-organization-repos/v-2021-07-03/gor-github-organization-repos.js"></script>
 
-	<script src="./lib/grv-github-repo-tree-view/v-2021-07-08/grv-github-repo-tree-view.js"></script>
+	<script src="./lib/grv-github-repo-tree-view/v-2021-08-17/grv-github-repo-tree-view.js"></script>
 
 	<script src="./lib/mnu-menu/v-2021-08-17/mnu-menu.js"></script>
 
@@ -71,6 +71,8 @@
 	</main>
 
 
+	<div id="divPopUp"></div>
+	
 	<script>
 
 		const COR = {
@@ -141,6 +143,7 @@
 			} else {
 
 				COR.path = "../../../";
+				COR.ignoreFolders = [];
 
 			}
 
