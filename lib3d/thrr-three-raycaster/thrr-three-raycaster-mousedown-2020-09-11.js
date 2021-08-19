@@ -11,11 +11,22 @@ const THRR = {
 };
 
 
-THRR.updateScene = function () {
+THRR.init = function () {
 
 	THRR.intersectObjects = THR.group.children;
 
 	THRR.addPointerDown();
+
+	if ( !window.divPopUp ) {
+
+		divPopUp = document.body.appendChild( document.createElement( "div" ) );
+		//divPopUp.style.cssText =
+		//	"background-color: #fff; width: 20rem; position: absolute; right: 30px; top: 20px; z-index:10;"
+		divPopUp.classList.add( "infoTooltip" );
+
+
+	}
+
 
 };
 
@@ -74,7 +85,7 @@ THRR.onPointerDown = function ( event ) {
 
 		}
 
-		divPopUp.hidden = false;
+		divPopUp.style.display = "block";
 		divPopUp.style.left = event.clientX + 0 + "px";
 		divPopUp.style.top = event.clientY + "px";
 		divPopUp.innerHTML = THRR.getHtm( THRR.intersected );
@@ -84,7 +95,7 @@ THRR.onPointerDown = function ( event ) {
 		//}
 	} else {
 		if ( [ "touchstart", "touchmove", "pointerdown" ].includes( event.type ) ) {
-			divPopUp.hidden = true;
+			divPopUp.style.display = "none";
 		}
 
 		THRR.intersected = undefined;
@@ -93,7 +104,7 @@ THRR.onPointerDown = function ( event ) {
 
 THRR.onClick = function () {
 	if ( !THRR.intersected ) {
-		divPopUp.hidden = true;
+		divPopUp.style.display = "none";
 	}
 
 	THR.renderer.domElement.removeEventListener( "click", THRR.onClick );
@@ -136,11 +147,17 @@ THRR.getMeshData = function ( index ) {
 
 	//console.log( "index", index );
 
-	JTV.init();
+	if ( window.JTV ) {
 
-	JTV.onLoad( index );
+		JTV.init();
 
-	detNavMenu.open = true;
-	detData.open = true;
+		JTV.onLoad( index );
+
+		detNavMenu.open = true;
+		detData.open = true;
+
+	}
+
+
 
 };
