@@ -323,7 +323,7 @@ pre {
 	padding: var( --margin);
 	position: fixed;
 	top: 1rem;
-	overflow: auto;
+	overflow: hidden;
 	resize: both;
 	width: var(--mnu-width);
 	z-index: 1;
