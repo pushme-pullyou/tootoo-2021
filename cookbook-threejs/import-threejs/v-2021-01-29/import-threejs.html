@@ -8,9 +8,9 @@
 <script type="module">
 
 	//import * as THREE from 'https://unpkg.com/three/build/three.module.js'
-	import * as THREE from 'https://unpkg.com/three@0.125.2/build/three.module.js'
+	import * as THREE from "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r131/build/three.module.js"
 
-	let camera, scene, renderer;
+	var camera, scene, renderer;
 	let geometry, material, mesh;
 
 	init();
@@ -32,6 +32,8 @@
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		renderer.setAnimationLoop( animation );
 		document.body.appendChild( renderer.domElement );
+
+		console.log( "scene", scene );
 
 	}
 

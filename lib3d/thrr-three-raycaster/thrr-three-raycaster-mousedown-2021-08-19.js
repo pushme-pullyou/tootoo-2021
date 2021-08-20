@@ -21,10 +21,7 @@ THRR.init = function () {
 	if ( !window.divPopUp ) {
 
 		divPopUp = document.body.appendChild( document.createElement( "div" ) );
-		//divPopUp.style.cssText =
-		//	"background-color: #fff; width: 20rem; position: absolute; right: 30px; top: 20px; z-index:10;"
 		divPopUp.classList.add( "infoTooltip" );
-
 
 	}
 
@@ -32,6 +29,7 @@ THRR.init = function () {
 };
 
 THRR.addPointerDown = function () {
+	
 	THR.renderer.domElement.addEventListener( "pointerdown", THRR.onPointerDown );
 	THR.renderer.domElement.addEventListener( "touchstart", THRR.onPointerDown );
 	THR.renderer.domElement.addEventListener( "touchmove", THRR.onPointerDown );

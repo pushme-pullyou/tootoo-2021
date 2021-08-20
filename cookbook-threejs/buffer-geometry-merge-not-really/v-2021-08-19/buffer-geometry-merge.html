@@ -55,12 +55,14 @@
 
 			<h1>
 				<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/lib3d/" target="_blank"
-				title="source code on GitHub"><img
-				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
+					title="source code on GitHub"><img
+						src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
 				<a href="" id=aTitle title="Click this menu title to reset the model"></a>
 			</h1>
 
-			<div id=divMessage ></div>
+			<p><button onclick=drawBoxes()>draw boxes</button></p>
+
+			<div id=divMessage></div>
 
 			<p
 				title="View the number of objects that need rendering and the total number of triangles used to create the objects">
@@ -125,14 +127,33 @@
 			axesHelper = new THREE.AxesHelper( 50 );
 			scene.add( axesHelper );
 
-			geometry = new THREE.BoxGeometry( 50, 50, 50 );
+			// geometry = new THREE.BoxGeometry( 50, 50, 50 );
+			// material = new THREE.MeshNormalMaterial();
+			// mesh = new THREE.Mesh( geometry, material );
+			// scene.add( mesh );
+
+		}
+
+
+		function drawBoxes( count = 100 ) {
+
+			geometry = new THREE.BufferGeometry();
+
+			for ( let i = 0; i < count; i++ ) {
+
+
+				const geom = new THREE.BoxGeometry( 50, 50, 50 );
+				geom.translate( 100 * Math.random() - 50, 100 * Math.random() - 50, 100 * Math.random() - 50 );
+				geometry.merge( geom )
+
+
+			}
+
 			material = new THREE.MeshNormalMaterial();
 			mesh = new THREE.Mesh( geometry, material );
 			scene.add( mesh );
 
 		}
-
-
 
 		function requestFile( url, callback ) {
 
@@ -201,4 +222,5 @@
 	</script>
 
 </body>
+
 </html>

@@ -31,7 +31,8 @@ RAY.onMouseMove = function (event) {
 
 	let intersects = RAY.raycaster.intersectObjects(RAY.intersectObjects);
 
-	if (intersects.length) {
+	if ( intersects.length ) {
+		
 		RAY.intersected = intersects[0];
 
 		//if ( intersected.instanceId ) {
