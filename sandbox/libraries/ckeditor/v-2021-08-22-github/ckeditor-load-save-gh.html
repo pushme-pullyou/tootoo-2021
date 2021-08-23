@@ -89,6 +89,10 @@
 		XGP.accessToken = localStorage.getItem( 'githubAccessToken' ) || "";
 		XGPinpAccessToken.value = XGP.accessToken;
 
+		window.addEventListener( "beforeunload", XGP.checkForChange );
+		window.addEventListener( 'keyup', XGP.onKeyUp, false ); // Save file Alt--S
+
+
 		XGP.requestFile();
 
 		window.addEventListener( "hashchange", onHashChange, false );
@@ -217,7 +221,7 @@
 
 	XGP.checkForChange = function ( event ) {
 
-		if ( divContent.innerHTML === XGP.content || XGP.content === divContent.innerText ) { return; }
+		if ( ed.data.get() === XGP.content ) { return; }
 
 		console.log( "", XGP.content );
 
@@ -259,14 +263,14 @@
 					//items: )
 
 					//items: () => Array.from( editor.ui.componentFactory.names() )
-					items: [ 'heading', 'bold', 'italic', "blockquote", 'link', 'undo', 'redo', 'numberedList', 'bulletedList' ]
+					items: [ 'heading', 'bold', 'italic', "blockquote", 'link', 'undo', 'redo', 'numberedList', 'bulletedList', "indent", "outdent" ]
 				}
 			} )
 
 			.then( editor => {
 
 				const arr = Array.from( editor.ui.componentFactory.names() );
-				//console.log( "arr", arr );
+				console.log( "arr", arr );
 
 				ed = editor; // create a global
 
