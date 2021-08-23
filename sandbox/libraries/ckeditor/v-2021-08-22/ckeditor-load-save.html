@@ -3,8 +3,15 @@
 
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="description" content="">
+	<meta name="date" content="2021-08-22">
 	<title>CKEditor 5 load & save</title>
 	<style>
+		body {
+			font: 100% monospace;
+		}
+
 		#container {
 			/* To create the column layout. */
 			display: flex;
@@ -18,19 +25,31 @@
 			max-width: 30rem;
 			width: 100%;
 		}
-
 	</style>
 </head>
 
 <body>
+	<h1>
+		<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/sandbox/libraries/ckeditor/" target="_blank"
+			title="source code on GitHub"><img
+				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
+		<a href="" title="Click this menu title to reset the model">
+			<span id=spnTitle></span>
+			<span id=spnVersion></span>
+		</a>
+	</h1>
 
-	<input type=file id=inpFile onchange=readFile(this); accept="".htm, .html">
+	<input type=file id=inpFile onchange=readFile(this.files); accept=".htm, .html, .md, .txt">
 
-	<button id="save-data" >save file</button>
+	<button id="save-data">save file</button>
 
 	<button id="get-data">Get editor data</button>
 
-	<button id="set-data" onclick="ed.setData('Hello, World!')">Set editor data</button>
+	<button id="setData">Set editor data</button>
+
+	<a href="#../test1.htm">test1</a>
+
+	<a href="#https://pushme-pullyou.github.io/tootoo-2021/test-cases/text.txt">text.txt</a>
 
 
 	<div id="container">
@@ -75,6 +94,11 @@
 
 	function init() {
 
+		spnTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+
+		spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
+
+
 		ClassicEditor
 			.create( editor, {
 				initialData: appData.initialData,
@@ -89,12 +113,12 @@
 
 			.then( editor => {
 
-				arr = Array.from( editor.ui.componentFactory.names() );
+				const arr = Array.from( editor.ui.componentFactory.names() );
 
-				console.log( "arr", arr );
+				//console.log( "arr", arr );
 
 				ed = editor; // create a global
-				// Get the data on demand.
+
 				document.querySelector( '#get-data' ).addEventListener( 'click', () => {
 					//editorData = editor.data.get();
 
@@ -103,6 +127,12 @@
 					// For example, you can set them as values of hidden input fields.
 					console.log( editorData );
 					//console.log( commentThreadsData );
+				} );
+
+				setData.addEventListener( 'click', () => {
+
+					requestFile( "../test1.htm" );
+
 				} );
 
 				document.querySelector( '#save-data' ).addEventListener( 'click', () => {
@@ -116,22 +146,60 @@
 
 			.catch( error => console.error( error ) );
 
+		container.addEventListener( "dragenter", dragenter, false );
+		container.addEventListener( "dragover", dragover, false );
+		container.addEventListener( "drop", drop, false );
+
+		window.addEventListener( "hashchange", onHashChange, false );
+
+	}
+
+	function onHashChange() {
+
+		url = location.hash.slice( 1 );
+
+		requestFile( url );
 
 	}
 
 	function requestFile( url ) {
 
-			const xhr = new XMLHttpRequest();
-			xhr.open( 'GET', url, true );
-			//xhr.responseType = "json";  / text ~ blob
-			xhr.onerror = ( xhr ) => console.log( 'error:', xhr );
-			xhr.onprogress = ( xhr ) => console.log( 'bytes loaded:', xhr.loaded );
-			xhr.onload = ( xhr ) => console.log( 'response', xhr.target.response );
-			xhr.send( null );
+		const xhr = new XMLHttpRequest();
+		xhr.open( 'GET', url, true );
+		//xhr.responseType = "json";  / text ~ blob
+		xhr.onerror = ( xhr ) => console.log( 'error:', xhr );
+		//xhr.onprogress = ( xhr ) => console.log( 'bytes loaded:', xhr.loaded );
+		xhr.onload = ( xhr ) => ed.data.set( xhr.target.response );
+		xhr.send( null );
 
 	}
 
-	function readFile ( inpFiles ) {
+
+	function dragenter( e ) {
+		e.stopPropagation();
+		e.preventDefault();
+	}
+
+	function dragover( e ) {
+		e.stopPropagation();
+		e.preventDefault();
+	}
+
+	function drop( e ) {
+
+		e.stopPropagation();
+		e.preventDefault();
+
+		const dt = e.dataTransfer;
+		const files = dt.files;
+
+		readFile( files );
+	}
+
+	function readFile( files ) {
+
+		const timeStart = performance.now();
+		const file = files[ 0 ];
 
 		const reader = new FileReader();
 		reader.onload = function ( event ) {
@@ -140,20 +208,23 @@
 
 			ed.setData( reader.result );
 
-			divStats.innerHTML = `
-				name: ${ files.files[ 0 ].name }<br>
-				size: ${ files.files[ 0 ].size.toLocaleString() } bytes<br>
-				type: ${ files.files[ 0 ].type }<br>
-				modified: ${ files.files[ 0 ].lastModifiedDate.toLocaleDateString() }<br>
-				time to load: ${ ( performance.now() - FRT.timeStart ).toLocaleString() } ms`;
 
-			console.log( '', files.files );
-			console.log( '', event );
+			if ( window.divStats ) {
+			
+				divStats.innerHTML = `
+				name: ${ file.name }<br>
+				size: ${ file.size.toLocaleString() } bytes<br>
+					type: ${ file.type }<br>
+				modified: ${ file.lastModifiedDate.toLocaleDateString() }<br>
+				time to load: ${ ( performance.now() - timeStart ).toLocaleString() } ms`;
+
+			}
+			//console.log( '', file);
+			//console.log( '', event );
 
 		}
 
-		reader.readAsText( inpFiles.files[ 0 ] );
-
+		reader.readAsText( file );
 
 	}
 
@@ -165,7 +236,6 @@
 		a.href = window.URL.createObjectURL( blob );
 		a.download = `hello-world-${ new Date().toISOString().slice( 0, 10 ) }.htm`;
 		a.click();
-		//		delete a;
 		a = null;
 	}
 
