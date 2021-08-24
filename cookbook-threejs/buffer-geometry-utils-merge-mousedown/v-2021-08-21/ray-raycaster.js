@@ -42,7 +42,7 @@ RAY.onPointerDown = function ( event ) {
 
 	//console.log( "event", event );
 
-	//if ( event.button !== 2 ) { RAY.onClick(); return; }
+	if ( event.button !== 2 ) { RAY.onClick(); return; }
 
 	if ( event.type === "touchmove" || event.type === "touchstart" ) {
 
