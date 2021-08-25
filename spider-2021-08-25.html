@@ -32,7 +32,7 @@
 
 	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/gor-github-organization-repos/v-2021-07-03/gor-github-organization-repos.js"></script>
 
-	<script src="./lib/grv-github-repo-tree-view/v-2021-08-17/grv-github-repo-tree-view.js"></script>
+	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/grv-github-repo-tree-view/v-2021-08-25/grv-github-repo-tree-view.js"></script>
 
 	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/mnu-menu/v-2021-08-17/mnu-menu.js"></script>
 
@@ -80,7 +80,7 @@
 			defaultFile: "README.md",
 			ignoreFolders: [],
 			ignoreFolders: ["archive", "lib", "lib3d", "lib-spider", "lib-spider-08", "lib-templates"],
-			filterFiles:  [ "gif", "md", "jpg", "license", "pdf", "png", "svg", "txt" ],
+			filterFiles:  [ "gif", "md", "html", "jpg", "license", "pdf", "png", "svg", "txt" ],
 			urlSource: "https://github.com/ladybug-tools/spider-2021/",
 			urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
 			iconGitHub: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`,
@@ -118,7 +118,15 @@
 			//GOR.getOrganization();
 			//GORdet.open = true;
 
-			GRV.getFiles = GRV.getFilesAll;
+			GRV.info = `
+Right-click folder names to bring up the context menu to open and close multiple folders.<br>
+<br>
+`;
+			GRV.intro = `
+			<p>This menu enables you to display all folders and files in the ${ COR.title } GitHub repository in a tree view.</p>
+			${ MNU.addInfoBox( GRV.info ) }`;
+
+			//GRV.getFiles = GRV.getFilesAll;
 			GRV.getFiles = GRV.getFilesCurated;
 			GRV.init();
 			GRVdet.open = true;
