@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang=en>
+
+<head>
+	<title></title>
+	<meta charset=utf-8 />
+</head>
+
+<body style="font: 100% monospace;">
+	<script src="https://cdn.jsdelivr.net/npm/jszip@3.7.1/dist/jszip.min.js"></script>
+	<h2><a href="">Choose the local(s) zip file(s)</a></h2>
+	<p class="note">Note : your browser will process the zip file, don't choose a file too big !</p>
+	<input type="file" id="inpFile" name="file" multiple /><br />
+
+	<div id="result_block" class="hidden">
+		<h3 id=title> </h3>
+		<div id="result"></div>
+	</div>
+
+	<script>
+
+		inpFile.onchange = function ( event ) {
+
+
+			function handleFile( file ) {
+
+				const startTime = performance.now();
+				console.log( "file", file );
+				title.innerHTML = `<h3>${ file.name }</h3>`;
+				result.innerHTML = "";
+
+
+				JSZip.loadAsync( file )
+					.then(
+
+						function ( z ) {
+							zip = z;
+							title.innerHTML += `
+<span> loaded in ${ ( performance.now() - startTime ).toLocaleString() }ms</span>`;
+
+							zip.forEach( function ( relativePath, zipEntry ) {
+								result.innerHTML += `<div><button onclick=getZipContents(this.innerText) > ${ zipEntry.name }</button></div>`;
+								console.log( "relativePath", relativePath );
+								console.log( "zipEntry", zipEntry );
+							} );
+						},
+
+						function ( e ) {
+							result += `<div>Error reading ${ f.name }: ${ e.message }</div>`
+						}
+
+					);
+			}
+
+			const files = event.target.files;
+
+			for ( let i = 0; i < files.length; i++ ) { handleFile( files[ i ] ); }
+
+		}
+
+
+		function getZipContents( fileName ) {
+
+			zip.file( fileName ).async( "string" ).then ( data => {
+
+				console.log( "data", data );
+				// data is "Hello World\n"
+			} );
+		}
+	</script>
+</body>
+
+</html>
