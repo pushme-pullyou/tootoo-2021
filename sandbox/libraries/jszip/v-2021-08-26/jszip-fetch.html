@@ -27,11 +27,21 @@
 		</a>
 	</h1>
 
-	<p><a href="" target="_blank"></a></p>
+	<p><button onclick=fetchZipFile(url4); >winchester-school-560-surfaces.zip</button></p>
 	<div id="divContent"></div>
 
 
 	<script>
+
+		const base = "https://cdn.jsdelivr.net/gh/ladybug-tools/3d-models@master/";
+
+		const url1 = base + "gbxml-sample-files/zip/vauxhall-tower-30k-surfaces.zip";  // breaks the browser
+
+		const url2 = base + "gbxml-sample-files/zip/london-office2.zip";
+
+		const url3 = base + "gbxml-sample-files/zip/bristol-clifton-down-road-utf16.zip";
+
+		const url4 = base + "gbxml-sample-files/zip/winchester-school-560-surfaces.zip"
 
 		init();
 
@@ -41,15 +51,13 @@
 
 			spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
 
-
-
-			fetchZipFile();
+			fetchZipFile( url2 );
 
 		}
 
 
 
-		function fetchZipFile( url = "https://cdn.jsdelivr.net/gh/ladybug-tools/spider@master/gbxml-sample-files/zip/london-office2.zip", ) {
+		function fetchZipFile( url = "https://cdn.jsdelivr.net/gh/ladybug-tools/3d-models@master/gbxml-sample-files/zip/london-office2.zip", ) {
 
 			fetch( url )
 
