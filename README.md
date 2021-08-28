@@ -10,16 +10,24 @@ _"Map": in lib3d_
 
 ## Concept
 
-"lib" or libraries of of files for other repositories to use
+TooToo is a collection of very simple, plain-vanilla JavaScript scripts and test files to help you manage content on both GitHub branches and GitHub pages.
+
+The collection title is a play on the [Dr Dolittle]( https://en.wikipedia.org/wiki/Doctor_Dolittle ) naming style. Too-Too is the name of the good doctor's talking pet owl. See also, heh-heh, [pushMe-pullYou]( https://pushme-pullyou.github.io ). Do you git it?
+
+The useful files are in "lib" folders - libraries of files for other repositories to use
 
 * ["lib"]( https://pushme-pullyou.github.io/tootoo-2021/#lib/README.md ) - contains files that may be used to build a basic and test simple content management system for GitHub pages
-* ["lib3d"]( https://pushme-pullyou.github.io/tootoo-2021/#lib3d/README.md ) - contains files that may be used to build apps based on [Thrree.js]( https://threejs.org )
+* ["lib3d"]( https://pushme-pullyou.github.io/tootoo-2021/#lib3d/README.md ) - contains files that may be used to build apps based on [Three.js]( https://threejs.org )
 * ["lib-geo"]( https://pushme-pullyou.github.io/tootoo-2021/#lib-geo/README.md ) - contains files that may used to build 3D maps and globes based on Three.js
 
+All JavaScript files are with 3 letter namespaces. The same three letter are used as the first letters of the file name. This makes easy to inspect the code in the console and then locate the file of interest - even if Windows Notepad is your development tool.
 
 ## To Do / Wish List
 
-* Use most local files
+* View files in 3D
+* View files in galleries
+* Edit files
+
 
 ## Issues
 
@@ -41,19 +49,23 @@ Switching themes
 
 ## Change Log
 
-## 2021-06-29
+### 2021-08-28
+
+* update readme
+
+### 2021-06-29
 
 * Continue with menu and link fixes
 * Updating COR usage
 
-## 2021-06-27
+### 2021-06-27
 
 Done
 
 * Heritage-sf & Residents working OK
 * Scroll to top not working ~ fixed
 
-## 2021-06-26
+### 2021-06-26
 
 * Remove outer box in nav menu?
 * Simplify style and MNU files
