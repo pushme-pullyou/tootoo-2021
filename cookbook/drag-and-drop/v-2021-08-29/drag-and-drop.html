@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="description" content="">
+	<meta name="date" content="2021-08-29">
+	<title></title>
+	<style>
+		body {
+			font: 100% monospace;
+		}
+
+		#divContent {
+			border: 1px solid green;
+			height: 20rem;
+			width: 30rem;
+			overflow: auto;
+			resize: both;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h1>
+		<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/cookbook/drag-and-drop/" target="_blank"
+			title="source code on GitHub"><img
+				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
+		<a href="" title="Click this menu title to reset the model">
+			<span id=spnTitle></span>
+			<span id=spnVersion></span>
+		</a>
+	</h1>
+	<h3>"Drag & Drop" and "Choose files": select multiple files </h3>
+
+	<p><input type=file id=inpFiles  multiple ></p>
+
+	<div id="divContent"></div>
+
+	<div id="divStats"></div>
+
+
+	<script>
+		let index;
+		let files;
+		let timeStart;
+		const reader = new FileReader();
+
+		init();
+
+		function init() {
+
+			spnTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+
+			spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
+
+			//requestFile();
+
+			document.body.addEventListener( "dragenter", dragenter, false );
+			document.body.addEventListener( "dragover", dragover, false );
+			document.body.addEventListener( "drop", drop, false );
+
+		}
+
+
+		function dragenter( e ) {
+			e.stopPropagation();
+			e.preventDefault();
+		}
+
+		function dragover( e ) {
+			e.stopPropagation();
+			e.preventDefault();
+		}
+
+
+
+		function drop( e ) {
+
+			e.stopPropagation();
+			e.preventDefault();
+
+			const dt = e.dataTransfer;
+
+			files = dt.files;
+
+			timeStart = performance.now();
+
+			index = 0;
+
+			readFile();
+
+		}
+
+
+		inpFiles.onchange = function( event ) {
+
+			files = inpFiles.files;
+			index = 0;
+			readFile();
+
+		}
+
+
+		reader.onload = function ( event ) {
+
+			divContent.innerHTML = reader.result;
+
+			if ( window.divStats ) {
+
+				divStats.innerHTML = `
+					name: ${ file.name }<br>
+					size: ${ file.size.toLocaleString() } bytes<br>
+					type: ${ file.type }<br>
+					modified: ${ file.lastModifiedDate.toLocaleDateString() }<br>
+					time to load: ${ ( performance.now() - timeStart ).toLocaleString() } ms`;
+
+			}
+
+		}
+
+
+		function readFile() {
+
+			reader.readAsText( files[ index ] );
+
+			file = files[ index ];
+
+			console.log( "", index, file );
+
+			index++;
+
+			if ( index < files.length ) {
+
+
+				setTimeout( readFile, 2000 );
+
+			}
+
+		}
+
+
+
+
+
+		function requestFile( url = "https://example.com", callback = onLoad ) {
+
+			url = "https://cdn.jsdelivr.net/gh/pushme-pullyou/tootoo-2021@master/README.md";
+			const urlCORS = ""; //https://cors-anywhere.herokuapp.com/";
+
+			xhr = new XMLHttpRequest();
+			xhr.open( "GET", urlCORS + url, true );
+			xhr.responseType = "text";
+			xhr.onerror = ( xhr ) => console.log( "error:", xhr );
+			//xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
+			xhr.onload = ( xhr ) => callback( xhr.target.response );
+			xhr.send( null );
+
+		}
+
+
+
+		function onLoad( response ) {
+
+			console.log( "response", response );
+
+			divContent.innerText = response;
+
+		}
+
+	</script>
+
+
+</body>
+
+</html>
