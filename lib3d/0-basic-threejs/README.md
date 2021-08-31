@@ -10,49 +10,77 @@ _Basic Three.js in a resizable window. One finger to rotate. Two to zoom._
 @@@-->
 
 ``` html
-			<div>
 
-				<label title="Slide me">
-					X: <output id=outX>1</output><br>
-					<input id=rngX type=range oninput=outX.value=this.value;updateModel(this); min=0 max=10 value=1
-						step=0.1 class=full-width >
-				</label>
+<div>
 
-			</div>
+	<label title="Slide me">
+		X: <output id=outX>1</output><br>
+		<input id=rngX type=range oninput=outX.value=this.value;updateModel(this); min=0 max=10 value=1
+			step=0.1 class=full-width >
+	</label>
+
+</div>
 
 ```
 
-### JavaScript
+## JavaScript
 
+``` js
+	function requestFile( url, callback ) {
+
+		const xhr = new XMLHttpRequest();
+		xhr.open( 'GET', url, true );
+		xhr.onerror = ( xhr ) => console.log( 'error:', xhr );
+		//xhr.onprogress = ( xhr ) => console.log( 'bytes loaded:', xhr.loaded );
+		xhr.onload = ( xhr ) => callback( xhr.target.response );
+		xhr.send( null );
+
+	}
+
+	scene.add( new THREE.ArrowHelper( normalZ, scene.position, 5, 0x00ffff ) ); // aqua
+
+
+	const pointsObj = new THREE.Points( geom, new THREE.PointsMaterial( {
+		color: "red"
+	} ) );
+	scene.add( pointsObj );
+
+
+	const line = new THREE.LineLoop( geom, new THREE.LineBasicMaterial( {
+		color: "aqua"
+	} ) );
+	scene.add( line );
+
+```
+
+### Add Ground
 
 ``` js
 
+function addGround() {
 
-		function requestFile( url, callback ) {
+	const geometry = new THREE.PlaneBufferGeometry( 5000, 5000 );
+	geometry.applyMatrix4( new THREE.Matrix4().makeTranslation( position.x, position.y, position.z ) );
+	const material = new THREE.MeshBasicMaterial( { color: 0xaaaaaa, side: 0 } );
+	ground = new THREE.Mesh( geometry, material );
+	ground.name = "ground";
+	scene.add( THR.ground );
 
-			const xhr = new XMLHttpRequest();
-			xhr.open( 'GET', url, true );
-			xhr.onerror = ( xhr ) => console.log( 'error:', xhr );
-			//xhr.onprogress = ( xhr ) => console.log( 'bytes loaded:', xhr.loaded );
-			xhr.onload = ( xhr ) => callback( xhr.target.response );
-			xhr.send( null );
-
-		}
-
-		scene.add( new THREE.ArrowHelper( normalZ, scene.position, 5, 0x00ffff ) ); // aqua
+};
 
 
-		const pointsObj = new THREE.Points( geom, new THREE.PointsMaterial( {
-			color: "red"
-		} ) );
-		scene.add( pointsObj );
-
-		const line = new THREE.LineLoop( geom, new THREE.LineBasicMaterial( {
-			color: "aqua"
-		} ) );
-		scene.add( line );
 ```
 
+
+## Geometry
+
+
+```js
+// CylinderGeometry( radiusTop, radiusBottom, height, radiusSegments, heightSegments, openEnded )
+// SphereGeometry( radius, segmentsWidth, segmentsHeight, phiStart, phiLength, thetaStart, thetaLength )
+// TorusGeometry( radius, tube, radialSegments, tubularSegments, arc )
+
+```
 ## Concept
 
 The template I often use to get a minor project underway
