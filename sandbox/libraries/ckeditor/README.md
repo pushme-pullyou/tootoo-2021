@@ -21,7 +21,34 @@ _"CKEditor" in a resizable window. One finger to rotate. Two to zoom._
 ## Links of Interest
 
 * https://ckeditor.com/
+* https://ckeditor.com/ckeditor-5/online-builder/
 * https://ckeditor.com/docs/
+
+
+## Builder selections
+
+* AutoFormat
+* AutoLink
+* AutoSave
+* Block quote
+* Bold
+* Code
+* Find and replace
+* General HTML support
+* Heading
+* Horizontal line
+* Image
+* Indent
+* Italic
+* Link
+* List
+* Media
+* Page break
+* Remove format
+* Source Editing
+* Strikethrough
+* Wordcount
+
 
 ## Change Log
 
@@ -29,6 +56,7 @@ _"CKEditor" in a resizable window. One finger to rotate. Two to zoom._
 
 * Add save file
 * Add init
+
 ### 2021-08-08
 
 * Building demo is copy paste easy
