@@ -1,18 +1,10 @@
 const GGF = {};
 
 
-
-
 GGF.init = function () {
 
-	console.log( "", 23 );
-
-	//if ( window.GGF && window.GifWriter ) }
 
 	if ( window.prgGenerateGIF) {
-
-
-
 
 	} else {
 
