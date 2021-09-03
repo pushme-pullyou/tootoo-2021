@@ -2,8 +2,7 @@ const GGF = {};
 
 
 GGF.init = function () {
-
-
+	console.log( "", 23 );
 	if ( window.prgGenerateGIF) {
 
 	} else {
@@ -40,6 +39,8 @@ GGF.onClick = async function () {
 	prgGenerateGIF.style.display = '';
 
 	// Generate
+
+	canvas = THR.renderer.domElement;
 
 	const buffer = await GGF.generateGIF( canvas, render, 4, 30 );
 
