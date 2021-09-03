@@ -9,19 +9,7 @@ _Basic Three.js in a resizable window. One finger to rotate. Two to zoom._
 ### Full Screen: [Basic Three.js]( https://pushme-pullyou.github.io/tootoo-2021/lib3d/0-basic-threejs/ )
 @@@-->
 
-``` html
 
-<div>
-
-	<label title="Slide me">
-		X: <output id=outX>1</output><br>
-		<input id=rngX type=range oninput=outX.value=this.value;updateModel(this); min=0 max=10 value=1
-			step=0.1 class=full-width >
-	</label>
-
-</div>
-
-```
 
 ## JavaScript
 
@@ -50,6 +38,22 @@ _Basic Three.js in a resizable window. One finger to rotate. Two to zoom._
 		color: "aqua"
 	} ) );
 	scene.add( line );
+
+```
+
+### Slider
+
+``` html
+
+<div>
+
+	<label title="Slide me">
+		X: <output id=outX>1</output><br>
+		<input id=rngX type=range oninput=outX.value=this.value;updateModel(this); min=0 max=10 value=1
+			step=0.1 class=full-width >
+	</label>
+
+</div>
 
 ```
 
