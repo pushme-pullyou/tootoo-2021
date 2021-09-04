@@ -7,7 +7,7 @@
 	<meta name="description"
 		content="The Spider 2021 home page uses TooToo 2021 - a script that applies the GitHub API to provide access to all the current files in a repository hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2021-08-25">
+	<meta name="date" content="2021-09-04">
 	<title>Spider</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
@@ -28,11 +28,13 @@
 	<!-- https://github.com/showdownjs/showdown -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 
-	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/fox-file-open-xhr/v-2021-07-03/fox-file-open-xhr.js"></script>
+	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/gra-github-repo-access/v-2021-07-13/gra-github-repo-access.js"></script>
+
+	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/fox-file-open-xhr/v-2021-08-11/fox-file-open-xhr.js"></script>
 
 	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/gor-github-organization-repos/v-2021-07-03/gor-github-organization-repos.js"></script>
 
-	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/grv-github-repo-tree-view/v-2021-08-25/grv-github-repo-tree-view.js"></script>
+	<script src="lib/grv-github-repo-tree-view/v-2021-09-04/grv-github-repo-tree-view.js"></script>
 
 	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib/mnu-menu/v-2021-08-17/mnu-menu.js"></script>
 
@@ -76,7 +78,7 @@
 			user: "ladybug-tools",
 			repo: "spider-2021",
 			branch: "main",
-			path: "https://www.ladybug.tools/spider-2021/", //"./", // "../../../",
+			path: "https://www.ladybug.tools/spider-2021/",
 			defaultFile: "README.md",
 			ignoreFolders: [],
 			ignoreFolders: ["archive", "lib", "lib3d", "lib-spider", "lib-spider-08", "lib-templates"],
@@ -124,7 +126,7 @@
 			Right-click folder names to bring up the context menu to open and close multiple folders.<br>
 			<br>
 			`;
-			
+
 			GRV.intro = `
 			<p>This menu enables you to display all folders and files in the ${ COR.title } GitHub repository in a tree view.</p>
 			${ MNU.addInfoBox( GRV.info ) }`;
