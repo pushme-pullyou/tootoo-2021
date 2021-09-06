@@ -24,7 +24,7 @@
 		}
 
 		#container .ck.ck-editor {
-			width: 30rem;
+			width: 32rem;
 		}
 
 
@@ -37,6 +37,9 @@
 </head>
 
 <body>
+
+	<script src="../ckeditor5/build/ckeditor.js"></script>
+
 	<h1>
 		<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/sandbox/libraries/ckeditor/" target="_blank"
 			title="source code on GitHub"><img
@@ -59,6 +62,8 @@
 	<div id="container">
 		<div class="editor"></div>
 	</div>
+
+	<div id="wordCount"></div>
 
 	<div id="divStats"></div>
 
@@ -99,7 +104,8 @@
 			window.addEventListener( "beforeunload", XGP.checkForChange );
 			//window.addEventListener( 'keyup', XGP.onKeyUp, false ); // Save file Alt--S
 
-
+			createEditor();
+			
 			XGP.requestFile();
 
 			window.addEventListener( "hashchange", onHashChange, false );
@@ -152,15 +158,15 @@
 			XGP.ext = XGP.url.split( "." ).pop().toLowerCase();
 			//console.log( "ext", XGP.ext );
 
-			//if ( window.ed ) {
+			if ( window.editor  ) {
 
-				ed.data.set( content );
+				editor.data.set( content );
 
-			// } else {
+			} else {
 
-			// 	createEditor( content )
+				createEditor( content )
 
-			// }
+			}
 
 			XGP.content = content;
 
@@ -198,7 +204,7 @@
 
 		XGP.putFile = function () {
 
-			XGP.content = ed.getData();
+			XGP.content = editor.getData();
 
 			console.log( "XGP.content", XGP.content );
 			const codedData = window.btoa( XGP.content ); // encode the string
@@ -228,7 +234,7 @@
 
 		XGP.checkForChange = function ( event ) {
 
-			if ( ed.data.get() === XGP.content ) { return; }
+			if ( editor.data.get() === XGP.content ) { return; }
 
 			console.log( "", XGP.content );
 
@@ -257,16 +263,24 @@
 
 		if ( window.self === window.top ) init();
 
-	</script>
 
-	<script src="../ckeditor5/build/ckeditor.js"></script>
-
-	<script>
+		function createEditor( content ) {
 
 		ClassicEditor
 			.create( document.querySelector( '.editor' ), {
 
-				//initialData: appData.initialData,
+				initialData: content,
+
+				htmlSupport: {
+					allow: [
+						{
+							name: /.*/,
+							attributes: true,
+							classes: true,
+							styles: true
+						}
+					]
+				},
 
 				toolbar: {
 					items: [
@@ -274,10 +288,12 @@
 						'|',
 						'bold',
 						'italic',
-						'horizontalLine',
 						'strikethrough',
+						'code',
 						'blockQuote',
 						'link',
+						'horizontalLine',
+						'sourceEditing',
 						'bulletedList',
 						'numberedList',
 						'|',
@@ -285,12 +301,10 @@
 						'outdent',
 						'indent',
 						'|',
-						'imageUpload',
-						'mediaEmbed',
-						'undo',
-						'redo',
 						'removeFormat',
-						'sourceEditing'
+						'imageUpload',
+						'undo',
+						'redo'
 					]
 				},
 				language: 'en',
@@ -306,41 +320,20 @@
 
 			} )
 
-
 			.then( editor => {
 
-				//const arr = Array.from( editor.ui.componentFactory.names() );
+				window.editor = editor; // create a global
 
-				//console.log( "arr", arr );
-
-				ed = editor; // create a global
-
-				XGP.requestFile();
-
-				// document.querySelector( '#get-data' ).addEventListener( 'click', () => {
-				// 	//editorData = editor.data.get();
-
-				// 	editorData = editor.getData();
-				// 	// Now, use `editorData` and `commentThreadsData` to save the data in your application.
-				// 	// For example, you can set them as values of hidden input fields.
-				// 	console.log( editorData );
-				// 	//console.log( commentThreadsData );
-				// } );
-
-				// setData.addEventListener( 'click', () => {
-
-				// 	requestFile( "../test1.htm" );
-
-				// } );
-
-				// document.querySelector( '#save-data' ).addEventListener( 'click', () => {
-
-				// 	editorData = editor.data.get();
-
-				// 	saveFile();
-
-				// } );
 			} )
+
+
+			// .then( editor => {
+			// 	const wordCountPlugin = editor.plugins.get( 'WordCount' );
+			// 	const wordCountWrapper = document.getElementById( 'wordCount' );
+
+			// 	wordCountWrapper.appendChild( wordCountPlugin.wordCountContainer );
+			// } )
+
 
 			.catch( error => {
 				console.error( 'Oops, something went wrong!' );
@@ -348,7 +341,8 @@
 				console.warn( 'Build id: lbmmnmrgezqg-rdlk6p2px8qg' );
 				console.error( error );
 			} );
-			
+
+		}
 	</script>
 </body>
 

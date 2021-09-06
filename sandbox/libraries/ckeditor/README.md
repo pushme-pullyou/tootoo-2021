@@ -25,30 +25,44 @@ _"CKEditor" in a resizable window. One finger to rotate. Two to zoom._
 * https://ckeditor.com/docs/
 
 
-## Builder selections
+### Builder selections
 
+* Alignment
 * AutoFormat
 * AutoLink
 * AutoSave
 * Block quote
 * Bold
 * Code
+* Code blocks??
+* Data filter ??
+* Data Schema ??
 * Find and replace
 * General HTML support
 * Heading
+* Highlight
 * Horizontal line
 * Image
+* Image resize
 * Indent
 * Italic
 * Link
+* Link image
 * List
-* Media
-* Page break
 * Remove format
 * Source Editing
+* Special characters
+* Special characters essentials
 * Strikethrough
 * Wordcount
 
+
+### Avoid
+
+* mediaembed
+* Watchdog
+* Comments
+* CKFinder & Cloud services
 
 ## Change Log
 
