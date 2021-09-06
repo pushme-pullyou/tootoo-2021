@@ -7,7 +7,7 @@
 	<meta name="description"
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files in a repository hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2021-09-04">
+	<meta name="date" content="2021-09-05">
 	<title>TooToo</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
@@ -28,15 +28,18 @@
 	<!-- https://github.com/showdownjs/showdown -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 
+	<script src="./lib/mnu-menu/v-2021-08-17/mnu-menu.js"></script>
+
 	<script src="./lib/gra-github-repo-access/v-2021-07-13/gra-github-repo-access.js"></script>
 
-	<script src="./lib/fox-file-open-xhr/v-2021-08-11/fox-file-open-xhr.js"></script>
+	<!-- <script src="./lib/fox-file-open-xhr/v-2021-08-11/fox-file-open-xhr.js"></script> -->
+
+	<script src="./lib09/frx-file-read-xhr/v-2021-09-05/frx-file-read-xhr.js"></script>
 
 	<script src="./lib/gor-github-organization-repos/v-2021-07-03/gor-github-organization-repos.js"></script>
 
 	<script src="./lib/grv-github-repo-tree-view/v-2021-09-04/grv-github-repo-tree-view.js"></script>
 
-	<script src="./lib/mnu-menu/v-2021-08-17/mnu-menu.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
@@ -48,6 +51,8 @@
 			<div id=MNUdivHeader></div>
 
 			<div id=GRAdivDetails></div>
+
+			<div id=FRXdivDetails></div>
 
 			<div id=FOXdivDetails></div>
 
@@ -113,9 +118,13 @@
 			GRA.init();
 
 			// FOX = Fox File Open XHR
-			FOX.init();
-			FOXdivDetails.innerHTML = FOX.getMenu();
-			FOX.onHashChange();
+			// FOX.init();
+			// FOXdivDetails.innerHTML = FOX.getMenu();
+			// FOX.onHashChange();
+
+			// FRX = File Read XHR
+			FRX.init();
+			FRX.onHashChange();
 
 			GOR.init();
 			GORinpUser.value = COR.user + "/" + COR.repo;
@@ -131,8 +140,8 @@
 			<p>This menu enables you to display all folders and files in the ${ COR.title } GitHub repository in a tree view.</p>
 			${ MNU.addInfoBox( GRV.info ) }`;
 
-			//GRV.getFiles = GRV.getFilesAll;
-			GRV.getFiles = GRV.getFilesCurated;
+			GRV.getFiles = GRV.getFilesAll;
+			//GRV.getFiles = GRV.getFilesCurated;
 			GRV.init();
 			GRVdet.open = true;
 			//GRVsumRepo.hidden = true;
@@ -151,7 +160,7 @@
 			} else {
 
 				COR.path = "../../../";
-				//COR.ignoreFolders = [];
+				COR.ignoreFolders = [];
 
 			}
 
