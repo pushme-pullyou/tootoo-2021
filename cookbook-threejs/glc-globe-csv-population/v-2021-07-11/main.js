@@ -6,7 +6,7 @@ const COR = {
 	defaultFile: "README.md",
 	ignoreFolders: [],
 	filterFiles: [ "gif", "md", "jpg", "license", "pdf", "png", "svg", "txt" ],
-	urlSource: "https://github.com/pushme-pullyou/tootoo-2021/tree/main/lib-geo/glc-globe-csv-population",
+	urlSource: "https://github.com/pushme-pullyou/tootoo-2021/tree/main/cookbook-threejs/glc-globe-csv-population",
 	urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
 	iconGitHub: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`,
 	iconInfo: `<img class=infoImg src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/noun_Information_585560.svg">`,
