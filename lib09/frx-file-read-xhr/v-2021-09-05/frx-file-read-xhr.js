@@ -101,6 +101,7 @@ FRX.reader.onload = function () {
 
 
 FRX.loadHandler = function ( fName ) {
+
 	console.log( "fName", fName );
 
 	if ( FRX.fileName.startsWith( "edit" ) ) {
