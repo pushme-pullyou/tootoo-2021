@@ -29,7 +29,7 @@ THR.init = function () {
 	scene.background = new THREE.Color( 0xcce0ff );
 	scene.fog = new THREE.Fog( 0xcce0ff, 550, 800 );
 	scene.add( camera );
-	scane.name = "THR.scene";
+	scene.name = "THR.scene";
 
 	renderer = new THREE.WebGLRenderer( { alpha: true, antialias: true } );
 	renderer.setPixelRatio( window.devicePixelRatio );
