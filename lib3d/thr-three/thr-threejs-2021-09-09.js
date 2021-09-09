@@ -23,11 +23,13 @@ THR.init = function () {
 	camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
 	camera.position.set( -100, -100, 100 );
 	camera.up.set( 0, 0, 1 );
+	camera.name = ( "THR.camera" );
 
 	scene = new THREE.Scene();
 	scene.background = new THREE.Color( 0xcce0ff );
 	scene.fog = new THREE.Fog( 0xcce0ff, 550, 800 );
 	scene.add( camera );
+	scane.name = ( "THR.scene" );
 
 	renderer = new THREE.WebGLRenderer( { alpha: true, antialias: true } );
 	renderer.setPixelRatio( window.devicePixelRatio );
@@ -47,6 +49,7 @@ THR.init = function () {
 	controls.dampingFactor = 0.08;
 	controls.enablePan = true;
 	controls.autoRotateSpeed = 5;
+	controls.name = ( "THR.controls" );
 
 	axesHelper = new THREE.AxesHelper( 100 );
 	axesHelper.name = "THR.axesHelper";
