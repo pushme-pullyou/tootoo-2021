@@ -23,13 +23,13 @@ THR.init = function () {
 	camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
 	camera.position.set( -100, -100, 100 );
 	camera.up.set( 0, 0, 1 );
-	camera.name = ( "THR.camera" );
+	camera.name = "THR.camera";
 
 	scene = new THREE.Scene();
 	scene.background = new THREE.Color( 0xcce0ff );
 	scene.fog = new THREE.Fog( 0xcce0ff, 550, 800 );
 	scene.add( camera );
-	scane.name = ( "THR.scene" );
+	scane.name = "THR.scene";
 
 	renderer = new THREE.WebGLRenderer( { alpha: true, antialias: true } );
 	renderer.setPixelRatio( window.devicePixelRatio );
@@ -49,7 +49,7 @@ THR.init = function () {
 	controls.dampingFactor = 0.08;
 	controls.enablePan = true;
 	controls.autoRotateSpeed = 5;
-	controls.name = ( "THR.controls" );
+	controls.name = "THR.controls";
 
 	axesHelper = new THREE.AxesHelper( 100 );
 	axesHelper.name = "THR.axesHelper";
@@ -274,19 +274,19 @@ THR.addLights1 = function () {
 THR.addLights = function () {
 	//THR.scene.add( new THREE.AmbientLight( 0x404040 ) );
 	const lightAmbient = new THREE.AmbientLight( 0x444444 );
-	lightAmbient.name = ( "THR.lightAmbient" );
+	lightAmbient.name = "THR.lightAmbient";
 	THR.scene.add( lightAmbient );
 
 	const pointLight = new THREE.PointLight( 0xffffff, 0.2 );
 	pointLight.position.copy( THR.camera.position );
-	pointLight.name = ( "THR.pointLight" );
+	pointLight.name = "THR.pointLight";
 
 	//pointLight.shadow.radius = 2;
 	//pointLight.castShadow = true;
 	THR.camera.add( pointLight );
 
 	const lightDirectional = new THREE.DirectionalLight( 0xfffffff, 1 );
-	lightDirectional.name = ( "THR.lightDirectional" );
+	lightDirectional.name = "THR.lightDirectional";
 	lightDirectional.position.set( 0, -200, 100 );
 	lightDirectional.castShadow = true;
 	lightDirectional.shadow.mapSize.width = 1024;
