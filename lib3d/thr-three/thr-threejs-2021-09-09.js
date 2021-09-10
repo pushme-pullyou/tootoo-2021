@@ -102,7 +102,7 @@ THR.getGroupNew = function ( group = THR.group ) {
 
 	group = new THREE.Group();
 
-	THR.group.name = "THR.groupDefault";
+	group.name = "THR.groupDefault";
 
 	THR.scene.add( group );
 
