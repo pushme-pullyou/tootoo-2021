@@ -101,7 +101,6 @@ THR.getGroupNew = function ( group = THR.group ) {
 	THR.scene.remove( group );
 
 	group = new THREE.Group();
-
 	group.name = "THR.groupDefault";
 
 	THR.scene.add( group );
