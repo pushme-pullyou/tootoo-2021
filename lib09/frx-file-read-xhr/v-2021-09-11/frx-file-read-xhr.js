@@ -110,11 +110,11 @@ FRX.loadHandler = function ( fName ) {
 	main.hidden = false;
 	THR.renderer.domElement.style.display = "none";
 
-	if ( FRX.fileName.endsWith( "/edit" ) ) {
+	if ( FRX.fileName.startsWith( "edit" ) ) {
 
 		//divMainContent.style.display = "block";
 
-		FRX.url = FRX.fileName.slice( 0, -5 );
+		FRX.url = FRX.fileName.slice( 5 );
 
 		console.log( "FRX.url", FRX.url );
 
