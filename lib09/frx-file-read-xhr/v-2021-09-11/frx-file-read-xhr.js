@@ -114,7 +114,7 @@ FRX.loadHandler = function ( fName ) {
 
 		//divMainContent.style.display = "block";
 
-		FRX.url = FRX.fileName.slice( 5 );
+		FRX.url = FRX.url.slice( 5 );
 
 		console.log( "FRX.url", FRX.url );
 
