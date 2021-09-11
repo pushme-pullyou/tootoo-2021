@@ -112,9 +112,11 @@ FRX.loadHandler = function ( fName ) {
 
 	if ( FRX.fileName.endsWith( "/edit" ) ) {
 
-		divMainContent.style.display = "block";
+		//divMainContent.style.display = "block";
 
-		FRX.url = FRX.fileName.slice( -5 );
+		FRX.url = FRX.fileName.slice( 0, -5 );
+
+		console.log( "FRX.url", FRX.url );
 
 		const xhr = new XMLHttpRequest();
 		xhr.open( "get", FRX.url, true );
