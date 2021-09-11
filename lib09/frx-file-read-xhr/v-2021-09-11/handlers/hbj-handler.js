@@ -52,7 +52,7 @@ HBJ.addParser = function ( json ) {
 
 	loader.onload = () => { HBJ.parse( json )};
 
-	loader.src = "./js/parsers/hbj-hbjson-parser.js";
+	loader.src = "../parsers/hbj-hbjson-parser.js";
 
 };
 
