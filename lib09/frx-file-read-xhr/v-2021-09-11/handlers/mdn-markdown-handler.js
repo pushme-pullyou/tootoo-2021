@@ -5,6 +5,7 @@
 
 MDN = {};
 
+MDN.src = "https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js";
 
 MDN.handle = function () {
 
@@ -28,7 +29,7 @@ MDN.onUnZip = function () {
 
 		MDN.loader = document.body.appendChild( document.createElement( 'script' ) );
 		MDN.loader.onload = () => MDN.display( FRX.content );
-		MDN.loader.src = "https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js";
+		MDN.loader.src = MDN.src;
 
 	} else {
 
@@ -46,7 +47,7 @@ MDN.read = function () {
 
 		MDN.loader = document.body.appendChild( document.createElement( 'script' ) );
 		MDN.loader.onload = () => MDN.readFile();
-		MDN.loader.src = "https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js";
+		MDN.loader.src = MDN.src;
 
 	} else {
 
@@ -74,7 +75,7 @@ MDN.onChange = function () {
 
 		MDN.loader = document.body.appendChild( document.createElement( 'script' ) );
 		MDN.loader.onload = () => MDN.request( FRX.url );
-		MDN.loader.src = "https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js";
+		MDN.loader.src = MDN.src;
 
 	} else {
 
@@ -97,6 +98,7 @@ MDN.request = function ( url ) {
 };
 
 
+
 MDN.display = function ( content ) {
 
 	showdown.setFlavor( "github" );
@@ -115,5 +117,7 @@ ${ htm }
 
 
 };
+
+
 
 MDN.handle();

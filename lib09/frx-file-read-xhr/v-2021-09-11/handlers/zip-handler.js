@@ -23,6 +23,7 @@ ZIP.handle = function () {
 ZIP.loadFile = function ( file = FRX.file ) {
 
 	JSZip.loadAsync( file )
+		
 		.then( ( zip ) => {
 
 			const names = ZIP.getNames( zip );
