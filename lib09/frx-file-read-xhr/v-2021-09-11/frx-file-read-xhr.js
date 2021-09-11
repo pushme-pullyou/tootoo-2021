@@ -7,7 +7,7 @@
 const FRX = {};
 
 FRX.reader = new FileReader();
-FRX.path = "https://pushme-pullyou.github.io/tootoo-2021/lib09/frx-file-read-xhr/v-2021-09-11";
+FRX.path = "https://pushme-pullyou.github.io/tootoo-2021/lib09/frx-file-read-xhr/v-2021-09-11/";
 
 FRX.init = function () {
 
