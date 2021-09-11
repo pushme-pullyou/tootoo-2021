@@ -22,7 +22,7 @@ Use the file dialog, drag&drop or a URL`;
 
 	FRXdivDetails.innerHTML = `
 <details id=detFile >
-		<summary class="summary-primary gmd-1" title="Open files on your device: ">File menu
+		<summary class="summary-primary gmd-1" title="Open files on your device: ">bbbFile menu
 		<span id=MNUspnFile ></span>
 		${ MNU.addInfoBox( info ) }
 	</summary>
@@ -110,7 +110,7 @@ FRX.loadHandler = function ( fName ) {
 	main.hidden = false;
 	THR.renderer.domElement.style.display = "none";
 
-	if ( FRX.fileName.startsWith( "edit" ) ) {
+	if ( FRX.url.startsWith( "edit" ) ) {
 
 		//divMainContent.style.display = "block";
 
