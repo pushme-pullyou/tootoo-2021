@@ -22,12 +22,15 @@ Use the file dialog, drag&drop or a URL`;
 
 	FRXdivDetails.innerHTML = `
 <details id=detFile >
-		<summary class="summary-primary gmd-1" title="Open files on your device: ">bbbFile menu
+		<summary class="summary-primary gmd-1" title="Open files on your device: ">
+		File menu
 		<span id=MNUspnFile ></span>
 		${ MNU.addInfoBox( info ) }
 	</summary>
 
 	<div id=FRdivMenuFileReader> </div>
+
+	<div id=GRAdivDetails></div>
 
 	<p>Select a file from your device or network.</p>
 	<p>
@@ -104,11 +107,8 @@ FRX.reader.onload = function () {
 FRX.loadHandler = function ( fName ) {
 	//console.log( "fName", fName );
 
-	//divMainContent.style.display = "block";
-	//THR.renderer.domElement.hidden = true;
-
 	main.hidden = false;
-	THR.renderer.domElement.style.display = "none";
+	if ( window[ "THR" ] ) { THR.renderer.domElement.style.display = "block"; }
 
 	if ( FRX.url.startsWith( "edit" ) ) {
 
@@ -135,7 +135,7 @@ FRX.loadHandler = function ( fName ) {
 
 	if ( [ "htm", "html" ].includes( FRX.extension ) ) {
 
-		FRX.load( HTM, "htm-html-handler.js" ); return;
+		FRX.load( "HTM", "htm-html-handler.js" ); return;
 
 		// divMainContent.innerHTML =
 		// 	`<iframe id=ifr src="${ decodeURI( FRX.url ) }" style="border:none;width:100%;" ></iframe>`;
@@ -149,7 +149,8 @@ FRX.loadHandler = function ( fName ) {
 
 		main.style.overflow = "auto";
 
-		FRX.load( MDN, "mdn-markdown-handler.js" ); return;
+		FRX.load( "MDN", "mdn-markdown-handler.js" ); return;
+
 	}
 
 
@@ -157,41 +158,41 @@ FRX.loadHandler = function ( fName ) {
 
 		main.style.overflow = "auto";
 
-		FRX.load( IMG, "img-image-handler.js" ); return;
+		FRX.load( "IMG", "img-image-handler.js" ); return;
 
 	}
 
 
 	main.hidden = true;
-	THR.renderer.domElement.style.display = "block";
+	if ( window[ "THR" ] ) { THR.renderer.domElement.style.display = "block"; }
 
 	// if ( fName.endsWith( ".md" ) ) { FRX.load( r3DM, "3dm-handler.js" ); return; }
 
-	if ( fName.endsWith( ".3dm" ) ) { FRX.load( r3DM, "3dm-handler.js" ); return; }
+	if ( fName.endsWith( ".3dm" ) ) { FRX.load( "r3DM", "3dm-handler.js" ); return; }
 
-	if ( fName.endsWith( "xml" ) || fName.endsWith( "gbxml" ) ) { FRX.load( GBX, "gbx-handler.js" ); return; }
+	if ( fName.endsWith( "xml" ) || fName.endsWith( "gbxml" ) ) { FRX.load("GBX", "gbx-handler.js" ); return; }
 
-	if ( fName.endsWith( "gltf" ) || fName.endsWith( "glb" ) ) { FRX.load( GLTF, "gltf-handler.js" ); return; }
+	if ( fName.endsWith( "gltf" ) || fName.endsWith( "glb" ) ) { FRX.load( "GLTF", "gltf-handler.js" ); return; }
 
-	if ( fName.endsWith( "hbjson" ) ) { FRX.load( HBJ, "hbj-handler.js" ); return; }
+	if ( fName.endsWith( "hbjson" ) ) { FRX.load( "HBJ", "hbj-handler.js" ); return; }
 
-	if ( fName.endsWith( ".idf" ) || fName.endsWith( ".osm" ) ) { FRX.load( IDF, "idf-handler.js" ); return; }
+	if ( fName.endsWith( ".idf" ) || fName.endsWith( ".osm" ) ) { FRX.load( "IDF", "idf-handler.js" ); return; }
 
 	if ( fName.endsWith( ".ifc" ) ) { alert( "IFC file support coming soon!" ); }
 
-	if ( fName.endsWith( ".json" ) ) { FRX.load( JSN, "jsn-three-handler.js" ); return; }
+	if ( fName.endsWith( ".json" ) ) { FRX.load( "JSN", "jsn-three-handler.js" ); return; }
 
-	if ( fName.endsWith( ".obj" ) ) { FRX.load( OBJ, "obj-handler.js" ); return; }
+	if ( fName.endsWith( ".obj" ) ) { FRX.load( "OBJ", "obj-handler.js" ); return; }
 
-	if ( fName.endsWith( ".rad" ) ) { FRX.load( RAD, "rad-handler.js" ); return; }
+	if ( fName.endsWith( ".rad" ) ) { FRX.load( "RAD", "rad-handler.js" ); return; }
 
-	if ( fName.endsWith( ".stl" ) ) { FRX.load( STL, "stl-handler.js" ); return; }
+	if ( fName.endsWith( ".stl" ) ) { FRX.load( "STL", "stl-handler.js" ); return; }
 
-	if ( fName.endsWith( ".vtk" ) || fName.endsWith( ".vtp" ) ) { FRX.load( VTK, "vtk-handler.js" ); return; }
+	if ( fName.endsWith( ".vtk" ) || fName.endsWith( ".vtp" ) ) { FRX.load( "VTK", "vtk-handler.js" ); return; }
 
 	if ( fName.endsWith( ".vtkjs" ) ) { alert( "VTKjs support coming soon!" ); return; }
 
-	if ( fName.endsWith( ".zip" ) ) { FRX.load( ZIP, "zip-handler.js" ); return; }
+	if ( fName.endsWith( ".zip" ) ) { FRX.load( "ZIP", "zip-handler.js" ); return; }
 
 
 	THR.renderer.domElement.style.display = "none";
@@ -211,7 +212,7 @@ FRX.load = function ( obj, handler ) {
 
 	console.log( "FRX.path ", FRX.path );
 
-	if ( obj === undefined ) {
+	if ( window[ obj ] === undefined ) {
 
 		//console.log( "obj", obj );
 		scr = document.body.appendChild( document.createElement( 'script' ) );
@@ -221,7 +222,7 @@ FRX.load = function ( obj, handler ) {
 
 	} else {
 
-		obj.handle();
+		window[ obj ].handle();
 
 	}
 

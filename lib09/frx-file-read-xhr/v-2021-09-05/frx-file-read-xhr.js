@@ -138,6 +138,7 @@ FRX.loadHandler = function ( fName ) {
 	}
 
 	if ( FRX.extension === "md" || FRX.extension.length > 4 ) {
+		
 
 		showdown.setFlavor( "github" );
 

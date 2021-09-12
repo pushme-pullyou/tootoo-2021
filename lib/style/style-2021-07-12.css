@@ -40,17 +40,17 @@ body {
 	overflow: hidden;
 }
 
-#main::-webkit-scrollbar, #detNavMenu::-webkit-scrollbar {
+#main::-webkit-scrollbar, #navMenu::-webkit-scrollbar, .select-resize::-webkit-scrollbar {
 	width: 1.25rem;
 	/* width of the entire scrollbar */
 }
 
-#main::-webkit-scrollbar-track, #detNavMenu::-webkit-scrollbar-track {
+#main::-webkit-scrollbar-track, #navMenu::-webkit-scrollbar-track, .select-resize::-webkit-scrollbar-track {
 	background: var(--color-0-background);
 	/* color of the tracking area */
 }
 
-#main::-webkit-scrollbar-thumb, #detNavMenu::-webkit-scrollbar-thumb {
+#main::-webkit-scrollbar-thumb, #navMenu::-webkit-scrollbar-thumb, .select-resize::-webkit-scrollbar-thumb {
 	background-color: var(--color-2-background);
 	/* color of the scroll thumb */
 	border-radius: var( --margin);
