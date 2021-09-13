@@ -7,13 +7,12 @@
 const FRX = {};
 
 FRX.reader = new FileReader();
-FRX.path = "https://pushme-pullyou.github.io/tootoo-2021/lib09/frx-file-read-xhr/v-2021-09-11/";
+//FRX.path = "https://pushme-pullyou.github.io/tootoo-2021/lib09/frx-file-read-xhr/v-2021-09-12/";
+FRX.path = "./lib09/frx-file-read-xhr/v-2021-09-12/";
 
 FRX.init = function () {
 
 	FRX.defaultFile = COR.defaultFile;
-
-	window.addEventListener( "hashchange", FRX.onHashChange );
 
 	const info = `
 <p>Open <a href="http://gbxml.org" target="_blank">gbXML</a>, HBJSON, Rhino 3DM, gLTF,
@@ -21,10 +20,10 @@ FRX.init = function () {
 Use the file dialog, drag&drop or a URL.</p>
 File: frx-file-read-xhr.js<br>
 Name space: FRX<br>
-Release: v-2021-09-11<br>`;
+Release: v-2021-09-12<br>`;
 
 	FRXdivDetails.innerHTML = `
-<details id=detFile >
+<details id=detFile open >
 		<summary class="summary-primary gmd-1" title="Open files on your device: ">
 		File menu
 		<span id=MNUspnFile ></span>
@@ -42,11 +41,58 @@ Release: v-2021-09-11<br>`;
 
 	<div id=FRXdivLog></div>
 
+	<div id=FRXdivLog2 ></div>
+
 	<div id=FOZdivFileOpenZip></div>
 
 </details>`;
 
+	window.addEventListener( "hashchange", FRX.onHashChange );
+
+	window.addEventListener( "dragenter", FRX.dragenter, false );
+	window.addEventListener( "dragover", FRX.dragover, false );
+	window.addEventListener( "drop", FRX.drop, false );
+
+
 };
+
+FRX.handleEvent = function ( e ) {
+	FRXdivLog2.innerText += `${ e.type }: ${ e.loaded.toLocaleString() } bytes transferred\n`;
+};
+
+FRX.addListeners = function ( xhr ) {
+	xhr.addEventListener( 'loadstart', FRX.handleEvent );
+	xhr.addEventListener( 'load', FRX.handleEvent );
+	xhr.addEventListener( 'loadend', FRX.handleEvent );
+	xhr.addEventListener( 'progress', FRX.handleEvent );
+	xhr.addEventListener( 'error', FRX.handleEvent );
+	xhr.addEventListener( 'abort', FRX.handleEvent );
+};
+
+
+
+FRX.dragenter = function( event ) {
+	event.stopPropagation();
+	event.preventDefault();
+}
+
+FRX.dragover = function( event ) {
+	event.stopPropagation();
+	event.preventDefault();
+}
+
+FRX.drop = function( event ) {
+	event.stopPropagation();
+	event.preventDefault();
+
+	const dt = event.dataTransfer;
+	FRX.files = dt.files;
+
+	FRX.index = 0;
+	FRX.readFile();
+
+}
+
 
 
 FRX.onHashChange = function () {
@@ -122,6 +168,7 @@ FRX.loadHandler = function ( fName ) {
 		console.log( "FRX.url", FRX.url );
 
 		const xhr = new XMLHttpRequest();
+		FRX.addListeners( xhr );
 		xhr.open( "get", FRX.url, true );
 		xhr.onload = () => {
 			const txt = xhr.responseText;
@@ -131,8 +178,8 @@ FRX.loadHandler = function ( fName ) {
 			//console.log( "FRX time load", ( FRX.timeEnd - FRX.timeStart ).toLocaleString() );
 		};
 		xhr.send( null );
+		return xhr;
 
-		return;
 	}
 
 
@@ -197,9 +244,8 @@ FRX.loadHandler = function ( fName ) {
 
 	if ( fName.endsWith( ".zip" ) ) { FRX.load( "ZIP", "zip-handler.js" ); return; }
 
-
-	THR.renderer.domElement.style.display = "none";
-	divMainContent.style.display = "block";
+	if ( window[ "THR" ] ) { THR.renderer.domElement.style.display = "none"; }
+	//divMainContent.style.display = "block";
 	main.hidden = false;
 	main.style.overflow = "hidden";
 
@@ -213,7 +259,7 @@ FRX.loadHandler = function ( fName ) {
 
 FRX.load = function ( obj, handler ) {
 
-	console.log( "FRX.path ", FRX.path );
+	//console.log( "FRX.path ", FRX.path );
 
 	if ( window[ obj ] === undefined ) {
 

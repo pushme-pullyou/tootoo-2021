@@ -7,7 +7,7 @@
 	<meta name="description"
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files in a repository hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2021-09-11">
+	<meta name="date" content="2021-09-12">
 	<title>TooToo</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
@@ -19,6 +19,27 @@
 			--main-hue: 240;
 			/* 0 to 360 0=red 120=green 240=blue */
 		}
+
+		#container {
+			/* To create the column layout. */
+			display: flex;
+
+			/* To make the container relative to its children. */
+			position: relative;
+
+		}
+
+		#container .ck.ck-editor {
+			width: 32rem;
+		}
+
+
+		#container .ck.ck-content {
+			overflow: auto;
+			resize: both;
+			width: 100%;
+		}
+
 	</style>
 
 </head>
@@ -27,13 +48,17 @@
 
 	<script src="./lib/mnu-menu/v-2021-08-17/mnu-menu.js"></script>
 
-	<script src="./lib09/frx-file-read-xhr/v-2021-09-11/frx-file-read-xhr.js"></script>
+	<script src="./lib09/frx-file-read-xhr/v-2021-09-12/frx-file-read-xhr.js"></script>
 
 	<script src="./lib/gra-github-repo-access/v-2021-07-13/gra-github-repo-access.js"></script>
 
 	<script src="./lib/gor-github-organization-repos/v-2021-07-03/gor-github-organization-repos.js"></script>
 
 	<script src="./lib/grv-github-repo-tree-view/v-2021-09-11/grv-github-repo-tree-view.js"></script>
+
+	<script src=""></script>
+
+	<script src="./lib09/ckeditor/v-2021-09-12/cke-ckeditor.js"></script>
 
 
 	<details id=detNavMenu class="gmd-4">
@@ -96,13 +121,13 @@
 
 		init();
 
+
 		function init() {
 
-			//COR.path = COR.assets;
-			//COR.assets = COR.path;
 
+			// MNU = Menu
 			MNU.init();
-			MNUdivSample.innerHTML = MNU.getSample();
+			//MNUdivSample.innerHTML = MNU.getSample();
 			sumNavMenu.hidden = false;
 
 			//const htm = "Hello, World!";
@@ -110,10 +135,14 @@
 			//MNUaSource.hidden = true;
 			//MNUspnVersion.hidden = true;
 
+			// CKE = CK Editor
+			CKE.init();
+
 			// FRX = File Read XHR
 			FRX.init();
 			GRA.init();
 
+			// GOR = GitHub Organization Read
 			GOR.init();
 			GORinpUser.value = COR.user + "/" + COR.repo;
 			GOR.getOrganization();

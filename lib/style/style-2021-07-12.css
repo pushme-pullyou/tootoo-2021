@@ -300,7 +300,7 @@ pre {
 #main {
 	border: 0px solid red;
 	height: 100vh;
-	left: calc( var(--mnu-width) + 1rem);
+	left: calc( var(--mnu-width) + 1.5rem);
 	position: absolute;
 	width: calc(100% - var(--mnu-width) - 1rem);
 }
