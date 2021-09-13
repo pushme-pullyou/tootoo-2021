@@ -10,11 +10,11 @@ FRX.reader = new FileReader();
 
 if ( location.protocol === "https:" ) {
 
-	FRX.path = "https://pushme-pullyou.github.io/tootoo-2021/lib09/frx-file-read-xhr/v-2021-09-12/";
+	FRX.path = "https://pushme-pullyou.github.io/tootoo-2021/lib09/frx-file-read-xhr/v-2021-09-13/";
 
 } else {
 
-	FRX.path = "../../../pushme-pullyou-tootoo-2021/lib09/frx-file-read-xhr/v-2021-09-12/";
+	FRX.path = "../../../pushme-pullyou-tootoo-2021/lib09/frx-file-read-xhr/v-2021-09-13/";
 
 }
 
