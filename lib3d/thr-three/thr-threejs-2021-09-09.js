@@ -59,11 +59,11 @@ THR.init = function () {
 	window.addEventListener( "orientationchange", THR.onWindowResize, false );
 
 	window.addEventListener( "keydown", THR.onStart );
-	renderer.domElement.addEventListener( "click", THR.onStart );
-	renderer.domElement.addEventListener( "touchstart", THR.onStart );
-	renderer.domElement.addEventListener( "touchmove", THR.onStart );
-	renderer.domElement.addEventListener( "touchend", THR.onStart );
-	renderer.domElement.addEventListener( "wheel", THR.onStart );
+	window.addEventListener( "click", THR.onStart );
+	window.addEventListener( "touchstart", THR.onStart );
+	window.addEventListener( "touchmove", THR.onStart );
+	window.addEventListener( "touchend", THR.onStart );
+	window.addEventListener( "wheel", THR.onStart );
 
 	THR.camera = camera;
 	THR.controls = controls;
@@ -86,11 +86,11 @@ THR.onStart = function () {
 	controls.autoRotate = false;
 
 	window.removeEventListener( "keydown", THR.onStart );
-	renderer.domElement.removeEventListener( "click", THR.onStart );
-	renderer.domElement.removeEventListener( "touchstart", THR.onStart );
-	renderer.domElement.removeEventListener( "touchmove", THR.onStart );
-	renderer.domElement.removeEventListener( "touchend", THR.onStart );
-	renderer.domElement.removeEventListener( "wheel", THR.onStart );
+	window.removeEventListener( "click", THR.onStart );
+	window.removeEventListener( "touchstart", THR.onStart );
+	window.removeEventListener( "touchmove", THR.onStart );
+	window.removeEventListener( "touchend", THR.onStart );
+	window.removeEventListener( "wheel", THR.onStart );
 };
 
 
