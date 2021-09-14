@@ -1,5 +1,5 @@
 // copyright 2021 Theo Armour. MIT license.
-/* global HBJ, THREE, THR, THRR, COR  */
+/* global HBJ, THREE, THR, THRR, COR, FRX  */
 // jshint esversion: 11
 // jshint loopfunc: true
 
@@ -54,6 +54,9 @@ HBJ.parse = function ( json ) {
 
 		alert( `${ FRX.filName }: has no visible geometry ` );
 	}
+
+
+	THRR.getHtm = HBJ.getHtm;
 
 };
 
@@ -179,52 +182,34 @@ HBJ.getArea = function ( contour ) {
 
 
 
-THRR.getHtm = function ( intersected ) {
+HBJ.getHtm = function ( intersected ) {
 
-	//console.log( "intersected", intersected );
-	THRR.timeStart = performance.now();
+	console.log( "intersected", intersected );
+	//THRR.timeStart = performance.now();
 	//scene.updateMatrixWorld();
 	const mesh = intersected.object;
-	//mesh.updateMatrix();
 	//console.log( "mesh", mesh );
 
 	const meshPosition = mesh.geometry.attributes.position;
 	const face = intersected.face;
 	const vertexA = new THREE.Vector3().fromBufferAttribute( meshPosition, face.a );
-	//console.log( "vertex", vertexA );
 	const vertexB = new THREE.Vector3().fromBufferAttribute( meshPosition, face.b );
 	const vertexC = new THREE.Vector3().fromBufferAttribute( meshPosition, face.c );
 
-
-	// THRR.geometryLine = new THREE.BufferGeometry().setFromPoints( [ vertexA, vertexB, vertexC] );
-	// //geometry.setAttribute( 'position', new THREE.BufferAttribute( new Float32Array( 3 * 3 ), 3 ) );
-
-	// THRR.materialLine = new THREE.LineBasicMaterial( { color: 0xffffff, transparent: true } );
-
-	// THR.scene.remove( THRR.line );
-	// THRR.line = new THREE.LineLoop( THRR.geometryLine, THRR.materialLine );
-	// THR.scene.add( THRR.line );
-
-	//mesh.children.forEach( ( mesh, index ) => {
-
-	console.log( "mesh", mesh );
-	//const faces = mesh.userData.geometry;
-
 	let index = 0;
-	let area = 0;
 	let items;
 
-	let geo = mesh.userData.geometry;
+	//let geo = mesh.userData.geometry;
 
-	if ( geo?.length ) {
+	// if ( geo?.length ) {
 
-		items = geo.map( geo => geo.userData );
+	// 	//items = geo.map( geo => geo.userData );
 
-	} else {
+	// } else {
 
 		items = mesh.geometry.userData.mergedUserData;
 
-	}
+	//}
 
 	//console.log( "items", items );
 
@@ -260,9 +245,8 @@ THRR.getHtm = function ( intersected ) {
 
 				THR.group.add( THRR.line );
 
-				area = HBJ.getArea( points );
-
-				console.log( "bingo!", i, boundary, "\n", vertexA, vertexB );
+				//area = HBJ.getArea( points );
+				//console.log( "bingo!", i, boundary, "\n", vertexA, vertexB );
 				index = i;
 
 				break;
@@ -275,16 +259,15 @@ THRR.getHtm = function ( intersected ) {
 
 
 	let item;
-
 	//console.log( "ms:", ( performance.now() - THRR.timeStart ).toLocaleString() );
 
 	if ( items[ index ] ) {
 
 		item = items[ index ];
-		console.log( "item", item );
+		//console.log( "item", item );
 
 		return `id: ${ index }<br>
-type: ${ mesh.name }<br>
+type: ${ item.face.face_type || "Shade"}<br>
 area: ${ item.area.toLocaleString() }<br>
 name: ${ item.face.identifier }<br>
 boundary: ${ item.face.boundary_condition?.type }<br>`;

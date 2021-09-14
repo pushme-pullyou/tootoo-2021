@@ -5,6 +5,7 @@
 
 HBJ = {};
 
+
 HBJ.handle = function () {
 
 	//console.log( "FRX.content", FRX.content.slice( 0, 100 ) );
