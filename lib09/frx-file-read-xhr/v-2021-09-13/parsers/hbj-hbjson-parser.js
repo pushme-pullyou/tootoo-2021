@@ -1,10 +1,8 @@
 // copyright 2021 Theo Armour. MIT license.
-/* global THREE, THR, THRR, COR  */
+/* global HBJ, THREE, THR, THRR, COR  */
 // jshint esversion: 11
 // jshint loopfunc: true
 
-
-const HBJ = {};
 
 HBJ.colors = {
 
@@ -18,6 +16,7 @@ HBJ.colors = {
 	Shade: "yellow"
 
 };
+
 
 HBJ.Face3DTypes = [ "AirBoundary", "Aperture", "Door", "Floor", "RoofCeiling", "Shade", "Wall" ];
 
@@ -39,10 +38,22 @@ HBJ.parse = function ( json ) {
 
 		const geometry = HBJ.geometries.filter( geo => geo.name === type );
 
-		if ( geometry.length ) { HBJ.pushMeshes( geometry, HBJ.colors[ type ] ); }
+		if ( geometry.length ) {
+
+			HBJ.pushMeshes( geometry, HBJ.colors[ type ] );
+
+
+		}
 	}
 
-	COR.reset( HBJ.meshes );
+	if ( HBJ.meshes.length ) {
+
+		COR.reset( HBJ.meshes );
+
+	} else {
+
+		alert( `${ FRX.filName }: has no visible geometry ` );
+	}
 
 };
 
@@ -73,7 +84,7 @@ HBJ.processRooms = function () {
 
 	const roomFacesApertures = HBJ.json.rooms?.flatMap( room => room.faces.flatMap( face =>
 		face.apertures ).filter( Boolean ) ) || [];
-	roomFacesApertures.forEach( aper => HBJ.geometries.push( HBJ.addShape3d( aper, "Aperture" ) ) );
+	roomFacesApertures.forEach( aper => HBJ.geometries.push( HBJ.addShape3d( aper, "Aperture", true ) ) );
 
 	roomFacesApertures?.flatMap( aperture => aperture.outdoor_shades ).filter( Boolean )
 		.forEach( shade => HBJ.geometries.push( HBJ.addShape3d( shade, "Shade" ) ) );
@@ -97,9 +108,9 @@ HBJ.pushMeshes = function ( geometries, color ) {
 
 
 
-HBJ.addShape3d = function ( obj, type ) {
+HBJ.addShape3d = function ( obj, type, offset ) {
 
-	const shapeGeometry = HBJ.getShape( obj.geometry.boundary );
+	const shapeGeometry = HBJ.getShape( obj.geometry.boundary, offset );
 	shapeGeometry.userData.face = obj;
 	shapeGeometry.name = type;
 
@@ -168,7 +179,7 @@ HBJ.getArea = function ( contour ) {
 
 
 
-HBJ.getHtm = function ( intersected ) {
+THRR.getHtm = function ( intersected ) {
 
 	//console.log( "intersected", intersected );
 	THRR.timeStart = performance.now();
