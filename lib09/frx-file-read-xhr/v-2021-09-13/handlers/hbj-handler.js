@@ -9,14 +9,12 @@ HBJ = {};
 HBJ.handle = function () {
 
 	//console.log( "FRX.content", FRX.content.slice( 0, 100 ) );
-	console.log( "FRX.file", FRX.file.name );
-	console.log( "FRX.url", FRX.url.split( "/" ).pop() );
 
 	if ( FRX.content ) { HBJ.addParser( JSON.parse( FRX.content ) ); return; }
 
-	if ( FRX.file ) { HBJ.read(); return; }
+	if ( FRX.file ) { console.log( "FRX.file", FRX.file.name ); HBJ.read(); return; }
 
-	if ( FRX.url ) { HBJ.onChange( FRX.url ); return; }
+	if ( FRX.url ) { console.log( "FRX.url", FRX.url.split( "/" ).pop() ); HBJ.onChange( FRX.url ); return; }
 
 };
 
