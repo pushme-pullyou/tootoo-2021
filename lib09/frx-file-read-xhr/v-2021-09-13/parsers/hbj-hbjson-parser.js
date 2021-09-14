@@ -40,7 +40,7 @@ HBJ.parse = function ( json ) {
 
 		if ( geometry.length ) {
 
-			HBJ.pushMeshes( geometry, HBJ.colors[ type ] );
+			HBJ.pushMeshes( geometry, HBJ.colors[ type ], type );
 
 
 		}
@@ -99,11 +99,11 @@ HBJ.processRooms = function () {
 
 
 
-HBJ.pushMeshes = function ( geometries, color ) {
+HBJ.pushMeshes = function ( geometries, color, name ) {
 
 	const bufferGeometry = THREE.BufferGeometryUtils.mergeBufferGeometries( geometries );
-	const mesh = new THREE.Mesh( bufferGeometry, new THREE.MeshPhongMaterial( { color: color, side: 2, specular: 0xffffff, } ) );
-	mesh.name = geometries.name;
+	const mesh = new THREE.Mesh( bufferGeometry, new THREE.MeshPhongMaterial( { color: color, side: 2, specular: 0xffffff, transparent: true } ) );
+	mesh.name = name;
 	HBJ.meshes.push( mesh );
 
 };
