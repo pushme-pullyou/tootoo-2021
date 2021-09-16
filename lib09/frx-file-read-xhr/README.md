@@ -1,17 +1,17 @@
 # [![](https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg )](https://github.com/pushme-pullyou/tootoo-2021/ "Source code on GitHub" ) [TT 2021]( https://pushme-pullyou.github.io/tootoo-2021/ "Home page" ) / [FRX File Read XHR Read Me]( https://pushme-pullyou.github.io/tootoo-2021/#lib09/frx-file-read-xhr/README.md )
 
 
-<!--@@@
-<div class=ifrResize ><iframe src=https://pushme-pullyou.github.io/tootoo-2021/lib09/frx-file-read-xhr/ height=500px width=100% ></iframe></div>
+<!--  @@@
+<div class=iframe-resize ><iframe src=https://pushme-pullyou.github.io/tootoo-2021/lib09/frx-file-read-xhr/ height=100% width=100% ></iframe></div>
 _FOX File Read XHR in a resizable window. One finger to rotate. Two to zoom._
 
 ### Full Screen: [FOX File Read XHR]( https://pushme-pullyou.github.io/tootoo-2021/lib09/frx-file-read-xhr/ )
-@@@-->
+@@@  -->
 
 
 ## Concept
 
-* Open any types of files and set it to an appropriate parser
+* Open any type of file and send the data to an appropriate parser
 
 ## To Do / Wish List
 
