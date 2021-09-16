@@ -138,17 +138,6 @@ THR.dispose = function ( objects ) {
 
 
 
-THR.xxxxxupdateScene = function ( group = THR.group ) {
-	//console.log( "group", THR.group  );
-
-	if ( !THR.group.children.length ) {
-		return;
-	}
-
-	THR.zoomObjectBoundingSphere( group );
-
-};
-
 //////////
 
 THR.zoomObjectBoundingSphere = function ( obj = THR.group ) {
