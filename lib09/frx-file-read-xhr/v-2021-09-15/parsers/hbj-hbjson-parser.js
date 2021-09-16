@@ -8,7 +8,7 @@ HBJ.colors = {
 
 	Wall: "teal",
 	Floor: "brown",
-	RoofCeiling: "red",
+	RoofCeiling: "maroon",
 	AirBoundary: "blue",
 
 	Aperture: "orange",
