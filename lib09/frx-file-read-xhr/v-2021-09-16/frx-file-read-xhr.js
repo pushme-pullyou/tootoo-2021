@@ -6,21 +6,23 @@
 
 const FRX = {};
 
+FRX.version = "v-2021-09-16";
+
+
 FRX.reader = new FileReader();
 
-if ( location.protocol === "https:" ) {
-
-	FRX.path = "https://pushme-pullyou.github.io/tootoo-2021/lib09/frx-file-read-xhr/v-2021-09-13/";
-
-} else {
-
-	FRX.path = "../../../pushme-pullyou-tootoo-2021/lib09/frx-file-read-xhr/v-2021-09-13/";
-
-}
-
-
-
 FRX.init = function () {
+
+	if ( location.protocol === "https:" ) {
+
+		FRX.path = COR.path + `lib09/frx-file-read-xhr/${ FRX.version }/`;
+
+	} else {
+
+		FRX.path = COR.path + `lib09/frx-file-read-xhr/${ FRX.version }/`;
+
+	}
+
 
 	FRX.defaultFile = COR.defaultFile;
 
@@ -30,7 +32,7 @@ FRX.init = function () {
 Use the file dialog, drag&drop or a URL.</p>
 File: frx-file-read-xhr.js<br>
 Name space: FRX<br>
-Release: v-2021-09-13<br>`;
+Release: ${ FRX.version }<br>`;
 
 	FRXdivDetails.innerHTML = `
 <details id=detFile>
@@ -63,20 +65,6 @@ Release: v-2021-09-13<br>`;
 	window.addEventListener( "dragover", FRX.dragover, false );
 	window.addEventListener( "drop", FRX.drop, false );
 
-
-};
-
-FRX.handleEvent = function ( e ) {
-	FRXdivLog2.innerText += `${ e.type }: ${ e.loaded.toLocaleString() } bytes transferred\n`;
-};
-
-FRX.addListeners = function ( xhr ) {
-	xhr.addEventListener( 'loadstart', FRX.handleEvent );
-	xhr.addEventListener( 'load', FRX.handleEvent );
-	xhr.addEventListener( 'loadend', FRX.handleEvent );
-	xhr.addEventListener( 'progress', FRX.handleEvent );
-	xhr.addEventListener( 'error', FRX.handleEvent );
-	xhr.addEventListener( 'abort', FRX.handleEvent );
 };
 
 
@@ -105,6 +93,25 @@ FRX.drop = function ( event ) {
 
 
 
+FRX.addListeners = function ( xhr ) {
+	xhr.addEventListener( 'loadstart', FRX.handleEvent );
+	xhr.addEventListener( 'load', FRX.handleEvent );
+	xhr.addEventListener( 'loadend', FRX.handleEvent );
+	xhr.addEventListener( 'progress', FRX.handleEvent );
+	xhr.addEventListener( 'error', FRX.handleEvent );
+	xhr.addEventListener( 'abort', FRX.handleEvent );
+};
+
+
+
+FRX.handleEvent = function ( e ) {
+
+	FRXdivLog2.innerText = `${ e.type }: ${ e.loaded.toLocaleString() } bytes transferred\n`;
+};
+
+
+
+
 FRX.onHashChange = function () {
 
 	FRX.timeStart = performance.now();
@@ -121,12 +128,14 @@ FRX.onHashChange = function () {
 };
 
 
+
 FRX.onInputFiles = function () {
 
 	FRX.index = 0;
 	FRX.files = FRXinpFiles.files;
 	FRX.readFile();
 };
+
 
 
 FRX.readFile = function () {
@@ -203,7 +212,7 @@ FRX.loadHandler = function ( fName ) {
 
 	if ( fName.endsWith( ".3dm" ) ) { FRX.load( "r3DM", "3dm-handler.js" ); return; }
 
-	if ( fName.endsWith( "xml" ) || fName.endsWith( "gbxml" ) ) { FRX.load("GBX", "gbx-handler.js" ); return; }
+	if ( fName.endsWith( "xml" ) || fName.endsWith( "gbxml" ) ) { FRX.load( "GBX", "gbx-handler.js" ); return; }
 
 	if ( fName.endsWith( "gltf" ) || fName.endsWith( "glb" ) ) { FRX.load( "GLTF", "gltf-handler.js" ); return; }
 
