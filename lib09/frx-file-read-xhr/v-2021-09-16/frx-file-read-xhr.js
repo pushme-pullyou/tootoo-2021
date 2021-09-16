@@ -15,11 +15,11 @@ FRX.init = function () {
 
 	if ( location.protocol === "https:" ) {
 
-		FRX.path = COR.path + `lib09/frx-file-read-xhr/${ FRX.version }/`;
+		FRX.path = COR.pathTooToo + `lib09/frx-file-read-xhr/${ FRX.version }/`;
 
 	} else {
 
-		FRX.path = COR.path + `lib09/frx-file-read-xhr/${ FRX.version }/`;
+		FRX.path = COR.pathTooToo + `lib09/frx-file-read-xhr/${ FRX.version }/`;
 
 	}
 
