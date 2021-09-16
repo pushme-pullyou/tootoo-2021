@@ -1,20 +1,26 @@
-# [![](https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg )](https://github.com/pushme-pullyou/tootoo-2021/ "Source code on GitHub" ) [TT 2021]( https://pushme-pullyou.github.io/tootoo-2021/ "Home page" ) / [FOX File Read XHR Read Me]( https://pushme-pullyou.github.io/tootoo-2021/lib-templates/readme.html#lib/frx-file-read-xhr/README.md)
+# [![](https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg )](https://github.com/pushme-pullyou/tootoo-2021/ "Source code on GitHub" ) [TT 2021]( https://pushme-pullyou.github.io/tootoo-2021/ "Home page" ) / [FRX File Read XHR Read Me]( https://pushme-pullyou.github.io/tootoo-2021/#lib09/frx-file-read-xhr/README.md )
 
 
 <!--@@@
-<div class=ifrResize ><iframe src=https://pushme-pullyou.github.io/tootoo-2021/lib/frx-file-read-xhr/ height=100% width=100% ></iframe></div>
+<div class=ifrResize ><iframe src=https://pushme-pullyou.github.io/tootoo-2021/lib09/frx-file-read-xhr/ height=500px width=100% ></iframe></div>
 _FOX File Read XHR in a resizable window. One finger to rotate. Two to zoom._
 
-### Full Screen: [FOX File Read XHR]( https://pushme-pullyou.github.io/tootoo-2021/lib/frx-file-read-xhr/ )
+### Full Screen: [FOX File Read XHR]( https://pushme-pullyou.github.io/tootoo-2021/lib09/frx-file-read-xhr/ )
 @@@-->
 
 
 ## Concept
 
+* Open any types of files and set it to an appropriate parser
 
 ## To Do / Wish List
 
-* 2021-09-16 ~PopUp progress indicator
+* 2021-09-16 ~ PopUp progress indicator
+* 2021-09-16 ~ ZIP handler to use FRX handler
+* 2021-09-16 ~ Good stats for all types
+* 2021-09-16 ~ Reasonable time to render stats
+* 2021-09-16 ~ Carousels and Galleries
+* 2021-09-16 ~ Scripted demos
 * Better handling of images
 * Center small images?
 
