@@ -94,6 +94,7 @@ THR.onStart = function () {
 };
 
 
+
 THR.getGroupNew = function ( group = THR.group ) {
 
 	if ( !THR.scene ) { return; }
@@ -329,6 +330,20 @@ THR.addGround = function ( position = new THREE.Vector3( 0, 0, -0.02 ) ) {
 	// THR.ground.add(new THREE.Mesh(geo, mat));
 };
 
+
+THR.initStats = function () {
+
+
+	THRdivStatistics.innerHTML = `
+<p
+	title="View number of objects that need rendering and total number of triangles used to create objects">
+	<button onclick="THR.setStats()">View renderer statistics</button>
+</p>`;
+
+
+}
+
+
 THR.setStats = function () {
 	const script = document.head.appendChild( document.createElement( "script" ) );
 	script.onload = () => {
@@ -360,6 +375,8 @@ THR.setStats = function () {
 
 </p>`;
 };
+
+
 
 THR.onWindowResize = function () {
 	THR.camera.aspect = window.innerWidth / window.innerHeight;
