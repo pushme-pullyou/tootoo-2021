@@ -131,9 +131,8 @@ THR.dispose = function ( objects ) {
 
 	}
 
-	renderer.renderLists.dispose();
-	renderer.dispose();
-	scene.dispose();
+	THR.renderer.renderLists.dispose();
+	THR.renderer.dispose();
 
 };
 
