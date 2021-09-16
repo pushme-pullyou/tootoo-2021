@@ -100,7 +100,7 @@ THR.getGroupNew = function ( group = THR.group ) {
 	if ( !THR.scene ) { return; }
 
 	THR.dispose( group );
-	
+
 	THR.scene.remove( group );
 
 	group = new THREE.Group();
@@ -132,10 +132,12 @@ THR.dispose = function ( objects ) {
 	}
 
 	renderer.renderLists.dispose();
-	//renderer.getContext();
-	//renderer.dispose();
-	//scene.dispose();
-}
+	renderer.dispose();
+	scene.dispose();
+
+};
+
+
 
 THR.xxxxxupdateScene = function ( group = THR.group ) {
 	//console.log( "group", THR.group  );
