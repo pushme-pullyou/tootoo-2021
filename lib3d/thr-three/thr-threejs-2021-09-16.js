@@ -262,14 +262,14 @@ THR.setAllVisible = function () {
 	//THRU.tellTaleReset();
 	THR.group.children.forEach( mesh => ( mesh.visible = true ) );
 
-	scene.traverse( function ( object ) {
+	// scene.traverse( function ( object ) {
 
-		if ( object.isMesh ) {
-			object.material.needsUpdate = true;
-			object.geometry.computeVertexNormals()
-		}
+	// 	if ( object.isMesh ) {
+	// 		object.material.needsUpdate = true;
+	// 		object.geometry.computeVertexNormals()
+	// 	}
 
-	} );
+	// } );
 	//THR.group.children.forEach( mesh => ( mesh.material.needsUpdate = true ) );
 
 };

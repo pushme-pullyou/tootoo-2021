@@ -269,7 +269,7 @@ HBJ.getHtm = function ( intersected ) {
 		return `id: ${ index }<br>
 type: ${ item.face.face_type || "Shade"}<br>
 area: ${ item.area.toLocaleString() }<br>
-name: ${ item.face.identifier }<br>
+identifier: <button onclick=HBJ.findName(this.innerText)>${ item.face.identifier }</button><br>
 boundary: ${ item.face.boundary_condition?.type }<br>`;
 
 	} else {
@@ -279,3 +279,38 @@ boundary: ${ item.face.boundary_condition?.type }<br>`;
 
 };
 
+HBJ.findName = function ( string ) {
+
+	JTVdet.open = true;
+
+	setTimeout( () => { JTIdet.open = true; }, 500 );
+
+	setTimeout( () => {
+
+		JTFinpSearch.value = string;
+
+		var event = new Event( 'input', {
+			bubbles: true,
+			cancelable: true,
+		} );
+
+		JTFinpSearch.dispatchEvent( event );
+
+		JTVdet.scrollIntoView();
+
+	}, 300 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
