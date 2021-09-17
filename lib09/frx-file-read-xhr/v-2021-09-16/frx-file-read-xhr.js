@@ -134,6 +134,7 @@ FRX.onInputFiles = function () {
 	FRX.index = 0;
 	FRX.files = FRXinpFiles.files;
 	FRX.readFile();
+	
 };
 
 

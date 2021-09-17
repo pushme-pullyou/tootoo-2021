@@ -42,7 +42,6 @@ HBJ.parse = function ( json ) {
 
 			HBJ.pushMeshes( geometry, HBJ.colors[ type ], type );
 
-
 		}
 	}
 
@@ -197,19 +196,8 @@ HBJ.getHtm = function ( intersected ) {
 	const vertexC = new THREE.Vector3().fromBufferAttribute( meshPosition, face.c );
 
 	let index = 0;
-	let items;
+	let items = mesh.geometry.userData.mergedUserData;
 
-	//let geo = mesh.userData.geometry;
-
-	// if ( geo?.length ) {
-
-	// 	//items = geo.map( geo => geo.userData );
-
-	// } else {
-
-		items = mesh.geometry.userData.mergedUserData;
-
-	//}
 
 	//console.log( "items", items );
 
@@ -219,7 +207,7 @@ HBJ.getHtm = function ( intersected ) {
 		//console.log( "item", item );
 
 		const boundary = item.face.geometry.boundary;
-		//console.log( "boundary", boundary );
+		console.log( "boundary", boundary );
 
 		for ( let j = 0; j < boundary.length; j++ ) {
 
@@ -234,7 +222,7 @@ HBJ.getHtm = function ( intersected ) {
 				const points = boundary.map( item => new THREE.Vector3().fromArray( item ) );
 
 				THRR.line.geometry.dispose();
-				THR.group.remove( THRR.line );
+				mesh.remove( THRR.line );
 
 				THRR.geometryLine = new THREE.BufferGeometry().setFromPoints( points );
 
@@ -243,7 +231,7 @@ HBJ.getHtm = function ( intersected ) {
 				THRR.line = new THREE.LineLoop( THRR.geometryLine, THRR.materialLine );
 				THRR.line.name = "THR.linePopUp";
 
-				THR.group.add( THRR.line );
+				mesh.add( THRR.line );
 
 				//area = HBJ.getArea( points );
 				//console.log( "bingo!", i, boundary, "\n", vertexA, vertexB );
@@ -278,6 +266,9 @@ boundary: ${ item.face.boundary_condition?.type }<br>`;
 	}
 
 };
+
+
+
 
 HBJ.findName = function ( string ) {
 
