@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang = "en" >
+<head>
+<meta charset = "utf-8" >
+<meta name = "viewport" content= "width=device-width, initial-scale=1">
+<meta name = "description" content = "web page carousel" >
+<meta name = "keywords" content = "JavaScript,GitHub,FOSS,3D,STEM" >
+<meta name = "date" content = "2021-09-09" >
+<title>iframe carousel</title>
+<style>
+
+	body { font: 12pt monospace; margin: 0 auto; }
+	a { color: crimson; text-decoration: none; }
+	a:hover, a:focus { background-color: yellow; color: #aaa; text-decoration: underline }
+
+	iframe { border: none; height: 100vh; margin: 0; width: 100% }
+	iframe {
+		display: block;
+		border: 0;
+		-moz-transition:    all 1.9s;
+		-webkit-transition: all 1.9s;
+		-ms-transition:     all 1.9s;
+		-o-transition:      all 1.9s;
+		transition:         all 1.9s;
+		opacity: 1;
+
+	}
+	iframe.fade-out { opacity: 0; }
+	iframe.fade-in { opacity: 1; }
+
+</style>
+</head>
+<body>
+
+	<div id = "header" >
+		<div id = "title" ></div>
+		<div id = "contents" ></div>
+	</div>
+
+	<iframe id=IFCifr ></iframe>
+
+<script>
+
+
+let IFC = {};
+
+IFC.sites =
+[
+	[ "https://www.ladybug.tools/spider-2021/spider-viewer/","Aragog gbXML Viewer" ],
+	[ "https://www.ladybug.tools/spider-covid-19-viz-3d/","Radiance RAD File Viewer" ],
+	[ "https://prediqtiv.github.io/eye-cue/replay/dev","predIQtiv" ],
+	[ "https://webmath.github.io/algesurf/ray-marching/r3/algesurf-ray-marching-r3.html","algeSurf" ],
+	[ "https://www.ladybug.tools/spider/analemma3d/index.html#r20/analemma3d.html","Analemma 3D" ],
+	[ "https://www.ladybug.tools/spider/build-well/r14/build-well.html","Build Well" ],
+	[ "https://www.ladybug.tools/spider/burning-manalemma-2017/index.html#r10/burning-manalemma-2017.html#latitude:40.786944,longitude:-119.204444,zoom:11,offsetUTC:-420","BurningmAnalemma" ],
+	[ "https://www.ladybug.tools/spider/cookbook/scatter-well/r1/index.html","Scatter Well" ],
+	[ "https://www.ladybug.tools/spider/cookbook/rad-to-threejs/r5/rad-to-three.html","Radiance RAD File Viewer" ]
+];
+
+	IFC.timer;
+	IFC.index = 0; // Math.floor( Math.random() * sites.length );
+
+
+	IFC.init = function() {
+
+		clearInterval( IFC.timer );
+
+		IFC.displayNext();
+
+		IFC.timer = setInterval( IFC.displayNext, 10000 );
+
+	}
+
+
+	IFC.displayNext = function(){
+
+		IFC.index = IFC.index >= IFC.sites.length ? 0 : IFC.index;
+
+		IFCifr.onload = function() { IFCifr.className = "fade-in"; }
+
+		setTimeout( function(){ IFCifr.className = "fade-out"; }, 8000);
+
+		IFCifr.src = IFC.sites[ IFC.index ][ 0 ];
+
+		history.replaceState( "", document.title, window.location.pathname );
+
+		IFC.index++;
+
+	}
+
+
+	IFC.init();
+
+
+</script>
+</body>
+</html>
