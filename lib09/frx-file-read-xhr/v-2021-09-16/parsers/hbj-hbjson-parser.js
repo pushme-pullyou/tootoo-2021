@@ -256,7 +256,7 @@ HBJ.getHtm = function ( intersected ) {
 		//console.log( "item", item );
 
 		const boundary = item.face.geometry.boundary;
-		console.log( "boundary", boundary );
+		//console.log( "boundary", boundary );
 
 		for ( let j = 0; j < boundary.length; j++ ) {
 
