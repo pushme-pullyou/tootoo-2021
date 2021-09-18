@@ -6,14 +6,13 @@
 
 HBJ.colors = {
 
-	Wall: "teal",
-	Floor: "brown",
-	RoofCeiling: "maroon",
 	AirBoundary: "blue",
-
 	Aperture: "orange",
 	Door: "orange",
-	Shade: "yellow"
+	Floor: "brown",
+	RoofCeiling: "maroon",
+	Shade: "yellow",
+	Wall: "teal",
 
 };
 
@@ -55,7 +54,57 @@ HBJ.parse = function ( json ) {
 	}
 
 
-	THRR.getHtm = HBJ.getHtm;
+	THRR.getHtm = HBJ.getHtm;  // Set up raycasting
+
+	HBJ.init();
+
+};
+
+
+
+HBJ.init = function () {
+
+	htm = `
+<details id=HBJdet open >
+<summary class="summary-primary gmd-1" title="Open files on your device: ">Honeybee JSON Models </summary>
+
+<p>
+<button onclick=HBJ.getSensorGrids() >get sensor grids</button>
+</p>
+
+
+</details>`;
+
+whatever.innerHTML = htm;
+
+}
+
+
+HBJ.getSensorGrids = function () {
+
+	console.log( "grids", HBJ.json.properties.radiance.sensor_grids );
+
+	grids = HBJ.json.properties.radiance.sensor_grids;
+	for ( item of grids ) {
+
+		for ( sensor of item.sensors ) {
+
+			console.log( "position", sensor.pos );
+
+			p = sensor.pos
+
+			const geometry = new THREE.BoxGeometry( 0.1, 0.1,0.1);
+			const material = new THREE.MeshNormalMaterial();
+			const mesh = new THREE.Mesh( geometry, material );
+			mesh.position.set( p[ 0 ], p[ 1 ], p[ 2 ])
+			THR.scene.add( mesh );
+
+		}
+
+
+
+
+	}
 
 };
 

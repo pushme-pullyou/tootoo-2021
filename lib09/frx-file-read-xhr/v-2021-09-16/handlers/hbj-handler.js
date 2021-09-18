@@ -6,14 +6,11 @@
 HBJ = {};
 
 
+
 HBJ.handle = function () {
 
-	//console.log( "FRX.content", FRX.content.slice( 0, 100 ) );
-
 	if ( FRX.content ) { HBJ.addParser( JSON.parse( FRX.content ) ); return; }
-
 	if ( FRX.file ) { console.log( "FRX.file", FRX.file.name ); HBJ.read(); return; }
-
 	if ( FRX.url ) { console.log( "FRX.url", FRX.url.split( "/" ).pop() ); HBJ.onChange( FRX.url ); return; }
 
 };
@@ -25,6 +22,7 @@ HBJ.read = function () {
 	const reader = new FileReader();
 	reader.onload = ( event ) => HBJ.addParser( JSON.parse( event.target.result ) );
 	reader.readAsText( FRX.file );
+
 };
 
 
@@ -40,17 +38,11 @@ HBJ.onChange = function ( url ) {
 };
 
 
-//////////
-
-
-
 
 HBJ.addParser = function ( json ) {
 
 	const loader = document.body.appendChild( document.createElement( 'script' ) );
-
 	loader.onload = () => { HBJ.parse( json )};
-
 	loader.src = FRX.path + "parsers/hbj-hbjson-parser.js";
 
 };

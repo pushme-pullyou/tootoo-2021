@@ -19,7 +19,7 @@ FRX.init = function () {
 
 	} else {
 
-		FRX.path = COR.pathTooToo + `lib09/frx-file-read-xhr/${ FRX.version }/`;
+		FRX.path = "../../../pushme-pullyou-tootoo-2021/" + `lib09/frx-file-read-xhr/${ FRX.version }/`;
 
 	}
 
