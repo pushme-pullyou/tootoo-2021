@@ -13,6 +13,10 @@
 
 ## Links of Interest
 
+Add rules to existing style sheet
+
+* https://usefulangle.com/post/39/adding-css-to-stylesheet-with-javascript#:~:text=You%20can%20insert%20a%20new,rule%20to%20the%20stylesheet%20sheet.
+
 
 
 Web

@@ -23,6 +23,10 @@ CKE.init = function () {
 		title="Obtain GitHub API Access Token" style=width:100%; >
 	</div>
 
+	<p>
+	<button onclick=CKE.putFileToGitHub() title="Press Alt-S">putGitHub</button>
+	</p>
+
 	<div id=divLog></div>
 
 </details>`
@@ -57,12 +61,16 @@ CKE.loadCkeditor = function () {
 
 	window.removeEventListener( "hashchange", FRX.onHashChange );
 
-}
+};
 
 
 CKE.onHashChange = function () {
 
 	CKE.hash = location.hash ? location.hash.slice( 1 ) : COR.defaultFile;
+
+	CKE.url = CKE.base + CKE.hash;
+
+	console.log( "url", CKE.url );
 
 	if ( !window.CKEdivPopUp ) {
 
@@ -74,7 +82,7 @@ CKE.onHashChange = function () {
 	CKEdivPopUp.innerHTML = `
 <div>
 <button onclick=CKE.requestFile(); > edit: ${ CKE.hash }</button >
-</div>`
+</div>`;
 
 	divMainContent.innerHTML = `
 
@@ -91,11 +99,11 @@ CKE.onHashChange = function () {
 <div id="divMessage"></div>
 `;
 
-	CKE.requestFile()
+	CKE.requestFile();
 
 	//CKE.createEditor( "Text to be edited will appear here..." );
 
-}
+};
 
 
 
@@ -231,3 +239,86 @@ CKE.createEditor = function ( content ) {
 		} );
 
 };
+
+
+
+CKE.putFileToGitHub = function () {
+
+	if ( CKE.url === "" ) { alert( "No URL" ); return; }
+
+	const xhr = new XMLHttpRequest();
+	xhr.open( "GET", CKE.url, true );
+	xhr.setRequestHeader( "Authorization", "token " + CKE.accessToken );
+	xhr.responseType = "json";
+	xhr.onerror = ( xhr ) => console.log( "error:", xhr );
+	//xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
+	xhr.onload = ( xhr ) => {
+		//console.log( "", xhr );
+		CKE.sha = xhr.target.response.sha;
+		CKE.putFile();
+	};
+	xhr.send( null );
+
+};
+
+
+
+CKE.putFile = function () {
+
+	CKE.content = editor.getData();
+
+	console.log( "CKE.content", CKE.content );
+	const codedData = window.btoa( CKE.content ); // encode the string
+
+	const body = JSON.stringify( {
+		"branch": CKE.branch,
+		"content": codedData,
+		"message": `add to file`,
+		"sha": CKE.sha
+
+	} );
+
+	xhr = new XMLHttpRequest();
+	xhr.open( "PUT", CKE.url, true );
+	xhr.setRequestHeader( "Authorization", "token " + CKE.accessToken );
+	xhr.setRequestHeader( "Content-Type", "application/json" );
+	xhr.onerror = ( xhr ) => console.log( "error:", xhr );
+	xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
+	xhr.send( body );
+
+	//divMessage.innerText = `Put: ${ new Date().toLocaleString() } bytes:${ CKE.content.length } sha:${ CKE.sha }`;
+	divMessage.innerText = `Put: ${ new Date().toLocaleString().split( "," ).pop() } bytes:${ CKE.content.length }`;
+
+};
+
+
+
+CKE.checkForChange = function ( event ) {
+
+	if ( editor.data.get() === CKE.content ) { return; }
+
+	console.log( "", CKE.content );
+
+	event.preventDefault();
+
+	event.returnValue = "";
+
+};
+
+
+
+CKE.onKeyUp = function () {
+
+	//console.log( 'key', event.keyCode );
+
+	event.preventDefault();
+
+	if ( event.altKey && event.keyCode === 83 ) {
+
+		CKE.putFileToGitHub();
+
+	}
+
+};
+
+
