@@ -359,6 +359,9 @@ pre {
 		padding: var( --margin);
 		width: 3.5rem;
 	}
+	#DBDdivDashboard {
+		max-width: 95%;
+	}
 }
 
 @media all and (max-height: 500px) {
@@ -374,6 +377,9 @@ pre {
 		font-size: 120%;
 		padding: var( --margin);
 		width: 4rem;
+	}
+	#DBDdivDashboard {
+		max-width: 95%;
 	}
 }
 
