@@ -107,6 +107,7 @@ FRX.addListeners = function ( xhr ) {
 FRX.handleEvent = function ( e ) {
 
 	FRXdivLog2.innerText = `${ e.type }: ${ e.loaded.toLocaleString() } bytes transferred\n`;
+
 };
 
 
@@ -121,7 +122,7 @@ FRX.onHashChange = function () {
 	FRX.file = "";
 	FRX.fileName = url.split( "/" ).pop();
 	FRX.extension = FRX.fileName.toLowerCase().split( '.' ).pop();
-	FRX.url = url;
+	FRX.url = COR.path + url;
 
 	FRX.loadHandler( FRX.url );
 

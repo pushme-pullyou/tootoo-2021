@@ -11,7 +11,7 @@ const CKE = {};
 CKE.init = function () {
 
 	CKE.base = `https://api.github.com/repos/${ COR.user }/${ COR.repo }/contents/`;
-	
+
 	const htm = `
 <details id=detCKE ontoggle=CKE.loadCkeditor() >
 
@@ -46,7 +46,7 @@ CKE.loadCkeditor = function () {
 
 		scr = document.body.appendChild( document.createElement( 'script' ) );
 		scr.onload = () => CKE.onHashChange();
-		scr.src = "https://pushme-pullyou.github.io/tootoo-2021/lib09/ckeditor/ckeditor5/build/ckeditor.js";
+		scr.src = "https://pushme-pullyou.github.io/tootoo-2021/lib09/ckeditor/ckeditor5-markdown/build/ckeditor.js";
 		//scr.src = `js/handlers/${ parser }`;
 
 	} else {

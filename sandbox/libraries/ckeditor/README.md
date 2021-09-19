@@ -42,7 +42,8 @@ _"CKEditor" in a resizable window. One finger to rotate. Two to zoom._
 * Heading
 * Highlight
 * Horizontal line
-* Image
+* HTML comment
+* Image // handles block image etc
 * Image resize
 * Indent
 * Italic

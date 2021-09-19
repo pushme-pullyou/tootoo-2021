@@ -48,8 +48,8 @@
 
 	<script src="./lib/mnu-menu/v-2021-08-17/mnu-menu.js"></script>
 
-	<script src="./lib09/ckeditor/v-2021-09-12/cke-ckeditor.js"></script>
-	
+	<script src="./lib09/ckeditor/v-2021-09-18-md/cke-ckeditor.js"></script>
+
 	<script src="./lib09/frx-file-read-xhr/v-2021-09-16/frx-file-read-xhr.js"></script>
 
 	<script src="./lib/gra-github-repo-access/v-2021-07-13/gra-github-repo-access.js"></script>
@@ -99,11 +99,11 @@
 	<script>
 
 		const COR = {
-			user: "pushme-pullyou",
-			repo: "tootoo-2021",
+			user: "theo-armour", //"pushme-pullyou",
+			repo: "2021",
 			branch: "main",
-			path: "./",
-			pathTooToo: "./",
+			path: "https://theo-armour.github.io/2021/", //./",
+			pathTooToo: "https://pushme-pullyou.github.io/tootoo-2021/", //"./",
 			defaultFile: "README.md",
 			//defaultIgnoreFolders: [],
 			defaultIgnoreFolders: ["archive", "lib", "lib3d", "lib-geo", "lib-templates"],
@@ -175,11 +175,12 @@
 				window.history.pushState( "", "", "./" + location.hash );
 
 				COR.path = "./";
+
 				COR.ignoreFolders = COR.defaultIgnoreFolders;
 
 			} else {
 
-				COR.path = "./";
+				COR.path = "https://theo-armour.github.io/2021/"; //"./";
 				COR.ignoreFolders = [];
 
 			}
