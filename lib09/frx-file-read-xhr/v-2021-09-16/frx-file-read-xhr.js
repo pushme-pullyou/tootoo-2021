@@ -122,7 +122,7 @@ FRX.onHashChange = function () {
 	FRX.file = "";
 	FRX.fileName = url.split( "/" ).pop();
 	FRX.extension = FRX.fileName.toLowerCase().split( '.' ).pop();
-	FRX.url = COR.path + url;
+	FRX.url = url;
 
 	FRX.loadHandler( FRX.url );
 

@@ -69,6 +69,19 @@ CKE.loadCkeditor = function () {
 
 CKE.onHashChange = function () {
 
+	if ( window[ "editor" ] ) {
+
+		console.log( "true", editor?.data?.get().slice( 1 ) !== CKE.content );
+
+		if ( editor?.data?.get() !== CKE.content ) {
+
+			response = confirm( "Changes you made may not be saved. Click OK to proceed without saving")
+			if ( response !== true ) { return; }
+		}
+
+	}
+
+
 	CKE.hash = location.hash ? location.hash.slice( 1 ) : COR.defaultFile;
 
 	CKE.url = CKE.base + CKE.hash;
@@ -129,6 +142,7 @@ CKE.requestFile = function () {
 
 
 CKE.onLoad = function ( xhr ) {
+
 	console.log( "xhr", xhr );
 
 	CKE.sha = xhr.target.response.sha;
@@ -152,7 +166,7 @@ CKE.onLoad = function ( xhr ) {
 
 //	}
 
-	CKE.content = content;
+//CKE.content = content;
 
 	if ( window.divMessage ) {
 
@@ -224,6 +238,8 @@ CKE.createEditor = function ( content ) {
 		.then( editor => {
 
 			window.editor = editor; // create a global
+
+			CKE.content = editor.getData();
 
 		} )
 
@@ -300,9 +316,9 @@ CKE.putFile = function () {
 
 CKE.checkForChange = function ( event ) {
 
-	if ( editor.data.get() === CKE.content ) { return; }
+	if ( editor?.data?.get() === CKE.content ) { return; }
 
-	console.log( "", CKE.content );
+	console.log( "content", CKE.content );
 
 	event.preventDefault();
 
@@ -312,7 +328,7 @@ CKE.checkForChange = function ( event ) {
 
 
 
-CKE.onKeyUp = function () {
+CKE.onKeyUp = function ( event ) {
 
 	//console.log( 'key', event.keyCode );
 

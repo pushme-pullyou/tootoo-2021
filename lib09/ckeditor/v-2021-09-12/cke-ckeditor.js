@@ -11,7 +11,7 @@ const CKE = {};
 CKE.init = function () {
 
 	CKE.base = `https://api.github.com/repos/${ COR.user }/${ COR.repo }/contents/`;
-	
+
 	const htm = `
 <details id=detCKE ontoggle=CKE.loadCkeditor() >
 
