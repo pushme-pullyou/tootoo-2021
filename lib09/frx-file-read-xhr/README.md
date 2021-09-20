@@ -12,6 +12,7 @@ _FOX File Read XHR in a resizable window. One finger to rotate. Two to zoom._
 ## Concept
 
 * Open any type of file and send the data to an appropriate parser
+* Open any zip file, decompress it and send the data to an appropriate parser
 
 ## To Do / Wish List
 
@@ -26,6 +27,7 @@ _FOX File Read XHR in a resizable window. One finger to rotate. Two to zoom._
 
 ## Issues
 
+* 2021-09-20 ~ ZIP to STL fails
 
 ## Links of Interest
 

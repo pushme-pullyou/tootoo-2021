@@ -171,7 +171,7 @@ CKE.onLoad = function ( xhr ) {
 	if ( window.divMessage ) {
 
 		//divMessage.innerText = `Get:${ new Date().toLocaleString() } bytes:${ content.length } sha:${ CKE.sha }`;
-		divMessage.innerText = `Get${ new Date().toLocaleString().split( "," ).pop() } bytes:${ CKE.content.length }`;
+		divMessage.innerText = `Get${ new Date().toLocaleString().split( "," ).pop() } bytes:${ content.length }`;
 
 	}
 
@@ -212,7 +212,7 @@ CKE.createEditor = function ( content ) {
 					'bulletedList',
 					'numberedList',
 					'|',
-					'findAndReplace',
+					//'findAndReplace',
 					'outdent',
 					'indent',
 					'|',
