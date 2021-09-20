@@ -57,7 +57,7 @@
 
 	<script src="./lib/gor-github-organization-repos/v-2021-07-03/gor-github-organization-repos.js"></script>
 
-	<script src="./lib/grv-github-repo-tree-view/v-2021-09-18/grv-github-repo-tree-view.js"></script>
+	<script src="./lib09/grv-github-repo-tree-view/v-2021-09-20/grv-github-repo-tree-view.js"></script>
 
 
 
@@ -170,9 +170,15 @@
 			//GRVsumRepo.hidden = true;
 			GRV.getRepo();
 
+			if ( GRV.accessToken ) {
 
-			//FRX.onHashChange(); // start the action!
-			CKE.loadCkeditor()
+				CKE.loadCkeditor();
+
+			} else {
+
+				FRX.onHashChange(); // start the action!
+
+			}
 
 			// if running on server, keeps address bar pointed to latest dev
 
