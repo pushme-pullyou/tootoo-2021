@@ -89,7 +89,9 @@
 
 
 
-		function init() {
+		function init( url = XGP.url) {
+
+			XGP.url = url
 
 			spnTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
 
