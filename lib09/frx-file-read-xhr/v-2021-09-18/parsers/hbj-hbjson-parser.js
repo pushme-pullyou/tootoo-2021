@@ -16,9 +16,11 @@ HBJ.colors = {
 
 };
 
+HBJ.sensors = undefined;
 
 HBJ.Face3DTypes = [ "AirBoundary", "Aperture", "Door", "Floor", "RoofCeiling", "Shade", "Wall" ];
 
+HBJ.colorsDaylight = [ "#ea2600", "#ea7100", "#f7c835", "#e0e591", "#9fbdee", "#4b6ba9" ];
 
 
 HBJ.parse = function ( json ) {
@@ -53,7 +55,6 @@ HBJ.parse = function ( json ) {
 		alert( `${ FRX.filName }: has no visible geometry ` );
 	}
 
-
 	THRR.getHtm = HBJ.getHtm;  // Set up raycasting
 
 	HBJ.init();
@@ -72,73 +73,13 @@ HBJ.init = function () {
 	<button onclick=HBJ.getSensorGrids() >get sensor grids</button>
 </p>
 
+<p>
+	<input id=HBJinpResults type=file onchange=HBJ.getResults(); >
+</p>
 
 </details>`;
 
 	whatever.innerHTML = htm;
-
-};
-
-
-HBJ.getSensorGrids = function () {
-
-	console.log( "grids", HBJ.json.properties.radiance.sensor_grids );
-
-	grids = HBJ.json.properties.radiance.sensor_grids;
-
-	for ( let grid of grids ) {
-
-		vertices = grid.mesh.vertices.map( points => new THREE.Vector3().fromArray( points ) );
-
-		for ( face of grid.mesh.faces ) {
-
-			const verticesFace = face.map( index => vertices[ index ] );
-
-			const box = new THREE.Box3().setFromPoints( verticesFace );
-			//console.log( "box ", box );
-			const center = box.getCenter( new THREE.Vector3() );
-			const size = box.getSize( new THREE.Vector3());
-			//console.log( "size", size );
-
-			const geometry = new THREE.PlaneGeometry( size.x, size.y );
-			geometry.translate( center.x, center.y, center.z );
-			const material = new THREE.MeshBasicMaterial( { color: 0xffffff * Math.random(), side: 2 } );
-			const mesh = new THREE.Mesh( geometry, material );
-			THR.scene.add( mesh );
-
-		}
-
-
-		for ( sensor of grid.sensors ) {
-
-			//console.log( "position", sensor.pos );
-
-			p = sensor.pos;
-			d = sensor.dir;
-
-			start = new THREE.Vector3( p[ 0 ], p[ 1 ], p[ 2 ] );
-			dir = new THREE.Vector3( d[ 0 ], d[ 1 ], d[ 2 ] );
-
-			const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 );
-			const material = new THREE.MeshNormalMaterial();
-			const mesh = new THREE.Mesh( geometry, material );
-			mesh.position.copy( start );
-			THR.scene.add( mesh );
-
-			points = [ new THREE.Vector3(), dir ];
-
-			const geometryLine = new THREE.BufferGeometry().setFromPoints( points );
-			const materialLine = new THREE.LineBasicMaterial( { color: "magenta" } );
-			line = new THREE.Line( geometryLine, materialLine );
-			mesh.add( line );
-
-			//console.log( "line", line );
-
-
-
-		}
-
-	}
 
 };
 
@@ -264,6 +205,8 @@ HBJ.getArea = function ( contour ) {
 
 
 
+//////////
+
 HBJ.getHtm = function ( intersected ) {
 
 	console.log( "intersected", intersected );
@@ -374,17 +317,129 @@ HBJ.findName = function ( string ) {
 
 	}, 300 );
 
+};
 
 
 
+//////////
 
 
 
+HBJ.getSensorGrids = function () {
+
+	//console.log( "grids", HBJ.json.properties.radiance.sensor_grids );
+
+	const grids = HBJ.json.properties.radiance.sensor_grids;
+
+	THR.dispose( HBJ.sensors );
+	THR.scene.remove( HBJ.sensors );
+
+	HBJ.sensors = new THREE.Group();
+
+	THR.scene.add( HBJ.sensors );
+
+	for ( let grid of grids ) {
+
+		vertices = grid.mesh.vertices.map( points => new THREE.Vector3().fromArray( points ) );
+
+		for ( let face of grid.mesh.faces ) {
+
+			const verticesFace = face.map( index => vertices[ index ] );
+
+			const box = new THREE.Box3().setFromPoints( verticesFace );
+			//console.log( "box ", box );
+			const center = box.getCenter( new THREE.Vector3() );
+			const size = box.getSize( new THREE.Vector3() );
+			//console.log( "size", size );
+
+			const geometry = new THREE.PlaneGeometry( size.x, size.y );
+			geometry.translate( center.x, center.y, center.z );
+			const material = new THREE.MeshBasicMaterial( { color: 0xffffff * Math.random(), side: 2 } );
+			const mesh = new THREE.Mesh( geometry, material );
+			mesh.name = "mesh";
+
+			HBJ.sensors.add( mesh );
+
+		}
 
 
+		for ( sensor of grid.sensors ) {
 
+			//console.log( "position", sensor.pos );
 
+			const p = sensor.pos;
+			const d = sensor.dir;
 
+			start = new THREE.Vector3( p[ 0 ], p[ 1 ], p[ 2 ] );
+			dir = new THREE.Vector3( d[ 0 ], d[ 1 ], d[ 2 ] );
 
+			const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 );
+			const material = new THREE.MeshNormalMaterial();
+			const mesh = new THREE.Mesh( geometry, material );
+			mesh.position.copy( start );
+			HBJ.sensors.add( mesh );
+
+			points = [ new THREE.Vector3(), dir ];
+
+			const geometryLine = new THREE.BufferGeometry().setFromPoints( points );
+			const materialLine = new THREE.LineBasicMaterial( { color: "magenta" } );
+			line = new THREE.Line( geometryLine, materialLine );
+			mesh.add( line );
+
+		}
+
+		THR.scene.add( HBJ.sensors );
+
+	}
 
 };
+
+
+HBJ.getResults = function () {
+
+	FRX.file = HBJinpResults.files[ 0 ];
+	const reader = new FileReader();
+	reader.onload = ( event ) => HBJ.drawResults( event.target.result );
+	reader.readAsText( FRX.file );
+
+};
+
+
+HBJ.drawResults = function ( result ) {
+
+	const lines = result.split( /\r\n|\n/ ).map( line => + line );
+
+	const faces = HBJ.sensors.children.filter( sensor => sensor.name === "mesh" );
+
+	faces.forEach( ( face, i ) => {
+
+		const factor = lines[ i ];
+		const color = HBJ.getColor( factor );
+
+		face.material.color.setStyle( color );
+		face.material.needsUpdate = true;
+
+	} );
+
+};
+
+
+
+HBJ.getColor = function ( factor ) {
+
+	if ( factor < 2 ) { return "rgb(75,107,169)"; }
+
+	if ( factor < 4 ) { return "rgb(159,189,238)"; }
+
+	if ( factor < 6 ) { return "rgb(224,229,145)"; }
+
+	if ( factor < 8 ) { return "rgb(247,200,53)"; }
+
+	if ( factor < 10 ) { return "rgb(234,113,0)"; }
+
+	return "rgb(234,38,0)";
+
+};
+
+
+
