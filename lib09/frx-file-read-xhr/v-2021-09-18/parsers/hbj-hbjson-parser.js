@@ -69,7 +69,7 @@ HBJ.init = function () {
 <summary class="summary-primary gmd-1" title="Open files on your device: ">Honeybee JSON Models </summary>
 
 <p>
-<button onclick=HBJ.getSensorGrids() >get sensor grids</button>
+	<button onclick=HBJ.getSensorGrids() >get sensor grids</button>
 </p>
 
 
@@ -88,21 +88,23 @@ HBJ.getSensorGrids = function () {
 
 	for ( let grid of grids ) {
 
-		console.log( "grid", grid );
-
-		//for ( mesh of grid.mesh.vertices ) {
-
 		vertices = grid.mesh.vertices.map( points => new THREE.Vector3().fromArray( points ) );
-
-
 
 		for ( face of grid.mesh.faces ) {
 
-			vertices2 = face.map( index => vertices[ index ] );
-			const geometryLine = new THREE.BufferGeometry().setFromPoints( vertices2 );
-			const materialLine = new THREE.LineBasicMaterial( { color: 0x000000 } );
-			line = new THREE.Line( geometryLine, materialLine );
-			THR.scene.add( line );
+			const verticesFace = face.map( index => vertices[ index ] );
+
+			const box = new THREE.Box3().setFromPoints( verticesFace );
+			//console.log( "box ", box );
+			const center = box.getCenter( new THREE.Vector3() );
+			const size = box.getSize( new THREE.Vector3());
+			//console.log( "size", size );
+
+			const geometry = new THREE.PlaneGeometry( size.x, size.y );
+			geometry.translate( center.x, center.y, center.z );
+			const material = new THREE.MeshBasicMaterial( { color: 0xffffff * Math.random(), side: 2 } );
+			const mesh = new THREE.Mesh( geometry, material );
+			THR.scene.add( mesh );
 
 		}
 
@@ -130,7 +132,7 @@ HBJ.getSensorGrids = function () {
 			line = new THREE.Line( geometryLine, materialLine );
 			mesh.add( line );
 
-			console.log( "line", line );
+			//console.log( "line", line );
 
 
 
