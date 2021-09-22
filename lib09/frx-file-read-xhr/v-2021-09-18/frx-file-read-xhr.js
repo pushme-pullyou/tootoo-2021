@@ -6,7 +6,7 @@
 
 const FRX = {};
 
-FRX.version = "v-2021-09-16";
+FRX.version = "v-2021-09-18";
 
 
 FRX.reader = new FileReader();

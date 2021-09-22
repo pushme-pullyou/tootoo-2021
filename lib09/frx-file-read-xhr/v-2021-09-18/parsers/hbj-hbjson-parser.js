@@ -75,9 +75,9 @@ HBJ.init = function () {
 
 </details>`;
 
-whatever.innerHTML = htm;
+	whatever.innerHTML = htm;
 
-}
+};
 
 
 HBJ.getSensorGrids = function () {
@@ -85,24 +85,56 @@ HBJ.getSensorGrids = function () {
 	console.log( "grids", HBJ.json.properties.radiance.sensor_grids );
 
 	grids = HBJ.json.properties.radiance.sensor_grids;
-	for ( item of grids ) {
 
-		for ( sensor of item.sensors ) {
+	for ( let grid of grids ) {
 
-			console.log( "position", sensor.pos );
+		console.log( "grid", grid );
 
-			p = sensor.pos
+		//for ( mesh of grid.mesh.vertices ) {
 
-			const geometry = new THREE.BoxGeometry( 0.1, 0.1,0.1);
-			const material = new THREE.MeshNormalMaterial();
-			const mesh = new THREE.Mesh( geometry, material );
-			mesh.position.set( p[ 0 ], p[ 1 ], p[ 2 ])
-			THR.scene.add( mesh );
+		vertices = grid.mesh.vertices.map( points => new THREE.Vector3().fromArray( points ) );
+
+
+
+		for ( face of grid.mesh.faces ) {
+
+			vertices2 = face.map( index => vertices[ index ] );
+			const geometryLine = new THREE.BufferGeometry().setFromPoints( vertices2 );
+			const materialLine = new THREE.LineBasicMaterial( { color: 0x000000 } );
+			line = new THREE.Line( geometryLine, materialLine );
+			THR.scene.add( line );
 
 		}
 
 
+		for ( sensor of grid.sensors ) {
 
+			//console.log( "position", sensor.pos );
+
+			p = sensor.pos;
+			d = sensor.dir;
+
+			start = new THREE.Vector3( p[ 0 ], p[ 1 ], p[ 2 ] );
+			dir = new THREE.Vector3( d[ 0 ], d[ 1 ], d[ 2 ] );
+
+			const geometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 );
+			const material = new THREE.MeshNormalMaterial();
+			const mesh = new THREE.Mesh( geometry, material );
+			mesh.position.copy( start );
+			THR.scene.add( mesh );
+
+			points = [ new THREE.Vector3(), dir ];
+
+			const geometryLine = new THREE.BufferGeometry().setFromPoints( points );
+			const materialLine = new THREE.LineBasicMaterial( { color: "magenta" } );
+			line = new THREE.Line( geometryLine, materialLine );
+			mesh.add( line );
+
+			console.log( "line", line );
+
+
+
+		}
 
 	}
 
@@ -304,7 +336,7 @@ HBJ.getHtm = function ( intersected ) {
 		//console.log( "item", item );
 
 		return `id: ${ index }<br>
-type: ${ item.face.face_type || "Shade"}<br>
+type: ${ item.face.face_type || "Shade" }<br>
 area: ${ item.area.toLocaleString() }<br>
 identifier: <button onclick=HBJ.findName(this.innerText)>${ item.face.identifier }</button><br>
 boundary: ${ item.face.boundary_condition?.type }<br>`;
@@ -353,4 +385,4 @@ HBJ.findName = function ( string ) {
 
 
 
-}
+};

@@ -43,7 +43,7 @@ HBJ.addParser = function ( json ) {
 
 	const loader = document.body.appendChild( document.createElement( 'script' ) );
 	loader.onload = () => { HBJ.parse( json )};
-	loader.src = FRX.path + "parsers/hbj-hbjson-parser.js";
+	loader.src = FRX.pathUtilities + "parsers/hbj-hbjson-parser.js";
 
 };
 
