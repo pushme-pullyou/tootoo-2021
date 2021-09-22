@@ -66,7 +66,7 @@ HBJ.parse = function ( json ) {
 HBJ.init = function () {
 
 	htm = `
-<details id=HBJdet open >
+<details id=HBJdet >
 <summary class="summary-primary gmd-1" title="Open files on your device: ">Honeybee JSON Models </summary>
 
 <p>
