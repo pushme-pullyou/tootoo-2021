@@ -11,7 +11,7 @@ HBJ.handle = function () {
 
 	if ( FRX.content ) { HBJ.addParser( JSON.parse( FRX.content ) ); return; }
 	if ( FRX.file ) { console.log( "FRX.file", FRX.file.name ); HBJ.read(); return; }
-	if ( FRX.url ) { console.log( "FRX.url", FRX.url.split( "/" ).pop() ); HBJ.onChange( FRX.url ); return; }
+	if ( FRX.url ) { console.log( "FRX.url.pop", FRX.url.split( "/" ).pop() ); HBJ.onChange( FRX.url ); return; }
 
 };
 

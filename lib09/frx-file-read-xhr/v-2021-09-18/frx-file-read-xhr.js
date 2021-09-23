@@ -124,9 +124,6 @@ FRX.onHashChange = function () {
 	FRX.extension = FRX.fileName.toLowerCase().split( '.' ).pop();
 	FRX.url = url;
 
-
-	console.log( "FRX.url333", FRX.url );
-
 	FRX.loadHandler( FRX.url );
 
 };
