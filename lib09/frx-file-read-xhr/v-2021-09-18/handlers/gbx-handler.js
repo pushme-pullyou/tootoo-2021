@@ -62,7 +62,7 @@ GBX.read = function () {
 GBX.onChange = function ( url ) {
 
 	const xhr = new XMLHttpRequest();
-	xhr.open( "get", url, true );
+	xhr.open( "get", FRX.url, true );
 	xhr.onload = ( xhr ) => GBX.parse( xhr.target.response );
 	xhr.send( null );
 

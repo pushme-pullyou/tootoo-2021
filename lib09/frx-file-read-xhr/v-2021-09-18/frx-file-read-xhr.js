@@ -117,12 +117,15 @@ FRX.onHashChange = function () {
 
 	FRX.timeStart = performance.now();
 
-	const url = location.hash ? COR.pathContent + location.hash.slice( 1 ) : FRX.defaultFile;
+	const url = location.hash ? location.hash.slice( 1 ) : FRX.defaultFile;
 	FRX.content = "";
 	FRX.file = "";
 	FRX.fileName = url.split( "/" ).pop();
 	FRX.extension = FRX.fileName.toLowerCase().split( '.' ).pop();
 	FRX.url = url;
+
+
+	console.log( "FRX.url333", FRX.url );
 
 	FRX.loadHandler( FRX.url );
 
