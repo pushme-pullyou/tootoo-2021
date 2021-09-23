@@ -5,7 +5,7 @@
 
 const GRV = {};
 
-GRV.urlHome = "";
+GRV.urlHome = "https://www.ladybug.tools/3d-models/";
 
 GRV.info = `
 Right-click folder names to bring up the context menu to open and close multiple folders.<br>
@@ -31,12 +31,12 @@ GRV.init = function ( { user = COR.user, repo = COR.repo, branch = COR.branch } 
 
 	GRV.accessToken = localStorage.getItem( 'githubAccessToken' ) || "";
 
-	GRV.ignoreFolders = COR.defaultIgnoreFolders.slice();
+	GRV.ignoreFolders = []; //COR.defaultIgnoreFolders.slice() || [];
 
 	// check if GRV.repo could be better
 	const menuType = GRV.getFiles === GRV.getFilesAll ? GRV.menuCurated : GRV.menuAll;
 	const htm = `
-<details id=GRVdet >
+<details id=GRVdet ontoggle=GRV.toggleMenu(); >
 
 	<summary id=GRVsumRepo class="summary-primary gmd-1" title="View selected items">
 		<span id=GRVsumTitle >${ COR.repo } folders & files</span>
@@ -89,7 +89,7 @@ GRV.requestFile = function ( url = GRV.urlApi, callback = GRV.onLoadTree ) {
 	if ( GRV.accessToken ) {
 
 		xhr.setRequestHeader( "Authorization", "token " + GRV.accessToken );
-		
+
 	}
 	xhr.responseType = "json";
 	xhr.onerror = ( xhr ) => console.log( "error:", xhr );
@@ -364,7 +364,7 @@ GRV.toggleMenu = function () {
 
 		GRVbutMenu.innerHTML = GRV.menuAll;
 		GRV.getFiles = GRV.getFilesCurated;
-		GRV.ignoreFolders = COR.ignoreFolders;
+		GRV.ignoreFolders = COR.defaultIgnoreFolders;
 	}
 
 	//console.log( "", GRV.getFiles );
