@@ -80,6 +80,7 @@
 
 		};
 
+		//XGP.url = "https://api.github.com/repos/theo-armour/qdata/contents/0-to-do/0-to-do.html"
 		// Application data will be available under a global variable `appData`.
 		const appData = {
 
@@ -99,6 +100,8 @@
 
 			XGP.accessToken = localStorage.getItem( 'githubAccessToken' ) || "";
 			//XGPinpAccessToken.value = XGP.accessToken;
+
+			console.log( "XGP.accessToken", XGP.accessToken );
 
 			window.addEventListener( "beforeunload", XGP.checkForChange );
 			//window.addEventListener( 'keyup', XGP.onKeyUp, false ); // Save file Alt--S
