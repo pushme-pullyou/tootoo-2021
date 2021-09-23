@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
 	<meta name="description" content="">
 	<meta name="date" content="2021-09-20">
-	<title>notesy</title>
+	<title></title>
 
 	<style>
 		body {
@@ -80,8 +80,10 @@
 
 		};
 
-		//XGP.url = "https://api.github.com/repos/theo-armour/qdata/contents/0-to-do/0-to-do.html"
+		//XGP.url = "https://api.github.com/repos/theo-armour/qdata/contents/0-to-do/0-to-do.html";
+
 		// Application data will be available under a global variable `appData`.
+
 		const appData = {
 
 			initialData: `# Hello, World!`
@@ -92,16 +94,16 @@
 
 		function init( url = XGP.url) {
 
-			XGP.url = url
+			XGP.url = url;
 
-			spnTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+			spnTitle.innerHTML = document.title ? document.title : url.split( '/' ).pop().slice().replace( /-/g, ' ' );
 
 			//spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
 
 			XGP.accessToken = localStorage.getItem( 'githubAccessToken' ) || "";
 			//XGPinpAccessToken.value = XGP.accessToken;
 
-			console.log( "XGP.accessToken", XGP.accessToken );
+			//console.log( "XGP.accessToken", XGP.accessToken );
 
 			window.addEventListener( "beforeunload", XGP.checkForChange );
 			//window.addEventListener( 'keyup', XGP.onKeyUp, false ); // Save file Alt--S
@@ -135,7 +137,7 @@
 
 
 		XGP.requestFile = function ( event ) {
-			console.log( "XGP.url ", XGP.url );
+			//console.log( "XGP.url ", XGP.url );
 
 			const xhr = new XMLHttpRequest();
 			xhr.open( "GET", XGP.url, true );

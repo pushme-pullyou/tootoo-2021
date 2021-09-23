@@ -24,9 +24,9 @@ _"Trayo" in a resizable window. One finger to rotate. Two to zoom._
 ## Change Log
 
 
-### 123
+### 2021-09-22
 
-* First commit
+* First commit this read me
 
 
 ***
