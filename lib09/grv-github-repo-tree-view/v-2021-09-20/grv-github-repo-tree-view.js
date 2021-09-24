@@ -5,7 +5,7 @@
 
 const GRV = {};
 
-GRV.urlHome = "https://www.ladybug.tools/3d-models/";
+
 
 GRV.info = `
 Right-click folder names to bring up the context menu to open and close multiple folders.<br>
@@ -28,6 +28,8 @@ GRV.menuCurated = "Display curated list of folders and files";
 
 
 GRV.init = function ( { user = COR.user, repo = COR.repo, branch = COR.branch } = {} ) {
+
+	GRV.urlHome = ""; //COR.pathContent;
 
 	GRV.accessToken = localStorage.getItem( 'githubAccessToken' ) || "";
 
