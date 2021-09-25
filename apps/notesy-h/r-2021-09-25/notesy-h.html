@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="description" content="">
+	<meta name="date" content="2021-09-25">
+	<title></title>
+
+	<style>
+		body {
+			font: 100% monospace;
+			margin: 0;
+		}
+
+		h1 {
+			margin: 0;
+		}
+
+		#container {
+			/* To create the column layout. */
+			display: flex;
+
+			/* To make the container relative to its children. */
+			position: relative;
+
+		}
+
+		#container .ck.ck-editor {
+			width: 32rem;
+		}
+
+		#container .ck.ck-content {
+			overflow: auto;
+			resize: both;
+			width: 100%;
+		}
+	</style>
+</head>
+
+<body>
+
+	<script src="../ckeditor5/build/ckeditor.js"></script>
+
+	<h1>
+		<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/apps/notesy-h/" target="_blank"
+			title="source code on GitHub"><img
+				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
+
+		<a href="" title="Click this menu title to reset the model">
+			<span id=spnTitle></span><span id=spnVersion></span>
+		</a>
+
+		<button onclick=XGP.putFileToGitHub() title="Press Alt-S">putGitHub</button>
+
+	</h1>
+
+	<div id="container">
+		<div class="editor"></div>
+	</div>
+
+	<div id="wordCount"></div>
+
+	<div id="divStats"></div>
+
+	<div id="divMessage"></div>
+
+
+	<script>
+
+
+		const base = "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/";
+
+		const XGP = {
+
+			url: base + "sandbox/notesy/lorem.html",
+
+		};
+
+		// Application data will be available under a global variable `appData`.
+
+		const appData = {
+
+			initialData: `# Hello, World!`
+
+		};
+
+
+
+		XGP.init = function ( url = XGP.url ) {
+
+			XGP.url = url;
+
+			spnTitle.innerHTML = document.title ? document.title : url.split( '/' ).pop().slice().replace( /-/g, ' ' );
+
+			//spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
+
+			XGP.accessToken = localStorage.getItem( 'githubAccessToken' ) || "";
+			//XGPinpAccessToken.value = XGP.accessToken;
+
+			//console.log( "XGP.accessToken", XGP.accessToken );
+
+			window.addEventListener( "beforeunload", XGP.checkForChange );
+			//window.addEventListener( 'keyup', XGP.onKeyUp, false ); // Save file Alt--S
+
+			XGP.createEditor();
+
+			XGP.requestFile();
+
+			window.addEventListener( "hashchange", XGP.onHashChange, false );
+
+		};
+
+
+
+		XGP.setGitHubAccessToken = function () {
+
+			localStorage.setItem( "githubAccessToken", XGPinpAccessToken.value );
+
+		};
+
+
+
+		XGP.onHashChange = function () {
+
+			XGP.url = base + location.hash.slice( 1 );
+
+			XGP.requestFile( XGP.url );
+
+		};
+
+
+
+		XGP.requestFile = function ( event ) {
+			console.log( "XGP.url ", XGP.url );
+
+			const xhr = new XMLHttpRequest();
+			xhr.open( "GET", XGP.url, true );
+			xhr.setRequestHeader( "Authorization", "token " + XGP.accessToken );
+			xhr.responseType = "json";
+			xhr.onerror = ( xhr ) => console.log( "error:", xhr );
+			//xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
+			xhr.onload = XGP.onLoad;
+			xhr.send( null );
+
+		};
+
+
+
+		XGP.onLoad = function ( xhr ) {
+			//console.log( "response", xhr );
+
+			XGP.sha = xhr.target.response.sha;
+
+			const content = atob( xhr.target.response.content );
+
+			XGP.ext = XGP.url.split( "." ).pop().toLowerCase();
+			//console.log( "ext", XGP.ext );
+
+			if ( window.editor ) {
+
+				editor.data.set( content );
+
+			} else {
+
+				XGP.createEditor( content )
+
+			}
+
+			XGP.content = content;
+
+			if ( window.divMessage ) {
+
+				//divMessage.innerText = `Get:${ new Date().toLocaleString() } bytes:${ content.length } sha:${ XGP.sha }`;
+				divMessage.innerText = `Get${ new Date().toLocaleString().split( "," ).pop() } bytes:${ XGP.content.length }`;
+
+			}
+
+		};
+
+
+
+		XGP.putFileToGitHub = function () {
+
+			if ( XGP.url === "" ) { alert( "No URL" ); return; }
+
+			const xhr = new XMLHttpRequest();
+			xhr.open( "GET", XGP.url, true );
+			xhr.setRequestHeader( "Authorization", "token " + XGP.accessToken );
+			xhr.responseType = "json";
+			xhr.onerror = ( xhr ) => console.log( "error:", xhr );
+			//xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
+			xhr.onload = ( xhr ) => {
+				//console.log( "", xhr );
+				XGP.sha = xhr.target.response.sha;
+				XGP.putFile();
+			};
+			xhr.send( null );
+
+		};
+
+
+
+		XGP.putFile = function () {
+
+			XGP.content = editor.getData();
+
+			console.log( "XGP.content", XGP.content );
+			const codedData = window.btoa( XGP.content ); // encode the string
+
+			const body = JSON.stringify( {
+				"branch": XGP.branch,
+				"content": codedData,
+				"message": `add to file`,
+				"sha": XGP.sha
+
+			} );
+
+			xhr = new XMLHttpRequest();
+			xhr.open( "PUT", XGP.url, true );
+			xhr.setRequestHeader( "Authorization", "token " + XGP.accessToken );
+			xhr.setRequestHeader( "Content-Type", "application/json" );
+			xhr.onerror = ( xhr ) => console.log( "error:", xhr );
+			xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
+			xhr.send( body );
+
+			//divMessage.innerText = `Put: ${ new Date().toLocaleString() } bytes:${ XGP.content.length } sha:${ XGP.sha }`;
+			divMessage.innerText = `Put: ${ new Date().toLocaleString().split( "," ).pop() } bytes:${ XGP.content.length }`;
+
+		};
+
+
+
+		XGP.checkForChange = function ( event ) {
+
+			if ( editor.data.get() === XGP.content ) { return; }
+
+			console.log( "", XGP.content );
+
+			event.preventDefault();
+
+			event.returnValue = "";
+
+		};
+
+
+
+		XGP.onKeyUp = function () {
+
+			//console.log( 'key', event.keyCode );
+
+			event.preventDefault();
+
+			if ( event.altKey && event.keyCode === 83 ) {
+
+				XGP.putFileToGitHub();
+
+			}
+
+		};
+
+
+
+		XGP.createEditor = function ( content ) {
+
+			ClassicEditor
+				.create( document.querySelector( '.editor' ), {
+
+					initialData: content,
+
+					htmlSupport: {
+						allow: [
+							{
+								name: /.*/,
+								attributes: true,
+								classes: true,
+								styles: true
+							}
+						]
+					},
+
+					toolbar: {
+						items: [
+							'heading',
+							'|',
+							'bold',
+							'italic',
+							'strikethrough',
+							'code',
+							'blockQuote',
+							'link',
+							'horizontalLine',
+							'sourceEditing',
+							'bulletedList',
+							'numberedList',
+							'|',
+							'findAndReplace',
+							'outdent',
+							'indent',
+							'|',
+							'removeFormat',
+							'imageUpload',
+							'undo',
+							'redo'
+						]
+					},
+					language: 'en',
+					image: {
+						toolbar: [
+							'imageTextAlternative',
+							'imageStyle:inline',
+							'imageStyle:block',
+							'imageStyle:side'
+						]
+					},
+					licenseKey: '',
+
+				} )
+
+				.then( editor => {
+
+					window.editor = editor; // create a global
+
+				} )
+
+
+				// .then( editor => {
+				// 	const wordCountPlugin = editor.plugins.get( 'WordCount' );
+				// 	const wordCountWrapper = document.getElementById( 'wordCount' );
+
+				// 	wordCountWrapper.appendChild( wordCountPlugin.wordCountContainer );
+				// } )
+
+
+				.catch( error => {
+					console.error( 'Oops, something went wrong!' );
+					console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
+					console.warn( 'Build id: lbmmnmrgezqg-rdlk6p2px8qg' );
+					console.error( error );
+				} );
+
+		}
+
+		if ( window.self === window.top ) XGP.init();
+
+	</script>
+</body>
+
+</html>

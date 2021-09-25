@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Trayo</title>
+
+	<style>
+		body {
+			font: 100% monospace;
+			margin: 0;
+		}
+
+		h1 {
+			margin: 0;
+			padding: 0
+		}
+
+		iframe {
+
+			border: 0px;
+			height: 100%;
+			margin: 0;
+			width: 100%;
+		}
+
+		.hide {
+			display: none;
+			position: absolute;
+			top: -0.1rem;
+		}
+
+		.show:hover+.hide {
+			display: block;
+		}
+
+		.resize {
+			overflow: auto;
+			resize: both;
+		}
+
+		.content {
+			background-color: #ffc;
+
+		}
+
+		#divNotes1 {
+			float: left;
+			height: 93vh;
+			margin-left: 1rem;
+			overflow: hidden;
+			width: 25%;
+			z-index: 1;
+		}
+
+		#divNotes2 {
+			float: left;
+			margin-left: 1rem;
+			height: 93vh;
+			overflow: hidden;
+			width: 20%;
+		}
+
+		#divNotes3 {
+			float: left;
+			height: 93vh;
+			margin-left: 1rem;
+			width: 25%;
+			overflow: hidden;
+		}
+
+		#divNotes4 {
+			float: left;
+			height: 93vh;
+			margin-left: 1rem;
+			width: 20%;
+			overflow: hidden;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h1>
+		<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/main/apps/trayo" target="_blank"
+			title="source code on GitHub"><img
+				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
+		<a href="" title="Click this menu title to reset the model">
+			trayo
+			<span id=spnVersion></span></a>
+		<label>
+			<input id=inpAccessToken onclick=this.select(); onblur=setGitHubAccessToken();
+				title="Obtain GitHub API Access Token" size=5>
+		</label>
+
+		<span
+			title="#164; curren; times; deg; bull; middot; mdash; euro; hellip; vellip; #x1801; ❦ #x2766; ❧ phone; spades; starf; bigstar; xcirc; block; marker; FilledSmallSquare;">
+			&#164; &curren; &times; &deg; &bull; &middot; &mdash; &euro; &hellip; &vellip; &#x1801; ❦ &#x2766; ❧ &phone;
+			&spades; &starf; &bigstar; <span title="xcirc;">&xcirc;</span> &block; &marker; &FilledSmallSquare;
+		</span>
+
+	</h1>
+
+	<div id=divNotes1 class=resize>
+		<iframe id=ifrNotes1></iframe>
+	</div>
+
+	<button onclick="ifrNotes2.contentWindow.init(obj2a.url);">yesterday</button>
+
+	<div id=divNotes2 class=resize>
+		<iframe id=ifrNotes2></iframe>
+	</div>
+
+	<div id=divNotes3 class=resize>
+		<iframe id=ifrNotes3></iframe>
+	</div>
+
+	<div id=divNotes4 class=resize>
+		<iframe id=ifrNotes4 onload=ifrNotes4></iframe>
+	</div>
+
+	<script>
+
+		const notesy = "../../notesy/v-2021-09-20/notesy.html";
+
+
+		const obj1 = {
+			url: "https://api.github.com/repos/theo-armour/qdata/contents/0-to-do/0-to-do.html",
+			source: "https://github.com/theo-armour/qdata/tree/master/0-to-do/0-to-do.html"
+		}
+		ifrNotes1.onload = () => { ifrNotes1.contentWindow.init( obj1.url ); }
+		ifrNotes1.src = notesy;
+
+
+		const aDate = new Date();
+		let month = ( 1 + aDate.getMonth() ).toString().padStart( 2, "0" );
+		const date = aDate.getDate().toString().padStart( 2, "0" );
+
+		console.log( "date", date );
+
+		const path = `${ month }/${ month }-${ date }.md`;
+
+
+		aDate.setDate( aDate.getDate() - 1 );
+		//const date = new Date();
+		month = ( 1 + aDate.getMonth() ).toString().padStart( 2, "0" );
+		//console.log( "ydy", date );
+		ydy = aDate.getDate().toString().padStart( 2, "0" );
+		const path2 = `${ month }/${ month }-${ ydy }.md`;
+
+		console.log( "path", path );
+
+		const obj2a = {
+			url: "https://api.github.com/repos/theo-armour/qdata/contents/journal/days-of-year-md/" + path2,
+			source: "https://github.com/theo-armour/qdata/blob/master/journal/days-of-year-md/" + path2,
+		}
+
+		const obj2 = {
+			url: "https://api.github.com/repos/theo-armour/qdata/contents/journal/days-of-year-md/" + path,
+			source: "https://github.com/theo-armour/qdata/blob/master/journal/days-of-year-md/" + path,
+		}
+		ifrNotes2.onload = () => ifrNotes2.contentWindow.init( obj2.url );
+		ifrNotes2.src = notesy;
+
+		const obj3 = {
+			url: "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/sandbox/trayo/shortcuts2.html",
+			source: "https://github.com/pushme-pullyou/tootoo-2021/blob/main/sandbox/trayo/shortcuts2.html"
+		}
+		ifrNotes3.onload = () => ifrNotes3.contentWindow.init( obj3.url );
+		ifrNotes3.src = notesy;
+
+		const obj4 = {
+			url: "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/sandbox/trayo/tips.html",
+			source: "https://github.com/pushme-pullyou/tootoo-2021/tree/main/sandbox/notesy"
+		}
+		ifrNotes4.onload = () => ifrNotes4.contentWindow.init( obj4.url );
+		ifrNotes4.src = notesy;
+
+	</script>
+</body>
+
+</html>
