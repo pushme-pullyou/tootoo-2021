@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 	<meta name=description content="Real-time 3D in your browser with menu hiding">
 	<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM">
-	<meta name="date" content="2021-08-13">
+	<meta name="date" content="2021-09-24">
 	<title></title>
 	<style>
 		/* Copyright 2021 Theo Armour. MIT License */
@@ -46,6 +46,8 @@
 	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r132/build/three.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r132/examples/js/controls/OrbitControls.js"></script>
 
+	<script src="sc3-screen-capture-3d.js"></script>
+
 
 	<nav id=navMenu class=nav>
 
@@ -55,12 +57,15 @@
 
 			<h1>
 				<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/lib3d/" target="_blank"
-				title="source code on GitHub"><img
-				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
+					title="source code on GitHub"><img
+						src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
 				<a href="" id=aTitle title="Click this menu title to reset the model"></a>
 			</h1>
 
-			<div id=divMessage ></div>
+			<div id=SC3divScreenCapture3D ></div>
+
+
+			<div id=divMessage></div>
 
 			<p
 				title="View the number of objects that need rendering and the total number of triangles used to create the objects">
@@ -129,6 +134,8 @@
 			material = new THREE.MeshNormalMaterial();
 			mesh = new THREE.Mesh( geometry, material );
 			scene.add( mesh );
+
+			SC3.init();
 
 		}
 
@@ -201,4 +208,5 @@
 	</script>
 
 </body>
+
 </html>
