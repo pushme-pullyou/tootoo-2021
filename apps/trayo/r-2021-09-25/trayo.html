@@ -122,15 +122,16 @@
 
 	<script>
 
-		const notesy = "../../notesy/v-2021-09-20/notesy.html";
+		const notesyH = "../../notesy-h/r-2021-09-25/notesy-h.html";
+		const notesyM = "../../notesy-m/r-2021-09-24/notesy-m.html";
 
 
-		const obj1 = {
-			url: "https://api.github.com/repos/theo-armour/qdata/contents/0-to-do/0-to-do.html",
-			source: "https://github.com/theo-armour/qdata/tree/master/0-to-do/0-to-do.html"
+		obj1 = {
+			url: "https://api.github.com/repos/theo-armour/qdata/contents/0-to-do/0-to-do.md",
+			source: "https://github.com/theo-armour/qdata/tree/master/0-to-do/0-to-do.md"
 		}
 		ifrNotes1.onload = () => { ifrNotes1.contentWindow.init( obj1.url ); }
-		ifrNotes1.src = notesy;
+		ifrNotes1.src = notesyM;
 
 
 		const aDate = new Date();
@@ -151,31 +152,32 @@
 
 		console.log( "path", path );
 
-		const obj2a = {
-			url: "https://api.github.com/repos/theo-armour/qdata/contents/journal/days-of-year-md/" + path2,
-			source: "https://github.com/theo-armour/qdata/blob/master/journal/days-of-year-md/" + path2,
-		}
+		// const obj2a = {
+		// 	url: "https://api.github.com/repos/theo-armour/qdata/contents/journal/days-of-year-md/" + path2,
+		// 	source: "https://github.com/theo-armour/qdata/blob/master/journal/days-of-year-md/" + path2,
+		// }
 
 		const obj2 = {
 			url: "https://api.github.com/repos/theo-armour/qdata/contents/journal/days-of-year-md/" + path,
 			source: "https://github.com/theo-armour/qdata/blob/master/journal/days-of-year-md/" + path,
 		}
 		ifrNotes2.onload = () => ifrNotes2.contentWindow.init( obj2.url );
-		ifrNotes2.src = notesy;
+		ifrNotes2.src = notesyM;
+
 
 		const obj3 = {
 			url: "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/sandbox/trayo/shortcuts2.html",
 			source: "https://github.com/pushme-pullyou/tootoo-2021/blob/main/sandbox/trayo/shortcuts2.html"
 		}
 		ifrNotes3.onload = () => ifrNotes3.contentWindow.init( obj3.url );
-		ifrNotes3.src = notesy;
+		ifrNotes3.src = notesyH;
 
 		const obj4 = {
 			url: "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/sandbox/trayo/tips.html",
 			source: "https://github.com/pushme-pullyou/tootoo-2021/tree/main/sandbox/notesy"
 		}
 		ifrNotes4.onload = () => ifrNotes4.contentWindow.init( obj4.url );
-		ifrNotes4.src = notesy;
+		ifrNotes4.src = notesyH;
 
 	</script>
 </body>

@@ -88,7 +88,7 @@
 
 
 
-		XGP.init = function ( url = XGP.url ) {
+		function init( url = XGP.url ) {
 
 			XGP.url = url;
 
@@ -99,7 +99,7 @@
 			XGP.accessToken = localStorage.getItem( 'githubAccessToken' ) || "";
 			//XGPinpAccessToken.value = XGP.accessToken;
 
-			//console.log( "XGP.accessToken", XGP.accessToken );
+			console.log( "XGP.accessToken", XGP.accessToken );
 
 			window.addEventListener( "beforeunload", XGP.checkForChange );
 			//window.addEventListener( 'keyup', XGP.onKeyUp, false ); // Save file Alt--S
