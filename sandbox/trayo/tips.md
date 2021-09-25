@@ -25,7 +25,8 @@
 			<br>
 
 			<div>
-				<a href="https://zapier.com/learn/customer-support/improv-customer-support/" target="_blank">4 rules
+				<a href="https://zapier.com/learn/customer-support/improv-customer-support/" target="_blank">
+				4 rules
 					of
 					improv</a>
 				<button onclick=dia4rules.open=!dia4rules.open;>4r</button>
