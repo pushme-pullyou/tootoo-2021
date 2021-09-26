@@ -117,6 +117,7 @@ CKE.onLoad = function ( xhr ) {
 	//CKEspnMessage.innerText = `Get:${ new Date().toLocaleString() } bytes:${ content.length } sha:${ CKE.sha }`;
 	CKEspnMessage.innerText = `Get${ new Date().toLocaleString().split( "," ).pop() } bytes:${ CKE.content.length }`;
 
+
 };
 
 
@@ -145,8 +146,8 @@ CKE.putFileToGitHub = function () {
 CKE.putFile = function () {
 
 	CKE.content = CKE.editor.getData();
-
 	//console.log( "CKE.content", CKE.content );
+
 	const codedData = window.btoa( CKE.content ); // encode the string
 
 	const body = JSON.stringify( {
@@ -154,6 +155,7 @@ CKE.putFile = function () {
 		"content": codedData,
 		"message": `add to file`,
 		"sha": CKE.sha
+
 	} );
 
 	xhr = new XMLHttpRequest();
