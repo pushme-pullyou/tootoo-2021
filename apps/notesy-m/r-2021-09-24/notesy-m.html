@@ -24,17 +24,15 @@
 
 			/* To make the container relative to its children. */
 			position: relative;
-
 		}
 
 		#container .ck.ck-editor {
-			width: 32rem;
+			width: 100%;
 		}
 
 		#container .ck.ck-content {
 			overflow: auto;
 			resize: both;
-			width: 100%;
 		}
 	</style>
 </head>
@@ -343,7 +341,7 @@
 
 		}
 
-		if ( window.self === window.top ) XGP.init();
+		if ( window.self === window.top ) init();
 
 	</script>
 </body>
