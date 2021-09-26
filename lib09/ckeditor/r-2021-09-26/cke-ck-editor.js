@@ -75,7 +75,7 @@ CKE.setGitHubAccessToken = function () {
 
 CKE.onHashChange = function () {
 
-	CKE.url = location.hash ? base + location.hash.slice( 1 ) : CKE.urlDefault;
+	CKE.url = location.hash ? location.hash.slice( 1 ) : CKE.urlDefault;
 
 	CKEspnTitle.innerText = CKE.url.split( '/' ).pop().slice().replace( /-/g, ' ' );
 
