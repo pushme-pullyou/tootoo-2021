@@ -77,6 +77,7 @@
 			url: base + "sandbox/notesy/lorem.html",
 
 		};
+		
 
 		// Application data will be available under a global variable `appData`.
 
@@ -334,10 +335,12 @@
 
 
 				.catch( error => {
+
 					console.error( 'Oops, something went wrong!' );
 					console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
 					console.warn( 'Build id: lbmmnmrgezqg-rdlk6p2px8qg' );
 					console.error( error );
+
 				} );
 
 		}

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="description" content="">
+	<meta name="date" content="2021-09-26">
+	<title></title>
+	<style>
+		body {
+			font: 100% monospace;
+		}
+
+		#CKEdivCkeditor {
+			border: 1px solid #888;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h1>
+		<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/xxxxxx/" target="_blank"
+			title="source code on GitHub"><img
+				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
+		<a href="" title="Click this menu title to reset the model">
+			<span id=spnTitle></span>
+			<span id=spnVersion></span>
+		</a>
+	</h1>
+
+	<div id=CKEdivCkeditor></div>
+
+	<div id="divContent"></div>
+
+
+	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib09/ckeditor/ckeditor5/build/ckeditor.js"></script>
+
+	<script src="cke-ck-editor.js"></script>
+
+	<script>
+
+		init();
+
+		function init() {
+
+			spnTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+
+			spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
+
+			CKE.init();
+
+		}
+
+
+	</script>
+
+</body>
+
+</html>
