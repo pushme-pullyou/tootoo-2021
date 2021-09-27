@@ -25,12 +25,10 @@ CKE.init = function ( url = CKE.url ) {
 
 <a href="${ CKE.url }" target="_blank"
 	title="source code on GitHub"><img
-	src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg>
-</a>
+	src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
 
 <a href="" title="Click this menu title to reset the file">
-	<span id=CKEspnTitle></span>
-</a>
+	<span id=CKEspnTitle></span></a>
 
 <button onclick=CKE.putFileToGitHub() title="Press Alt-S">putToGitHub</button>
 
