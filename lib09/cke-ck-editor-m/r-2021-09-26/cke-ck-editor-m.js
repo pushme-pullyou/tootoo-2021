@@ -10,7 +10,7 @@ const CKE = {
 
 
 
-CKE.init = function ( url = CKE.url ) {
+CKE.init = function () {
 
 	CKE.url = url;
 
@@ -23,7 +23,7 @@ CKE.init = function ( url = CKE.url ) {
 	htm = `
 <h2 style=display:inline;margin:0 >
 
-<a href="${ CKE.url }" target="_blank"
+<a href="" target="_blank"
 	title="source code on GitHub"><img
 	src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
 
@@ -119,7 +119,6 @@ CKE.onLoad = function ( xhr ) {
 	}
 
 	CKE.content = content;
-
 
 	//CKEspnMessage.innerText = `Get:${ new Date().toLocaleString() } bytes:${ content.length } sha:${ CKE.sha }`;
 	CKEspnMessage.innerText = `Get${ new Date().toLocaleString().split( "," ).pop() } bytes:${ CKE.content.length }`;
