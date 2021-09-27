@@ -1,6 +1,6 @@
 ## [![](https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg)](https://github.com/pushme-pullyou/tootoo-2021/) [TooToo 2021 Read Me](https://pushme-pullyou.github.io/tootoo-2021/#README.md)
 
-\## Concept
+### Concept
 
 TooToo is a collection of very simple, plain-vanilla JavaScript scripts and test files to help you manage content on both GitHub branches and GitHub pages.
 
