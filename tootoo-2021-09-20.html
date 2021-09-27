@@ -20,11 +20,21 @@
 			/* 0 to 360 0=red 120=green 240=blue */
 		}
 
-		#container {
-			/* To create the column layout. */
+		#divMainContent {
+
+			margin-left: 5rem;
+			height: 90vh;
+			overflow: auto;
+			resize: both;
+			width: 32rem;
+
+		}
+
+		/* #container {
+			/* To create the column layout.
 			display: flex;
 
-			/* To make the container relative to its children. */
+			/* To make the container relative to its children.
 			position: relative;
 
 		}
@@ -40,6 +50,8 @@
 			height: 90vh;
 			width: 100%;
 		}
+
+		*/
 
 	</style>
 
@@ -164,7 +176,7 @@
 			// ${ MNU.addInfoBox( GRV.info ) }`;
 
 			GRV.getFiles = GRV.getFilesAll;
-			//GRV.getFiles = GRV.getFilesCurated;
+			GRV.getFiles = GRV.getFilesCurated;
 			GRV.init();
 			GRVdet.open = true;
 			//GRVsumRepo.hidden = true;

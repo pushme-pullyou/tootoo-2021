@@ -10,6 +10,9 @@ const CKE = {};
 
 CKE.init = function () {
 
+	CKE.parentMenu = CKEdivCkeditor
+	CKE.parentContent = divMainContent
+
 	CKE.base = `https://api.github.com/repos/${ COR.user }/${ COR.repo }/contents/`;
 
 	const htm = `
@@ -21,6 +24,7 @@ CKE.init = function () {
 		${ MNU.addInfoBox( "Files to try" ) }
 	</summary>
 
+	GitHub Access Token
 	<div>
 		<input id=CKEinpAccessToken onclick=this.select(); onblur=CKE.setGitHubAccessToken();
 		title="Obtain GitHub API Access Token" style=width:100%; >
@@ -34,7 +38,7 @@ CKE.init = function () {
 
 </details>`
 
-	CKEdivCkeditor.innerHTML = htm;
+	CKE.parentMenu.innerHTML = htm;
 
 
 }
@@ -97,12 +101,17 @@ CKE.onHashChange = function () {
 
 	CKEdivPopUp.innerHTML = `
 <div>
+
 <button onclick=CKE.requestFile(); > edit: ${ CKE.hash }</button >
 
 <button onclick=CKE.putFileToGitHub() title="Press Alt-S">putGitHub</button>
-</div>`;
 
-	divMainContent.innerHTML = `
+<span id="divMessage"></span>
+
+</div>
+`;
+
+	CKE.parentContent.innerHTML = `
 
 <div id="container"  >
 
@@ -114,7 +123,6 @@ CKE.onHashChange = function () {
 
 <div id="divStats"></div>
 
-<div id="divMessage"></div>
 `;
 
 	CKE.requestFile();
@@ -126,7 +134,7 @@ CKE.onHashChange = function () {
 
 
 CKE.requestFile = function () {
-	console.log( "CKE.hash ", CKE.hash );
+	//console.log( "CKE.hash ", CKE.hash );
 
 	const xhr = new XMLHttpRequest();
 	xhr.open( "GET", CKE.base + CKE.hash, true );
@@ -143,7 +151,7 @@ CKE.requestFile = function () {
 
 CKE.onLoad = function ( xhr ) {
 
-	console.log( "xhr", xhr );
+	//console.log( "xhr", xhr );
 
 	CKE.sha = xhr.target.response.sha;
 
@@ -287,8 +295,8 @@ CKE.putFileToGitHub = function () {
 CKE.putFile = function () {
 
 	CKE.content = editor.getData();
+	//console.log( "CKE.content", CKE.content );
 
-	console.log( "CKE.content", CKE.content );
 	const codedData = window.btoa( CKE.content ); // encode the string
 
 	const body = JSON.stringify( {
