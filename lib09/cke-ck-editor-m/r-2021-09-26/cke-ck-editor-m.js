@@ -1,5 +1,4 @@
 const base = "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/";
-//const base = "../../../";
 
 const CKE = {
 
@@ -10,7 +9,7 @@ const CKE = {
 
 
 
-CKE.init = function () {
+CKE.init = function ( url = CKE.url ) {
 
 	CKE.url = url;
 
@@ -27,8 +26,7 @@ CKE.init = function () {
 	title="source code on GitHub"><img
 	src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
 
-<a href="" title="Click this menu title to reset the file">
-	<span id=CKEspnTitle></span></a>
+<a href="" title="Click this menu title to reset the file"><span id=CKEspnTitle></span></a>
 
 <button onclick=CKE.putFileToGitHub() title="Press Alt-S">putToGitHub</button>
 
@@ -77,7 +75,7 @@ CKE.onHashChange = function () {
 
 	CKEspnTitle.innerText = CKE.url.split( '/' ).pop().slice().replace( /-/g, ' ' );
 
-	console.log( "CKE.url", CKE.url );
+	//console.log( "CKE.url", CKE.url );
 
 	CKE.requestFile( CKE.url );
 
