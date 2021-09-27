@@ -38,6 +38,11 @@ Switching themes
 
 ## Change Log
 
+### 2021-09-27
+
+* TT 2021-09-27: 
+* CKE ~ fic to menu not doc.body; simplify CSS
+
 ### 2021-09-18
 
 *   Add CKE Markdowneditor
