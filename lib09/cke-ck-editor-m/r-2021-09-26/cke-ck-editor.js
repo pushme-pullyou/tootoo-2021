@@ -245,7 +245,7 @@ CKE.createEditor = function ( content ) {
 					'bulletedList',
 					'numberedList',
 					'|',
-					'findAndReplace',
+					//'findAndReplace',
 					'outdent',
 					'indent',
 					'|',
