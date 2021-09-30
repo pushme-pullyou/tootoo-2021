@@ -15,6 +15,7 @@
 		}
 
 		h1 {
+			display: inline;
 			margin: 0;
 		}
 
@@ -53,6 +54,8 @@
 		<button onclick=XGP.putFileToGitHub() title="Press Alt-S">putGitHub</button>
 
 	</h1>
+	<span id="divMessage"></span>
+
 
 	<div id="container">
 		<div class="editor"></div>
@@ -62,7 +65,6 @@
 
 	<div id="divStats"></div>
 
-	<div id="divMessage"></div>
 
 
 	<script>
@@ -90,7 +92,7 @@
 
 			XGP.url = url;
 
-			spnTitle.innerHTML = document.title ? document.title : url.split( '/' ).pop().slice().replace( /-/g, ' ' );
+			spnTitle.innerHTML = document.title ? document.title : url.split( '/' ).pop().slice().replace( /\.md/g, "" );
 
 			//spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
 
@@ -171,7 +173,7 @@
 			if ( window.divMessage ) {
 
 				//divMessage.innerText = `Get:${ new Date().toLocaleString() } bytes:${ content.length } sha:${ XGP.sha }`;
-				divMessage.innerText = `Get${ new Date().toLocaleString().split( "," ).pop() } bytes:${ XGP.content.length }`;
+				divMessage.innerText = `Get${ new Date().toLocaleString().split( "," ).pop() } ${ XGP.content.length }`;
 
 			}
 
