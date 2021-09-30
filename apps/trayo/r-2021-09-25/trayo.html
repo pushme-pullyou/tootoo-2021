@@ -122,8 +122,20 @@
 
 	<script>
 
-		const notesyH = "../../notesy-h/r-2021-09-25/notesy-h.html";
-		const notesyM = "../../notesy-m/r-2021-09-24/notesy-m.html";
+		let notesyH;
+		let notesyM;
+
+		if ( location.protocol === "https:" ) {
+
+			notesyH = "https://pushme-pullyou.github.io/tootoo-2021/apps/notesy-h/r-2021-09-25/notesy-h.html";
+			notesyM = "https://pushme-pullyou.github.io/tootoo-2021/apps/notesy-m/r-2021-09-24/notesy-m.html";
+
+		} else {
+
+			notesyH = "../../../../pushme-pullyou-tootoo-2021/apps/notesy-h/r-2021-09-25/notesy-h.html";
+			notesyM = "../../../../pushme-pullyou-tootoo-2021/apps/notesy-m/r-2021-09-24/notesy-m.html";
+
+		}
 
 
 		obj1 = {

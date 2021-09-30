@@ -9,14 +9,23 @@
 	<title></title>
 
 	<style>
+		* {
+			box-sizing: border-box;
+		}
+
 		body {
 			font: 100% monospace;
 			margin: 0;
 		}
 
 		h1 {
-			margin: 0;
 			display: inline;
+			margin: 0;
+			padding: 0;
+		}
+
+		ul {
+			padding-left: 0rem;
 		}
 	</style>
 </head>
@@ -200,7 +209,7 @@
 			xhr.send( body );
 
 			//divMessage.innerText = `Put: ${ new Date().toLocaleString() } bytes:${ XGP.content.length } sha:${ XGP.sha }`;
-			divMessage.innerText = `Put: ${ new Date().toLocaleString().split( "," ).pop().slice(0, -3 ) } ${ XGP.content.length }`;
+			divMessage.innerText = `Put: ${ new Date().toLocaleString().split( "," ).pop().slice( 0, -3 ) } ${ XGP.content.length }`;
 
 		};
 

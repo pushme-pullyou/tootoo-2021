@@ -2,7 +2,7 @@
 
 
 <!--@@@
-<div class=iframe-resize ><iframe src=https://pushme-pullyou.github.io/tootoo-2021/ apps/trayo/ height=100% width=100% ></iframe></div>
+<div class=iframe-resize ><iframe src=https://pushme-pullyou.github.io/tootoo-2021/apps/trayo/ height=100% width=100% ></iframe></div>
 _"Trayo" in a resizable window. One finger to rotate. Two to zoom._
 @@@-->
 
