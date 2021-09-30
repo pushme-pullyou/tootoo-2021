@@ -103,6 +103,7 @@ CKE.onHashChange = function () {
 <div>
 
 <button onclick=FRX.onHashChange();CKEdivPopUp.innerHTML=""; >Exit edit</button >
+
 <button onclick=CKE.requestFile(); > edit: ${ CKE.hash }</button >
 
 <button onclick=CKE.putFileToGitHub() title="Press Alt-S">putGitHub</button>

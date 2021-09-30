@@ -197,38 +197,9 @@ GRV.onHashChange = function () {
 		item.parentNode.classList.add( "highlight" );
 		//console.log( "item.parentNode", item.parentNode );
 
-		item.parentNode.parentNode.open = true;
+		if ( item.parentNode.parentNode ) { item.parentNode.parentNode.open = true; }
 
 	}
-
-
-	// item.parentNode.parentNode.parentNode.open = true;
-
-	// if ( item.parentNode.parentNode.parentNode.parentNode ) {
-
-	// 	item.parentNode.parentNode.parentNode.parentNode.open = true;
-
-	// }
-
-	// if ( item && item.parentNode ) {
-
-	// 	item.parentNode.classList.add( "highlight" );
-
-	// }
-
-	// if ( item && item.parentNode.parentNodeitem ) {
-
-	// 	item.parentNode.parentNodeitem.parentNode.parentNode.open = true;
-
-	// 	item.parentNode.parentNode.parentNode.open = true;
-
-	// 	if ( item.parentNode.parentNode.parentNode.parentNode ) {
-
-	// 		item.parentNode.parentNode.parentNode.parentNode.open = true;
-
-	// 	}
-
-	// }
 
 	//item.scrollIntoView();
 

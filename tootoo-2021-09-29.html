@@ -71,6 +71,8 @@
 
 	<script src="./lib09/grv-github-repo-tree-view/v-2021-09-20/grv-github-repo-tree-view.js"></script>
 
+	<script src="./lib09/exh-export-html/v-2021-09-29/exh-export-html.js"></script>
+
 
 
 	<details id=detNavMenu class="gmd-4">
@@ -94,6 +96,8 @@
 			<div id=GRVdivDetails></div>
 
 			<div id=MNUdivSample ></div>
+
+			<div id=EXHdivExportHtml></div>
 
 			<div id=MNUdivFooter></div>
 
@@ -181,6 +185,8 @@
 			GRVdet.open = true;
 			//GRVsumRepo.hidden = true;
 			GRV.getRepo();
+
+			EXH.init();
 
 			if ( GRV.accessToken ) {
 
