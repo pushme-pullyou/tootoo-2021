@@ -147,7 +147,7 @@
 			if ( window.divMessage ) {
 
 				//divMessage.innerText = `Get:${ new Date().toLocaleString() } bytes:${ content.length } sha:${ XGP.sha }`;
-				divMessage.innerText = `Get${ new Date().toLocaleString().split( "," ).pop() } bytes:${ XGP.content.length }`;
+				divMessage.innerText = `Get${ new Date().toLocaleString().split( "," ).pop().slice( 0, -3 ) } ${ XGP.content.length }`;
 
 			}
 
@@ -200,7 +200,7 @@
 			xhr.send( body );
 
 			//divMessage.innerText = `Put: ${ new Date().toLocaleString() } bytes:${ XGP.content.length } sha:${ XGP.sha }`;
-			divMessage.innerText = `Put: ${ new Date().toLocaleString().split( "," ).pop() } bytes:${ XGP.content.length }`;
+			divMessage.innerText = `Put: ${ new Date().toLocaleString().split( "," ).pop().slice(0, -3 ) } ${ XGP.content.length }`;
 
 		};
 
