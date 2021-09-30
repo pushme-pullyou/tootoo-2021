@@ -32,8 +32,7 @@
 				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
 
 		<a href="" title="Click this menu title to reset the model">
-			<span id=spnTitle></span><span id=spnVersion></span>
-		</a>
+			<span id=spnTitle></span></a>
 
 		<button onclick=XGP.putFileToGitHub() title="Press Alt-S">putGitHub</button>
 
@@ -63,21 +62,12 @@
 		};
 
 
-		// Application data will be available under a global variable `appData`.
-
-		const appData = {
-
-			initialData: `# Hello, World!`
-
-		};
-
-
 
 		function init( url = XGP.url ) {
 
 			XGP.url = url;
 
-			spnTitle.innerHTML = document.title ? document.title : url.split( '/' ).pop().slice().replace( /\.htm/g, ' ' );
+			spnTitle.innerHTML = document.title ? document.title : url.split( '/' ).pop().slice().replace( /\.html|\.htm/g, "" );
 
 			//spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
 
