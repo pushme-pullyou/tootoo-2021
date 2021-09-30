@@ -9,7 +9,7 @@
 	<meta name="description"
 		content="File wrangler. Default index.html file. Opens HTML or Markdown files. Passes location.hash.">
 	<meta name="keywords" content="ShowDown,Markdown,AJAX,JavaScript,HTML,CSS,GitHub,FOSS">
-	<meta name="version" content="2021-07-17">
+	<meta name="version" content="2021-09-29">
 
 	<style>
 		/* Copyright 2021 Theo Armour. MIT License */
@@ -100,6 +100,8 @@
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
 
+	<button onclick=saveFile() style=position:absolute;right:0;>save</button>
+
 	<div id=divContent></div>
 
 	<script>
@@ -140,6 +142,18 @@
 				window.scrollTo( 0, 0 );
 			}
 			xhr.send( null );
+
+		}
+
+
+		function saveFile() {
+
+			const blob = new Blob( [ divContent.innerHTML ] );
+			let a = document.createElement( 'a' );
+			a.href = window.URL.createObjectURL( blob );
+			a.download = `${ document.title.split( "." ).shift() }.html`;
+			a.click();
+			a = null;
 
 		}
 
