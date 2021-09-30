@@ -7,6 +7,10 @@
 	<title>Trayo</title>
 
 	<style>
+		* {
+			box-sizing: border-box;
+
+		}
 		body {
 			font: 100% monospace;
 			margin: 0;
@@ -19,11 +23,14 @@
 
 		iframe {
 
-			border: 0px;
+			border: 1px solid red;
 			height: 100%;
 			margin: 0;
 			width: 100%;
 		}
+
+		main { display: flex; }
+
 
 		.hide {
 			display: none;
@@ -46,7 +53,6 @@
 		}
 
 		#divNotes1 {
-			float: left;
 			height: 93vh;
 			margin-left: 1rem;
 			overflow: hidden;
@@ -55,7 +61,6 @@
 		}
 
 		#divNotes2 {
-			float: left;
 			margin-left: 1rem;
 			height: 93vh;
 			overflow: hidden;
@@ -63,7 +68,6 @@
 		}
 
 		#divNotes3 {
-			float: left;
 			height: 93vh;
 			margin-left: 1rem;
 			width: 25%;
@@ -71,12 +75,12 @@
 		}
 
 		#divNotes4 {
-			float: left;
 			height: 93vh;
 			margin-left: 1rem;
 			width: 20%;
 			overflow: hidden;
 		}
+
 	</style>
 </head>
 
@@ -102,13 +106,17 @@
 
 	</h1>
 
+	<main>
+
+
+
 	<div id=divNotes1 class=resize>
 		<iframe id=ifrNotes1></iframe>
 	</div>
 
-	<button onclick="ifrNotes2.contentWindow.init(obj2a.url);">yesterday</button>
 
 	<div id=divNotes2 class=resize>
+		<button onclick="ifrNotes2.contentWindow.init(obj2a.url);">yesterday</button>
 		<iframe id=ifrNotes2></iframe>
 	</div>
 
@@ -120,6 +128,8 @@
 		<iframe id=ifrNotes4 onload=ifrNotes4></iframe>
 	</div>
 
+	</main>
+
 	<script>
 
 		const notesyH = "../../notesy-h/r-2021-09-25/notesy-h.html";
@@ -127,18 +137,18 @@
 
 
 		obj1 = {
-			url: "https://api.github.com/repos/theo-armour/qdata/contents/0-to-do/0-to-do.md",
-			source: "https://github.com/theo-armour/qdata/tree/master/0-to-do/0-to-do.md"
+			url: "https://api.github.com/repos/theo-armour/qdata/contents/0-to-do/0-to-do.htm",
+			source: "https://github.com/theo-armour/qdata/tree/master/0-to-do/0-to-do.htm"
 		}
 		ifrNotes1.onload = () => { ifrNotes1.contentWindow.init( obj1.url ); }
-		ifrNotes1.src = notesyM;
+		ifrNotes1.src = notesyH;
 
 
 		const aDate = new Date();
 		let month = ( 1 + aDate.getMonth() ).toString().padStart( 2, "0" );
 		const date = aDate.getDate().toString().padStart( 2, "0" );
 
-		console.log( "date", date );
+		//console.log( "date", date );
 
 		const path = `${ month }/${ month }-${ date }.md`;
 
@@ -150,7 +160,7 @@
 		ydy = aDate.getDate().toString().padStart( 2, "0" );
 		const path2 = `${ month }/${ month }-${ ydy }.md`;
 
-		console.log( "path", path );
+		//console.log( "path", path );
 
 		// const obj2a = {
 		// 	url: "https://api.github.com/repos/theo-armour/qdata/contents/journal/days-of-year-md/" + path2,

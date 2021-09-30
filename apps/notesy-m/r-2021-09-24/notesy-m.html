@@ -18,11 +18,11 @@
 			margin: 0;
 		}
 
-		#container {
-			/* To create the column layout. */
+		/* #container {
+			/* To create the column layout.
 			display: flex;
 
-			/* To make the container relative to its children. */
+			/* To make the container relative to its children.
 			position: relative;
 		}
 
@@ -33,7 +33,7 @@
 		#container .ck.ck-content {
 			overflow: auto;
 			resize: both;
-		}
+		} */
 	</style>
 </head>
 
@@ -235,7 +235,7 @@
 
 			if ( editor.data.get() === XGP.content ) { return; }
 
-			console.log( "", XGP.content );
+			console.log( "", XGP.url.split().pop() );
 
 			event.preventDefault();
 

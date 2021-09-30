@@ -1,0 +1,155 @@
+
+<div style="border:0px solid red; margin: 0 auto; padding: 0 1rem; max-width: 40rem;">
+<h1 id="cartography">Cartography</h1>
+<p>lat 37.8031325,-122.4309479</p>
+<h2 id="math">MATH</h2>
+<pre><code>var pi = Math.PI, pi05 = pi * 0.5, pi2 = pi + pi;
+var d2r = pi / 180, r2d = 180 / pi;  // degrees / radians
+
+var sin = Math.sin;
+var cos = Math.cos;
+
+var v = new THREE.Vector3;
+var v = function ( x, y, z ){ return new THREE.Vector3( x, y, z ); };
+
+
+var cos = function ( a ){ return Math.cos( a ); }
+var sin = function ( a ){ return Math.sin( a ); }
+
+function cos( a ){ return Math.cos( a ); }
+function sin( a ){ return Math.sin( a ); }
+
+function pow( a, b ){ return Math.pow( a, b ); }
+function ran(){ return Math.random(); }
+
+v( x, y, z ) =&gt; new THREE.Vector3( x, y, z );
+v2( x, y ) =&gt; new THREE.Vector2( x, y );</code></pre>
+<h2 id="mapbox">MapBox</h2>
+<p><a href="https://api.mapbox.com/v4/mapbox.terrain-rgb/15/5242/12663.pngraw?access_token=pk.eyJ1IjoidGhlb2EiLCJhIjoiY2o1YXFra3V2MGIzbzJxb2lneDUzaWhtZyJ9.7bYFAQabMXiYmcqW8NLfwg" rel="noopener noreferrer" target="_blank">https://api.mapbox.com/v4/mapbox.terrain-rgb/15/5242/12663.pngraw?access_token=pk.eyJ1IjoidGhlb2EiLCJhIjoiY2o1YXFra3V2MGIzbzJxb2lneDUzaWhtZyJ9.7bYFAQabMXiYmcqW8NLfwg</a></p>
+<p><a href="https://api.mapbox.com/v4/mapbox.terrain-rgb/0/0/0.pngraw?access_token=pk.eyJ1IjoidGhlb2EiLCJhIjoiY2o1YXFra3V2MGIzbzJxb2lneDUzaWhtZyJ9.7bYFAQabMXiYmcqW8NLfwg" rel="noopener noreferrer" target="_blank">https://api.mapbox.com/v4/mapbox.terrain-rgb/0/0/0.pngraw?access_token=pk.eyJ1IjoidGhlb2EiLCJhIjoiY2o1YXFra3V2MGIzbzJxb2lneDUzaWhtZyJ9.7bYFAQabMXiYmcqW8NLfwg</a></p>
+<p><a href="https://api.mapbox.com/v4/mapbox.terrain-rgb/7/20/49.pngraw?access_token=pk.eyJ1IjoidGhlb2EiLCJhIjoiY2o1YXFra3V2MGIzbzJxb2lneDUzaWhtZyJ9.7bYFAQabMXiYmcqW8NLfwg" rel="noopener noreferrer" target="_blank">https://api.mapbox.com/v4/mapbox.terrain-rgb/7/20/49.pngraw?access_token=pk.eyJ1IjoidGhlb2EiLCJhIjoiY2o1YXFra3V2MGIzbzJxb2lneDUzaWhtZyJ9.7bYFAQabMXiYmcqW8NLfwg</a></p>
+<p>height = -10000 + ((R * 256 * 256 + G * 256 + B) * 0.1)</p>
+<p>key from <a href="https://www.mapbox.com/mapbox-gl-js/example/map-tiles/" rel="noopener noreferrer" target="_blank">https://www.mapbox.com/mapbox-gl-js/example/map-tiles/</a></p>
+<p><a href="http://a.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6/14/4823/6160.vector.pbf?access_token=pk.eyJ1IjoidGhlb2EiLCJhIjoiY2o1YXFra3V2MGIzbzJxb2lneDUzaWhtZyJ9.7bYFAQabMXiYmcqW8NLfwg" rel="noopener noreferrer" target="_blank">http://a.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6/14/4823/6160.vector.pbf?access_token=pk.eyJ1IjoidGhlb2EiLCJhIjoiY2o1YXFra3V2MGIzbzJxb2lneDUzaWhtZyJ9.7bYFAQabMXiYmcqW8NLfwg</a></p>
+<p>works!!!</p>
+<p>pk.eyJ1IjoidGhlb2EiLCJhIjoiY2o1YXFra3V2MGIzbzJxb2lneDUzaWhtZyJ9.7bYFAQabMXiYmcqW8NLfwg</p>
+<p><a href="https://api.mapbox.com/v4/mapbox.streets/14/4823/6160.png?access_token=pk.eyJ1IjoidGhlb2EiLCJhIjoiY2o1YXFra3V2MGIzbzJxb2lneDUzaWhtZyJ9.7bYFAQabMXiYmcqW8NLfwg" rel="noopener noreferrer" target="_blank">https://api.mapbox.com/v4/mapbox.streets/14/4823/6160.png?access_token=pk.eyJ1IjoidGhlb2EiLCJhIjoiY2o1YXFra3V2MGIzbzJxb2lneDUzaWhtZyJ9.7bYFAQabMXiYmcqW8NLfwg</a></p>
+<p><a href="http://tile.openstreetmap.org/7/20/49.png" rel="noopener noreferrer" target="_blank">http://tile.openstreetmap.org/7/20/49.png</a></p>
+<h2 id="json">JSON</h2>
+<p>{<br>
+    "vicinity": "xxx",<br>
+    "latitude": 0,<br>
+    "longitude": 0,<br>
+    "zoom": 12,<br>
+    "tilesX": 3,<br>
+    "tilesY": 3,<br>
+    "samplesX": 510,<br>
+    "samplesY": 510,<br>
+    "ULtileX": xxx,<br>
+    "ULtileY": xxx,<br>
+    "plainOpacity" : 0.5,<br>
+    "verticalScale" : 0.00001,<br>
+    "fogNear" : 0.5,<br>
+    "fogFar" : 1,<br>
+    "elevations": [</p>
+<p>]<br>
+}</p>
+<p>// Interesting places. Possibly to add to gazetteer</p>
+<p>// BGBW Narsarsuaq Airport<br>
+// EGNS / isle of Man<br>
+// PHOG hawaii</p>
+<p>// San Francisco<br>
+    var latitude = 37.796;<br>
+    var longitude = -122.398;</p>
+<p>// Paris<br>
+    var latitude = 48.8566;<br>
+    var longitude = 2.3522;<br>
+/*</p>
+<p>// Igualada Spain<br>
+    var latitude = 41.5861554761;<br>
+    var longitude = 1.6519343471;</p>
+<p>// VNLK<br>
+    var latitude = 27.71110193545;<br>
+    var longitude = 86.71228385040001;</p>
+<p>// YGIL Gilgandra<br>
+    var latitude = -31.7276314069;<br>
+    var longitude = 148.63915118805;</p>
+<p>// PHOG hawaii<br>
+    var latitude = 20.8968;<br>
+    var longitude = -156.4329;</p>
+<p>*/<br>
+Kerguelen_Islands</p>
+<p>-49.25<br>
+69.166667</p>
+<p>more nice lat lon</p>
+<h2 id="form">FORM</h2>
+<pre><code>        '&lt;p&gt;Latitude : &lt;input id=inpLatitude size=12 placeholder=' + latitude + ' onchange=goIt(); &gt;&lt;/p&gt;' +
+        '&lt;p&gt;Longitude: &lt;input id=inpLongitude size=12 placeholder=' + longitude + ' onchange=goIt(); &gt;&lt;/p&gt;' +</code></pre>
+<h2 id="tms">TMS</h2>
+<ul>
+<li><p>Source <a href="http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#ECMAScript_.28JavaScript.2FActionScript.2C_etc..29" rel="noopener noreferrer" target="_blank">http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#ECMAScript_.28JavaScript.2FActionScript.2C_etc..29</a></p>
+<p>function lon2tile( lon, zoom ) {</p>
+<pre><code>return Math.floor( ( lon + 180 ) / 360 * Math.pow( 2, zoom ) );</code></pre>
+<p>}</p>
+<p>function lat2tile( lat, zoom ) {</p>
+<pre><code>const pi = Math.PI;
+
+return Math.floor( ( 1 - Math.log( Math.tan( lat * pi / 180 ) + 1 / Math.cos( lat * pi / 180 ) ) / pi ) / 2 * Math.pow( 2, zoom ) );</code></pre>
+<p>}</p>
+<p>function tile2lon( x, zoom ) {</p>
+<pre><code>return ( x / Math.pow( 2, zoom ) * 360 - 180 );</code></pre>
+<p>}</p>
+<p>function tile2lat( y, zoom ) {</p>
+<pre><code>var pi = Math.PI
+var n = pi - 2 * pi * y / Math.pow( 2, zoom );
+return 180 / pi * Math.atan( 0.5 * ( Math.exp( n ) - Math.exp( -n ) ));</code></pre>
+<p>}</p></li>
+</ul>
+<p><a href="http://wiki.openstreetmap.org/wiki/Zoom_levels" rel="noopener noreferrer" target="_blank">http://wiki.openstreetmap.org/wiki/Zoom_levels</a></p>
+<h3 id="mercator">Mercator</h3>
+<p><a href="http://wiki.openstreetmap.org/wiki/Mercator" rel="noopener noreferrer" target="_blank">http://wiki.openstreetmap.org/wiki/Mercator</a></p>
+<p>function y2lat( a ) { return 180 / Math.PI * ( 2 * Math.atan( Math.exp( a * Math.PI / 180 ) ) - Math.PI / 2 ); }</p>
+<p>function lat2y( a ) { return 180 / Math.PI * Math.log( Math.tan( Math.PI / 4 + a * ( Math.PI / 180 ) / 2 ) ); }</p>
+<h2 id="xyz">XYZ</h2>
+<p>// source <a href="http://en.wikipedia.org/wiki/Spherical_coordinate_system" rel="noopener noreferrer" target="_blank">http://en.wikipedia.org/wiki/Spherical_coordinate_system</a></p>
+<pre><code>function convertPosition( lat, lon, radius ) {
+
+    const d2r = pi / 180
+    var rc = radius * Math.cos( lat * d2r );
+    return new THREE.Vector3( rc * Math.cos( lon * d2r ), radius * Math.sin( lat * d2r ), rc * Math.sin( lon * d2r) );
+}
+
+function latLonToXYZ( radius, latitude, longitude ) {
+
+    x = radius * Math.sin( latitude ) * Math.cos( longitude )
+    y = radius * Math.sin( latitude ) * Math.sin( longitude )
+    z = radius * Math.cos( latitude )
+
+    return new THREE.Vector3( x, y, z );
+
+}</code></pre>
+<h2 id="google-maps">Google Maps</h2>
+<p>Google Maps Time Zone API</p>
+<ul>
+<li><a href="https://developers.google.com/maps/documentation/timezone/start" rel="noopener noreferrer" target="_blank">https://developers.google.com/maps/documentation/timezone/start</a></li>
+<li><a href="https://maps.googleapis.com/maps/api/timezone/json?location=38.908133,-77.047119&amp;timestamp=1458000000" rel="noopener noreferrer" target="_blank">https://maps.googleapis.com/maps/api/timezone/json?location=38.908133,-77.047119×tamp=1458000000</a></li>
+<li><a href="https://stackoverflow.com/questions/23017766/google-maps-tile-url-for-hybrid-maptype-tiles" rel="noopener noreferrer" target="_blank">https://stackoverflow.com/questions/23017766/google-maps-tile-url-for-hybrid-maptype-tiles</a></li>
+</ul>
+<blockquote>
+  <p>Smart clients were supposed to spread the load across servers mt0 to mt3. But now, these names and mt are all aliases (CNAMEs) of mt.l.google.com that the DNS rotates through a number of addresses as it is queried. So, simply using mt.google.com will do the balancing globally, and locally if you do multiple DNS queries</p>
+</blockquote>
+<p>h = roads only ~ white background<br>
+m = standard road map<br>
+p = terrain ~ all black<br>
+r = somehow altered road map ~ nothing visible<br>
+s = satellite only<br>
+t = terrain only<br>
+y = hybrid</p>
+<h2 id="bitmaps--height-maps">Bitmaps &amp; Height Maps</h2>
+<ul>
+<li>Google maps: set language? &amp;hl=fr ??</li>
+<li>Calculate the lower zoom before the higher zoom - then easier to calculate the correct common top left</li>
+<li>Don't forget the origin for tiles at XY = 0,0 is top left</li>
+<li>ESRI // remember x and y reversed</li>
+</ul>
+</div>
