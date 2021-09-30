@@ -29,7 +29,7 @@ GRV.menuCurated = "Display curated list of folders and files";
 
 GRV.init = function ( { user = COR.user, repo = COR.repo, branch = COR.branch } = {} ) {
 
-	GRV.urlHome = ""; //COR.pathContent;
+	GRV.urlHome = COR.pathContent;
 
 	GRV.accessToken = localStorage.getItem( 'githubAccessToken' ) || "";
 
