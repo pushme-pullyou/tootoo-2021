@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="description"
+		content="TooToo 2021 uses the GitHub API to provide access to all the current files in a repository hosted with GitHub Pages.">
+	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
+	<meta name="date" content="2021-09-29">
+	<title>TooToo</title>
+
+	<!-- Copyright 2021 Theo Armour. MIT license -->
+	<link id=CORstyle rel="stylesheet" href="./lib/style/style-2021-07-12.css">
+
+	<style>
+		:root {
+			/* --mnu-width: 20rem; */
+			--main-hue: 240;
+			/* 0 to 360 0=red 120=green 240=blue */
+		}
+
+		#divMainContent {
+
+			margin-left: 5rem;
+			height: 90vh;
+			overflow: auto;
+			resize: both;
+			width: 32rem;
+
+		}
+
+		/* #container {
+			/* To create the column layout.
+			display: flex;
+
+			/* To make the container relative to its children.
+			position: relative;
+
+		}
+
+		#container .ck.ck-editor {
+			width: 32rem;
+		}
+
+
+		#container .ck.ck-content {
+			overflow: auto;
+			resize: both;
+			height: 90vh;
+			width: 100%;
+		}
+
+		*/
+
+	</style>
+
+</head>
+
+<body>
+
+	<script src="./lib/mnu-menu/v-2021-08-17/mnu-menu.js"></script>
+
+	<script src="./lib09/ckeditor/v-2021-09-29-md/cke-ckeditor-m.js"></script>
+
+	<script src="./lib09/frx-file-read-xhr/v-2021-09-18/frx-file-read-xhr.js"></script>
+
+	<script src="./lib/gra-github-repo-access/v-2021-07-13/gra-github-repo-access.js"></script>
+
+	<script src="./lib/gor-github-organization-repos/v-2021-07-03/gor-github-organization-repos.js"></script>
+
+	<script src="./lib09/grv-github-repo-tree-view/v-2021-09-20/grv-github-repo-tree-view.js"></script>
+
+
+
+	<details id=detNavMenu class="gmd-4">
+
+		<summary id=sumNavMenu class="summary-nav gmd-1">
+			☰ <span id=spnMenuHelp>show&darr; || hide&uarr; menu</span>
+		</summary>
+
+		<nav id="navMenu" class="">
+
+			<div id=MNUdivHeader></div>
+
+			<div id=CKEdivCkeditor ></div>
+
+			<div id=FRXdivDetails></div>
+
+			<div id=FOXdivDetails></div>
+
+			<div id=GORdivDetails></div>
+
+			<div id=GRVdivDetails></div>
+
+			<div id=MNUdivSample ></div>
+
+			<div id=MNUdivFooter></div>
+
+		</nav>
+
+	</details>
+
+
+	<main id=main>
+
+		<div id="divMainContent"></div>
+
+	</main>
+
+
+	<script>
+
+		const COR = {
+			//user: "theo-armour",
+			user: "pushme-pullyou",
+			repo: "tootoo-2021",
+			branch: "main",
+			//pathContent: "./",
+			pathContent: "./",
+			//pathTooToo: "https://pushme-pullyou.github.io/tootoo-2021/", //"./",
+			pathTooToo: "./",
+			defaultFile: "README.md",
+			//defaultIgnoreFolders: [],
+			defaultIgnoreFolders: ["archive", "lib", "lib3d", "lib-geo", "lib-templates"],
+			filterFiles:  [ "gif", "md", "html", "jpg", "license", "pdf", "png", "svg", "txt" ],
+			urlSource: "https://github.com/pushme-pullyou/tootoo-2021/",
+			urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
+			iconGitHub: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`,
+			iconLogo: "❦",
+			iconInfo: `<img class=infoImg src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/noun_Information_585560.svg">`,
+			iconExternalFile: `<img class=infoImg  src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/icon-external-link.svg">`,
+			title: document.title ? document.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " ),
+			version: document.head.querySelector( "[ name=date ]" ).content,
+			description: document.head.querySelector( "[ name=description ]" ).content,
+		};
+
+
+		init();
+
+
+		function init() {
+
+
+			// MNU = Menu
+			MNU.init();
+			//MNUdivSample.innerHTML = MNU.getSample();
+			sumNavMenu.hidden = false;
+
+			//const htm = "Hello, World!";
+			//MNU.init( { description: htm } );
+			//MNUaSource.hidden = true;
+			//MNUspnVersion.hidden = true;
+
+			// CKE = CK Editor
+			CKE.init();
+
+			// FRX = File Read XHR
+			FRX.init();
+
+			GRA.init();
+
+			// GOR = GitHub Organization Read
+			GOR.init();
+			GORinpUser.value = COR.user + "/" + COR.repo;
+			GOR.getOrganization();
+			//GORdet.open = true;
+
+			// GRV.info = `
+			// Right-click folder names to bring up the context menu to open and close multiple folders.<br>
+			// <br>
+			// `;
+
+			// GRV.intro = `
+			// <p>This menu enables you to display all folders and files in the ${ COR.title } GitHub repository in a tree view.</p>
+			// ${ MNU.addInfoBox( GRV.info ) }`;
+
+			GRV.getFiles = GRV.getFilesAll;
+			GRV.getFiles = GRV.getFilesCurated;
+			GRV.init();
+			GRVdet.open = true;
+			//GRVsumRepo.hidden = true;
+			GRV.getRepo();
+
+			if ( GRV.accessToken ) {
+
+				CKE.loadCkeditor();
+
+			} else {
+
+				FRX.onHashChange(); // start the action!
+
+			}
+
+			// if running on server, keeps address bar pointed to latest dev
+
+			//if ( !location.hash && location.protocol === "https:" ) {
+			if ( location.protocol === "https:" ) {
+
+				window.history.pushState( "", "", "./" + location.hash );
+
+				//COR.pathContent = "./";
+
+				COR.ignoreFolders = COR.defaultIgnoreFolders;
+
+			} else {
+
+				//COR.pathContent = "https://theo-armour.github.io/2021/"; //"./";
+
+				COR.ignoreFolders = [];
+
+			}
+
+		}
+
+	</script>
+</body>
+
+</html>
