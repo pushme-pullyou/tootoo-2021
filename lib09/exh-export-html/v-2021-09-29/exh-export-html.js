@@ -35,7 +35,7 @@ EXH.saveFile = function () {
 	const blob = new Blob( [ divMainContent.innerHTML ] );
 	let a = document.createElement( 'a' );
 	a.href = window.URL.createObjectURL( blob );
-	a.download = `${ document.title.split( "." ).shift() }.htm`;
+	a.download = `${ FRX.filName.split( "." ).shift() }.htm`;
 	a.click();
 	a = null;
 
