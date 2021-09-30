@@ -206,7 +206,7 @@
 
 			XGP.content = editor.getData();
 
-			console.log( "XGP.content", XGP.content );
+			console.log( "", XGP.url.split( "/" ).pop() );
 			const codedData = window.btoa( XGP.content ); // encode the string
 
 			const body = JSON.stringify( {
@@ -236,7 +236,7 @@
 
 			if ( editor.data.get() === XGP.content ) { return; }
 
-			console.log( "", XGP.url.split().pop() );
+			console.log( "", XGP.url.split( "/" ).pop() );
 
 			event.preventDefault();
 
