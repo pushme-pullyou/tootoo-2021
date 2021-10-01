@@ -16,58 +16,27 @@ CKH.init = function () {
 	CKH.base = "https://api.github.com/repos/theo-armour/qdata/contents/";
 	//CKH.base = `https://api.github.com/repos/${ COR.user }/${ COR.repo }/contents/`;
 
-	const htm = `
-<details id=detCKH ontoggle=CKH.loadCKHditor() >
-
-	<summary class="summary-primary gmd-1" title="Edit GitHub files on your device: ">
-		CKH Editor
-		<span id=MNUspnFile ></span>
-		
-	</summary>
-
-	GitHub Access Token
-	<div>
-		<input id=CKHinpAccessToken onclick=this.select(); onblur=CKH.setGitHubAccessToken();
-		title="Obtain GitHub API Access Token" style=width:100%; >
-	</div>
-
-	<p>
-
-	</p>
-
-	<div id=divLog></div>
-
-</details>`
-
-	//CKH.parentMenu.innerHTML = htm;
-
-	CKH.loadCKHditor() 
-}
-
-
-CKH.loadCKHditor = function () {
-
-	// if ( window[ "editor" ] === undefined ) {
-
-	// 	scr = detNavMenu.appendChild( document.createElement( 'script' ) );
-	// 	scr.onload = () => CKH.onHashChange();
-	// 	scr.src = "https://pushme-pullyou.github.io/tootoo-2021/lib09/CKHditor/CKHditor5/build/CKHditor.js";
-	// 	//scr.src = `js/handlers/${ parser }`;
-
-	// } else {
-
-		
-
-	//}
-
 	CKH.accessToken = localStorage.getItem( 'githubAccessToken' ) || "";
 	//CKHinpAccessToken.value = CKH.accessToken;
+
+	CKH.parentContent.innerHTML = `
+
+	<div id="container"  >
+	
+		<div class="editor"></div>
+	
+	</div>
+	
+	<div id="wordCount"></div>
+	
+	<div id="divStats"></div>
+	
+	`;
 
 	window.addEventListener( "hashchange", CKH.onHashChange, false );
 
 	window.addEventListener( "beforeunload", CKH.checkForChange );
 
-	//window.removeEventListener( "hashchange", FRX.onHashChange );
 
 	CKH.onHashChange();
 
@@ -85,6 +54,7 @@ CKH.onHashChange = function () {
 
 			response = confirm( "Changes you made may not be saved. Click OK to proceed without saving")
 			if ( response !== true ) { return; }
+
 		}
 
 	}
@@ -95,44 +65,8 @@ CKH.onHashChange = function () {
 
 	console.log( "url", CKH.url.split( "/" ).pop() );
 
-	if ( !window.CKHdivPopUp ) {
-
-		//CKHdivPopUp = detNavMenu.appendChild( document.createElement( 'div' ) );
-		//CKHdivPopUp.style.cssText = "position:fixed;left:calc( 1.5rem + var( --mnu-width ) );rem;top:1rem;transform-origin: 0 0;transform: rotate(90deg);";
-
-	}
-
-// 	CKHdivPopUp.innerHTML = `
-// <div>
-
-// <button onclick=FRX.onHashChange();CKHdivPopUp.innerHTML=""; >Exit edit</button >
-
-// <button onclick=CKH.requestFile(); > edit: ${ CKH.hash }</button >
-
-// <button onclick=CKH.putFileToGitHub() title="Press Alt-S">putGitHub</button>
-
-// <span id="divMessage"></span>
-
-// </div>
-// `;
-
-	CKH.parentContent.innerHTML = `
-
-<div id="container"  >
-
-	<div class="editor"></div>
-
-</div>
-
-<div id="wordCount"></div>
-
-<div id="divStats"></div>
-
-`;
 
 	CKH.requestFile();
-
-	//CKH.createEditor( "Text to be edited will appear here..." );
 
 };
 
@@ -156,7 +90,7 @@ CKH.requestFile = function () {
 
 CKH.onLoad = function ( xhr ) {
 
-	//console.log( "xhr", xhr );
+	console.log( "xhr", xhr );
 
 	CKH.sha = xhr.target.response.sha;
 
