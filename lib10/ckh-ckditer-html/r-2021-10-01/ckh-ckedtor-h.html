@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="description" content="">
+	<meta name="date" content="2021-10-01">
+	<title>notes</title>
+	<style>
+		body {
+			font: 100% monospace;
+			margin: 3px 0;
+		}
+
+		#CKEdivCkeditor {
+			border: 1px solid #888;
+			overflow: hidden;
+			resize: both;
+		}
+	</style>
+</head>
+
+<body>
+
+	<a href="#https://api.github.com/repos/theo-armour/qdata/contents/snippets/notes.md">notes</a>
+	<a href="#https://api.github.com/repos/theo-armour/qdata/contents/snippets/things-i-forget.md">forget</a>
+	<a href="#https://api.github.com/repos/theo-armour/qdata/contents/snippets/things-i-like.md">like</a>
+	<a href="#https://api.github.com/repos/theo-armour/qdata/contents/snippets/lingo.md">lingo</a>
+	<a href="#https://api.github.com/repos/theo-armour/qdata/contents/snippets/aphorisms-mantras.md">aphorism</a>
+	<a href="#https://api.github.com/repos/theo-armour/qdata/contents/snippets/jokes-and-quotes.md">jokes</a>
+
+
+
+	<div id=CKEdivCkeditor></div>
+
+	<div id="divContent"></div>
+
+
+	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib09/ckeditor/ckeditor5/build/ckeditor.js"></script>
+
+	<script src="../../../lib10/ckh-ckeditor-html/r-2021-10-01/ckh-ckeditor-html.js"></script>
+
+	<script>
+
+		init();
+
+		function init() {
+
+			CKE.urlDefault = "https://api.github.com/repos/theo-armour/qdata/contents/snippets/notes.htm"
+
+			CKE.init();
+
+		}
+
+	</script>
+
+</body>
+
+</html>
