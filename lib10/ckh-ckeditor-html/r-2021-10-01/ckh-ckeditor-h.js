@@ -65,7 +65,6 @@ CKH.onHashChange = function () {
 
 	console.log( "url", CKH.url.split( "/" ).pop() );
 
-
 	CKH.requestFile();
 
 };
