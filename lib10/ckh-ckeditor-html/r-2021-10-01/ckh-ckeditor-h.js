@@ -23,6 +23,7 @@ CKH.init = function () {
 		CKH.accessToken = prompt( "Enter GitHub Personal Access Token" )
 
 		localStorage.setItem( "githubAccessToken", CKH.accessToken );
+		
 	}
 
 
