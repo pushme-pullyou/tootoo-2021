@@ -29,14 +29,11 @@ CKH.init = function () {
 	
 	<div id="wordCount"></div>
 	
-	<div id="divStats"></div>
-	
-	`;
+	<div id="divStats"></div>`;
 
 	window.addEventListener( "hashchange", CKH.onHashChange, false );
 
 	window.addEventListener( "beforeunload", CKH.checkForChange );
-
 
 	CKH.onHashChange();
 
