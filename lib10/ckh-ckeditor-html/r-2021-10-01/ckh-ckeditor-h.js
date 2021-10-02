@@ -8,7 +8,7 @@ const CKH = {};
 
 
 CKH.init = function () {
-	
+
 	CKH.parentMenu = CKHdivCKEditor;
 	CKH.parentContent = divMainContent;
 	CKH.defaultFile = "snippets/notes.htm";
@@ -17,18 +17,25 @@ CKH.init = function () {
 	//CKH.base = `https://api.github.com/repos/${ COR.user }/${ COR.repo }/contents/`;
 
 	CKH.accessToken = localStorage.getItem( 'githubAccessToken' ) || "";
-	//CKHinpAccessToken.value = CKH.accessToken;
+
+	if ( !CKH.accessToken ) {
+
+		CKH.accessToken = prompt( "Enter GitHub Personal Access Token" )
+
+		localStorage.setItem( "githubAccessToken", CKH.accessToken );
+	}
+
 
 	CKH.parentContent.innerHTML = `
 
 	<div id="container"  >
-	
+
 		<div class="editor"></div>
-	
+
 	</div>
-	
+
 	<div id="wordCount"></div>
-	
+
 	<div id="divStats"></div>`;
 
 	window.addEventListener( "hashchange", CKH.onHashChange, false );
@@ -261,7 +268,7 @@ CKH.checkForChange = function ( event ) {
 
 	if ( editor?.data?.get() === CKH.content ) { return; }
 
-	console.log( "content", CKH.content );
+	console.log( "content", CKH.url.split( "/" ).pop() );
 
 	event.preventDefault();
 
