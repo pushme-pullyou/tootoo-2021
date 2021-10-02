@@ -18,12 +18,12 @@ CKH.init = function () {
 
 	CKH.accessToken = localStorage.getItem( 'githubAccessToken' ) || "";
 
-	if ( !CKH.accessToken ) {
+	if ( CKH.accessToken === "null" || CKH.accessToken === "" ) {
 
 		CKH.accessToken = prompt( "Enter GitHub Personal Access Token" )
 
 		localStorage.setItem( "githubAccessToken", CKH.accessToken );
-		
+
 	}
 
 
