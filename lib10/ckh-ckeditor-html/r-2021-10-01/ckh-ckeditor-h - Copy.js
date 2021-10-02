@@ -94,7 +94,16 @@ CKH.requestFile = function () {
 
 CKH.onLoad = function ( xhr ) {
 
+	//console.log( "xhr", xhr );
+
+	//CKH.sha = xhr.target.response.sha;
+
 	CKH.content = atob( xhr.target.response.content );
+
+	//console.log( "content", content );
+
+	//CKH.ext = CKH.hash.split( "." ).pop().toLowerCase();
+	//console.log( "ext", CKH.ext );
 
 	if ( CKH.editor ) {
 
@@ -107,10 +116,12 @@ CKH.onLoad = function ( xhr ) {
 
 	}
 
-	if ( window.spnMessage ) {
+//CKH.content = content;
+
+	if ( window.divMessage ) {
 
 		//divMessage.innerText = `Get:${ new Date().toLocaleString() } bytes:${ content.length } sha:${ CKH.sha }`;
-		spnMessage.innerText = `Get ${ new Date().toLocaleString().split( "," ).pop().slice(1,-3 ) } ${ CKH.content.length }`;
+		divMessage.innerText = `Get${ new Date().toLocaleString().split( "," ).pop() } bytes:${ content.length }`;
 
 	}
 
@@ -225,7 +236,7 @@ CKH.putFileToGitHub = function () {
 
 CKH.putFile = function () {
 
-	CKH.content = CKH.editor.getData();
+	CKH.content = editor.getData();
 	//console.log( "CKH.content", CKH.content );
 
 	const codedData = window.btoa( CKH.content ); // encode the string
@@ -247,7 +258,7 @@ CKH.putFile = function () {
 	xhr.send( body );
 
 	//divMessage.innerText = `Put: ${ new Date().toLocaleString() } bytes:${ CKH.content.length } sha:${ CKH.sha }`;
-	spnMessage.innerText = `Put ${ new Date().toLocaleString().split( "," ).pop().slice( 1, -3 ) } ${ CKH.content.length }`;
+	divMessage.innerText = `Put: ${ new Date().toLocaleString().split( "," ).pop() } bytes:${ CKH.content.length }`;
 
 };
 
@@ -255,7 +266,7 @@ CKH.putFile = function () {
 
 CKH.checkForChange = function ( event ) {
 
-	if ( CKH.editor?.data?.get() === CKH.content ) { return; }
+	if ( editor?.data?.get() === CKH.content ) { return; }
 
 	console.log( "content", CKH.url.split( "/" ).pop() );
 
