@@ -17,7 +17,7 @@ All JavaScript files are with 3 letter namespaces. The same three letter are use
 ## To Do / Wish List
 
 *   View files in 3D
-*   View files in galleries
+*   View files in galleries vvv
 *   Edit files
 
 ## Issues
@@ -40,8 +40,8 @@ Switching themes
 
 ### 2021-09-27
 
-* TT 2021-09-27: 
-* CKE ~ fic to menu not doc.body; simplify CSS
+*   TT 2021-09-27:
+*   CKE ~ fic to menu not doc.body; simplify CSS
 
 ### 2021-09-18
 
