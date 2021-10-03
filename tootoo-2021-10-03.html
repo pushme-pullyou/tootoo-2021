@@ -37,7 +37,7 @@
 
 	<script src="./lib09/mnu-menu/r-2021-09-23/mnu-menu.js"></script>
 
-	<script src="./lib09/ckeditor/v-2021-09-29-md/cke-ckeditor-m.js"></script>
+	<script src="./lib10/ckm-ckeditor-markdown/r-2021-10-03/ckm-ckeditor-md.js"></script>
 
 	<script src="./lib09/frx-file-read-xhr/v-2021-09-18/frx-file-read-xhr.js"></script>
 
@@ -61,7 +61,7 @@
 
 			<div id=MNUdivHeader></div>
 
-			<div id=CKEdivCkeditor></div>
+			<div id=CKMdivCKEditor></div>
 
 			<div id=FRXdivDetails></div>
 
@@ -96,7 +96,7 @@
 			repo: "tootoo-2021",
 			branch: "main",
 			pathContent: "./",
-			//pathTooToo: "https://pushme-pullyou.github.io/tootoo-2021/", //"./",
+			//pathTooToo: "https://pushme-pullyou.github.io/tootoo-2021/",
 			pathTooToo: "./",
 			defaultFile: "README.md",
 			//defaultIgnoreFolders: [],
@@ -130,8 +130,8 @@
 			//MNUaSource.hidden = true;
 			//MNUspnVersion.hidden = true;
 
-			// CKE = CK Editor
-			CKE.init();
+			// CKM = CK Editor Markkdown
+			CKM.init();
 
 			// FRX = File Read XHR
 			FRX.init();
@@ -159,7 +159,7 @@
 			// start the action!
 			if ( GRV.accessToken ) {
 
-				CKE.loadCkeditor();
+				CKM.init();
 
 			} else {
 

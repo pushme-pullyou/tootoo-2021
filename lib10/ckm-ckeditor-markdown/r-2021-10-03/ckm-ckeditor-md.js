@@ -44,7 +44,19 @@ CKM.init = function () {
 
 	window.addEventListener( "beforeunload", CKM.checkForChange );
 
-	CKM.onHashChange();
+
+	if ( window[ "editor" ] === undefined ) {
+
+		scr = document.body.appendChild( document.createElement( 'script' ) );
+		scr.onload = () => CKM.onHashChange();
+		scr.src = "https://pushme-pullyou.github.io/tootoo-2021/lib10/ckeditor5-markdown/build/ckeditor.js";
+		//scr.src = `js/handlers/${ parser }`;
+
+	} else {
+
+		CKM.onHashChange();
+
+	}
 
 };
 
