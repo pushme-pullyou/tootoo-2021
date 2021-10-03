@@ -17,7 +17,7 @@ All JavaScript files are with 3 letter namespaces. The same three letter are use
 ## To Do / Wish List
 
 *   View files in 3D
-*   View files in galleries vvv
+*   View files in galleries
 *   Edit files
 
 ## Issues
