@@ -7,7 +7,7 @@
 	<meta name="description"
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files in a repository hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2021-09-29">
+	<meta name="date" content="2021-10-03">
 	<title>TooToo</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
@@ -29,37 +29,13 @@
 			width: 32rem;
 
 		}
-
-		/* #container {
-			/* To create the column layout.
-			display: flex;
-
-			/* To make the container relative to its children.
-			position: relative;
-
-		}
-
-		#container .ck.ck-editor {
-			width: 32rem;
-		}
-
-
-		#container .ck.ck-content {
-			overflow: auto;
-			resize: both;
-			height: 90vh;
-			width: 100%;
-		}
-
-		*/
-
 	</style>
 
 </head>
 
 <body>
 
-	<script src="./lib/mnu-menu/v-2021-08-17/mnu-menu.js"></script>
+	<script src="./lib09/mnu-menu/r-2021-09-23/mnu-menu.js"></script>
 
 	<script src="./lib09/ckeditor/v-2021-09-29-md/cke-ckeditor-m.js"></script>
 
@@ -85,7 +61,7 @@
 
 			<div id=MNUdivHeader></div>
 
-			<div id=CKEdivCkeditor ></div>
+			<div id=CKEdivCkeditor></div>
 
 			<div id=FRXdivDetails></div>
 
@@ -95,7 +71,7 @@
 
 			<div id=GRVdivDetails></div>
 
-			<div id=MNUdivSample ></div>
+			<div id=MNUdivSample></div>
 
 			<div id=EXHdivExportHtml></div>
 
@@ -119,14 +95,13 @@
 			user: "pushme-pullyou",
 			repo: "tootoo-2021",
 			branch: "main",
-			//pathContent: "./",
 			pathContent: "./",
 			//pathTooToo: "https://pushme-pullyou.github.io/tootoo-2021/", //"./",
 			pathTooToo: "./",
 			defaultFile: "README.md",
 			//defaultIgnoreFolders: [],
-			defaultIgnoreFolders: ["archive", "lib", "lib3d", "lib-geo", "lib-templates"],
-			filterFiles:  [ "gif", "md", "html", "jpg", "license", "pdf", "png", "svg", "txt" ],
+			defaultIgnoreFolders: [ "archive", "lib", "lib3d", "lib-geo", "lib-templates" ],
+			filterFiles: [ "gif", "md", "html", "jpg", "license", "pdf", "png", "svg", "txt" ],
 			urlSource: "https://github.com/pushme-pullyou/tootoo-2021/",
 			urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
 			iconGitHub: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`,
@@ -170,15 +145,7 @@
 			GOR.getOrganization();
 			//GORdet.open = true;
 
-			// GRV.info = `
-			// Right-click folder names to bring up the context menu to open and close multiple folders.<br>
-			// <br>
-			// `;
-
-			// GRV.intro = `
-			// <p>This menu enables you to display all folders and files in the ${ COR.title } GitHub repository in a tree view.</p>
-			// ${ MNU.addInfoBox( GRV.info ) }`;
-
+			// GRV = GitHub Repo View
 			GRV.getFiles = GRV.getFilesAll;
 			GRV.getFiles = GRV.getFilesCurated;
 			GRV.init();
@@ -186,15 +153,17 @@
 			//GRVsumRepo.hidden = true;
 			GRV.getRepo();
 
+			// EXH = Export HTML
 			EXH.init();
 
+			// start the action!
 			if ( GRV.accessToken ) {
 
 				CKE.loadCkeditor();
 
 			} else {
 
-				FRX.onHashChange(); // start the action!
+				FRX.onHashChange();
 
 			}
 
@@ -211,7 +180,7 @@
 
 			} else {
 
-				//COR.pathContent = "https://theo-armour.github.io/2021/"; //"./";
+				//COR.pathContent = "https://user.github.io/repo/";
 
 				COR.ignoreFolders = [];
 

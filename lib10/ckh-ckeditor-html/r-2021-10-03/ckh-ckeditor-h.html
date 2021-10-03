@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
 	<meta name="description" content="">
-	<meta name="date" content="2021-10-01">
+	<meta name="date" content="2021-10-03">
 	<title>notes</title>
 	<style>
 		body {
@@ -13,18 +13,13 @@
 			margin: 3px 0;
 		}
 
-		/* #CKEdivCkeditor {
-			border: 1px solid #888;
-			overflow: hidden;
-			resize: both;
-		} */
 	</style>
 </head>
 
 <body>
 
 	<div>
-		<button onclick=CKH.putFileToGitHub() >putToGitHub</button>
+		<button onclick=CKH.getSha() >putToGitHub</button>
 
 		<a href="">notes</a>
 		<a href="#snippets/things-i-forget.htm">forget</a>
@@ -45,15 +40,13 @@
 
 	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib09/ckeditor/ckeditor5/build/ckeditor.js"></script>
 
-	<script src="../../../lib10/ckh-ckeditor-html/r-2021-10-01/ckh-ckeditor-h.js"></script>
+	<script src="../../../lib10/ckh-ckeditor-html/r-2021-10-03/ckh-ckeditor-h.js"></script>
 
 	<script>
 
 		init();
 
 		function init() {
-
-			//CKH.urlDefault = "https://api.github.com/repos/theo-armour/qdata/contents/snippets/notes.htm"
 
 			CKH.init();
 

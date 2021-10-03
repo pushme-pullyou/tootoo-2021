@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="description" content="">
+	<meta name="date" content="2021-10-03">
+	<title>ckm-ckeditor-md</title>
+	<style>
+		body {
+			font: 100% monospace;
+			margin: 3px 0;
+		}
+
+	</style>
+</head>
+
+<body>
+
+	<div>
+		<button onclick=CKM.getSha() >putToGitHub</button>
+
+		<a href="">README.md</a>
+		<a href="#LICENSE.md">license</a>
+		<span id=spnMessage ></span>
+
+	</div>
+
+
+
+	<div id=CKMdivCKEditor></div>
+
+	<div id="divMainContent"></div>
+
+
+	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib09/ckeditor/ckeditor5-markdown/build/ckeditor.js"></script>
+
+	<script src="../../../lib10/ckm-ckeditor-markdown/r-2021-10-03/ckm-ckeditor-md.js"></script>
+
+	<script>
+
+		init();
+
+		function init() {
+
+			CKM.urlDefault = "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/README.md";
+
+			CKM.init();
+
+		}
+
+	</script>
+
+</body>
+
+</html>
