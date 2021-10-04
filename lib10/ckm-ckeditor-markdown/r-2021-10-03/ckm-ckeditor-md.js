@@ -15,7 +15,7 @@ CKM.init = function () {
 	//CKM.base = "https://api.github.com/repos/theo-armour/qdata/contents/";
 	//CKM.base = `https://api.github.com/repos/${ COR.user }/${ COR.repo }/contents/`;
 
-	CKM.accessToken = localStorage.getItem( 'githubAccessToken' ) || "";
+	CKM.accessToken = localStorage.getItem( "githubAccessToken" ) || "";
 
 	if ( CKM.accessToken === "null" || CKM.accessToken === "" ) {
 
@@ -25,7 +25,6 @@ CKM.init = function () {
 
 	}
 
-
 	CKM.parentContent.innerHTML = `
 
 	<div id="container"  >
@@ -34,27 +33,15 @@ CKM.init = function () {
 
 	</div>
 
-	<div id="wordCount"></div>
-
-	<div id="divStats"></div>`;
+	<div id="wordCount"></div>`;
 
 	window.addEventListener( "hashchange", CKM.onHashChange, false );
 
 	window.addEventListener( "beforeunload", CKM.checkForChange );
 
-	if ( CKM.editor === undefined ) {
-
-		scr = document.body.appendChild( document.createElement( 'script' ) );
-		scr.onload = () => CKM.onHashChange();
-		scr.src = "https://pushme-pullyou.github.io/tootoo-2021/lib10/ckeditor5-markdown/build/ckeditor.js";
-
-	} else {
-
-		CKM.onHashChange();
-
-	}
-
-
+	const scr = document.body.appendChild( document.createElement( "script" ) );
+	scr.onload = () => CKM.createEditor();
+	scr.src = "https://pushme-pullyou.github.io/tootoo-2021/lib10/ckeditor5-markdown/build/ckeditor.js";
 
 };
 
@@ -62,13 +49,14 @@ CKM.init = function () {
 
 CKM.onHashChange = function () {
 
-	if ( CKM.content !== undefined) {
+	if ( CKM.contentEditor !== undefined ) {
 
-		console.log( "equal", CKM.editor?.data?.get() === CKM.content );
+	  //console.log( "equal", CKM.editor.data.get() === CKM.contentEditor );
 
-		if ( CKM.editor?.data?.get() !== CKM.content ) {
+		if ( CKM.editor.data.get() !== CKM.contentEditor ) {
 
-			const response = confirm( "vvvvChanges you made may not be saved. Click OK to proceed without saving" );
+			const response = confirm( "Changes you made may not be saved. Click OK to proceed without saving" );
+
 			if ( response !== true ) { return; }
 
 		}
@@ -106,18 +94,11 @@ CKM.onLoad = function ( xhr ) {
 
 	CKM.content = atob( xhr.target.response.content );
 
-	if ( CKM.editor ) {
+	CKM.editor.data.set( CKM.content );
 
-		CKM.editor.data.set( CKM.content );
+	CKM.contentEditor = CKM.editor.data.get();
 
-
-	} else {
-
-		CKM.createEditor( CKM.content );
-
-	}
-
-	spnMessage.innerText = `Get ${ new Date().toLocaleString().split( "," ).pop().slice( 1, -3 ) } ${ CKM.content.length }`;
+	spnMessage.innerText = `Get ${ new Date().toLocaleString().split( "," ).pop().slice( 1, -3 ) } ${ CKM.contentEditor.length }`;
 
 };
 
@@ -148,10 +129,10 @@ CKM.getSha = function () {
 
 CKM.putFile = function () {
 
-	CKM.content = CKM.editor.getData();
-	//console.log( "CKM.content", CKM.content );
+	CKM.contentEditor = CKM.editor.data.get();
+	//console.log( "CKM.contentEditor.length", CKM.contentEditor.length );
 
-	const codedData = window.btoa( CKM.content ); // encode the string
+	const codedData = window.btoa( CKM.contentEditor ); // encode the string
 
 	const body = JSON.stringify( {
 		"branch": CKM.branch,
@@ -169,7 +150,7 @@ CKM.putFile = function () {
 	//xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
 	xhr.send( body );
 
-	spnMessage.innerText = `Put ${ new Date().toLocaleString().split( "," ).pop().slice( 1, -3 ) } ${ CKM.content.length }`;
+	spnMessage.innerText = `Put ${ new Date().toLocaleString().split( "," ).pop().slice( 1, -3 ) } ${ CKM.contentEditor.length }`;
 
 };
 
@@ -177,9 +158,9 @@ CKM.putFile = function () {
 
 CKM.checkForChange = function ( event ) {
 
-	if ( CKM.editor?.data?.get() === CKM.content ) { return; }
+	if ( CKM.editor.data.get() === CKM.contentEditor ) { return; }
 
-	console.log( "content", CKM.url.split( "/" ).pop() );
+	console.log( "file", CKM.url.split( "/" ).pop() );
 
 	event.preventDefault();
 
@@ -191,7 +172,7 @@ CKM.checkForChange = function ( event ) {
 
 CKM.onKeyUp = function ( event ) {
 
-	//console.log( 'key', event.keyCode );
+	//console.log( "key", event.keyCode );
 
 	event.preventDefault();
 
@@ -205,14 +186,12 @@ CKM.onKeyUp = function ( event ) {
 
 
 
-
 //////////
-
 
 CKM.createEditor = function ( content ) {
 
 	ClassicEditor
-		.create( document.querySelector( '.editor' ), {
+		.create( document.querySelector( ".editor" ), {
 
 			initialData: content,
 
@@ -229,39 +208,39 @@ CKM.createEditor = function ( content ) {
 
 			toolbar: {
 				items: [
-					'heading',
-					'|',
-					'bold',
-					'italic',
-					'strikethrough',
-					'code',
-					'blockQuote',
-					'link',
-					'horizontalLine',
-					'sourceEditing',
-					'bulletedList',
-					'numberedList',
-					'|',
-					//'findAndReplace',
-					'outdent',
-					'indent',
-					'|',
-					'removeFormat',
-					'imageUpload',
-					'undo',
-					'redo'
+					"heading",
+					"|",
+					"bold",
+					"italic",
+					"strikethrough",
+					"code",
+					"blockQuote",
+					"link",
+					"horizontalLine",
+					"sourceEditing",
+					"bulletedList",
+					"numberedList",
+					"|",
+					//"findAndReplace",
+					"outdent",
+					"indent",
+					"|",
+					"removeFormat",
+					"imageUpload",
+					"undo",
+					"redo"
 				]
 			},
-			language: 'en',
+			language: "en",
 			image: {
 				toolbar: [
-					'imageTextAlternative',
-					'imageStyle:inline',
-					'imageStyle:block',
-					'imageStyle:side'
+					"imageTextAlternative",
+					"imageStyle:inline",
+					"imageStyle:block",
+					"imageStyle:side"
 				]
 			},
-			licenseKey: '',
+			licenseKey: "",
 
 		} )
 
@@ -269,23 +248,24 @@ CKM.createEditor = function ( content ) {
 
 			CKM.editor = editor; // create a global
 
-			CKM.content = CKM.editor.getData();
+			CKM.onHashChange();
 
 		} )
 
 		// .then( editor => {
-		// 	const wordCountPlugin = editor.plugins.get( 'WordCount' );
-		// 	const wordCountWrapper = document.getElementById( 'wordCount' );
+		// 	const wordCountPlugin = editor.plugins.get( "WordCount" );
+		// 	const wordCountWrapper = document.getElementById( "wordCount" );
 
 		// 	wordCountWrapper.appendChild( wordCountPlugin.wordCountContainer );
 		// } )
 
 
 		.catch( error => {
-			console.error( 'Oops, something went wrong!' );
-			console.error( 'Please, report the following error on https://github.com/CKHditor/CKHditor5/issues with the build id and the error stack trace:' );
-			console.warn( 'Build id: lbmmnmrgezqg-rdlk6p2px8qg' );
+			console.error( "Oops, something went wrong!" );
+			console.error( "Please, report the following error on https://github.com/CKHditor/CKHditor5/issues with the build id and the error stack trace:" );
+			console.warn( "Build id: lbmmnmrgezqg-rdlk6p2px8qg" );
 			console.error( error );
 		} );
 
 };
+
