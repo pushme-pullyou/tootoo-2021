@@ -105,7 +105,7 @@
 			urlSource: "https://github.com/pushme-pullyou/tootoo-2021/",
 			urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
 			iconGitHub: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`,
-			iconLogo: "❦",
+			iconRepo: "❦",
 			iconInfo: `<img class=infoImg src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/noun_Information_585560.svg">`,
 			iconExternalFile: `<img class=infoImg  src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/icon-external-link.svg">`,
 			title: document.title ? document.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " ),
@@ -131,7 +131,7 @@
 			//MNUspnVersion.hidden = true;
 
 			// CKM = CK Editor Markkdown
-			CKM.init();
+			//CKM.init();
 
 			// FRX = File Read XHR
 			FRX.init();
@@ -156,10 +156,14 @@
 			// EXH = Export HTML
 			EXH.init();
 
+
+
 			// start the action!
 			if ( GRV.accessToken ) {
 
 				CKM.init();
+
+				addPopUp();
 
 			} else {
 
@@ -185,6 +189,43 @@
 				COR.ignoreFolders = [];
 
 			}
+
+		}
+
+		function addPopUp() {
+
+			if ( !window.CKMdivPopUp ) {
+
+				CKMdivPopUp = detNavMenu.appendChild( document.createElement( 'div' ) );
+				CKMdivPopUp.style.cssText = "position:fixed;left:calc( 1.5rem + var( --mnu-width ) );rem;top:1rem;transform-origin: 0 0;transform: rotate(90deg);";
+
+			}
+
+			CKMdivPopUp.innerHTML = `
+<div>
+
+	<button onclick=FRX.onHashChange();CKMdivPopUp.innerHTML=""; >Exit edit</button >
+
+	<button onclick=CKM.requestFile(); > edit: ${ CKM.hash }</button >
+
+	<button onclick=CKM.getSha() title="Press Alt-S">putGitHub</button>
+
+	<span id="spnMessage"></span>
+
+</div>
+`;
+
+			CKM.parentContent.innerHTML = `
+
+<div id="container" >
+
+	<div class="editor"></div>
+
+</div>
+
+<div id="wordCount"></div>
+
+<div id="divStats"></div>`;
 
 		}
 
