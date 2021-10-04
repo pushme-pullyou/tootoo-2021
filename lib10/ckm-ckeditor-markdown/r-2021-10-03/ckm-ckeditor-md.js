@@ -11,8 +11,8 @@ CKM.init = function ( url) {
 	CKM.parentContent = divMainContent;
 	CKM.defaultFile = url || "README.md";
 
-	CKM.base = "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/";
-	//CKM.base = "https://api.github.com/repos/theo-armour/qdata/contents/";
+	//CKM.base = "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/";
+	CKM.base = "https://api.github.com/repos/theo-armour/qdata/contents/";
 	//CKM.base = `https://api.github.com/repos/${ COR.user }/${ COR.repo }/contents/`;
 
 	CKM.accessToken = localStorage.getItem( "githubAccessToken" ) || "";
