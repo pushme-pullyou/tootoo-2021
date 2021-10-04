@@ -262,7 +262,7 @@ CKM.createEditor = function ( content ) {
 
 		.catch( error => {
 			console.error( "Oops, something went wrong!" );
-			console.error( "Please, report the following error on https://github.com/CKHditor/CKHditor5/issues with the build id and the error stack trace:" );
+			console.error( "Please, report the following error on https://github.com/ckeditor/ckditor5/issues with the build id and the error stack trace:" );
 			console.warn( "Build id: lbmmnmrgezqg-rdlk6p2px8qg" );
 			console.error( error );
 		} );

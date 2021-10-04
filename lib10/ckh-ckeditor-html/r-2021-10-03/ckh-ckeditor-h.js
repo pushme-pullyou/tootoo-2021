@@ -63,6 +63,7 @@ CKH.onHashChange = function () {
 	}
 
 	CKH.hash = location.hash ? location.hash.slice( 1 ) : CKH.defaultFile;
+
 	console.log( "file", CKH.hash.split( "/" ).pop() );
 
 	CKH.url = CKH.base + CKH.hash;
@@ -133,7 +134,7 @@ CKH.putFile = function () {
 	const codedData = window.btoa( CKH.contentEditor ); // encode the string
 
 	const body = JSON.stringify( {
-		"branch": CKH.branch,
+		"branch": CKH.branch, // delete??
 		"content": codedData,
 		"message": `add to file`,
 		"sha": CKH.sha
