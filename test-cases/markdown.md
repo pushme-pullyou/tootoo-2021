@@ -1,7 +1,5 @@
 ## Markdown
 
-hh
-
 ## Things we design
 
 *   https://jaanga.github.io/moving-manuals/
