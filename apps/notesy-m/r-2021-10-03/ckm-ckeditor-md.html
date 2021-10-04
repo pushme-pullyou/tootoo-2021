@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="description" content="">
+	<meta name="date" content="2021-10-03">
+	<title>ckm-ckeditor-md</title>
+	<style>
+		body {
+			font: 100% monospace;
+			margin: 3px 0;
+		}
+
+	</style>
+</head>
+
+<body>
+
+	<div>
+		<button onclick=CKH.getSha() >putToGitHub</button>
+		<span id=spnMessage ></span>
+
+	</div>
+
+	<div id="divMainContent"></div>
+
+
+	<script src="ckm-ckeditor-md.js"></script>
+
+	<script>
+
+		if ( window.self === window.top ) { init() };
+
+		function init( url = "" ) {
+
+			console.log( "url", url );
+
+			CKM.init( url );
+
+		}
+
+	</script>
+
+</body>
+
+</html>
