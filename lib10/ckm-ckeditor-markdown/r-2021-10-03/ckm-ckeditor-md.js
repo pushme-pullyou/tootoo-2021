@@ -6,10 +6,8 @@
 const CKM = {};
 
 
-
 CKM.init = function () {
 
-	CKM.parentMenu = CKMdivCKEditor;
 	CKM.parentContent = divMainContent;
 	CKM.defaultFile = "README.md";
 
@@ -44,13 +42,11 @@ CKM.init = function () {
 
 	window.addEventListener( "beforeunload", CKM.checkForChange );
 
-
-	if ( window[ "editor" ] === undefined ) {
+	if ( CKM.editor === undefined ) {
 
 		scr = document.body.appendChild( document.createElement( 'script' ) );
 		scr.onload = () => CKM.onHashChange();
 		scr.src = "https://pushme-pullyou.github.io/tootoo-2021/lib10/ckeditor5-markdown/build/ckeditor.js";
-		//scr.src = `js/handlers/${ parser }`;
 
 	} else {
 
@@ -58,19 +54,21 @@ CKM.init = function () {
 
 	}
 
+
+
 };
 
 
 
 CKM.onHashChange = function () {
 
-	if ( CKM.editor ) {
+	if ( CKM.content !== undefined) {
 
-		console.log( "true", CKM.editor?.data?.get().slice( 1 ) !== CKM.content );
+		console.log( "equal", CKM.editor?.data?.get() === CKM.content );
 
 		if ( CKM.editor?.data?.get() !== CKM.content ) {
 
-			const response = confirm( "Changes you made may not be saved. Click OK to proceed without saving" );
+			const response = confirm( "vvvvChanges you made may not be saved. Click OK to proceed without saving" );
 			if ( response !== true ) { return; }
 
 		}
@@ -271,7 +269,7 @@ CKM.createEditor = function ( content ) {
 
 			CKM.editor = editor; // create a global
 
-			CKM.content = editor.getData();
+			CKM.content = CKM.editor.getData();
 
 		} )
 

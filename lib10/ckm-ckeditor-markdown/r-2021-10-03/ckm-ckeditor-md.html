@@ -19,22 +19,20 @@
 <body>
 
 	<div>
+
 		<button onclick=CKM.getSha() >putToGitHub</button>
 
 		<a href="">README.md</a>
 		<a href="#LICENSE.md">license</a>
+		<a href="#test-cases/markdown.md">markdown</a>
+		<a href="#test-cases/markdown-help.md">markdown-help</a>
+
 		<span id=spnMessage ></span>
 
 	</div>
 
-
-
-	<div id=CKMdivCKEditor></div>
-
 	<div id="divMainContent"></div>
 
-
-	<script src="https://pushme-pullyou.github.io/tootoo-2021/lib09/ckeditor/ckeditor5-markdown/build/ckeditor.js"></script>
 
 	<script src="../../../lib10/ckm-ckeditor-markdown/r-2021-10-03/ckm-ckeditor-md.js"></script>
 
@@ -43,8 +41,6 @@
 		init();
 
 		function init() {
-
-			CKM.urlDefault = "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/README.md";
 
 			CKM.init();
 
