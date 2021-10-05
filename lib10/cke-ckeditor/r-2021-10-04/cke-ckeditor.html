@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="description" content="">
+	<meta name="date" content="2021-10-0e">
+	<title>cke-ckeditor</title>
+	<style>
+		body {
+			font: 100% monospace;
+			margin: 3px 0;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div>
+
+		<button onclick=CKM.getSha()>putToGitHub</button>
+
+		<a href="">notes</a>
+		<a href="#snippets/things-i-forget.htm">forget</a>
+		<a href="#snippets/things-i-like.htm">like</a>
+		<a href="#snippets/lingo.htm">lingo</a>
+		<a href="#snippets/aphorisms-mantras.htm">aphorism</a>
+		<a href="#snippets/jokes-and-quotes.htm">jokes</a>
+
+		<a href="">README.md</a>
+		<a href="#LICENSE.md">license</a>
+		<a href="#test-cases/markdown.md">markdown</a>
+		<a href="#test-cases/sample.md">sample</a>
+
+		<span id=spnMessage></span>
+
+	</div>
+
+	<div id="divMainContent"></div>
+
+
+	<script src="../../../lib10/cke-ckeditor/r-2021-10-04/cke-ckeditor.js"></script>
+
+	<script>
+
+		init();
+
+		function init() {
+
+			base = "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/";
+			content = divMainContent;
+			claass = ".editor";
+			file = "README.md";
+			type = "markdown";
+
+			CKE.init();
+
+		}
+
+	</script>
+
+</body>
+
+</html>
