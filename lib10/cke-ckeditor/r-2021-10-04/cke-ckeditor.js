@@ -8,7 +8,7 @@ const CKE = {};
 //CKE.base = `https://api.github.com/repos/${ COR.user }/${ COR.repo }/contents/`;
 //CKE.base = "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/";
 CKE.defaultBase = "https://api.github.com/repos/theo-armour/qdata/contents/";
-CKE.defaultContent = divMainContent;
+CKE.defaultContent = "divMainContent";
 CKE.defaultClass = ".editor";
 CKE.defaultFile = "snippets/notes.htm";
 CKE.defaultType = "html";
@@ -18,7 +18,7 @@ CKE.init = function ( base, content, claass, file, type ) {
 	//console.log( base, content, claass, file, type );
 
 	CKE.base =  base || CKE.defaultBase;
-	CKE.content = content || CKE.defaultContent;
+	CKE.content = content || window[ CKE.defaultContent ];
 	CKE.class = claass || CKE.defaultClass;
 	CKE.type = type || CKE.defaultType;
 	CKE.file = file || CKE.defaultFile;
