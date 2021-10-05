@@ -2,8 +2,6 @@
 
 Interesting things you can do with Markdown.
 
-hhh
-
 ## Links of Interest
 
 *   https://daringfireball.net/projects/markdown/ \<\< where it all started
