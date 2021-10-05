@@ -15,6 +15,8 @@ CKE.defaultType = "html";
 
 CKE.init = function ( base, content, claass, file, type ) {
 
+	//console.log( base, content, claass, file, type );
+
 	CKE.base =  base || CKE.defaultBase;
 	CKE.content = content || CKE.defaultContent;
 	CKE.class = claass || CKE.defaultClass;
