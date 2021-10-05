@@ -46,15 +46,15 @@
 
 		init();
 
-		function init() {
+		base = "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/";
+		content = divMainContent;
+		claass = ".editor";
+		file = "README.md";
+		type = "markdown";
 
-			base = "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/";
-			content = divMainContent;
-			claass = ".editor";
-			file = "README.md";
-			type = "markdown";
+		function init( base, content, claass, file, type ) {
 
-			CKE.init();
+			CKE.init( base, content, claass, file, type );
 
 		}
 

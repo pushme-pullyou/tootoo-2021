@@ -18,8 +18,8 @@ CKE.init = function ( base, content, claass, file, type ) {
 	CKE.base =  base || CKE.defaultBase;
 	CKE.content = content || CKE.defaultContent;
 	CKE.class = claass || CKE.defaultClass;
-	CKE.file = file || CKE.defaultFile;
 	CKE.type = type || CKE.defaultType;
+	CKE.file = file || CKE.defaultFile;
 
 	CKE.accessToken = localStorage.getItem( "githubAccessToken" ) || "";
 
