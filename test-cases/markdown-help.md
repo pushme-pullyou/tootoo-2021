@@ -2,6 +2,8 @@
 
 Interesting things you can do with Markdown.
 
+hhh
+
 ## Links of Interest
 
 *   https://daringfireball.net/projects/markdown/ \<\< where it all started
@@ -77,7 +79,7 @@ iframe test
 _italics_ *italics*
 ```
 
-__italics__ __italics__
+**italics** **italics**
 
 ```
 **bold**
@@ -89,7 +91,7 @@ __italics__ __italics__
 ***bold and italics***
 ```
 
-__**bold and italics**__
+**bold and italics**
 
 ### Strike through
 
@@ -103,11 +105,11 @@ __**bold and italics**__
 
 ```
 Press <kbd>W</kbd> to go up, and <kbd>A</kbd> to go down.
-If you can find the <kbd>ESC</kbd>, pressing that will fire missiles 🚀
+If you can find the <kbd>ESC</kbd>, pressing that will fire missiles ðŸš€
 ```
 
 Press W to go up, and A to go down.  
-If you can find the ESC, pressing that will fire missiles 🚀
+If you can find the ESC, pressing that will fire missiles ðŸš€
 
 ### Horizontal rules
 
@@ -145,7 +147,7 @@ text [^1](footnote) not
 | h1 | h2 | h3 |
 | :-- | :-: | --: |
 | 100 | \[a\]\[1\] | !\[b\]\[2\] |
-| __foo__ | **bar** | ~~baz~~ |
+| **foo** | **bar** | ~~baz~~ |
 
 ### Lists
 
@@ -243,15 +245,14 @@ text `text` text
 
 ### Footers
 
-  
-�
+ 
 
 ---
 
-## [❦](javascript:window.scrollTo(0,0);)
+## [â¦](javascript:window.scrollTo(0,0);)
 
-\# ❦
+\# â¦
 
-\## [❦](javascript:content.scrollTop=0;)
+\## [â¦](javascript:content.scrollTop=0;)
 
-\# [❦](javascript:window.scrollTop=0;)
+\# [â¦](javascript:window.scrollTop=0;)
