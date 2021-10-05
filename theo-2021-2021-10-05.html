@@ -8,14 +8,14 @@
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files in a repository hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
 	<meta name="date" content="2021-10-05">
-	<title>TooToo</title>
+	<title>Theo Armour</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
 	<link id=CORstyle rel="stylesheet" href="./lib/style/style-2021-07-12.css">
 
 	<style>
 		:root {
-			/* --mnu-width: 20rem; */
+			--mnu-width: 25rem;
 			--main-hue: 240;
 			/* 0 to 360 0=red 120=green 240=blue */
 		}
@@ -89,21 +89,22 @@
 	</main>
 
 
-
 	<script>
 
 		const COR = {
-			user: "pushme-pullyou",
-			repo: "tootoo-2021",
+			//user: "theo-armour",
+			user: "theo-armour",
+			repo: "2021",
 			branch: "main",
+			//pathContent: "https://theo-armour.github.io/2021/",
 			pathContent: "./",
-			//pathTooToo: "https://pushme-pullyou.github.io/tootoo-2021/",
-			pathTooToo: "./",
+			pathTooToo: "https://pushme-pullyou.github.io/tootoo-2021/",
+			//pathTooToo: "./",
 			defaultFile: "README.md",
 			//defaultIgnoreFolders: [],
 			defaultIgnoreFolders: [ "archive", "lib", "lib3d", "lib-geo", "lib-templates" ],
 			filterFiles: [ "gif", "md", "html", "jpg", "license", "pdf", "png", "svg", "txt" ],
-			urlSource: "https://github.com/pushme-pullyou/tootoo-2021/",
+			urlSource: "https://github.com/theo-armour/2021/",
 			urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
 			iconGitHub: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`,
 			iconRepo: "❦",
@@ -141,9 +142,9 @@
 			GRA.init();
 
 			// GOR = GitHub Organization Read
-			GOR.init();
-			GORinpUser.value = COR.user + "/" + COR.repo;
-			GOR.getOrganization();
+			// GOR.init();
+			// GORinpUser.value = COR.user + "/" + COR.repo;
+			// GOR.getOrganization();
 			//GORdet.open = true;
 
 			// GRV = GitHub Repo View
@@ -160,7 +161,7 @@
 			// start the action!
 			if ( GRV.accessToken ) {
 
-				const base = "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/";
+				const base = "https://api.github.com/repos/theo-armour/2021/contents/";
 				const content = divMainContent;
 				const claass = ".editor";
 				const file = "README.md";
@@ -189,7 +190,7 @@
 
 			} else {
 
-				//COR.pathContent = "https://user.github.io/repo/";
+				//COR.pathContent = "https://theo-armour.github.io/2021/";
 
 				COR.ignoreFolders = [];
 
