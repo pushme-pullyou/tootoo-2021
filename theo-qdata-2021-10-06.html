@@ -7,7 +7,7 @@
 	<meta name="description"
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files in a repository hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2021-10-03">
+	<meta name="date" content="2021-10-06">
 	<title>Theo qData</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
@@ -21,13 +21,11 @@
 		}
 
 		#divMainContent {
-
 			margin-left: 5rem;
 			height: 90vh;
 			overflow: auto;
 			resize: both;
 			width: 32rem;
-
 		}
 	</style>
 
@@ -37,7 +35,7 @@
 
 	<script src="./lib09/mnu-menu/r-2021-09-23/mnu-menu.js"></script>
 
-	<script src="./lib09/ckeditor/v-2021-09-29-md/cke-ckeditor-m.js"></script>
+	<script src="./lib10/cke-ckeditor/r-2021-10-06/cke-ckeditor.js"></script>
 
 	<script src="./lib09/frx-file-read-xhr/v-2021-09-18/frx-file-read-xhr.js"></script>
 
@@ -50,7 +48,6 @@
 	<script src="./lib09/exh-export-html/v-2021-09-29/exh-export-html.js"></script>
 
 
-
 	<details id=detNavMenu class="gmd-4">
 
 		<summary id=sumNavMenu class="summary-nav gmd-1">
@@ -61,7 +58,7 @@
 
 			<div id=MNUdivHeader></div>
 
-			<div id=CKEdivCkeditor></div>
+			<div id=CKEdivCKEditor></div>
 
 			<div id=FRXdivDetails></div>
 
@@ -89,6 +86,7 @@
 	</main>
 
 
+
 	<script>
 
 		const COR = {
@@ -97,7 +95,7 @@
 			repo: "qdata",
 			branch: "master",
 			pathContent: "https://theo-armour.github.io/qdata/",
-			//pathContent: "./",
+			pathContent: "./",
 			//pathTooToo: "https://pushme-pullyou.github.io/tootoo-2021/",
 			pathTooToo: "./",
 			defaultFile: "README.md",
@@ -107,7 +105,7 @@
 			urlSource: "https://github.com/theo-armour/qdata/",
 			urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
 			iconGitHub: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`,
-			iconLogo: "❦",
+			iconRepo: "❦",
 			iconInfo: `<img class=infoImg src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/noun_Information_585560.svg">`,
 			iconExternalFile: `<img class=infoImg  src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/icon-external-link.svg">`,
 			title: document.title ? document.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " ),
@@ -133,7 +131,7 @@
 			//MNUspnVersion.hidden = true;
 
 			// CKE = CK Editor
-			CKE.init();
+			//CKE.init();
 
 			// FRX = File Read XHR
 			FRX.init();
@@ -161,7 +159,15 @@
 			// start the action!
 			if ( GRV.accessToken ) {
 
-				CKE.loadCkeditor();
+				const base = "https://api.github.com/repos/theo-armour/qdata/contents/";
+				const content = divMainContent;
+				const claass = ".editor";
+				const file = "README.md";
+				const type = "markdown";
+
+				CKE.init( base, content, claass, file, type );
+
+				//addPopUp();
 
 			} else {
 
@@ -176,13 +182,9 @@
 
 				window.history.pushState( "", "", "./" + location.hash );
 
-				//COR.pathContent = "./";
-
 				COR.ignoreFolders = COR.defaultIgnoreFolders;
 
 			} else {
-
-				//COR.pathContent = "https://theo-armour.github.io/2021/";
 
 				COR.ignoreFolders = [];
 
@@ -191,6 +193,7 @@
 		}
 
 	</script>
+
 </body>
 
 </html>
