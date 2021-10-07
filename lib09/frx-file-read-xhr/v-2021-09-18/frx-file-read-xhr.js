@@ -111,8 +111,9 @@ FRX.handleEvent = function ( e ) {
 
 
 
-
 FRX.onHashChange = function () {
+
+	if ( GRV.accessToken ) { return; }
 
 	FRX.timeStart = performance.now();
 

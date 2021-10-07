@@ -7,27 +7,25 @@
 	<meta name="description"
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files in a repository hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2021-10-05">
-	<title>Theo Armour</title>
+	<meta name="date" content="2021-10-06">
+	<title>TooToo</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
 	<link id=CORstyle rel="stylesheet" href="./lib/style/style-2021-07-12.css">
 
 	<style>
 		:root {
-			--mnu-width: 25rem;
+			/* --mnu-width: 20rem; */
 			--main-hue: 240;
 			/* 0 to 360 0=red 120=green 240=blue */
 		}
 
 		#divMainContent {
-
 			margin-left: 5rem;
 			height: 90vh;
 			overflow: auto;
 			resize: both;
 			width: 32rem;
-
 		}
 	</style>
 
@@ -37,7 +35,7 @@
 
 	<script src="./lib09/mnu-menu/r-2021-09-23/mnu-menu.js"></script>
 
-	<script src="./lib10/cke-ckeditor/r-2021-10-04/cke-ckeditor.js"></script>
+	<script src="./lib10/cke-ckeditor/r-2021-10-06/cke-ckeditor.js"></script>
 
 	<script src="./lib09/frx-file-read-xhr/v-2021-09-18/frx-file-read-xhr.js"></script>
 
@@ -88,22 +86,21 @@
 	</main>
 
 
+
 	<script>
 
 		const COR = {
-			//user: "theo-armour",
-			user: "theo-armour",
-			repo: "2021",
+			user: "pushme-pullyou",
+			repo: "tootoo-2021",
 			branch: "main",
-			//pathContent: "https://theo-armour.github.io/2021/",
 			pathContent: "./",
-			pathTooToo: "https://pushme-pullyou.github.io/tootoo-2021/",
-			//pathTooToo: "./",
+			//pathTooToo: "https://pushme-pullyou.github.io/tootoo-2021/",
+			pathTooToo: "./",
 			defaultFile: "README.md",
 			//defaultIgnoreFolders: [],
 			defaultIgnoreFolders: [ "archive", "lib", "lib3d", "lib-geo", "lib-templates" ],
 			filterFiles: [ "gif", "md", "html", "jpg", "license", "pdf", "png", "svg", "txt" ],
-			urlSource: "https://github.com/theo-armour/2021/",
+			urlSource: "https://github.com/pushme-pullyou/tootoo-2021/",
 			urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
 			iconGitHub: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`,
 			iconRepo: "❦",
@@ -141,9 +138,9 @@
 			GRA.init();
 
 			// GOR = GitHub Organization Read
-			// GOR.init();
-			// GORinpUser.value = COR.user + "/" + COR.repo;
-			// GOR.getOrganization();
+			GOR.init();
+			GORinpUser.value = COR.user + "/" + COR.repo;
+			GOR.getOrganization();
 			//GORdet.open = true;
 
 			// GRV = GitHub Repo View
@@ -160,7 +157,7 @@
 			// start the action!
 			if ( GRV.accessToken ) {
 
-				const base = "https://api.github.com/repos/theo-armour/2021/contents/";
+				const base = "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/";
 				const content = divMainContent;
 				const claass = ".editor";
 				const file = "README.md";
@@ -168,7 +165,7 @@
 
 				CKE.init( base, content, claass, file, type );
 
-				addPopUp();
+				//addPopUp();
 
 			} else {
 
@@ -183,13 +180,9 @@
 
 				window.history.pushState( "", "", "./" + location.hash );
 
-				//COR.pathContent = "./";
-
 				COR.ignoreFolders = COR.defaultIgnoreFolders;
 
 			} else {
-
-				//COR.pathContent = "https://theo-armour.github.io/2021/";
 
 				COR.ignoreFolders = [];
 
@@ -197,33 +190,7 @@
 
 		}
 
-		function addPopUp() {
-
-			if ( !window.CKEdivPopUp ) {
-
-				CKEdivPopUp = detNavMenu.appendChild( document.createElement( 'div' ) );
-				CKEdivPopUp.style.cssText = "position:fixed;left:calc( 1.5rem + var( --mnu-width ) );rem;top:1rem;transform-origin: 0 0;transform: rotate(90deg);";
-
-			}
-
-			CKEdivPopUp.innerHTML = `
-<div>
-
-	<button onclick=FRX.onHashChange();CKEdivPopUp.innerHTML=""; >Exit edit</button >
-
-	<button onclick=CKE.requestFile(); > edit: ${ CKE.hash }</button >
-
-	<button onclick=CKE.getSha() title="Press Alt-S">putGitHub</button>
-
-	<span id="spnMessage"></span>
-
-</div>`;
-
-
-		}
-
 	</script>
-
 
 </body>
 
