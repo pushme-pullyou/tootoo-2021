@@ -222,7 +222,7 @@ FRX.loadHandler = function ( fName ) {
 
 	if ( fName.endsWith( ".idf" ) || fName.endsWith( ".osm" ) ) { FRX.load( "IDF", "idf-handler.js" ); return; }
 
-	if ( fName.endsWith( ".ifc" ) ) { alert( "IFC file support coming soon!" ); }
+	if ( fName.endsWith( ".ifc" ) ) { FRX.load( "IFC", "ifc-handler.js" ); return; }
 
 	if ( fName.endsWith( ".json" ) ) { FRX.load( "JSN", "jsn-three-handler.js" ); return; }
 
