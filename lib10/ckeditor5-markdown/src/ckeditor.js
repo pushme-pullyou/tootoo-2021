@@ -16,9 +16,11 @@ import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalli
 import HtmlComment from '@ckeditor/ckeditor5-html-support/src/htmlcomment.js';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic.js';
 import List from '@ckeditor/ckeditor5-list/src/list.js';
+import Markdown from '@ckeditor/ckeditor5-markdown-gfm/src/markdown.js';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph.js';
 import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat.js';
 import SourceEditing from '@ckeditor/ckeditor5-source-editing/src/sourceediting.js';
+import WordCount from '@ckeditor/ckeditor5-word-count/src/wordcount.js';
 
 class Editor extends ClassicEditor {}
 
@@ -37,9 +39,11 @@ Editor.builtinPlugins = [
 	HtmlComment,
 	Italic,
 	List,
+	Markdown,
 	Paragraph,
 	RemoveFormat,
-	SourceEditing
+	SourceEditing,
+	WordCount
 ];
 
 export default Editor;
