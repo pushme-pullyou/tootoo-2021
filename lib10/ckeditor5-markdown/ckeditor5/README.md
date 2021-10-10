@@ -16,7 +16,6 @@ If you picked the non-real-time collaboration plugins:
 
 2. Fill the prompt with the license key. If you do not have the license key yet [contact us](https://ckeditor.com/contact/).
 
-
 ## Configuring build
 
 Changes like changing toolbar items, changing order of icons or customizing plugin configurations should be relatively easy to make. Open the `sample/index.html` file and edit the script that initialized the CKEditor 5. Save the file and refresh the browser. That's all.
@@ -58,7 +57,7 @@ Follow the guides available on https://ckeditor.com/docs/ckeditor5/latest/framew
 ## FAQ
 | Where is the place to report bugs and feature requests?
 
-You can create an issue on https://github.com/ckeditor/ckeditor5/issues including the build id - `71owz7rg1vaz-sy1ggkb9gt42`. Make sure that the question / problem is unique, please look for a possibly asked questions in the search box. Duplicates will be closed.
+You can create an issue on https://github.com/ckeditor/ckeditor5/issues including the build id - `b29pyak6bob3-5vuzzrvssvur`. Make sure that the question / problem is unique, please look for a possibly asked questions in the search box. Duplicates will be closed.
 
 | Where can I learn more about the CKEditor 5 framework?
 
