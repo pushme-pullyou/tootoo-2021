@@ -22,7 +22,7 @@ VTK.onChange = function () {
 
 		VTK.loader = document.body.appendChild( document.createElement( 'script' ) );
 		VTK.loader.onload = () => VTK.loadUrl( FRX.url );
-		VTK.loader.src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r131/examples/js/loaders/VTKLoader.js";
+		VTK.loader.src = `https://cdn.jsdelivr.net/gh/mrdoob/three.js@${ FRX.releaseThree }/examples/js/loaders/VTKLoader.js`;
 
 	} else {
 

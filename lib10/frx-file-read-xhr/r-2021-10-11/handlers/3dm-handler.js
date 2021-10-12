@@ -27,12 +27,12 @@ r3DM.onUnZip = function () {
 	if ( r3DM.loader === undefined ) {
 
 		r3DM.loader = document.body.appendChild( document.createElement( 'script' ) );
-		r3DM.loader.onload = () => r3DM.parseContent( FRX.content  );
-		r3DM.loader.src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r131/examples/js/loaders/3DMLoader.js";
+		r3DM.loader.onload = () => r3DM.parseContent( FRX.content );
+		r3DM.loader.src = `https://cdn.jsdelivr.net/gh/mrdoob/three.js@${ FRX.releaseThree }/examples/js/loaders/3DMLoader.js`;
 
 	} else {
 
-		r3DM.loadDataUrl( FRX.content  );
+		r3DM.loadDataUrl( FRX.content );
 
 	}
 
@@ -101,7 +101,7 @@ r3DM.parseContent = function ( content ) {
 	return;
 
 
-	console.log( "content", content.slice( 0, 200 ));
+	console.log( "content", content.slice( 0, 200 ) );
 
 	const loader = new THREE.Rhino3dmLoader();
 	loader.setLibraryPath( 'https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/' );
@@ -119,7 +119,7 @@ r3DM.parseContent = function ( content ) {
 
 		( err ) => { console.log( "error", err ); }
 
-		)
+	);
 
 };
 

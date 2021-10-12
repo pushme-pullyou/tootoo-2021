@@ -28,7 +28,7 @@ STL.onUnZip = function () {
 
 		STL.loader = document.body.appendChild( document.createElement( 'script' ) );
 		STL.loader.onload = () => STL.parse();
-		STL.loader.src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r131/examples/js/loaders/STLLoader.js";
+		STL.loader.src = `https://cdn.jsdelivr.net/gh/mrdoob/three.js@${ FRX.releaseThree }/examples/js/loaders/STLLoader.js`;
 
 	} else {
 

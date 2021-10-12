@@ -29,7 +29,7 @@ OBJ.onUnZip = function () {
 
 		OBJ.loader = document.body.appendChild( document.createElement( 'script' ) );
 		OBJ.loader.onload = () => OBJ.parse();
-		OBJ.loader.src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r131/examples/js/loaders/OBJLoader.js";
+		OBJ.loader.src = `https://cdn.jsdelivr.net/gh/mrdoob/three.js@${ FRX.releaseThree }/examples/js/loaders/OBJLoader.js`;
 
 	} else {
 

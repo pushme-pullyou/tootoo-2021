@@ -6,13 +6,13 @@
 
 const FRX = {};
 
-FRX.version = "r-2021-10-11";
-
+FRX.release = "r-2021-10-11";
+FRX.releaseThree = "r133";
 FRX.reader = new FileReader();
 
 FRX.init = function () {
 
-	FRX.pathUtilities = COR.pathTooToo + `lib10/frx-file-read-xhr/${ FRX.version }/`;
+	FRX.pathUtilities = COR.pathTooToo + `lib10/frx-file-read-xhr/${ FRX.release }/`;
 	//FRX.pathUtilities = `./`;
 
 	FRX.defaultFile = COR.pathContent + COR.defaultFile;
@@ -25,7 +25,7 @@ FRX.init = function () {
 Use the file dialog, drag&drop or a URL.</p>
 File: frx-file-read-xhr.js<br>
 Name space: FRX<br>
-Release: ${ FRX.version }<br>`;
+Release: ${ FRX.release }<br>`;
 
 	FRXdivDetails.innerHTML = `
 <details id=detFile open>
