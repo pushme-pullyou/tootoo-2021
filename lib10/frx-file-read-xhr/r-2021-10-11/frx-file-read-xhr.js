@@ -6,14 +6,14 @@
 
 const FRX = {};
 
-FRX.version = "v-2021-10-11";
+FRX.version = "r-2021-10-11";
 
 FRX.reader = new FileReader();
 
 FRX.init = function () {
 
-	//FRX.pathUtilities = COR.pathTooToo + `lib10/frx-file-read-xhr/${ FRX.version }/`;
-	FRX.pathUtilities = `./`;
+	FRX.pathUtilities = COR.pathTooToo + `lib10/frx-file-read-xhr/${ FRX.version }/`;
+	//FRX.pathUtilities = `./`;
 
 	FRX.defaultFile = COR.pathContent + COR.defaultFile;
 
@@ -172,7 +172,7 @@ FRX.loadHandler = function ( fName ) {
 	//console.log( "fName", fName );
 
 	main.hidden = false;
-	
+
 	if ( window[ "THR" ] ) { THR.renderer.domElement.style.display = "none"; }
 
 
