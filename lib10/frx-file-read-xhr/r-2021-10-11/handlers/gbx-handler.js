@@ -39,11 +39,11 @@ GBX.handle = function () {
 	console.log( "FRX.file", FRX.file.name );
 	console.log( "FRX.url", FRX.url.split( "/").pop() );
 
-	if ( FRX.content ) { GBX.parse( FRX.content ); return; }
+	if ( FRX.content ) { "FRX.content", FRX.content.slice( 0, 100 ); GBX.parse( FRX.content ); return; }
 
-	if ( FRX.file ) { GBX.read(); return; }
+	if ( FRX.file ) { console.log( "FRX.file", FRX.file.name ); GBX.read(); return; }
 
-	if ( FRX.url ) { GBX.onChange( FRX.url ); return; }
+	if ( FRX.url ) { console.log( "FRX.url.pop", FRX.url.split( "/" ).pop() ); GBX.onChange( FRX.url ); return; }
 
 };
 
