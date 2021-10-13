@@ -18,6 +18,7 @@ IDF.colors = {
 	undefined: 0x00ff00,
 };
 
+console.log( "", 23 );
 
 
 IDF.parse = function ( string ) {

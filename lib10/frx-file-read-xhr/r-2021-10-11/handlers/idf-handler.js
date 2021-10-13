@@ -38,7 +38,24 @@ IDF.read = function () {
 };
 
 
+
 IDF.onChange = function () {
+
+	FRX.loadLoader( IDF.loader, IDF.src, IDF.requestFile );
+
+};
+
+
+
+IDF.checkLoader = function () {
+
+	FRX.loadLoader( IDF.loader, IDF.src, IDF.requestFile );
+
+};
+
+
+
+IDF.requestFile = function () {
 
 	const xhr = new XMLHttpRequest();
 	xhr.open( "get", FRX.url, true );
