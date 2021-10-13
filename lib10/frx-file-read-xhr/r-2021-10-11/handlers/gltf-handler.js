@@ -5,9 +5,10 @@
 
 GLTF = {};
 
+GLTF.src = FRX.urlLoaders + "GLTFLoader.js";
+
 GLTF.handle = function () {
 
-	GLTF.src = FRX.urlLoaders + "GLTFLoader.js";
 
 	if ( FRX.file ) { console.log( "file ", FRX.file.name ); GLTF.checkLoader(); return; }
 
