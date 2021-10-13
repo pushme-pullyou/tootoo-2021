@@ -7,17 +7,20 @@ GLTF = {};
 
 GLTF.handle = function () {
 
+	GLTF.src = FRX.urlLoaders + "GLTFLoader.js";
+
 	if ( FRX.file ) { console.log( "file ", FRX.file.name ); GLTF.checkLoader(); return; }
 
-	if ( FRX.url ) { console.log( "url", FRX.url.split( "/" ).pop() ); GLTF.onChange( FRX.url ); return; }
+	if ( FRX.url ) { console.log( "url", FRX.url.split( "/" ).pop() ); GLTF.onChange(); return; }
 
 	if ( FRX.content ) { console.log( "zip", FRX.zipFileName ); GLTF.onUnZip( FRX.content ); return; }
 };
 
 
-GLTF.checkLoader = function ( inpFiles ) {
 
-	FRX.loadLoader( GLTF.loader, "GLTFLoader.js", GLTF.readFile );
+GLTF.checkLoader = function () {
+
+	FRX.loadLoader( GLTF.loader, GLTF.src, GLTF.readFile );
 
 };
 
@@ -33,9 +36,9 @@ GLTF.readFile = function () {
 
 
 
-GLTF.onChange = function ( url ) {
+GLTF.onChange = function () {
 
-	FRX.loadLoader( GLTF.loader, "GLTFLoader.js", GLTF.loadDataUrl() );
+	FRX.loadLoader( GLTF.loader, GLTF.src, GLTF.loadDataUrl );
 
 };
 
@@ -100,6 +103,7 @@ GLTF.loadDataUrl = function ( url = FRX.url) {
 	);
 
 };
+
 
 
 GLTF.handle();

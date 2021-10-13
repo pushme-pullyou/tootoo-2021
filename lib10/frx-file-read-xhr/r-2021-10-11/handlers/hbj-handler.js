@@ -5,47 +5,62 @@
 
 HBJ = {};
 
+HBJ.src = FRX.pathUtilities + "parsers/hbj-hbjson-parser.js";
 
 
 HBJ.handle = function () {
 
-	if ( FRX.content ) { HBJ.addParser( JSON.parse( FRX.content ) ); return; }
-	if ( FRX.file ) { console.log( "FRX.file", FRX.file.name ); HBJ.read(); return; }
-	if ( FRX.url ) { console.log( "FRX.url.pop", FRX.url.split( "/" ).pop() ); HBJ.onChange( FRX.url ); return; }
+	if ( FRX.file ) { console.log( "file", FRX.file.name ); HBJ.checkLoader(); return; }
+	if ( FRX.url ) { console.log( "url", FRX.url.split( "/" ).pop() ); HBJ.onChange( FRX.url ); return; }
+	if ( FRX.content ) { console.log( "zip", FRX.zipFileName ); HBJ.addParser( JSON.parse( FRX.content ) ); return; }
 
 };
 
 
+HBJ.checkLoader = function () {
 
-HBJ.read = function () {
+	FRX.loadLoader( HBJ.loader, HBJ.src, HBJ.readFile );
+
+};
+
+
+HBJ.readFile = function () {
 
 	const reader = new FileReader();
-	reader.onload = ( event ) => HBJ.addParser( JSON.parse( event.target.result ) );
+	reader.onload = ( event ) => HBJ.parse( JSON.parse( event.target.result ) );
 	reader.readAsText( FRX.file );
 
 };
 
 
 
-HBJ.onChange = function ( url ) {
+HBJ.onChange = function () {
+
+	FRX.loadLoader( HBJ.loader, HBJ.src, HBJ.requestFile);
+
+};
+
+
+
+HBJ.requestFile = function () {
 
 	const xhr = new XMLHttpRequest();
 	xhr.responseType = "json";
 	xhr.open( "get", FRX.url, true );
-	xhr.onload = ( xhr ) => HBJ.addParser( xhr.target.response );
+	xhr.onload = ( xhr ) => HBJ.parse( xhr.target.response );
 	xhr.send( null );
 
 };
 
 
 
-HBJ.addParser = function ( json ) {
+// HBJ.addParser = function ( json ) {
 
-	const loader = document.body.appendChild( document.createElement( 'script' ) );
-	loader.onload = () => { HBJ.parse( json )};
-	loader.src = FRX.pathUtilities + "parsers/hbj-hbjson-parser.js";
+// 	const loader = document.body.appendChild( document.createElement( 'script' ) );
+// 	loader.onload = () => { HBJ.parse( json )};
+// 	loader.src = HBJ.src;
 
-};
+// };
 
 
 

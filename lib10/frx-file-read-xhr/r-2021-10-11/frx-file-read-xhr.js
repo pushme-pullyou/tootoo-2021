@@ -8,6 +8,7 @@ const FRX = {};
 
 FRX.release = "r-2021-10-11";
 FRX.releaseThree = "r133";
+FRX.urlLoaders = `https://cdn.jsdelivr.net/gh/mrdoob/three.js@${ FRX.releaseThree }/examples/js/loaders/`
 FRX.reader = new FileReader();
 
 FRX.init = function () {
@@ -251,14 +252,17 @@ FRX.loadLoader = function ( loader, script, onLoad ) {
 
 	if ( loader === undefined ) {
 
-		loader = document.body.appendChild( document.createElement( 'script' ) );
-		loader.onload = onLoad;
-		loader.src = `https://cdn.jsdelivr.net/gh/mrdoob/three.js@${ FRX.releaseThree }/examples/js/loaders/${ script }`;
+		const load = document.body.appendChild( document.createElement( 'script' ) );
+		load.onload = () => { loader = load; onLoad(); }
+		load.src = script;
 		return;
+
 	}
 
 	onLoad();
+
 };
+
 
 
 FRX.load = function ( obj, handler ) {
