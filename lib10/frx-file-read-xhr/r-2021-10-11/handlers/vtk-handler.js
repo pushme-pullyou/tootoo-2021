@@ -1,7 +1,12 @@
+// copyright 2021 Theo Armour. MIT license.
+/* global THREE, COR*/
+// jshint esversion: 6
+// jshint loopfunc: true
+
 VTK = {};
 
-
 VTK.src = FRX.urlLoaders + "VTKLoader.js";
+
 
 VTK.handle = function () {
 
