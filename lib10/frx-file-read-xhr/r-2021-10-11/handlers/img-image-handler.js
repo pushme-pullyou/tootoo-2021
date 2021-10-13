@@ -8,33 +8,11 @@ IMG = {};
 
 IMG.handle = function () {
 
-	//console.log( "FRX.content", FRX.content.slice( 0, 100 ) );
-	console.log( "FRX.file", FRX.file.name );
-	console.log( "FRX.url", FRX.url.split( "/" ).pop() );
+	if ( FRX.file ) { console.log( "file", FRX.file.name ); IMG.read(); return; }
 
-	if ( FRX.content ) { IMG.onUnZip(); return; }
+	if ( FRX.url ) { console.log( "url", FRX.url.split( "/" ).pop() ); IMG.onChange(); return; }
 
-	if ( FRX.file ) { IMG.read(); return; }
-
-	if ( FRX.url ) { IMG.display( FRX.url ); return; }
-
-};
-
-
-
-IMG.onUnZip = function () {
-
-	if ( IMG.loader === undefined ) {
-
-		IMG.loader = document.body.appendChild( document.createElement( 'script' ) );
-		IMG.loader.onload = () => IMG.display( FRX.content );
-		IMG.loader.src = "https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js";
-
-	} else {
-
-		IMG.loadDataUrl( FRX.content );
-
-	}
+	if ( FRX.content ) { console.log( "zip", FRX.zipFileName ); IMG.checkLoader(); return; }
 
 };
 
@@ -42,17 +20,7 @@ IMG.onUnZip = function () {
 
 IMG.read = function () {
 
-	if ( IMG.loader === undefined ) {
-
-		IMG.loader = document.body.appendChild( document.createElement( 'script' ) );
-		IMG.loader.onload = () => IMG.readFile();
-		IMG.loader.src = "https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js";
-
-	} else {
-
-		IMG.readFile();
-
-	}
+	IMG.readFile();
 
 };
 
@@ -61,21 +29,29 @@ IMG.read = function () {
 IMG.readFile = function () {
 
 	const reader = new FileReader();
-	reader.onload = ( event ) => IMG.display( event.target.result );
+	reader.onload = () => IMG.display( reader.result );
 	reader.readAsDataURL( FRX.file );
 
 };
 
 
 
-IMG.display = function ( url ) {
+IMG.onChange = function () {
 
-	// divMainContent.style.display = "block";
-	// main.style.overflow = "auto";
+	IMG.display();
 
-	// divMainContent.style.display = "block";
+};
 
-	// THR.renderer.domElement.style.display = "none";
+
+IMG.checkLoader = function () {
+
+	IMG.display( FRX.content );
+
+};
+
+
+
+IMG.display = function ( url = FRX.url ) {
 
 	divMainContent.innerHTML =
 		`<a href=${ FRX.url } title="Open this image in a new window" target="_blank" >
