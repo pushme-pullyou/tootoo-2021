@@ -5,36 +5,15 @@
 
 HTM = {};
 
+HTM.src = FRX.urlLoaders + "3DMLoader.js";
 
 HTM.handle = function () {
 
-	//console.log( "FRX.content", FRX.content.slice( 0, 100 ) );
-	console.log( "FRX.file", FRX.file.name );
-	console.log( "FRX.url", FRX.url.split( "/" ).pop() );
+	if ( FRX.file ) { console.log( "file", FRX.file.name ); HTM.read(); return; }
 
-	if ( FRX.content ) { HTM.onUnZip(); return; }
+	if ( FRX.url ) { console.log( "url", FRX.url.split( "/" ).pop() ); HTM.onChange(); return; }
 
-	if ( FRX.file ) { HTM.read(); return; }
-
-	if ( FRX.url ) { HTM.request(); return; }
-
-};
-
-
-
-HTM.onUnZip = function () {
-
-	if ( HTM.loader === undefined ) {
-
-		HTM.loader = document.body.appendChild( document.createElement( 'script' ) );
-		HTM.loader.onload = () => HTM.display( FRX.content );
-		HTM.loader.src = "https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js";
-
-	} else {
-
-		HTM.loadDataUrl( FRX.content );
-
-	}
+	if ( FRX.content ) { console.log( "zip", FRX.zipFileName ); HTM.checkLoader(); return; }
 
 };
 
@@ -42,17 +21,7 @@ HTM.onUnZip = function () {
 
 HTM.read = function () {
 
-	// if ( HTM.loader === undefined ) {
-
-	// 	HTM.loader = document.body.appendChild( document.createElement( 'script' ) );
-	// 	HTM.loader.onload = () => HTM.readFile();
-	// 	HTM.loader.src = "https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js";
-
-	// } else {
-
-		HTM.readFile();
-
-	//}
+	HTM.readFile();
 
 };
 
@@ -70,22 +39,21 @@ HTM.readFile = function () {
 
 HTM.onChange = function () {
 
-	// if ( HTM.loader === undefined ) {
+	HTM.request();
 
-	// 	HTM.loader = document.body.appendChild( document.createElement( 'script' ) );
-	// 	HTM.loader.onload = () => HTM.display( FRX.url );
-	// 	HTM.loader.src = FRX.url;
-
-	// } else {
-
-		HTM.request( FRX.url );
-
-	//}
 };
 
 
 
-HTM.request = function ( url ) {
+HTM.checkLoader = function () {
+
+	HTM.display()
+
+};
+
+
+
+HTM.request = function () {
 
 	const xhr = new XMLHttpRequest();
 	xhr.open( "get", FRX.url, true );
@@ -98,16 +66,13 @@ HTM.request = function ( url ) {
 
 
 
-HTM.display = function ( content ) {
+HTM.display = function ( content = FRX.content ) {
 
 	//console.log( "url", url );
 
-	// divMainContent.innerHTML =
-	// 	`<iframe srcdoc="${ url }" height=${ window.innerHeight } style="border:none;width:100%;" ></iframe>`;
-
 	divMainContent.innerHTML = `
 <div style="border:0px solid red; margin: 0 auto; padding: 0 1rem; max-width: 40rem;" >
-${ content }
+	${ content }
 </div>`;
 };
 

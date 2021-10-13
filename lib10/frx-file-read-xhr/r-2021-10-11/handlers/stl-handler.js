@@ -6,54 +6,23 @@
 
 STL = {};
 
+STL.src = FRX.urlLoaders + "STLLoader.js";
+
 STL.handle = function () {
 
-	//console.log( "FRX.content", FRX.content.slice( 0, 500 ) );
-	console.log( "FRX.file", FRX.file.name );
-	console.log( "FRX.url", FRX.url.split( "/" ).pop() );
+	if ( FRX.file ) { console.log( "file", FRX.file.name ); STL.read(); return; }
 
-	if ( FRX.content ) { STL.onUnZip(); return; }
+	if ( FRX.url ) { console.log( "url", FRX.url.split( "/" ).pop() ); STL.onChange(); return; }
 
-	if ( FRX.file ) { STL.read(); return; }
-
-	if ( FRX.url ) { STL.onChange( FRX.url ); return; }
+	if ( FRX.content ) { console.log( "zip", FRX.zipFileName ); STL.checkLoader(); return; }
 
 };
-
-
-
-STL.onUnZip = function () {
-
-	if ( STL.loader === undefined ) {
-
-		STL.loader = document.body.appendChild( document.createElement( 'script' ) );
-		STL.loader.onload = () => STL.parse();
-		STL.loader.src = `https://cdn.jsdelivr.net/gh/mrdoob/three.js@${ FRX.releaseThree }/examples/js/loaders/STLLoader.js`;
-
-	} else {
-
-		STL.parse();
-
-	}
-
-};
-
 
 
 
 STL.read = function () {
 
-	if ( STL.loader === undefined ) {
-
-		STL.loader = document.body.appendChild( document.createElement( 'script' ) );
-		STL.loader.onload = () => STL.readFile();
-		STL.loader.src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r131/examples/js/loaders/STLLoader.js";
-
-	} else {
-
-		STL.readFile();
-
-	}
+	FRX.loadLoader( STL.loader, STL.src, STL.readFile );
 
 };
 
@@ -69,23 +38,20 @@ STL.readFile = function ( inpFiles ) {
 
 STL.onChange = function () {
 
-	if ( STL.loader === undefined ) {
+	FRX.loadLoader( STL.loader, STL.src, STL.loadUrl );
 
-		STL.loader = document.body.appendChild( document.createElement( 'script' ) );
-		STL.loader.onload = () => STL.loadUrl( FRX.url );
-		STL.loader.src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r131/examples/js/loaders/STLLoader.js";
+};
 
-	} else {
 
-		STL.loadUrl( FRX.url );
+STL.checkLoader = function () {
 
-	}
+	FRX.loadLoader( STL.loader, STL.src, STL.parse );
 
 };
 
 
 
-STL.loadUrl = function ( url ) {
+STL.loadUrl = function ( url = FRX.url) {
 
 	const loader = new THREE.STLLoader();
 	loader.load(

@@ -1,52 +1,25 @@
 VTK = {};
 
 
+VTK.src = FRX.urlLoaders + "VTKLoader.js";
+
 VTK.handle = function () {
 
-	console.log( "FRX.content", FRX.content.slice( 0, 100 ) );
-	console.log( "FRX.file", FRX.file.name );
-	console.log( "FRX.url", FRX.url.split( "/").pop() );
+	if ( FRX.file ) { console.log( "file", FRX.file.name ); VTK.read(); return; }
 
-	if ( FRX.content ) { VTK.parse( FRX.content ); return; }
+	if ( FRX.url ) { console.log( "url", FRX.url.split( "/" ).pop() ); VTK.onChange(); return; }
 
-	if ( FRX.url ) { VTK.onChange( FRX.url ); return; }
-
-	if ( FRX.file ) { VTK.read(); return; }
+	if ( FRX.content ) { console.log( "zip", FRX.zipFileName ); VTK.checkLoader(); return; }
 
 };
 
 
-VTK.onChange = function () {
-
-	if ( VTK.loader === undefined ) {
-
-		VTK.loader = document.body.appendChild( document.createElement( 'script' ) );
-		VTK.loader.onload = () => VTK.loadUrl( FRX.url );
-		VTK.loader.src = `https://cdn.jsdelivr.net/gh/mrdoob/three.js@${ FRX.releaseThree }/examples/js/loaders/VTKLoader.js`;
-
-	} else {
-
-		VTK.loadUrl( FRX.url );
-
-	}
-
-};
 
 VTK.read = function () {
 
-	if ( VTK.loader === undefined ) {
-
-		VTK.loader = document.body.appendChild( document.createElement( 'script' ) );
-		VTK.loader.onload = () => VTK.readFile();
-		VTK.loader.src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r131/examples/js/loaders/VTKLoader.js";
-
-	} else {
-
-		VTK.readFile();
-
-	}
-
+	FRX.loadLoader( VTK.loader, VTK.src, VTK.readFile );
 };
+
 
 
 VTK.readFile = function () {
@@ -58,7 +31,24 @@ VTK.readFile = function () {
 };
 
 
-VTK.loadUrl = function ( url ) {
+
+VTK.onChange = function () {
+
+	FRX.loadLoader( VTK.loader, VTK.src, VTK.loadUrl );
+
+};
+
+
+
+VTK.checkLoader = function () {
+
+	FRX.loadLoader( VTK.loader, VTK.src, VTK.parse );
+
+};
+
+
+
+VTK.loadUrl = function ( url = FRX.url) {
 
 	const loader = new THREE.VTKLoader();
 
@@ -81,7 +71,8 @@ VTK.loadUrl = function ( url ) {
 };
 
 
-VTK.parse = function ( content ) {
+
+VTK.parse = function ( content = VTK.content ) {
 
 	const loader = new THREE.VTKLoader();
 
@@ -102,5 +93,7 @@ VTK.parse = function ( content ) {
 	} );
 
 };
+
+
 
 VTK.handle();

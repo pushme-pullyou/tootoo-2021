@@ -5,37 +5,15 @@
 
 OBJ = {};
 
+OBJ.src = FRX.urlLoaders + "OBJLoader.js";
 
 OBJ.handle = function () {
 
-	console.log( "FRX.content", FRX.content.slice( 0, 100 ) );
-	console.log( "FRX.files {...}", FRX.file.name );
-	console.log( "FRX.url .../", FRX.url.split( "/" ).pop()  );
+	if ( FRX.file ) { console.log( "file", FRX.file.name ); OBJ.read(); return; }
 
-	if ( FRX.content ) { OBJ.onUnZip(); return; }
+	if ( FRX.url ) { console.log( "url", FRX.url.split( "/" ).pop() ); OBJ.onChange(); return; }
 
-	if ( FRX.file ) { OBJ.read(); return; }
-
-	if ( FRX.url ) { OBJ.onChange( FRX.url ); return; }
-
-};
-
-
-
-
-OBJ.onUnZip = function () {
-
-	if ( OBJ.loader === undefined ) {
-
-		OBJ.loader = document.body.appendChild( document.createElement( 'script' ) );
-		OBJ.loader.onload = () => OBJ.parse();
-		OBJ.loader.src = `https://cdn.jsdelivr.net/gh/mrdoob/three.js@${ FRX.releaseThree }/examples/js/loaders/OBJLoader.js`;
-
-	} else {
-
-		OBJ.parse();
-
-	}
+	if ( FRX.content ) { console.log( "zip", FRX.zipFileName ); OBJ.checkLoader(); return; }
 
 };
 
@@ -43,17 +21,7 @@ OBJ.onUnZip = function () {
 
 OBJ.read = function () {
 
-	if ( OBJ.objLoader === undefined ) {
-
-		OBJ.objLoader = document.body.appendChild( document.createElement( 'script' ) );
-		OBJ.objLoader.onload = () => OBJ.readFile();
-		OBJ.objLoader.src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r131/examples/js/loaders/OBJLoader.js";
-
-	} else {
-
-		OBJ.readFile( FRX.file );
-
-	}
+	FRX.loadLoader( OBJ.loader, OBJ.src, OBJ.readFile );
 
 };
 
@@ -69,24 +37,16 @@ OBJ.readFile = function () {
 
 
 
-OBJ.onChange = function ( url ) {
+OBJ.onChange = function () {
 
-	if ( OBJ.objLoader === undefined ) {
+	FRX.loadLoader( OBJ.loader, OBJ.src, OBJ.loadUrl );
 
-		OBJ.objLoader = document.body.appendChild( document.createElement( 'script' ) );
-		OBJ.objLoader.onload = () => OBJ.loadUrl( url );
-		OBJ.objLoader.src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r131/examples/js/loaders/OBJLoader.js";
-
-	} else {
-
-		OBJ.loadUrl( url );
-
-	}
 };
 
 
 
-OBJ.loadUrl = function ( url ) {
+OBJ.loadUrl = function ( url = FRX.url ) {
+	console.log( "", OBJ.src );
 
 	const loader = new THREE.OBJLoader();
 
@@ -112,9 +72,14 @@ OBJ.loadUrl = function ( url ) {
 		}
 	);
 
-
 };
 
+
+OBJ.checkLoader = function () {
+
+	FRX.loadLoader( OBJ.loader, OBJ.src, OBJ.parse );
+
+};
 
 
 
@@ -122,7 +87,7 @@ OBJ.parse = function () {
 
 	const loader = new THREE.OBJLoader();
 
-		OBJ.onLoadObj( loader.parse( FRX.content ) );
+	OBJ.onLoadObj( loader.parse( FRX.content ) );
 
 };
 

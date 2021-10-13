@@ -54,14 +54,4 @@ HBJ.requestFile = function () {
 
 
 
-// HBJ.addParser = function ( json ) {
-
-// 	const loader = document.body.appendChild( document.createElement( 'script' ) );
-// 	loader.onload = () => { HBJ.parse( json )};
-// 	loader.src = HBJ.src;
-
-// };
-
-
-
 HBJ.handle();

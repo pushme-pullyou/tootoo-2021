@@ -118,7 +118,7 @@ FRX.onHashChange = function () {
 	FRX.extension = FRX.fileName.includes( "." ) ? FRX.fileName.toLowerCase().split( '.' ).pop() : "";
 	FRX.url = url;
 
-	FRX.loadHandler( FRX.url );
+	FRX.selectHandler( FRX.url );
 
 };
 
@@ -163,13 +163,13 @@ FRX.readFile = function () {
 
 FRX.reader.onload = function () {
 
-	FRX.loadHandler( FRX.fileName.toLowerCase() );
+	FRX.selectHandler( FRX.fileName.toLowerCase() );
 
 };
 
 
 
-FRX.loadHandler = function ( fName ) {
+FRX.selectHandler = function ( fName ) {
 	//console.log( "fName", fName );
 
 	main.hidden = false;
@@ -181,7 +181,7 @@ FRX.loadHandler = function ( fName ) {
 
 		main.style.overflow = "auto";
 
-		FRX.load( "HTM", "htm-html-handler.js" ); return;
+		FRX.loadHandler( "HTM", "htm-html-handler.js" ); return;
 
 	}
 
@@ -189,7 +189,7 @@ FRX.loadHandler = function ( fName ) {
 
 		main.style.overflow = "auto";
 
-		FRX.load( "MDN", "mdn-markdown-handler.js" ); return;
+		FRX.loadHandler( "MDN", "mdn-markdown-handler.js" ); return;
 
 	}
 
@@ -198,7 +198,7 @@ FRX.loadHandler = function ( fName ) {
 
 		main.style.overflow = "auto";
 
-		FRX.load( "IMG", "img-image-handler.js" ); return;
+		FRX.loadHandler( "IMG", "img-image-handler.js" ); return;
 
 	}
 
@@ -207,31 +207,31 @@ FRX.loadHandler = function ( fName ) {
 
 	if ( window[ "THR" ] ) { THR.renderer.domElement.style.display = "block"; }
 
-	if ( fName.endsWith( ".3dm" ) ) { FRX.load( "r3DM", "3dm-handler.js" ); return; }
+	if ( fName.endsWith( ".3dm" ) ) { FRX.loadHandler( "r3DM", "3dm-handler.js" ); return; }
 
-	if ( fName.endsWith( "xml" ) || fName.endsWith( "gbxml" ) ) { FRX.load( "GBX", "gbx-handler.js" ); return; }
+	if ( fName.endsWith( "xml" ) || fName.endsWith( "gbxml" ) ) { FRX.loadHandler( "GBX", "gbx-handler.js" ); return; }
 
-	if ( fName.endsWith( "gltf" ) || fName.endsWith( "glb" ) ) { FRX.load( "GLTF", "gltf-handler.js" ); return; }
+	if ( fName.endsWith( "gltf" ) || fName.endsWith( "glb" ) ) { FRX.loadHandler( "GLTF", "gltf-handler.js" ); return; }
 
-	if ( fName.endsWith( "hbjson" ) ) { FRX.load( "HBJ", "hbj-handler.js" ); return; }
+	if ( fName.endsWith( "hbjson" ) ) { FRX.loadHandler( "HBJ", "hbj-handler.js" ); return; }
 
-	if ( fName.endsWith( ".idf" ) || fName.endsWith( ".osm" ) ) { FRX.load( "IDF", "idf-handler.js" ); return; }
+	if ( fName.endsWith( ".idf" ) || fName.endsWith( ".osm" ) ) { FRX.loadHandler( "IDF", "idf-handler.js" ); return; }
 
-	if ( fName.endsWith( ".ifc" ) ) { FRX.load( "IFC", "ifc-handler.js" ); return; }
+	if ( fName.endsWith( ".ifc" ) ) { FRX.loadHandler( "IFC", "ifc-handler.js" ); return; }
 
-	if ( fName.endsWith( ".json" ) ) { FRX.load( "JSN", "jsn-three-handler.js" ); return; }
+	if ( fName.endsWith( ".json" ) ) { FRX.loadHandler( "JSN", "jsn-three-handler.js" ); return; }
 
-	if ( fName.endsWith( ".obj" ) ) { FRX.load( "OBJ", "obj-handler.js" ); return; }
+	if ( fName.endsWith( ".obj" ) ) { FRX.loadHandler( "OBJ", "obj-handler.js" ); return; }
 
-	if ( fName.endsWith( ".rad" ) ) { FRX.load( "RAD", "rad-handler.js" ); return; }
+	if ( fName.endsWith( ".rad" ) ) { FRX.loadHandler( "RAD", "rad-handler.js" ); return; }
 
-	if ( fName.endsWith( ".stl" ) ) { FRX.load( "STL", "stl-handler.js" ); return; }
+	if ( fName.endsWith( ".stl" ) ) { FRX.loadHandler( "STL", "stl-handler.js" ); return; }
 
-	if ( fName.endsWith( ".vtk" ) || fName.endsWith( ".vtp" ) ) { FRX.load( "VTK", "vtk-handler.js" ); return; }
+	if ( fName.endsWith( ".vtk" ) || fName.endsWith( ".vtp" ) ) { FRX.loadHandler( "VTK", "vtk-handler.js" ); return; }
 
 	if ( fName.endsWith( ".vtkjs" ) ) { alert( "VTKjs support coming soon!" ); return; }
 
-	if ( fName.endsWith( ".zip" ) ) { FRX.load( "ZIP", "zip-handler.js" ); return; }
+	if ( fName.endsWith( ".zip" ) ) { FRX.loadHandler( "ZIP", "zip-handler.js" ); return; }
 
 	if ( window[ "THR" ] ) { THR.renderer.domElement.style.display = "none"; }
 	//divMainContent.style.display = "block";
@@ -239,7 +239,7 @@ FRX.loadHandler = function ( fName ) {
 	main.hidden = false;
 	main.style.overflow = "hidden";
 
-	FRX.load( "UNK", "unk-unknown-handler.js" );
+	FRX.loadHandler( "UNK", "unk-unknown-handler.js" );
 
 	//console.log( "FRX.url", decodeURI( FRX.url ) );
 	//divMainContent.innerHTML =
@@ -265,7 +265,7 @@ FRX.loadLoader = function ( loader, script, onLoad ) {
 
 
 
-FRX.load = function ( obj, handler ) {
+FRX.loadHandler = function ( obj, handler ) {
 
 	//console.log( "FRX.pathUtilities ", FRX.pathUtilities );
 
