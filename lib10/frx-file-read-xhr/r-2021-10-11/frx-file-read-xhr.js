@@ -247,6 +247,19 @@ FRX.loadHandler = function ( fName ) {
 };
 
 
+FRX.loadLoader = function ( loader, script, onLoad ) {
+
+	if ( loader === undefined ) {
+
+		loader = document.body.appendChild( document.createElement( 'script' ) );
+		loader.onload = onLoad;
+		loader.src = `https://cdn.jsdelivr.net/gh/mrdoob/three.js@${ FRX.releaseThree }/examples/js/loaders/${ script }`;
+		return;
+	}
+
+	onLoad();
+};
+
 
 FRX.load = function ( obj, handler ) {
 

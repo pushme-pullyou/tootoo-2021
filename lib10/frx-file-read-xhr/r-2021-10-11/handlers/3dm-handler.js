@@ -8,50 +8,19 @@ r3DM = {};
 
 r3DM.handle = function () {
 
-	//console.log( "FRX.content", FRX.content.slice( 0, 100 ) );
-	console.log( "FRX.file", FRX.file.name );
-	console.log( "FRX.url", FRX.url.split( "/" ).pop() );
+	if ( FRX.file ) { console.log( "file", FRX.file.name ); r3DM.read(); return; }
 
-	if ( FRX.content ) { r3DM.onUnZip(); return; }
+	if ( FRX.url ) { console.log( "url", FRX.url.split( "/" ).pop() ); r3DM.onChange(); return; }
 
-	if ( FRX.file ) { r3DM.read(); return; }
-
-	if ( FRX.url ) { r3DM.onChange(); return; }
+	if ( FRX.content ) { console.log( "zip", FRX.zipFileName ); r3DM.checkLoader(); return; }
 
 };
 
-
-
-r3DM.onUnZip = function () {
-
-	if ( r3DM.loader === undefined ) {
-
-		r3DM.loader = document.body.appendChild( document.createElement( 'script' ) );
-		r3DM.loader.onload = () => r3DM.parseContent( FRX.content );
-		r3DM.loader.src = `https://cdn.jsdelivr.net/gh/mrdoob/three.js@${ FRX.releaseThree }/examples/js/loaders/3DMLoader.js`;
-
-	} else {
-
-		r3DM.loadDataUrl( FRX.content );
-
-	}
-
-};
 
 
 r3DM.read = function () {
 
-	if ( r3DM.loader === undefined ) {
-
-		r3DM.loader = document.body.appendChild( document.createElement( 'script' ) );
-		r3DM.loader.onload = () => r3DM.readFile();
-		r3DM.loader.src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r131/examples/js/loaders/3DMLoader.js";
-
-	} else {
-
-		r3DM.readFile();
-
-	}
+	FRX.loadLoader( r3DM.loader, "3DMLoader.js", r3DM.readFile );
 
 };
 
@@ -69,27 +38,15 @@ r3DM.readFile = function () {
 
 r3DM.onChange = function () {
 
-	if ( r3DM.loader === undefined ) {
+	FRX.loadLoader( r3DM.loader, "3DMLoader.js", r3DM.loadDataUrl() );
 
-		r3DM.loader = document.body.appendChild( document.createElement( 'script' ) );
-		r3DM.loader.onload = () => r3DM.loadDataUrl( FRX.url );
-		r3DM.loader.src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r131/examples/js/loaders/3DMLoader.js";
-
-	} else {
-
-		r3DM.loadDataUrl( FRX.url );
-
-	}
 };
 
 
 
+r3DM.checkLoader = function () {
 
-r3DM.loadDataUrl = function ( url ) {
-
-	const loader = new THREE.Rhino3dmLoader();
-	loader.setLibraryPath( 'https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/' );
-	loader.load( url, ( object ) => { COR.reset( object.children ); } );
+	FRX.loadLoader( r3DM.loader, "3DMLoader.js", r3DM.parseContent );
 
 };
 
@@ -120,6 +77,15 @@ r3DM.parseContent = function ( content ) {
 		( err ) => { console.log( "error", err ); }
 
 	);
+
+};
+
+
+r3DM.loadDataUrl = function ( url = FRX.url ) {
+
+	const loader = new THREE.Rhino3dmLoader();
+	loader.setLibraryPath( 'https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/' );
+	loader.load( url, ( object ) => { COR.reset( object.children ); } );
 
 };
 

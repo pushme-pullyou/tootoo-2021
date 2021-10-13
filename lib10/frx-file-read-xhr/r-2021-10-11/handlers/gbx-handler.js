@@ -35,15 +35,11 @@ GBX.parser = new DOMParser();
 
 GBX.handle = function () {
 
-	//console.log( "FRX.content", FRX.content.slice( 0, 100 ) );
-	console.log( "FRX.file", FRX.file.name );
-	console.log( "FRX.url", FRX.url.split( "/").pop() );
+	if ( FRX.file ) { console.log( "file", FRX.file.name ); GBX.read(); return; }
 
-	if ( FRX.content ) { "FRX.content", FRX.content.slice( 0, 100 ); GBX.parse( FRX.content ); return; }
+	if ( FRX.url ) { console.log( "url", FRX.url.split( "/" ).pop() ); GBX.onChange( FRX.url ); return; }
 
-	if ( FRX.file ) { console.log( "FRX.file", FRX.file.name ); GBX.read(); return; }
-
-	if ( FRX.url ) { console.log( "FRX.url.pop", FRX.url.split( "/" ).pop() ); GBX.onChange( FRX.url ); return; }
+	if ( FRX.content ) { console.log( "zip", FRX.zipFileName ); GBX.parse( FRX.content ); return; }
 
 };
 
@@ -84,6 +80,7 @@ GBX.parse = function ( string ) {
 	COR.reset( GBX.meshes );
 
 	THRR.getHtm = GBX.getHtm;
+
 	//console.log( "gbx init", performance.now() - GBX.timeStart );
 
 	//showPaintTimings();

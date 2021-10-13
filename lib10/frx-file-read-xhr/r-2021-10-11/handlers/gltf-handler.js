@@ -7,49 +7,17 @@ GLTF = {};
 
 GLTF.handle = function () {
 
-	//console.log( "FRX.content", FRX.content.slice( 0, 100 ) );
-	console.log( "FRX.files ", FRX.file.name );
-	console.log( "FRX.url", FRX.url.split( "/" ).pop() );
+	if ( FRX.file ) { console.log( "file ", FRX.file.name ); GLTF.checkLoader(); return; }
 
-	if ( FRX.content ) { GLTF.parse( FRX.content ); return; }
+	if ( FRX.url ) { console.log( "url", FRX.url.split( "/" ).pop() ); GLTF.onChange( FRX.url ); return; }
 
-	if ( FRX.file ) { GLTF.read(); return; }
-
-	if ( FRX.url ) { GLTF.onChange( FRX.url ); return; }
-
+	if ( FRX.content ) { console.log( "zip", FRX.zipFileName ); GLTF.onUnZip( FRX.content ); return; }
 };
 
 
+GLTF.checkLoader = function ( inpFiles ) {
 
-GLTF.onChange = function ( url ) {
-
-	if ( GLTF.loader === undefined ) {
-
-		GLTF.loader = document.body.appendChild( document.createElement( 'script' ) );
-		GLTF.loader.onload = () => GLTF.loadDataUrl( FRX.url );
-		GLTF.loader.src = `https://cdn.jsdelivr.net/gh/mrdoob/three.js@${ FRX.releaseThree }/examples/js/loaders/GLTFLoader.js`;
-
-	} else {
-
-		GLTF.loadDataUrl( FRX.url );
-
-	}
-};
-
-
-GLTF.read = function ( inpFiles ) {
-
-	if ( GLTF.gltfLoader === undefined ) {
-
-		GLTF.gltfLoader = document.body.appendChild( document.createElement( 'script' ) );
-		GLTF.gltfLoader.onload = () => GLTF.readFile();
-		GLTF.gltfLoader.src = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r131/examples/js/loaders/GLTFLoader.js";
-
-	} else {
-
-		GLTF.readFile();
-
-	}
+	FRX.loadLoader( GLTF.loader, "GLTFLoader.js", GLTF.readFile );
 
 };
 
@@ -65,7 +33,23 @@ GLTF.readFile = function () {
 
 
 
-GLTF.loadDataUrl = function ( url = GLTF.defaultFile ) {
+GLTF.onChange = function ( url ) {
+
+	FRX.loadLoader( GLTF.loader, "GLTFLoader.js", GLTF.loadDataUrl() );
+
+};
+
+
+
+GLTF.onUnZip = function () {
+
+	alert( "GLTF files are highly compressed. Unzipping them is not a high priority. Yet." );
+
+};
+
+
+
+GLTF.loadDataUrl = function ( url = FRX.url) {
 
 	const loader = new THREE.GLTFLoader();
 
@@ -117,10 +101,5 @@ GLTF.loadDataUrl = function ( url = GLTF.defaultFile ) {
 
 };
 
-GLTF.parse = function() {
-
-	alert( "GLTF files are highly compressed. Unzipping them is not a high priority. Yet." )
-
-}
 
 GLTF.handle();

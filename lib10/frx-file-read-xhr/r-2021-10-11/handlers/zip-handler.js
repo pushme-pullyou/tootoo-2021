@@ -90,9 +90,9 @@ ZIP.getZipContents = function ( fileName, zip ) {
 	console.log( "fileName", fileName );
 	extension = fileName.split( "." ).pop().toLowerCase();
 
-	if ( [ "glb", "3dm", "vtk" ].includes( extension ) ) {
+	if ( [ "glb", "vtk" ].includes( extension ) ) {
 
-		alert( "Spider is not yet unzipping this file format. Yet" );
+		alert( "Spider is not yet unzipping this file format. Yet." );
 
 		return;
 	}
@@ -189,6 +189,7 @@ ZIP.unzip = function ( url ) {
 		} ).then( text => {
 
 			FRX.content = text;
+			FRX.zipFileName = fName;
 
 			//console.log( "text", text );
 
@@ -200,17 +201,17 @@ ZIP.unzip = function ( url ) {
 
 			if ( fName.endsWith( "hbjson" ) ) { FRX.load( "HBJ", "hbj-handler.js" ); return; }
 
-			if ( fileName.endsWith( "json" ) ) { FRX.load( "JSN", "jsn-three-handler.js" ); return; }
+			if ( fName.endsWith( "json" ) ) { FRX.load( "JSN", "jsn-three-handler.js" ); return; }
 
 			if ( fName.endsWith( ".idf" ) || fName.endsWith( ".osm" ) ) { FRX.load( "IDF", "idf-handler.js" ); return; }
 
 			if ( fName.endsWith( "obj" ) ) { FRX.load( "OBJ", "obj-handler.js" ); return; }
 
-			if ( fileName.endsWith( "rad" ) ) { FRX.load( "RAD", "rad-handler.js" ); return; }
+			if ( fName.endsWith( "rad" ) ) { FRX.load( "RAD", "rad-handler.js" ); return; }
 
-			if ( fileName.endsWith( "stl" ) ) { FRX.load( "STL", "stl-handler.js" ); return; }
+			if ( fName.endsWith( "stl" ) ) { FRX.load( "STL", "stl-handler.js" ); return; }
 
-			if ( fileName.endsWith( "vtk" ) ) { FRX.load( "VTK", "vtk-handler.js" ); return; }
+			if ( fName.endsWith( "vtk" ) ) { FRX.load( "VTK", "vtk-handler.js" ); return; }
 
 		},
 
