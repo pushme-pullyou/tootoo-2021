@@ -46,7 +46,7 @@ OBJ.onChange = function () {
 
 
 OBJ.loadUrl = function ( url = FRX.url ) {
-	console.log( "", OBJ.src );
+	//console.log( "", OBJ.src );
 
 	const loader = new THREE.OBJLoader();
 
