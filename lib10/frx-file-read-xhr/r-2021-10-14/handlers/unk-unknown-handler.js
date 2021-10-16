@@ -42,7 +42,8 @@ UNK.readFile = function () {
 
 UNK.onChange = function () {
 
-	UNK.displayIframe();
+	divMainContent.innerHTML =
+		`<iframe src="${ FRX.url }" height=${ window.innerHeight } style="border:none;width:100%;" ></iframe>`;
 
 };
 
@@ -51,9 +52,7 @@ UNK.onChange = function () {
 
 UNK.checkLoader = function () {
 
-	//UNK.displayIframe();
-
-	divMainContent.innerText = FRX.content;
+	UNK.displayIframe();
 
 };
 
@@ -66,7 +65,9 @@ UNK.displayIframe = function ( content = FRX.content ) {
 
 	console.log( "FRX.file.type ", FRX.file.type );
 
-	if ( FRX.file.type.includes( "application" ) || FRX.file.type.includes( "video" ) ) {
+
+
+	if ( FRX.file?.type?.includes( "application" ) || FRX.file?.type?.includes( "video" ) ) {
 
 		divMainContent.innerHTML =
 			`<iframe src="${ decodeURI( content ) }" height=${ window.innerHeight } style="border:none;width:100%;" ></iframe>`;
