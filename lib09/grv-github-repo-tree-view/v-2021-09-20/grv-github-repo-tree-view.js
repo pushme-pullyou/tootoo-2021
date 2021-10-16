@@ -328,7 +328,7 @@ GRV.getFilesCurated = function ( subtree, files ) {
 GRV.toggleMenu = function () {
 
 	if ( GRVbutMenu.innerText === GRV.menuAll ) {
-		
+
 		GRVbutMenu.innerHTML = GRV.menuCurated;
 		GRV.getFiles = GRV.getFilesAll;
 		GRV.ignoreFolders = [];
