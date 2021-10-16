@@ -5,54 +5,22 @@
 
 UNK = {};
 
-
 UNK.handle = function () {
 
-	//console.log( "FRX.content", FRX.content.slice( 0, 100 ) );
-	console.log( "FRX.file", FRX.file.name );
-	console.log( "FRX.url", FRX.url.split( "/" ).pop() );
+	if ( FRX.file ) { console.log( "file", FRX.file.name ); UNK.read(); return; }
 
-	if ( FRX.content ) { UNK.onUnZip(); return; }
+	if ( FRX.url ) { console.log( "url", FRX.url.split( "/" ).pop() ); UNK.onChange(); return; }
 
-	if ( FRX.file ) { UNK.read(); return; }
-
-	if ( FRX.url ) { UNK.display(); return; }
+	if ( FRX.content ) { console.log( "zip", FRX.zipFileName ); UNK.checkLoader(); return; }
 
 };
 
-
-
-UNK.onUnZip = function () {
-
-	if ( UNK.loader === undefined ) {
-
-		UNK.loader = document.body.appendChild( document.createElement( 'script' ) );
-		UNK.loader.onload = () => UNK.display( FRX.content );
-		UNK.loader.src = "https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js";
-
-	} else {
-
-		UNK.loadDataUrl( FRX.content );
-
-	}
-
-};
 
 
 
 UNK.read = function () {
 
-	// if ( UNK.loader === undefined ) {
-
-	// 	UNK.loader = document.body.appendChild( document.createElement( 'script' ) );
-	// 	UNK.loader.onload = () => UNK.readFile();
-	// 	UNK.loader.src = "https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js";
-
-	// } else {
-
-		UNK.readFile();
-
-	//}
+	FRX.loadLoaders( UNK.loader, [], UNK.readFile );
 
 };
 
@@ -74,52 +42,44 @@ UNK.readFile = function () {
 
 UNK.onChange = function () {
 
-	// if ( UNK.loader === undefined ) {
-
-	// 	UNK.loader = document.body.appendChild( document.createElement( 'script' ) );
-	// 	UNK.loader.onload = () => UNK.display( FRX.url );
-	// 	UNK.loader.src = FRX.url;
-
-	// } else {
-
-		UNK.request( FRX.url );
-
-	//}
-};
-
-
-
-UNK.request = function ( url ) {
-
-	const xhr = new XMLHttpRequest();
-	xhr.open( "get", FRX.url, true );
-	xhr.onload = () => { UNK.display( xhr.responseText ); };
-	xhr.send( null );
-
-	return;
+	UNK.displayIframe();
 
 };
 
 
 
-UNK.display = function ( content ) {
 
-	console.log( "content", content );
+UNK.checkLoader = function () {
 
-	divMainContent.innerHTML = `
-		<div style="border:0px solid red; margin: 0 auto; padding: 0 1rem; max-width: 40rem;" >
-		${ content }
-		</div>`;
+	//UNK.displayIframe();
+
+	divMainContent.innerText = FRX.content;
+
 };
 
 
-UNK.displayIframe = function ( content ) {
 
-	console.log( "content", FRX.url );
 
-	divMainContent.innerHTML =
-		`<iframe src="${ decodeURI( content )}" height=${ window.innerHeight } style="border:none;width:100%;" ></iframe>`;
+UNK.displayIframe = function ( content = FRX.content ) {
 
+	//console.log( "content", content );
+
+	console.log( "FRX.file.type ", FRX.file.type );
+
+	if ( FRX.file.type.includes( "application" ) || FRX.file.type.includes( "video" ) ) {
+
+		divMainContent.innerHTML =
+			`<iframe src="${ decodeURI( content ) }" height=${ window.innerHeight } style="border:none;width:100%;" ></iframe>`;
+
+	} else {
+
+		// wrong guess, try again
+
+		const reader = new FileReader();
+		reader.onload = () => divMainContent.innerText = reader.result;
+		reader.readAsText( FRX.file );
+
+	}
 
 };
 

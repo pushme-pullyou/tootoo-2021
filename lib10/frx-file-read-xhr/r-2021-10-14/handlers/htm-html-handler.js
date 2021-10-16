@@ -47,7 +47,7 @@ HTM.onChange = function () {
 
 HTM.checkLoader = function () {
 
-	HTM.display()
+	HTM.display();
 
 };
 

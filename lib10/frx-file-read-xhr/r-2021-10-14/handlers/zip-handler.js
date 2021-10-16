@@ -6,25 +6,45 @@
 
 ZIP = {};
 
+ZIP.src = "https://cdn.jsdelivr.net/npm/jszip@3.7.1/dist/jszip.min.js";
+
+ZIP.target = FRXdivDetails.appendChild( document.createElement( "div" ) );
+
+
 
 ZIP.handle = function () {
 
-	console.log( "FRX.files ", FRX.file.name );
-	console.log( "FRX.url", FRX.url.split( "/").pop() );
+	if ( FRX.file ) { console.log( "files ", FRX.file.name ); ZIP.read(); return; }
 
-	if ( FRX.file ) { ZIP.loadFile(); return; }
-
-	if ( FRX.url ) { ZIP.fetchZipFile( FRX.url ); return; }
+	if ( FRX.url ) { console.log( "rl", FRX.url.split( "/" ).pop() ); ZIP.fetchZipFile( FRX.url ); return; }
 
 };
 
 
 
-ZIP.loadFile = function ( file = FRX.file ) {
+ZIP.read = function () {
+
+	if ( !window.JSZip ) {
+
+		FRX.loadLoaders( ZIP.loader, ZIP.src, ZIP.readFile );
+
+		return;
+
+	}
+
+	ZIP.readFile();
+
+};
+
+
+
+ZIP.readFile = function ( file = FRX.file ) {
 
 	JSZip.loadAsync( file )
 
 		.then( ( zip ) => {
+
+			ZIP.zip = zip;
 
 			const names = ZIP.getNames( zip );
 
@@ -32,11 +52,10 @@ ZIP.loadFile = function ( file = FRX.file ) {
 
 		} )
 
-		.catch( error => {
-			console.error( "There has been a problem with your file operation:", error );
-		} );
+		.catch( error => { console.error( "There has been a problem with your file operation:", error ); } );
 
 };
+
 
 
 
@@ -58,6 +77,7 @@ ZIP.fetchZipFile = function ( url = url2 ) {
 
 			const names = ZIP.getNames( zip );
 
+
 			ZIP.getZipContents( names[ 0 ], zip );
 
 		} )
@@ -76,9 +96,14 @@ ZIP.getNames = function ( zip ) {
 	const names = [];
 
 	zip.forEach( ( relativePath, zipEntry ) => {
-		//console.log( "zipEntry.name", zipEntry.name );
+		console.log( "zipEntry.name", zipEntry.name );
 		names.push( zipEntry.name );
 	} );
+
+	if ( ZIP.target ) {
+
+		ZIP.target.innerHTML = names.map( name => `<div><button onclick=ZIP.getZipContents("${ name }",ZIP.zip)>${ name }</button></div>` ).join( "" );
+	}
 
 	return names;
 
@@ -90,14 +115,15 @@ ZIP.getZipContents = function ( fileName, zip ) {
 	console.log( "fileName", fileName );
 	extension = fileName.split( "." ).pop().toLowerCase();
 
-	if ( [ "glb", "vtk" ].includes( extension ) ) {
+	// if ( [ "glb", "vtk" ].includes( extension ) ) {
 
-		alert( "Spider is not yet unzipping this file format. Yet." );
+	// 	alert( "Spider is not yet unzipping this file format. Yet." );
 
-		return;
-	}
+	// 	return;
 
-	zip.file( fileName ).async( "uint8array" )
+	// }
+
+	ZIP.zip.file( fileName ).async( "uint8array" )
 
 		.then( function ( uint8array ) {
 
@@ -134,33 +160,37 @@ ZIP.getZipContents = function ( fileName, zip ) {
 		} )
 
 		.then( text => {
-			//divContent.innerText = text;
+			//divMainContent.innerText = text;
 
 			FRX.content = text;
-			FRX.files = "";
+			FRX.file = "";
 			FRX.url = "";
 
-			//console.log( "text", text );
+			FRX.zipFileName = fileName;
 
-			if ( fileName.endsWith( ".3dm" ) ) { FRX.load( "r3DM", "3dm-handler.js" ); return; }
+			FRX.selectHandler( fileName );
 
-			if ( fileName.endsWith( "xml" ) ) { FRX.load( "GBX", "gbx-handler.js" ); return; }
+			// //console.log( "text", text );
 
-			if ( fileName.endsWith( "gltf" ) || fileName.endsWith( "glb" ) ) { FRX.load( "GLTF", "gltf-handler.js" ); return; }
+			// if ( fileName.endsWith( ".3dm" ) ) { FRX.load( "r3DM", "3dm-handler.js" ); return; }
 
-			if ( fileName.endsWith( "hbjson" ) ) { FRX.load( "HBJ", "hbj-handler.js" ); return; }
+			// if ( fileName.endsWith( "xml" ) ) { FRX.load( "GBX", "gbx-handler.js" ); return; }
 
-			if ( fileName.endsWith( "json" ) ) { FRX.load( "JSN", "jsn-three-handler.js" ); return; }
+			// if ( fileName.endsWith( "gltf" ) || fileName.endsWith( "glb" ) ) { FRX.load( "GLTF", "gltf-handler.js" ); return; }
 
-			if ( fileName.endsWith( ".idf" ) || fileName.endsWith( ".osm" ) ) { FRX.load( "IDF", "idf-handler.js" ); return; }
+			// if ( fileName.endsWith( "hbjson" ) ) { FRX.load( "HBJ", "hbj-handler.js" ); return; }
 
-			if ( fileName.endsWith( "obj" ) ) { FRX.load( "OBJ", "obj-handler.js" ); return; }
+			// if ( fileName.endsWith( "json" ) ) { FRX.load( "JSN", "jsn-three-handler.js" ); return; }
 
-			if ( fileName.endsWith( "rad" ) ) { FRX.load( "RAD", "rad-handler.js" ); return; }
+			// if ( fileName.endsWith( ".idf" ) || fileName.endsWith( ".osm" ) ) { FRX.load( "IDF", "idf-handler.js" ); return; }
 
-			if ( fileName.endsWith( "stl" ) ) { FRX.load( "STL", "stl-handler.js" ); return; }
+			// if ( fileName.endsWith( "obj" ) ) { FRX.load( "OBJ", "obj-handler.js" ); return; }
 
-			if ( fileName.endsWith( "vtk" ) ) { FRX.load( "VTK", "vtk-handler.js" ); return; }
+			// if ( fileName.endsWith( "rad" ) ) { FRX.load( "RAD", "rad-handler.js" ); return; }
+
+			// if ( fileName.endsWith( "stl" ) ) { FRX.load( "STL", "stl-handler.js" ); return; }
+
+			// if ( fileName.endsWith( "vtk" ) ) { FRX.load( "VTK", "vtk-handler.js" ); return; }
 
 		} )
 
@@ -215,9 +245,9 @@ ZIP.unzip = function ( url ) {
 
 		},
 
-		( event ) => FRXdivLog += `<div>Error reading ${ fName }: ${ event.message }</div>`
+			( event ) => FRXdivLog += `<div>Error reading ${ fName }: ${ event.message }</div>`
 
-	);
+		);
 
 
 };

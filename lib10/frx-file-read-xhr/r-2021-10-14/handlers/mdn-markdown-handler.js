@@ -47,7 +47,9 @@ MDN.onChange = function () {
 
 MDN.checkLoader = function () {
 
-	FRX.loadLoader( MDN.loader, MDN.src, MDN.display() );
+	FRX.loadLoader( MDN.loader, MDN.src, MDN.display );
+
+
 
 };
 

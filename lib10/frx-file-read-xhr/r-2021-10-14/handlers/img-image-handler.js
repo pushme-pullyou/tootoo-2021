@@ -45,13 +45,23 @@ IMG.onChange = function () {
 
 IMG.checkLoader = function () {
 
-	IMG.display( FRX.content );
+	//IMG.display( FRX.content );
+
+	console.log( "FRX.content", FRX.content );
+
+	var imageURL = window.URL.createObjectURL( FRX.content );
+	divMainContent.innerHTML =
+		`nnnn<a href=${ FRX.url } title="Open this image in a new window" target="_blank" >
+		<img src=${ imageURL } style=max-width:100% >
+	</a>`;
 
 };
 
 
 
 IMG.display = function ( url = FRX.url ) {
+
+	console.log( "FRX.url", FRX.url );
 
 	divMainContent.innerHTML =
 		`<a href=${ FRX.url } title="Open this image in a new window" target="_blank" >

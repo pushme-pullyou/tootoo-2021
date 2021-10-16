@@ -115,7 +115,7 @@ FRX.onHashChange = function () {
 	FRX.content = "";
 	FRX.file = "";
 	FRX.fileName = url.split( "/" ).pop();
-	FRX.extension = FRX.fileName.includes( "." ) ? FRX.fileName.toLowerCase().split( '.' ).pop() : "";
+	extension = FRX.fileName.includes( "." ) ? FRX.fileName.toLowerCase().split( '.' ).pop() : "";
 	FRX.url = url;
 
 	FRX.selectHandler( FRX.url );
@@ -142,7 +142,7 @@ FRX.readFile = function () {
 
 	FRX.file = FRX.files[ FRX.index ];
 	FRX.fileName = FRX.file.name;
-	FRX.extension = FRX.fileName.includes( "." ) ? FRX.fileName.toLowerCase().split( '.' ).pop() : "";
+	extension = FRX.fileName.includes( "." ) ? FRX.fileName.toLowerCase().split( '.' ).pop() : "";
 	FRX.hostName = FRX.file.type;
 	FRX.content = "";
 	FRX.url = "";
@@ -170,14 +170,24 @@ FRX.reader.onload = function () {
 
 
 FRX.selectHandler = function ( fName ) {
-	//console.log( "fName", fName );
 
+	console.log( "fName", fName );
+
+	const extension = fName.includes( "." ) ? fName.toLowerCase().split( '.' ).pop() : "";
+
+	console.log( "extension", extension );
 	main.hidden = false;
 
 	if ( window[ "THR" ] ) { THR.renderer.domElement.style.display = "none"; }
 
+	if ( [ "zip" ].includes( extension ) ) {
 
-	if ( [ "htm", "html" ].includes( FRX.extension ) ) {
+		FRX.loadHandler( "ZIP", "zip-handler.js" ); return;
+
+	}
+
+
+	if ( [ "htm", "html" ].includes( extension ) ) {
 
 		main.style.overflow = "auto";
 
@@ -185,7 +195,7 @@ FRX.selectHandler = function ( fName ) {
 
 	}
 
-	if ( [ "", "txt", "md", "markdown" ].includes( FRX.extension ) ) {
+	if ( [ "", "txt", "md", "markdown" ].includes( extension ) ) {
 
 		main.style.overflow = "auto";
 
@@ -194,7 +204,7 @@ FRX.selectHandler = function ( fName ) {
 	}
 
 
-	if ( [ "gif", "jpg", "jpeg", "png", "svg" ].includes( FRX.extension ) ) {
+	if ( [ "gif", "jpg", "jpeg", "png", "svg" ].includes( extension ) ) {
 
 		main.style.overflow = "auto";
 
@@ -203,39 +213,41 @@ FRX.selectHandler = function ( fName ) {
 	}
 
 
-	main.hidden = true;
+	if ( window[ "THR" ] ) {
 
-	if ( window[ "THR" ] ) { THR.renderer.domElement.style.display = "block"; }
+		main.hidden = true;
+		THR.renderer.domElement.style.display = "block";
 
-	if ( fName.endsWith( ".3dm" ) ) { FRX.loadHandler( "r3DM", "3dm-handler.js" ); return; }
+		if ( fName.endsWith( ".3dm" ) ) { FRX.loadHandler( "r3DM", "3dm-handler.js" ); return; }
 
-	if ( fName.endsWith( "xml" ) || fName.endsWith( "gbxml" ) ) { FRX.loadHandler( "GBX", "gbx-handler.js" ); return; }
+		if ( fName.endsWith( "xml" ) || fName.endsWith( "gbxml" ) ) { FRX.loadHandler( "GBX", "gbx-handler.js" ); return; }
 
-	if ( fName.endsWith( "gltf" ) || fName.endsWith( "glb" ) ) { FRX.loadHandler( "GLTF", "gltf-handler.js" ); return; }
+		if ( fName.endsWith( "gltf" ) || fName.endsWith( "glb" ) ) { FRX.loadHandler( "GLTF", "gltf-handler.js" ); return; }
 
-	if ( fName.endsWith( "hbjson" ) ) { FRX.loadHandler( "HBJ", "hbj-handler.js" ); return; }
+		if ( fName.endsWith( "hbjson" ) ) { FRX.loadHandler( "HBJ", "hbj-handler.js" ); return; }
 
-	if ( fName.endsWith( ".idf" ) || fName.endsWith( ".osm" ) ) { FRX.loadHandler( "IDF", "idf-handler.js" ); return; }
+		if ( fName.endsWith( ".idf" ) || fName.endsWith( ".osm" ) ) { FRX.loadHandler( "IDF", "idf-handler.js" ); return; }
 
-	if ( fName.endsWith( ".ifc" ) ) { FRX.loadHandler( "IFC", "ifc-handler.js" ); return; }
+		if ( fName.endsWith( ".ifc" ) ) { FRX.loadHandler( "IFC", "ifc-handler.js" ); return; }
 
-	if ( fName.endsWith( ".json" ) ) { FRX.loadHandler( "JSN", "jsn-three-handler.js" ); return; }
+		if ( fName.endsWith( ".json" ) ) { FRX.loadHandler( "JSN", "jsn-three-handler.js" ); return; }
 
-	if ( fName.endsWith( ".obj" ) ) { FRX.loadHandler( "OBJ", "obj-handler.js" ); return; }
+		if ( fName.endsWith( ".obj" ) ) { FRX.loadHandler( "OBJ", "obj-handler.js" ); return; }
 
-	if ( fName.endsWith( ".rad" ) ) { FRX.loadHandler( "RAD", "rad-handler.js" ); return; }
+		if ( fName.endsWith( ".rad" ) ) { FRX.loadHandler( "RAD", "rad-handler.js" ); return; }
 
-	if ( fName.endsWith( ".stl" ) ) { FRX.loadHandler( "STL", "stl-handler.js" ); return; }
+		if ( fName.endsWith( ".stl" ) ) { FRX.loadHandler( "STL", "stl-handler.js" ); return; }
 
-	if ( fName.endsWith( ".vtk" ) || fName.endsWith( ".vtp" ) ) { FRX.loadHandler( "VTK", "vtk-handler.js" ); return; }
+		if ( fName.endsWith( ".vtk" ) || fName.endsWith( ".vtp" ) ) { FRX.loadHandler( "VTK", "vtk-handler.js" ); return; }
 
-	if ( fName.endsWith( ".vtkjs" ) ) { alert( "VTKjs support coming soon!" ); return; }
+		if ( fName.endsWith( ".vtkjs" ) ) { alert( "VTKjs support coming soon!" ); return; }
 
-	if ( fName.endsWith( ".zip" ) ) { FRX.loadHandler( "ZIP", "zip-handler.js" ); return; }
+		if ( fName.endsWith( ".zip" ) ) { FRX.loadHandler( "ZIP", "zip-handler.js" ); return; }
 
-	if ( window[ "THR" ] ) { THR.renderer.domElement.style.display = "none"; }
-	//divMainContent.style.display = "block";
+		if ( window[ "THR" ] ) { THR.renderer.domElement.style.display = "none"; }
+		//divMainContent.style.display = "block";
 
+	}
 	main.hidden = false;
 	main.style.overflow = "hidden";
 
@@ -270,21 +282,38 @@ FRX.loadLoaders = function ( loader, scripts, onLoad ) {
 
 	if ( loader === undefined ) {
 
-		for ( script of scripts ) {
+		//console.log( "scripts", scripts );
+		if ( scripts.length === 0 ) {
 
-			const load = document.body.appendChild( document.createElement( 'script' ) );
-			load.onload = () => { loader = load; onLoad(); };
-			load.src = script;
+			loader = "foo";
+			onLoad();
+
+		} else {
+
+			for ( script of scripts ) {
+
+				const load = document.body.appendChild( document.createElement( 'script' ) );
+				load.onload = () => { loader = load; onLoad(); };
+				load.src = script;
+
+			}
+
+			return;
+
 
 		}
 
-		return;
+
+
+
 
 	}
 
 	onLoad();
 
 };
+
+
 
 FRX.loadHandler = function ( obj, handler ) {
 
