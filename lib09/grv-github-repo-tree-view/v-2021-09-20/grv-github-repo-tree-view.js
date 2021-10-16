@@ -33,7 +33,7 @@ GRV.init = function ( { user = COR.user, repo = COR.repo, branch = COR.branch } 
 
 	GRV.accessToken = localStorage.getItem( 'githubAccessToken' ) || "";
 
-	GRV.ignoreFolders = []; //COR.defaultIgnoreFolders.slice() || [];
+	GRV.ignoreFolders = COR.defaultIgnoreFolders.slice() || [];
 
 	// check if GRV.repo could be better
 	const menuType = GRV.getFiles === GRV.getFilesAll ? GRV.menuCurated : GRV.menuAll;
@@ -328,6 +328,7 @@ GRV.getFilesCurated = function ( subtree, files ) {
 GRV.toggleMenu = function () {
 
 	if ( GRVbutMenu.innerText === GRV.menuAll ) {
+		
 		GRVbutMenu.innerHTML = GRV.menuCurated;
 		GRV.getFiles = GRV.getFilesAll;
 		GRV.ignoreFolders = [];
