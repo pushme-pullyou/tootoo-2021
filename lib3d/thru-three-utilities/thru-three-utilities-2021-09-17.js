@@ -44,13 +44,23 @@ THRU.addTellTale = function ( siz = 0.5 ) {
 
 
 
-THRU.addLine = function ( mesh, vertices, color = 0x000000 ) { // THRR-caster only
+THRU.addLine = function () { // THRR-caster only
 
-	const geometry = new THREE.Geometry();
-	geometry.vertices = vertices;
-	const material = new THREE.LineBasicMaterial( { color: color } );
+	values = [];
+
+	for ( let i = 3; i < 999; i += 3 ) {
+
+		vertices.push( Math.random() );
+
+	}
+
+	const geometry = new THREE.BufferGeometry();
+	geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( values, 3 ) );
+	geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( values, 3 ) );
+
+	const material = new THREE.LineBasicMaterial( { color: 0xffffff, vertexColors: THREE.VertexColors } );
 	const line = new THREE.Line( geometry, material );
-	mesh.add( line );
+	THR.scene.add( line );
 
 	return line;
 
