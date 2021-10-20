@@ -78,6 +78,7 @@ THR.init = function () {
 	window.addEventListener( "onloadthree", THR.onLoad, false );
 
 	window.dispatchEvent( event );
+	
 };
 
 
