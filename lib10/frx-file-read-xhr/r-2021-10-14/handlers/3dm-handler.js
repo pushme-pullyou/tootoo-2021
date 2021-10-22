@@ -21,7 +21,7 @@ r3DM.handle = function () {
 
 r3DM.read = function () {
 
-	FRX.loadLoader( r3DM.loader, r3DM.src, r3DM.readFile );
+	FRX.loadLoader( r3DM, r3DM.src, r3DM.readFile );
 
 };
 
@@ -39,7 +39,17 @@ r3DM.readFile = function () {
 
 r3DM.onChange = function () {
 
-	FRX.loadLoader( r3DM.loader, r3DM.src, r3DM.loadDataUrl() );
+	FRX.loadLoaders( r3DM, r3DM.src, r3DM.doIt );
+
+};
+
+
+
+r3DM.doIt = function () {
+
+	r3DM.loadDataUrl();
+
+	//FRX.loadLoader( GBX, GBX.src, );
 
 };
 
@@ -47,7 +57,7 @@ r3DM.onChange = function () {
 
 r3DM.checkLoader = function () {
 
-	FRX.loadLoader( r3DM.loader, r3DM.src, r3DM.parseContent );
+	FRX.loadLoader( r3DM, r3DM.src, r3DM.parseContent );
 
 };
 

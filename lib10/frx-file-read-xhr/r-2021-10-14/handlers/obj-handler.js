@@ -38,7 +38,7 @@ OBJ.handle = function () {
 
 OBJ.read = function () {
 
-	FRX.loadLoaders( OBJ.loader, OBJ.scripts, OBJ.readFile );
+	FRX.loadLoaders( OBJ, OBJ.scripts, OBJ.readFile );
 
 };
 
@@ -51,7 +51,6 @@ OBJ.readFile = function () {
 
 
 	if ( OBJ.loadedScripts === OBJ.scripts.length ) {
-
 
 		OBJ.manager = new THREE.LoadingManager();
 
@@ -72,7 +71,7 @@ OBJ.readFile = function () {
 
 OBJ.onChange = function () {
 
-	FRX.loadLoader( OBJ.loader, OBJ.src, OBJ.loadUrl );
+	FRX.loadLoaders( OBJ, OBJ.src, OBJ.loadUrl );
 
 };
 
@@ -80,7 +79,7 @@ OBJ.onChange = function () {
 
 OBJ.checkLoader = function () {
 
-	FRX.loadLoader( OBJ.loader, OBJ.src, OBJ.parse );
+	FRX.loadLoaders( OBJ, OBJ.src, OBJ.parse );
 
 };
 

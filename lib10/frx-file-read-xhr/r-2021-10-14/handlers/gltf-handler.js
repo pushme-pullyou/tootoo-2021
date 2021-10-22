@@ -9,19 +9,19 @@ GLTF.src = FRX.urlLoaders + "GLTFLoader.js";
 
 GLTF.handle = function () {
 
-
 	if ( FRX.file ) { console.log( "file ", FRX.file.name ); GLTF.checkLoader(); return; }
 
 	if ( FRX.url ) { console.log( "url", FRX.url.split( "/" ).pop() ); GLTF.onChange(); return; }
 
 	if ( FRX.content ) { console.log( "zip", FRX.zipFileName ); GLTF.onUnZip( FRX.content ); return; }
+
 };
 
 
 
 GLTF.checkLoader = function () {
 
-	FRX.loadLoader( GLTF.loader, GLTF.src, GLTF.readFile );
+	FRX.loadLoaders( GLTF, GLTF.src, GLTF.readFile );
 
 };
 
@@ -39,7 +39,7 @@ GLTF.readFile = function () {
 
 GLTF.onChange = function () {
 
-	FRX.loadLoader( GLTF.loader, GLTF.src, GLTF.loadDataUrl );
+	FRX.loadLoaders( GLTF, GLTF.src, GLTF.loadDataUrl );
 
 };
 
@@ -53,7 +53,7 @@ GLTF.onUnZip = function () {
 
 
 
-GLTF.loadDataUrl = function ( url = FRX.url) {
+GLTF.loadDataUrl = function ( url = FRX.url ) {
 
 	const loader = new THREE.GLTFLoader();
 

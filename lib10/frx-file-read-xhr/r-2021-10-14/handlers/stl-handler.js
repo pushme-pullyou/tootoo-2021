@@ -22,7 +22,7 @@ STL.handle = function () {
 
 STL.read = function () {
 
-	FRX.loadLoader( STL.loader, STL.src, STL.readFile );
+	FRX.loadLoaders( STL, STL.src, STL.readFile );
 
 };
 
@@ -38,14 +38,14 @@ STL.readFile = function ( inpFiles ) {
 
 STL.onChange = function () {
 
-	FRX.loadLoader( STL.loader, STL.src, STL.loadUrl );
+	FRX.loadLoaders( STL, STL.src, STL.loadUrl );
 
 };
 
 
 STL.checkLoader = function () {
 
-	FRX.loadLoader( STL.loader, STL.src, STL.parse );
+	FRX.loadLoaders( STL, STL.src, STL.parse );
 
 };
 

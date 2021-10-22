@@ -7,12 +7,15 @@ GBX = {};
 
 GBX.src = FRX.pathUtilities + "parsers/gbx-gbxml-parser.js";
 
+GBX.loaded = false;
 
 GBX.handle = function () {
 
 	if ( FRX.file ) { console.log( "file", FRX.file.name ); GBX.read(); return; }
 
 	if ( FRX.url ) { console.log( "url", FRX.url.split( "/" ).pop() ); GBX.onChange(); return; }
+
+	if ( FRX.zipFileName ) { console.log( "FRX.zipFileName", FRX.zipFileName ); GBX.checkLoader(); return }
 
 	if ( FRX.content ) { console.log( "zip", FRX.zipFileName ); GBX.checkLoader(); return; }
 
@@ -40,7 +43,9 @@ GBX.readFile = function () {
 
 GBX.onChange = function ( url ) {
 
-	FRX.loadLoader( GBX.loader, GBX.src, GBX.requestFile );
+	console.log( "GBX.loaded", GBX.loaded );
+
+	FRX.loadLoader( GBX, GBX.src, GBX.requestFile );
 
 };
 
@@ -48,7 +53,7 @@ GBX.onChange = function ( url ) {
 
 GBX.checkLoader = function () {
 
-	FRX.loadLoader( GBX.loader, GBX.src, GBX.parseContent );
+	FRX.loadLoader( GBX, GBX.src, GBX.parse( FRX.content ) );
 
 };
 

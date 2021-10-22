@@ -6,7 +6,7 @@
 HBJ = {};
 
 HBJ.src = FRX.pathUtilities + "parsers/hbj-hbjson-parser.js";
-
+HBJ.loaded = false;
 
 HBJ.handle = function () {
 
@@ -22,7 +22,7 @@ HBJ.handle = function () {
 
 HBJ.read = function () {
 
-	FRX.loadLoader( HBJ.loader, HBJ.src, HBJ.readFile );
+	FRX.loadLoader( HBJ, HBJ.src, HBJ.readFile );
 
 };
 
@@ -39,7 +39,7 @@ HBJ.readFile = function () {
 
 HBJ.onChange = function () {
 
-	FRX.loadLoader( HBJ.loader, HBJ.src, HBJ.requestFile);
+	FRX.loadLoaders( HBJ, HBJ.src, HBJ.requestFile );
 
 };
 
@@ -47,7 +47,7 @@ HBJ.onChange = function () {
 
 HBJ.checkLoader = function () {
 
-	FRX.loadLoader( HBJ.loader, HBJ.src, HBJ.requestFile );
+	FRX.loadLoaders( HBJ, HBJ.src, HBJ.requestFile );
 
 };
 

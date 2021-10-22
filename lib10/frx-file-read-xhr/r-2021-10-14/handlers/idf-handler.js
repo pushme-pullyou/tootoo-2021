@@ -23,7 +23,7 @@ IDF.handle = function () {
 
 IDF.read = function () {
 
-	FRX.loadLoader( IDF.loader, IDF.src, IDF.readFile );
+	FRX.loadLoaders( IDF, IDF.src, IDF.readFile );
 
 };
 
@@ -41,7 +41,7 @@ IDF.read = function () {
 
 IDF.onChange = function () {
 
-	FRX.loadLoader( IDF.loader, IDF.src, IDF.requestFile );
+	FRX.loadLoaders( IDF, IDF.src, IDF.requestFile );
 
 };
 
@@ -49,7 +49,7 @@ IDF.onChange = function () {
 
 IDF.checkLoader = function () {
 
-	FRX.loadLoader( IDF.loader, IDF.src, IDF.requestFile );
+	FRX.loadLoaders( IDF, IDF.src, IDF.parse( FRX.content ) );
 
 };
 

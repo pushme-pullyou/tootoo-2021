@@ -48,7 +48,7 @@ Release: ${ FRX.release }<br>`;
 
 	<div id=FRXdivLog2 ></div>
 
-	<div id=FOZdivFileOpenZip></div>
+	<div id=vvFOZdivFileOpenZip></div>
 
 </details>`;
 
@@ -171,14 +171,15 @@ FRX.reader.onload = function () {
 
 FRX.selectHandler = function ( fName ) {
 
-	console.log( "fName", fName );
+	//console.log( "handler fName", fName );
 
 	const extension = fName.includes( "." ) ? fName.toLowerCase().split( '.' ).pop() : "";
+	//console.log( "extension", extension );
 
-	console.log( "extension", extension );
 	main.hidden = false;
 
 	if ( window[ "THR" ] ) { THR.renderer.domElement.style.display = "none"; }
+
 
 	if ( [ "zip" ].includes( extension ) ) {
 
@@ -242,7 +243,7 @@ FRX.selectHandler = function ( fName ) {
 
 		if ( fName.endsWith( ".vtkjs" ) ) { alert( "VTKjs support coming soon!" ); return; }
 
-		if ( fName.endsWith( ".zip" ) ) { FRX.loadHandler( "ZIP", "zip-handler.js" ); return; }
+		//if ( fName.endsWith( ".zip" ) ) { FRX.loadHandler( "ZIP", "zip-handler.js" ); return; }
 
 		if ( window[ "THR" ] ) { THR.renderer.domElement.style.display = "none"; }
 		//divMainContent.style.display = "block";
@@ -260,12 +261,15 @@ FRX.selectHandler = function ( fName ) {
 };
 
 
-FRX.loadLoader = function ( loader, script, onLoad ) {
+FRX.loadLoader = function ( obj , script, onLoad ) {
+	//console.log( "obj", obj );
+	//console.log( "loaded", obj, onLoad );
 
-	if ( loader === undefined ) {
+	if ( obj.loaded === false ) {
 
+		obj.loaded = true;
 		const load = document.body.appendChild( document.createElement( 'script' ) );
-		load.onload = () => { loader = load; onLoad(); };
+		load.onload = onLoad();
 		load.src = script;
 		return;
 
@@ -276,30 +280,31 @@ FRX.loadLoader = function ( loader, script, onLoad ) {
 };
 
 
-FRX.loadLoaders = function ( loader, scripts, onLoad ) {
+
+FRX.loadLoaders = function ( obj, scripts, onLoad ) {
 
 	scripts = Array.isArray( scripts ) ? scripts : [ scripts ];
 
-	if ( loader === undefined ) {
+	if ( !obj.loaded ) {
 
 		//console.log( "scripts", scripts );
 		if ( scripts.length === 0 ) {
 
-			loader = "foo";
+			obj.loaded = true;
 			onLoad();
 
 		} else {
 
 			for ( script of scripts ) {
 
+				obj.loaded = true;
 				const load = document.body.appendChild( document.createElement( 'script' ) );
-				load.onload = () => { loader = load; onLoad(); };
+				load.onload = onLoad;
 				load.src = script;
 
 			}
 
 			return;
-
 
 		}
 

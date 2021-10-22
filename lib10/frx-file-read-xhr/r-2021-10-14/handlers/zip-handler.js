@@ -16,7 +16,7 @@ ZIP.handle = function () {
 
 	if ( FRX.file ) { console.log( "files ", FRX.file.name ); ZIP.read(); return; }
 
-	if ( FRX.url ) { console.log( "rl", FRX.url.split( "/" ).pop() ); ZIP.fetchZipFile( FRX.url ); return; }
+	if ( FRX.url ) { console.log( "url", FRX.url.split( "/" ).pop() ); ZIP.fetchZipFile( FRX.url ); return; }
 
 };
 
@@ -61,6 +61,8 @@ ZIP.readFile = function ( file = FRX.file ) {
 
 ZIP.fetchZipFile = function ( url = url2 ) {
 
+	//console.log( "url", url );
+
 	fetch( url )
 
 		.then( response => {
@@ -75,10 +77,11 @@ ZIP.fetchZipFile = function ( url = url2 ) {
 
 		.then( zip => {
 
-			const names = ZIP.getNames( zip );
+			ZIP.zip = zip;
 
+			const names = ZIP.getNames();
 
-			ZIP.getZipContents( names[ 0 ], zip );
+			ZIP.getZipContents( names[ 0 ] );
 
 		} )
 
@@ -95,14 +98,16 @@ ZIP.getNames = function ( zip ) {
 
 	const names = [];
 
-	zip.forEach( ( relativePath, zipEntry ) => {
-		console.log( "zipEntry.name", zipEntry.name );
+	ZIP.zip.forEach( ( relativePath, zipEntry ) => {
+		//console.log( "zipEntry.name", zipEntry.name );
 		names.push( zipEntry.name );
 	} );
 
 	if ( ZIP.target ) {
 
-		ZIP.target.innerHTML = names.map( name => `<div><button onclick=ZIP.getZipContents("${ name }",ZIP.zip)>${ name }</button></div>` ).join( "" );
+		ZIP.target.innerHTML = names.map( name =>
+			`<div><button onclick=ZIP.getZipContents("${ name }",ZIP.zip)>${ name }</button></div>` ).join( "" );
+
 	}
 
 	return names;
@@ -110,24 +115,21 @@ ZIP.getNames = function ( zip ) {
 };
 
 
+
+
 ZIP.getZipContents = function ( fileName, zip ) {
 
-	console.log( "fileName", fileName );
+	//console.log( "fileName", fileName );
+	//console.log( "ZIP.zip", ZIP.zip );
 	extension = fileName.split( "." ).pop().toLowerCase();
-
-	// if ( [ "glb", "vtk" ].includes( extension ) ) {
-
-	// 	alert( "Spider is not yet unzipping this file format. Yet." );
-
-	// 	return;
-
-	// }
 
 	ZIP.zip.file( fileName ).async( "uint8array" )
 
 		.then( function ( uint8array ) {
 
 			let text;
+
+			//console.log( "text", text );
 
 			if ( uint8array[ 0 ] !== 255 || uint8array[ 0 ] === 239 || uint8array[ 0 ] === 60 ) {
 
@@ -168,9 +170,11 @@ ZIP.getZipContents = function ( fileName, zip ) {
 
 			FRX.zipFileName = fileName;
 
+			//console.log( "223", fileName  );
+
 			FRX.selectHandler( fileName );
 
-			// //console.log( "text", text );
+			//console.log( "text", text );
 
 			// if ( fileName.endsWith( ".3dm" ) ) { FRX.load( "r3DM", "3dm-handler.js" ); return; }
 
@@ -221,27 +225,28 @@ ZIP.unzip = function ( url ) {
 			FRX.content = text;
 			FRX.zipFileName = fName;
 
+			FRX.selectHandler( fName );
 			//console.log( "text", text );
 
-			if ( fName.endsWith( ".3dm" ) ) { FRX.load( "r3DM", "3dm-handler.js" ); return; }
+			// if ( fName.endsWith( ".3dm" ) ) { FRX.load( "r3DM", "3dm-handler.js" ); return; }
 
-			if ( fName.endsWith( "xml" ) ) { FRX.load( "GBX", "gbx-handler.js" ); return; }
+			// if ( fName.endsWith( "xml" ) ) { FRX.load( "GBX", "gbx-handler.js" ); return; }
 
-			if ( fName.endsWith( "gltf" ) || fileName.endsWith( "glb" ) ) { FRX.load( "GLTF", "gltf-handler.js" ); return; }
+			// if ( fName.endsWith( "gltf" ) || fileName.endsWith( "glb" ) ) { FRX.load( "GLTF", "gltf-handler.js" ); return; }
 
-			if ( fName.endsWith( "hbjson" ) ) { FRX.load( "HBJ", "hbj-handler.js" ); return; }
+			// if ( fName.endsWith( "hbjson" ) ) { FRX.load( "HBJ", "hbj-handler.js" ); return; }
 
-			if ( fName.endsWith( "json" ) ) { FRX.load( "JSN", "jsn-three-handler.js" ); return; }
+			// if ( fName.endsWith( "json" ) ) { FRX.load( "JSN", "jsn-three-handler.js" ); return; }
 
-			if ( fName.endsWith( ".idf" ) || fName.endsWith( ".osm" ) ) { FRX.load( "IDF", "idf-handler.js" ); return; }
+			// if ( fName.endsWith( ".idf" ) || fName.endsWith( ".osm" ) ) { FRX.load( "IDF", "idf-handler.js" ); return; }
 
-			if ( fName.endsWith( "obj" ) ) { FRX.load( "OBJ", "obj-handler.js" ); return; }
+			// if ( fName.endsWith( "obj" ) ) { FRX.load( "OBJ", "obj-handler.js" ); return; }
 
-			if ( fName.endsWith( "rad" ) ) { FRX.load( "RAD", "rad-handler.js" ); return; }
+			// if ( fName.endsWith( "rad" ) ) { FRX.load( "RAD", "rad-handler.js" ); return; }
 
-			if ( fName.endsWith( "stl" ) ) { FRX.load( "STL", "stl-handler.js" ); return; }
+			// if ( fName.endsWith( "stl" ) ) { FRX.load( "STL", "stl-handler.js" ); return; }
 
-			if ( fName.endsWith( "vtk" ) ) { FRX.load( "VTK", "vtk-handler.js" ); return; }
+			// if ( fName.endsWith( "vtk" ) ) { FRX.load( "VTK", "vtk-handler.js" ); return; }
 
 		},
 

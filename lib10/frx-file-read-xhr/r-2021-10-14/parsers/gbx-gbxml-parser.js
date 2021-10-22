@@ -28,7 +28,7 @@ GBX.parser = new DOMParser();
 
 GBX.parse = function ( string ) {
 
-	console.log( "string", string );
+	//console.log( "string", string );
 
 	GBX.string = string.replace( /[\t\n\r]/gm, "" );
 

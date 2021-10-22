@@ -21,8 +21,6 @@ JSN.handle = function () {
 
 JSN.read = function () {
 
-	//FRX.loadLoader( JSN.loader, JSN.src, JSN.readFile );
-
 	JSN.readFile()
 
 };

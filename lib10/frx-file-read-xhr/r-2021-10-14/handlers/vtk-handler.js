@@ -22,7 +22,7 @@ VTK.handle = function () {
 
 VTK.read = function () {
 
-	FRX.loadLoader( VTK.loader, VTK.src, VTK.readFile );
+	FRX.loadLoaders( VTK, VTK.src, VTK.readFile );
 };
 
 
@@ -39,7 +39,7 @@ VTK.readFile = function () {
 
 VTK.onChange = function () {
 
-	FRX.loadLoader( VTK.loader, VTK.src, VTK.loadUrl );
+	FRX.loadLoaders( VTK, VTK.src, VTK.loadUrl() );
 
 };
 
@@ -47,7 +47,7 @@ VTK.onChange = function () {
 
 VTK.checkLoader = function () {
 
-	FRX.loadLoader( VTK.loader, VTK.src, VTK.parse );
+	FRX.loadLoaders( VTK, VTK.src, VTK.parse );
 
 };
 

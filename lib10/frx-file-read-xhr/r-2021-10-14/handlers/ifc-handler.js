@@ -23,7 +23,7 @@ IFC.handle = function () {
 
 IFC.read = function () {
 
-	FRX.loadLoader( IFC.loader, IFC.src, IFC.readFile );
+	FRX.loadLoaders( IFC, IFC.src, IFC.readFile );
 
 };
 
@@ -41,7 +41,7 @@ IFC.readFile = function () {
 
 IFC.onChange = function () {
 
-	FRX.loadLoader( IFC.loader, IFC.src, IFC.requestFile );
+	FRX.loadLoaders( IFC, IFC.src, IFC.requestFile );
 
 };
 
@@ -49,7 +49,7 @@ IFC.onChange = function () {
 
 IFC.checkLoader = function () {
 
-	FRX.loadLoader( IFC.loader, IFC.src, IFC.requestFile );
+	FRX.loadLoaders( IFC, IFC.src, IFC.requestFile );
 
 };
 
