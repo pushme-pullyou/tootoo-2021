@@ -59,38 +59,54 @@ RAD.handle = function () {
 	console.log( "FRX.files ", FRX.file.name );
 	console.log( "FRX.url", FRX.url.split( "/" ).pop() );
 
-	if ( FRX.content ) { RAD.addDataFile( FRX.content ); return; }
-
 	if ( FRX.file ) { RAD.read(); return; }
 
 	if ( FRX.url ) { RAD.onChange( FRX.url ); return; }
 
-};
-
-
-RAD.onChange = function () {
-
-	const xhr = new XMLHttpRequest();
-	xhr.open( 'GET', FRX.url, true );
-	xhr.onerror = ( xhr ) => console.log( 'error:', xhr );
-	//xhr.onprogress = ( xhr ) => console.log( 'bytes loaded:', xhr.loaded );
-	xhr.onload = ( xhr ) => RAD.addDataFile( xhr.target.response );
-	xhr.send( null );
-
-};
-
-
-RAD.read = function ( files ) {
-
-	RAD.reader = new FileReader();
-	RAD.reader.onload = ( event ) => RAD.addDataFile( event.target.result );
-	RAD.reader.readAsText( FRX.file );
+	if ( FRX.content ) { RAD.addDataFile( FRX.content ); return; }
 
 };
 
 
 
-// called by FIL.callbackRequestFile &&
+RAD.read = function () {
+
+
+	result = "";
+	RAD.count = 0;
+
+	for ( let file of FRX.files ) {
+
+		const reader = new FileReader();
+
+		reader.onload = ( event ) => {
+
+			result += event.target.result;
+
+			RAD.count++;
+
+			if ( RAD.count === FRX.files.length ) {
+
+				RAD.addDataFile( result );
+
+				console.log( "result", result );
+
+			}
+
+
+			console.log( "RAD.count", RAD.count );
+
+		};
+
+		reader.readAsText( file );
+
+	}
+
+};
+
+
+
+// called by RAD.callbackRequestFile &&
 
 RAD.addDataFile = function ( text ) {
 
@@ -118,6 +134,17 @@ RAD.addDataFile = function ( text ) {
 
 
 
+RAD.onChange = function () {
+
+	const xhr = new XMLHttpRequest();
+	xhr.open( 'GET', FRX.url, true );
+	xhr.onerror = ( xhr ) => console.log( 'error:', xhr );
+	//xhr.onprogress = ( xhr ) => console.log( 'bytes loaded:', xhr.loaded );
+	xhr.onload = ( xhr ) => RAD.addDataFile( xhr.target.response );
+	xhr.send( null );
+
+};
+
 //////////
 
 RAD.radToJson = function ( radText ) {
@@ -142,7 +169,7 @@ RAD.radToJson = function ( radText ) {
 				url = url.slice( 1 );
 				//console.log( 'path + url', path + url );
 
-				FIL.requestFile( url );
+				//RAD.requestFile( url, RAD.callbackRequestFile );
 
 			}
 
@@ -167,6 +194,47 @@ RAD.radToJson = function ( radText ) {
 
 };
 
+
+
+
+RAD.requestFile = function ( url, target ) {
+
+	const xhr = new XMLHttpRequest();  // unlike fetch handles local files
+	xhr.crossOrigin = 'anonymous';
+	xhr.open( 'GET', url, true );
+	xhr.onerror = function ( xhr ) { console.log( 'error:', xhr ); };
+	//xhr.onprogress = function( xhr ) { console.log( 'bytes loaded:', xhr.loaded ); }; // or something
+	xhr.onload = target;
+	xhr.send( null );
+
+};
+
+
+
+RAD.callbackRequestFile = function ( xhr ) {
+	//console.log( 'xhr.target.response', xhr.target.response );
+
+	const json = RAD.addDataFile( xhr.target.response );
+
+	json.forEach( result => RAD.json[ result[ 0 ] ].push( result[ 1 ] ) ); // not easy to understand
+
+	RAD.size = xhr.target.response.length;
+
+	RAD.htmLog +=
+		`
+		<p>
+			name: ${ RAD.name }<br>
+			size: ${ RAD.size.toLocaleString() } bytes<br>
+		</p>
+	`;
+
+	RAD.txtRadiance = xhr.target.response;
+	RAD.txtJson = JSON.stringify( json, undefined, 1 );
+
+	//RAD.setLog( RAD.divFileData );
+	RAD.timeLoad = ( performance.now() - RAD.timeStart ).toLocaleString();
+
+};
 
 
 RAD.setThreeJsWindowUpdate = function ( json, target = undefined ) {

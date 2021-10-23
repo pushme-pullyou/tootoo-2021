@@ -149,13 +149,13 @@ FRX.readFile = function () {
 
 	//console.log( "frx", FRX );
 
-	FRX.index++;
+	// FRX.index++;
 
-	if ( FRX.index < FRX.files.length ) {
+	// if ( FRX.index < FRX.files.length ) {
 
-		setTimeout( FRX.readFile, 2000 );
+	// 	setTimeout( FRX.readFile, 2000 );
 
-	}
+	// }
 
 };
 
