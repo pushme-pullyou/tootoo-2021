@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="description" content="">
+	<meta name="date" content="2021-07-29">
+	<title></title>
+	<style>
+		body {
+			font: 100% monospace;
+		}
+	</style>
+</head>
+
+<body>
+
+	<script src="https://cdn.jsdelivr.net/npm/jszip@3.7.1/dist/jszip.min.js"></script>
+
+	<h1>
+		<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/xxxxxx/" target="_blank"
+			title="source code on GitHub"><img
+				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
+		<a href="" title="Click this menu title to reset the model">
+			<span id=spnTitle></span>
+			<span id=spnVersion></span>
+		</a>
+	</h1>
+
+	<p>
+		<button onclick=writeZip()>writeZip</button>
+	</p>
+
+	<div id="divContent"></div>
+
+
+	<script>
+
+		const files = [ "LICENSE", "NPP_16.stl", "Photo Album_Example Auckland.pdf", "README.md", "Structural_MRI_animation.ogv.240p.webm", "ca_cs.xls", "code-of-conduct.md", "concept.md", "envmap.png", "heritage-front.jpg", "markdown-help.md", "markdown.md", "noun_Information_585560.svg", "pano.mp4", "readme.html", "sample.md", "snippets.txt", "style-sample-tags.html", "system-map.gif", "test-case.zip", "text-to-hack-3.html", "text-to-hack.html", "text.txt", "the-scream.jpg", "tree.obj", "us-county-state-latlon-pop.csv" ];
+
+		const ZIP = {};
+
+		init();
+
+		function init() {
+
+			spnTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+
+			spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
+
+
+			//requestFile();
+
+		}
+
+
+
+		function writeZip() {
+
+			if ( !ZIP.zip ) { ZIP.zip = new JSZip(); }
+			// ZIP.zip = new JSZip();
+
+			// ZIP.zip.file( "Hello.txt", "Hello World\n" );
+
+			// ZIP.zip.file( "Hello2.txt", "Hello World2\n" );
+
+			files2 = "hello.txt";
+			const test = ZIP.zip.folder( "test-cases/things" );
+			test.file( "smile.gif", "things" );
+
+			AddFilesToZip( files )
+
+		}
+
+
+
+		function AddFilesToZip( files ) {
+
+			files = Array.isArray( files ) ? files : [ files ];
+
+
+			for ( let file of files ) {
+
+				ZIP.zip.file( file, "Hello World\n" );
+
+			}
+
+			saveZip();
+		}
+
+		function saveZip() {
+
+			ZIP.zip.generateAsync( { type: "blob" } ).then( function ( content ) {
+				// see FileSaver.js
+				saveAs( content, "example.zip" );
+			} );
+
+		}
+
+
+		function saveAs( content, fileName ) {
+
+			const blob = new Blob( [ content ] );
+			let a = document.createElement( "a" );
+			a.href = window.URL.createObjectURL( blob );
+			a.download = fileName;
+			a.click();
+			a = null;
+
+		}
+		function requestFile( url = "https://example.com", callback = onLoad ) {
+
+			url = "https://cdn.jsdelivr.net/gh/pushme-pullyou/tootoo-2021@master/README.md";
+			const urlCORS = ""; //https://cors-anywhere.herokuapp.com/";
+
+			xhr = new XMLHttpRequest();
+			xhr.open( "GET", urlCORS + url, true );
+			xhr.responseType = "text";
+			xhr.onerror = ( xhr ) => console.log( "error:", xhr );
+			//xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
+			xhr.onload = ( xhr ) => callback( xhr.target.response );
+			xhr.send( null );
+
+		}
+
+
+
+		function onLoad( response ) {
+
+			console.log( "response", response );
+
+			divContent.innerText = response;
+
+		}
+
+	</script>
+
+
+</body>
+
+</html>

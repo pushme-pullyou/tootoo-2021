@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+
+<head>
+	<title data-n-head="true">mammoth.js render word docx on Browser Example demo </title>
+	<meta data-n-head="true" charset="utf-8">
+	<meta data-n-head="true" name="viewport" content="width=device-width,initial-scale=1">
+	<meta data-n-head="true" data-hid="description" name="description"
+		content="mammoth.js render word docx on Browser ">
+
+<style>
+	body {
+		font: bold 12pt monospace;
+	}
+</style>
+
+</head>
+
+<body>
+
+	<script src="https://cdn.jsdelivr.net/npm/mammoth@1.4.19/mammoth.browser.min.js"></script>
+
+
+	<h1><a href="https://github.com/mwilliamson/mammoth.js" target="_blank">gh</a> <a href="">DocX to HTML</a></h1>
+
+	<input type="file" onchange="parseWordDocxFile(this)">
+
+	<div>
+		Select a Word .docx file and convert result to HTML:
+	</div>
+
+	<div id="result1"></div>
+
+	</div>
+
+
+	<script>
+		// https://github.com/mwilliamson/mammoth.js
+
+		function parseWordDocxFile( e ) {
+
+			const n = e.files || [];
+
+			if ( n.length ) {
+				const r = n[ 0 ];
+				console.time();
+				const o = new FileReader;
+
+				o.onloadend = function ( e ) {
+
+					const n = o.result;
+
+					// extractRawText
+					mammoth.convertToHtml( { arrayBuffer: n } )
+						.then( function ( e ) {
+							result1.innerHTML = e.value;
+							console.log( e.value )
+						} )
+				};
+				o.readAsArrayBuffer( r )
+			}
+		}
+
+	</script>
+</body>
+
+</html>
