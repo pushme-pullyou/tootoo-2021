@@ -8,6 +8,7 @@ const CKE = {};
 //CKE.base = `https://api.github.com/repos/${ COR.user }/${ COR.repo }/contents/`;
 //CKE.base = "https://api.github.com/repos/pushme-pullyou/tootoo-2021/contents/";
 CKE.defaultBase = "https://api.github.com/repos/theo-armour/qdata/contents/";
+CKE.defaultSource = "https://github.com/theo-armour/qdata/tree/master/";
 CKE.defaultContent = "divMainContent";
 CKE.defaultClass = ".editor";
 CKE.defaultFile = "snippets/notes.htm";
@@ -17,7 +18,8 @@ CKE.init = function ( base, content, claass, file, type ) {
 
 	//console.log( base, content, claass, file, type );
 
-	CKE.base =  base || CKE.defaultBase;
+	CKE.base = base || CKE.defaultBase;
+	CKE.source = source || CKE.defaultSource;
 	CKE.content = content || window[ CKE.defaultContent ];
 	CKE.class = claass || CKE.defaultClass;
 	CKE.type = type || CKE.defaultType;
@@ -79,8 +81,6 @@ CKE.onHashChange = function () {
 	CKE.url = CKE.base + CKE.hash;
 
 	CKE.requestFile();
-
-	CKE.addPopUp();
 
 };
 
@@ -197,29 +197,6 @@ CKE.onKeyUp = function ( event ) {
 };
 
 
-CKE.addPopUp = function () {
-
-	if ( !window.CKEdivPopUp ) {
-
-		CKEdivPopUp = CKE.content.appendChild( document.createElement( 'div' ) );
-		CKEdivPopUp.style.cssText = "position:fixed;left:2rem;top:1rem;transform-origin: 0 0;transform: rotate(90deg);";
-
-	}
-
-	CKEdivPopUp.innerHTML = `
-<div>
-
-	<button onclick=GRV.accessToken=undefined;FRX.onHashChange();CKEdivPopUp.innerHTML=""; >Exit edit</button >
-
-	<button onclick=CKE.requestFile(); > edit: ${ CKE.hash }</button >
-
-	<button onclick=CKE.getSha() title="Press Alt-S">putGitHub</button>
-
-	<span id="spnMessage"></span>
-
-</div>`;
-
-};
 
 //////////
 

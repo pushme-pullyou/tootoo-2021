@@ -175,7 +175,7 @@ CKH.onKeyUp = function ( event ) {
 
 	event.preventDefault();
 
-	if ( event.altKey && event.keyCode === 83 ) {
+	if ( event.altKey && event.keyCode === 83 ) { // Alt-S to save
 
 		CKH.getSha();
 
