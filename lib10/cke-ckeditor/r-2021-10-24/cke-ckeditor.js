@@ -41,9 +41,7 @@ CKE.init = function ( base, content, claass, file, type ) {
 
 		<div class="editor"></div>
 
-	</div>
-
-	<div id="wordCount"></div>`;
+	</div>`;
 
 	window.addEventListener( "hashchange", CKE.onHashChange, false );
 
@@ -261,6 +259,7 @@ CKE.createEditor = function ( editor = CKE.class ) {
 			CKE.editor = editor; // create a global
 
 			CKE.onHashChange();
+
 
 		} )
 
