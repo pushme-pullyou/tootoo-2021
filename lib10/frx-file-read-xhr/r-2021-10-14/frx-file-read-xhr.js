@@ -308,10 +308,6 @@ FRX.loadLoaders = function ( obj, scripts, onLoad ) {
 
 		}
 
-
-
-
-
 	}
 
 	onLoad();

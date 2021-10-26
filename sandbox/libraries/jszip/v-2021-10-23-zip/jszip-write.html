@@ -16,7 +16,7 @@
 
 <body>
 
-	<script src="https://cdn.jsdelivr.net/npm/jszip@3.7.1/dist/jszip.min.js"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/jszip@3.7.1/dist/jszip.min.js"></script> -->
 
 	<h1>
 		<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/xxxxxx/" target="_blank"
@@ -37,9 +37,11 @@
 
 	<script>
 
-		const files = [ "LICENSE", "NPP_16.stl", "Photo Album_Example Auckland.pdf", "README.md", "Structural_MRI_animation.ogv.240p.webm", "ca_cs.xls", "code-of-conduct.md", "concept.md", "envmap.png", "heritage-front.jpg", "markdown-help.md", "markdown.md", "noun_Information_585560.svg", "pano.mp4", "readme.html", "sample.md", "snippets.txt", "style-sample-tags.html", "system-map.gif", "test-case.zip", "text-to-hack-3.html", "text-to-hack.html", "text.txt", "the-scream.jpg", "tree.obj", "us-county-state-latlon-pop.csv" ];
 
 		const ZIP = {};
+
+		ZIP.src = "https://cdn.jsdelivr.net/npm/jszip@3.7.1/dist/jszip.min.js";
+		ZIP.files = [ "LICENSE", "NPP_16.stl", "Photo Album_Example Auckland.pdf", "README.md", "Structural_MRI_animation.ogv.240p.webm", "ca_cs.xls", "code-of-conduct.md", "concept.md", "envmap.png", "heritage-front.jpg", "markdown-help.md", "markdown.md", "noun_Information_585560.svg", "pano.mp4", "readme.html", "sample.md", "snippets.txt", "style-sample-tags.html", "system-map.gif", "test-case.zip", "text-to-hack-3.html", "text-to-hack.html", "text.txt", "the-scream.jpg", "tree.obj", "us-county-state-latlon-pop.csv" ];
 
 		init();
 
@@ -50,26 +52,26 @@
 			spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
 
 
-			//requestFile();
-
 		}
 
 
 
-		function writeZip() {
+		function writeZip( files = ZIP.files ) {
 
-			if ( !ZIP.zip ) { ZIP.zip = new JSZip(); }
-			// ZIP.zip = new JSZip();
+			if ( !ZIP.zip ) {
 
-			// ZIP.zip.file( "Hello.txt", "Hello World\n" );
+				const scr = document.body.appendChild( document.createElement( 'script' ) );
+				scr.onload = () => {
+					ZIP.zip = new JSZip();
+					AddFilesToZip( files );
+				}
+				scr.src = ZIP.src;
 
-			// ZIP.zip.file( "Hello2.txt", "Hello World2\n" );
+				return;
 
-			files2 = "hello.txt";
-			const test = ZIP.zip.folder( "test-cases/things" );
-			test.file( "smile.gif", "things" );
+			}
 
-			AddFilesToZip( files )
+			AddFilesToZip( files );
 
 		}
 
@@ -79,7 +81,6 @@
 
 			files = Array.isArray( files ) ? files : [ files ];
 
-
 			for ( let file of files ) {
 
 				ZIP.zip.file( file, "Hello World\n" );
@@ -87,6 +88,7 @@
 			}
 
 			saveZip();
+
 		}
 
 		function saveZip() {
@@ -107,30 +109,6 @@
 			a.download = fileName;
 			a.click();
 			a = null;
-
-		}
-		function requestFile( url = "https://example.com", callback = onLoad ) {
-
-			url = "https://cdn.jsdelivr.net/gh/pushme-pullyou/tootoo-2021@master/README.md";
-			const urlCORS = ""; //https://cors-anywhere.herokuapp.com/";
-
-			xhr = new XMLHttpRequest();
-			xhr.open( "GET", urlCORS + url, true );
-			xhr.responseType = "text";
-			xhr.onerror = ( xhr ) => console.log( "error:", xhr );
-			//xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
-			xhr.onload = ( xhr ) => callback( xhr.target.response );
-			xhr.send( null );
-
-		}
-
-
-
-		function onLoad( response ) {
-
-			console.log( "response", response );
-
-			divContent.innerText = response;
 
 		}
 
