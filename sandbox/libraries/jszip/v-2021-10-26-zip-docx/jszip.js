@@ -9,6 +9,12 @@ ZIP.scripts = [
 	"https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"
 ];
 
+
+ZIP.baseNew = "../../../../../theo-armour-qdata/journal/days-of-year-md/10/";
+
+ZIP.baseOld = "../../../../../zzz-diary/10/";
+
+
 ZIP.fileNames = [ "LICENSE", "NPP_16.stl", "Photo Album_Example Auckland.pdf", "README.md", "Structural_MRI_animation.ogv.240p.webm", "ca_cs.xls", "code-of-conduct.md", "concept.md", "envmap.png", "heritage-front.jpg", "markdown-help.md", "markdown.md", "noun_Information_585560.svg", "pano.mp4", "readme.html", "sample.md", "snippets.txt", "style-sample-tags.html", "system-map.gif", "test-case.zip", "text-to-hack-3.html", "text-to-hack.html", "text.txt", "the-scream.jpg", "tree.obj", "us-county-state-latlon-pop.csv" ];
 
 
@@ -40,7 +46,7 @@ ZIP.loadScripts = function ( scripts = ZIP.scripts ) {
 
 ZIP.getFiles = function () {
 
-	ZIP.base = "../../../../../zzz-diary/10/";
+
 	ZIP.count = 0;
 	ZIP.fileNames = [];
 
@@ -60,16 +66,37 @@ ZIP.getFiles = function () {
 ZIP.getZip = function () {
 
 	ZIP.zip = new JSZip();
-	ZIP.requestFile();
+	ZIP.requestFileNew();
 
 };
 
 
 
+ZIP.requestFileNew = function () {
 
-ZIP.requestFile = function () {
+	const day = ( "0" + ( 1 + ZIP.count ) ).slice( -2 );
+	const url = ZIP.baseNew + "10-" + day + ".md";
 
-	const url = ZIP.base + ZIP.fileNames[ ZIP.count ] + ".docx";
+	console.log( "url", url );
+
+	const xhr = new XMLHttpRequest();
+	xhr.open( "GET", url, true );
+	xhr.responseType = "text";
+	xhr.onerror = ( xhr ) => console.log( "error:", xhr );
+	//xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
+	xhr.onload = ( xhr ) => {
+		ZIP.mdNew = xhr.target.response;
+		ZIP.requestFileOld();
+
+	};
+	xhr.send( null );
+
+};
+
+
+ZIP.requestFileOld = function () {
+
+	const url = ZIP.baseOld + ZIP.fileNames[ ZIP.count ] + ".docx";
 
 	console.log( "url", url );
 
@@ -86,21 +113,22 @@ ZIP.requestFile = function () {
 				.then( event => {
 					let text = event.value;
 
-					text = "# " + text.replace( /\*\*\*/g, "## " );
-
+					text = text.replace( /\*\*\*/g, "## " );
 
 					return text;
 
 				} )
-				.then( md => {
+			.then( md => {
 
-					const htm = new showdown.Converter().makeHtml( md );
+					const mdBoth = ZIP.mdNew + md;
+
+					const htm = new showdown.Converter().makeHtml( mdBoth );
 
 					divContent.innerHTML += htm + "\n===\n";
 
 					ZIP.zip.file( ZIP.fileNames[ ZIP.count ] + ".htm", htm );
 					ZIP.count++;
-					if ( ZIP.count < ZIP.fileNames.length ) { ZIP.requestFile(); }
+					if ( ZIP.count < ZIP.fileNames.length ) { ZIP.requestFileNew(); }
 				} );
 
 	};
