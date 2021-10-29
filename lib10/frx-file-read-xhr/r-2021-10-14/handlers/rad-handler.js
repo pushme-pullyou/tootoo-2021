@@ -112,7 +112,7 @@ RAD.addDataFile = function ( text ) {
 
 	RAD.json = { 'surfaces': [], 'materials': [], 'other': [] };
 
-	RAD.materialType = THR.scene.getObjectByName( 'lightAmbient' ) ?
+	RAD.materialType = THR.scene.getObjectByName( 'THR.lightAmbient' ) ?
 		THREE.MeshPhongMaterial
 		:
 		THREE.MeshBasicMaterial
