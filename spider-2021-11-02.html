@@ -8,7 +8,7 @@
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files in a repository hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
 	<meta name="date" content="2021-11-02">
-	<title>TooToo</title>
+	<title>Spider</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
 	<link id=CORstyle rel="stylesheet" href="./lib11/style/style-2021-11-02.css">
@@ -66,19 +66,19 @@
 
 		const COR = {
 			// Used by GRV
-			user: "pushme-pullyou",
-			repo: "tootoo-2021",
+			user: "ladybug-tools",
+			repo: "spider-2021",
 			branch: "main",
 
 			// Used by FRX
-			pathContent: "./",
+			pathContent: "https://www.ladybug.tools/spider-2021/",
 
-			// //pathTooToo: "https://pushme-pullyou.github.io/tootoo-2021/",
+			pathTooToo: "https://pushme-pullyou.github.io/tootoo-2021/",
 			// pathTooToo: "./",
 			// defaultFile: "README.md",
 			// //defaultIgnoreFolders: [],
 			defaultIgnoreFolders: [ "archive", "lib", "lib3d", "lib-geo", "lib-templates" ],
-			// filterFiles: [ "gif", "md", "html", "jpg", "license", "pdf", "png", "svg", "txt" ],
+			filterFiles: [ "gif", "md", "html", "jpg", "license", "pdf", "png", "svg", "txt" ],
 			// urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
 
 
@@ -89,7 +89,7 @@
 			iconInfo: `<img class=infoImg src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/noun_Information_585560.svg">`,
 			iconRepo: "❦",
 			title: document.title ? document.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " ),
-			urlSource: "https://github.com/pushme-pullyou/tootoo-2021/",
+			urlSource: "https://github.com/ladybug-tools/spider-2021/",
 			version: document.head.querySelector( "[ name=date ]" ).content,
 		};
 

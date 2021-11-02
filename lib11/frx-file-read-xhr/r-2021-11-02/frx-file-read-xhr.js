@@ -8,26 +8,28 @@ const FRX = {};
 
 FRX.release = "r-2021-11-02";
 FRX.releaseThree = "r133";
-FRX.pathTooToo = window.COR && COR.pathTooToo ? COR.pathTooToo : "./";
-FRX.pathContent = window.COR && COR.pathContent ? COR.pathContent : "./";
-FRX.defaultFile = window.COR && COR.defaultFile ? COR.defaultFile : "README.md";
 FRX.urlLoaders = `https://cdn.jsdelivr.net/gh/mrdoob/three.js@${ FRX.reeaseThree }/examples/js/loaders/`;
 FRX.reader = new FileReader();
 
 
 FRX.init = function () {
 
-	FRX.divTarget = FRXdivLog;
+
+	FRX.pathTooToo = window.COR && COR.pathTooToo ? COR.pathTooToo : "https://pushme-pullyou.github.io/tootoo-2021/";
+	FRX.pathContent = window.COR && COR.pathContent ? COR.pathContent : "https://www.ladybug.tools/spider-2021/";
+	FRX.defaultFile = window.COR && COR.defaultFile ? COR.defaultFile : "README.md";
+
 
 	FRX.pathUtilities = FRX.pathTooToo + `lib11/frx-file-read-xhr/${ FRX.release }/`;
 	//FRX.pathUtilities = `./`;
 
-	FRX.defaultFile = FRX.pathContent + FRX.defaultFile;
+	FRX.defaultUrl = FRX.pathContent + FRX.defaultFile;
+
+	FRX.divTarget = FRXdivLog;
 
 	//${ MNU.addInfoBox( info ); }
 
 	if ( window.FRXdivDetails ) {
-
 
 	const info = `
 <p>Open <a href="http://gbxml.org" target="_blank">gbXML</a>, HBJSON, Rhino 3DM, gLTF,
@@ -123,7 +125,7 @@ FRX.onHashChange = function () {
 
 	FRX.timeStart = performance.now();
 
-	const url = location.hash ? location.hash.slice( 1 ) : FRX.defaultFile;
+	const url = location.hash ? location.hash.slice( 1 ) : FRX.defaultUrl;
 	FRX.content = "";
 	FRX.file = "";
 	FRX.fileName = url.split( "/" ).pop();
