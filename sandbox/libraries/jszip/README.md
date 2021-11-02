@@ -11,6 +11,11 @@ _"jsZip" in a resizable window. One finger to rotate. Two to zoom._
 
 ## Concept
 
+* Open and then convert a foldr of docx files with "theo" format into Markdown format
+* Open a folder of Markdown files with th same name
+* Combine the data in the two files into one file
+* Convert the Markdown data to HTML
+* Compress the files into a single zip file
 
 ## To Do / Wish List
 
@@ -24,8 +29,10 @@ _"jsZip" in a resizable window. One finger to rotate. Two to zoom._
 ## Change Log
 
 
-### 123
+### 2021-11-01
 
+* creates list of file names
+()
 * First commit
 
 

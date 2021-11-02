@@ -25,7 +25,7 @@ ZIP.init = function () {
 
 	ZIP.loadScripts();
 
-	ZIP.getFiles();
+	ZIP.getFiles(); // can do while loading scripts
 
 };
 
@@ -45,6 +45,7 @@ ZIP.loadScripts = function ( scripts = ZIP.scripts ) {
 	return;
 
 };
+
 
 
 ZIP.getFiles = function () {
@@ -141,7 +142,7 @@ ZIP.requestFileOld = function () {
 
 
 
-ZIP.saveZip = function ( fileName = "example.zip" ) {
+ZIP.saveZip = function ( fileName = `month-${ ZIP.month }.zip` ) {
 
 	ZIP.zip.generateAsync( { type: "blob" } ).then( ( content ) => {
 
