@@ -125,7 +125,7 @@
 
 			if ( location.protocol === "https:" ) {
 
-				window.history.pushState( "", "", "./" + location.hash );
+				if ( COR.version !== "2021-11-02" ) { window.history.pushState( "", "", "../" + location.hash ); }
 
 				COR.ignoreFolders = COR.defaultIgnoreFolders;
 
