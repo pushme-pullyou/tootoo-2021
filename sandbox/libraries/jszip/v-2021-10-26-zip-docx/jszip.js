@@ -32,7 +32,7 @@ ZIP.loadScripts = function ( scripts = ZIP.scripts ) {
 	scripts = Array.isArray( scripts ) ? scripts : [ scripts ];
 
 
-	for ( script of scripts ) {
+	for ( let script of scripts ) {
 
 		const load = document.body.appendChild( document.createElement( 'script' ) );
 		load.src = script;
