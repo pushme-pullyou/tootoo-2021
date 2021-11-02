@@ -14,7 +14,6 @@ FRX.reader = new FileReader();
 
 FRX.init = function () {
 
-
 	FRX.pathTooToo = window.COR && COR.pathTooToo ? COR.pathTooToo : "https://pushme-pullyou.github.io/tootoo-2021/";
 	FRX.pathContent = window.COR && COR.pathContent ? COR.pathContent : "https://www.ladybug.tools/spider-2021/";
 	FRX.defaultFile = window.COR && COR.defaultFile ? COR.defaultFile : "README.md";
