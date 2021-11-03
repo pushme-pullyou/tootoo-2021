@@ -25,16 +25,19 @@
 
 <body>
 
-	<script src="./lib09/mnu-menu/r-2021-09-23/mnu-menu.js"></script>
+	<script src="./lib11/mnu-menu/r-2021-11-02/mnu-menu.js"></script>
 
 	<script src="./lib11/frx-file-read-xhr/r-2021-11-02/frx-file-read-xhr.js"></script>
 
 	<script src="./lib11/grv-github-repo-tree-view/v-2021-11-02/grv-github-repo-tree-view.js"></script>
 
 
-	<details id=detNavMenu class="gmd-4">
+	<div id=MNUdivShowHide ></div>
 
-		<summary id=sumNavMenu class="summary-nav gmd-1">
+
+		<!-- 	<details id=detNavMenu class="gmd-4">
+
+<summary id=sumNavMenu class="summary-nav gmd-1">
 			☰ <span id=spnMenuHelp>show&darr; || hide&uarr; menu</span>
 		</summary>
 
@@ -42,7 +45,7 @@
 
 			<div id=MNUdivHeader></div>
 
-			<!-- <div id=FRXdivDetails></div> -->
+			<!-- <div id=FRXdivDetails></div>
 
 			<div id=GRVdivDetails></div>
 
@@ -52,7 +55,7 @@
 
 		</nav>
 
-	</details>
+	</details> -->
 
 
 	<main id=main>
@@ -115,7 +118,7 @@
 			// GR
 			//GRA.init();
 
-			// GRV = GitHub Repo View
+			//GRV = GitHub Repo View
 			GRV.getFiles = GRV.getFilesAll;
 			GRV.getFiles = GRV.getFilesCurated;
 			GRV.init();

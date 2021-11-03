@@ -14,17 +14,15 @@ FRX.reader = new FileReader();
 
 FRX.init = function () {
 
-	FRX.pathTooToo = window.COR && COR.pathTooToo ? COR.pathTooToo : "https://pushme-pullyou.github.io/tootoo-2021/";
-	FRX.pathContent = window.COR && COR.pathContent ? COR.pathContent : "https://www.ladybug.tools/spider-2021/";
-	FRX.defaultFile = window.COR && COR.defaultFile ? COR.defaultFile : "README.md";
-
-
+	FRX.defaultFile = COR.defaultFile ? COR.defaultFile : "README.md";
+	FRX.divTarget = FRXdivLog;
+	FRX.pathContent = COR.pathContent ? COR.pathContent : "./";
+	FRX.pathTooToo = COR.pathTooToo ? COR.pathTooToo : "./";
 	FRX.pathUtilities = FRX.pathTooToo + `lib11/frx-file-read-xhr/${ FRX.release }/`;
 	//FRX.pathUtilities = `./`;
 
 	FRX.defaultUrl = FRX.pathContent + FRX.defaultFile;
 
-	FRX.divTarget = FRXdivLog;
 
 	//${ MNU.addInfoBox( info ); }
 

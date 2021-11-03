@@ -10,13 +10,13 @@ let MNU = {};
 MNU.init = function () {
 
 	MNU.urlSource = window.COR && COR.urlSource ? COR.urlSource : "https://github.com/pushme-pullyou/tootoo-2021/";
-	MNU.title = window.COR && COR.title ? COR.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " );
-	MNU.version = window.COR && COR.version ? COR.version : document.head.querySelector( "[ name=date ]" ).content;
-	MNU.iconGitHub = window.COR && COR.iconGitHub ? COR.iconGitHub : `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`;
-	MNU.iconRepo = window.COR && COR.iconRepo ? COR.iconRepo : "❦";
-	MNU.iconInfo = window.COR && COR.iconInfo ? COR.iconInfo : `<img class=infoImg src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/noun_Information_585560.svg" height=16px >`;
+	MNU.title = COR.title ? COR.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " );
+	MNU.version = COR.version ? COR.version : document.head.querySelector( "[ name=date ]" ).content;
+	MNU.iconGitHub = COR.iconGitHub ? COR.iconGitHub : `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`;
+	MNU.iconRepo = COR.iconRepo ? COR.iconRepo : "❦";
+	MNU.iconInfo = COR.iconInfo ? COR.iconInfo : `<img class=infoImg src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/noun_Information_585560.svg" height=16px >`;
 
-	MNU.infoBoxHtm = window.COR && COR.description ? COR.description : "XYZ";
+	MNU.infoBoxHtm = COR.description ? COR.description : "XYZ";
 
 	MNUdivShowHide.innerHTML = `
 
@@ -29,6 +29,10 @@ MNU.init = function () {
 		<nav id="navMenu" class="">
 
 			<div id=MNUdivHeader></div>
+
+			<div id=GRVdivDetails></div>
+
+			<div id=FRXdivLog ></div>
 
 			<div id=MNUdivSample></div>
 
