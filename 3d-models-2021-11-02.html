@@ -8,7 +8,7 @@
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files in a repository hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
 	<meta name="date" content="2021-11-02">
-	<title>Spider</title>
+	<title>3D Models</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
 	<link id=CORstyle rel="stylesheet" href="./lib11/style/style-2021-11-02.css">
@@ -31,10 +31,7 @@
 
 	<script src="./lib11/grv-github-repo-tree-view/v-2021-11-02/grv-github-repo-tree-view.js"></script>
 
-
-	<div id=MNUdivShowHide></div>
-
-
+	<div id=MNUdivShowHide ></div>
 
 	<main id=main>
 
@@ -48,18 +45,18 @@
 		const COR = {
 			// Used by GRV
 			user: "ladybug-tools",
-			repo: "spider-2021",
-			branch: "main",
+			repo: "3d-models",
+			branch: "master",
 
 			// Used by FRX
-			pathContent: "https://www.ladybug.tools/spider-2021/",
+			pathContent: "https://www.ladybug.tools/3d-models/",
 
-			pathTooToo: "https://pushme-pullyou.github.io/tootoo-2021/",
+			// //pathTooToo: "https://pushme-pullyou.github.io/tootoo-2021/",
 			// pathTooToo: "./",
 			// defaultFile: "README.md",
 			// //defaultIgnoreFolders: [],
 			defaultIgnoreFolders: [ "archive", "lib", "lib3d", "lib-geo", "lib-templates" ],
-			filterFiles: [ "gif", "md", "html", "jpg", "license", "pdf", "png", "svg", "txt" ],
+			// filterFiles: [ "gif", "md", "html", "jpg", "license", "pdf", "png", "svg", "txt" ],
 			// urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
 
 
@@ -70,7 +67,7 @@
 			iconInfo: `<img class=infoImg src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/noun_Information_585560.svg">`,
 			iconRepo: "❦",
 			title: document.title ? document.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " ),
-			urlSource: "https://github.com/ladybug-tools/spider-2021/",
+			urlSource: "https://github.com/ladybug-tools/3d-models/",
 			version: document.head.querySelector( "[ name=date ]" ).content,
 		};
 
@@ -96,7 +93,7 @@
 			// GR
 			//GRA.init();
 
-			// GRV = GitHub Repo View
+			//GRV = GitHub Repo View
 			GRV.getFiles = GRV.getFilesAll;
 			GRV.getFiles = GRV.getFilesCurated;
 			GRV.init();
