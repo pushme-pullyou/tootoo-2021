@@ -9,7 +9,7 @@ let MNU = {};
 
 MNU.init = function () {
 
-	MNU.urlSource = window.COR && COR.urlSource ? COR.urlSource : "https://github.com/pushme-pullyou/tootoo-2021/";
+	MNU.urlSource = COR.urlSource ? COR.urlSource : "https://github.com/pushme-pullyou/tootoo-2021/";
 	MNU.title = COR.title ? COR.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " );
 	MNU.version = COR.version ? COR.version : document.head.querySelector( "[ name=date ]" ).content;
 	MNU.iconGitHub = COR.iconGitHub ? COR.iconGitHub : `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`;
