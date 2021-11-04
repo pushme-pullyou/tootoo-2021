@@ -31,8 +31,6 @@ MNU.init = function () {
 
 			<div id=MNUdivContent></div>
 
-			<div id=FRXdivLog ></div>
-
 			<div id=GRVdivDetails></div>
 
 			<div id=MNUdivSample></div>

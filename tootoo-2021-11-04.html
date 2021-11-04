@@ -7,7 +7,7 @@
 	<meta name="description"
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files in a repository hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2021-11-02">
+	<meta name="date" content="2021-11-04">
 	<title>TooToo</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
@@ -15,7 +15,7 @@
 
 	<style>
 		:root {
-			/* --mnu-width: 20rem; */
+			/* --mnu-width: 20rem; commit*/
 			--main-hue: 240;
 			/* 0 to 360 0=red 120=green 240=blue */
 		}
@@ -112,7 +112,7 @@
 
 			if ( location.protocol === "https:" ) {
 
-				if ( COR.version !== "2021-11-02" ) { window.history.pushState( "", "", "../" + location.hash ); }
+				if ( COR.version !== "2021-11-04" ) { window.history.pushState( "", "", "../" + location.hash ); }
 
 				COR.ignoreFolders = COR.defaultIgnoreFolders;
 
