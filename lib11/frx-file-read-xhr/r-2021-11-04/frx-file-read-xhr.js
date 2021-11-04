@@ -64,7 +64,7 @@ Release: ${ FRX.release }<br>`;
 
 	}
 
-	FRX.divTarget = FRXdivLog;
+
 
 	window.addEventListener( "hashchange", FRX.onHashChange );
 
