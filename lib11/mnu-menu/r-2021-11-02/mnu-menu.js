@@ -9,14 +9,13 @@ let MNU = {};
 
 MNU.init = function () {
 
-	MNU.urlSource = COR.urlSource ? COR.urlSource : "https://github.com/pushme-pullyou/tootoo-2021/";
-	MNU.title = COR.title ? COR.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " );
-	MNU.version = COR.version ? COR.version : document.head.querySelector( "[ name=date ]" ).content;
-	MNU.iconGitHub = COR.iconGitHub ? COR.iconGitHub : `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`;
-	MNU.iconRepo = COR.iconRepo ? COR.iconRepo : "❦";
-	MNU.iconInfo = COR.iconInfo ? COR.iconInfo : `<img class=infoImg src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/noun_Information_585560.svg" height=16px >`;
-
 	MNU.infoBoxHtm = COR.description ? COR.description : "XYZ";
+	MNU.iconGitHub = COR.iconGitHub ? COR.iconGitHub : `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`;
+	MNU.iconInfo = COR.iconInfo ? COR.iconInfo : `<img class=infoImg src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/noun_Information_585560.svg" height=16px >`;
+	MNU.iconRepo = COR.iconRepo ? COR.iconRepo : "❦";
+	MNU.title = COR.title ? COR.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " );
+	MNU.urlSource = COR.urlSource ? COR.urlSource : "https://github.com/pushme-pullyou/tootoo-2021/";
+	MNU.version = COR.version ? COR.version : document.head.querySelector( "[ name=date ]" ).content;
 
 	MNUdivShowHide.innerHTML = `
 
@@ -68,7 +67,7 @@ MNU.init = function () {
 		MNUdivPopUp.style.padding = "0.5rem";
 		MNUdivPopUp.style.position = "absolute";
 		// MNUdivPopUp.classList.add( "infoTooltip" );
-		// MNUdivPopUp.style.display = "block";
+		//MNUdivPopUp.style.display = "block";
 	}
 
 

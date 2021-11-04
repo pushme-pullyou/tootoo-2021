@@ -7,7 +7,14 @@
 	<meta name="description" content="">
 	<meta name="date" content="2021-11-02">
 	<title></title>
+	<link id=CORstyle rel="stylesheet" href="../../../lib11/style/style-2021-11-02.css">
 	<style>
+		:root {
+			--mnu-width: 20rem;
+			--main-hue: 240;
+			/* 0 to 360 0=red 120=green 240=blue */
+		}
+
 		body {
 			font: 100% monospace;
 		}
@@ -25,6 +32,7 @@
 
 	<script>
 
+		let COR = {};
 
 		init();
 
@@ -33,37 +41,11 @@
 			MNU.init();
 
 			//sumNavMenu.hidden = false;
-			
+
 			MNU.getSample();
 
 		}
 
-
-
-		function requestFile( url = "https://example.com", callback = onLoad ) {
-
-			url = "https://cdn.jsdelivr.net/gh/pushme-pullyou/tootoo-2021@master/README.md";
-			const urlCORS = ""; //https://cors-anywhere.herokuapp.com/";
-
-			xhr = new XMLHttpRequest();
-			xhr.open( "GET", urlCORS + url, true );
-			xhr.responseType = "text";
-			xhr.onerror = ( xhr ) => console.log( "error:", xhr );
-			//xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
-			xhr.onload = ( xhr ) => callback( xhr.target.response );
-			xhr.send( null );
-
-		}
-
-
-
-		function onLoad( response ) {
-
-			console.log( "response", response );
-
-			divContent.innerText = response;
-
-		}
 
 	</script>
 

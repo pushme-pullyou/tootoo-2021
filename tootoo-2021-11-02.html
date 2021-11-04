@@ -35,29 +35,6 @@
 	<div id=MNUdivShowHide ></div>
 
 
-		<!-- 	<details id=detNavMenu class="gmd-4">
-
-<summary id=sumNavMenu class="summary-nav gmd-1">
-			☰ <span id=spnMenuHelp>show&darr; || hide&uarr; menu</span>
-		</summary>
-
-		<nav id="navMenu" class="">
-
-			<div id=MNUdivHeader></div>
-
-			<!-- <div id=FRXdivDetails></div>
-
-			<div id=GRVdivDetails></div>
-
-			<div id=FRXdivLog ></div>
-
-			<div id=MNUdivFooter></div>
-
-		</nav>
-
-	</details> -->
-
-
 	<main id=main>
 
 		<div id="divMainContent"></div>
@@ -68,24 +45,8 @@
 	<script>
 
 		const COR = {
-			// Used by GRV
-			user: "pushme-pullyou",
-			repo: "tootoo-2021",
-			branch: "main",
 
-			// Used by FRX
-			pathContent: "./",
-
-			// //pathTooToo: "https://pushme-pullyou.github.io/tootoo-2021/",
-			// pathTooToo: "./",
-			// defaultFile: "README.md",
-			// //defaultIgnoreFolders: [],
-			defaultIgnoreFolders: [ "archive", "lib", "lib3d", "lib-geo", "lib-templates" ],
-			// filterFiles: [ "gif", "md", "html", "jpg", "license", "pdf", "png", "svg", "txt" ],
-			// urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
-
-
-			// Used by MNU
+			// Used by MNU ~ mnu-menu.js
 			description: document.head.querySelector( "[ name=description ]" ).content,
 			iconExternalFile: `<img class=infoImg  src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/icon-external-link.svg">`,
 			iconGitHub: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`,
@@ -94,6 +55,23 @@
 			title: document.title ? document.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " ),
 			urlSource: "https://github.com/pushme-pullyou/tootoo-2021/",
 			version: document.head.querySelector( "[ name=date ]" ).content,
+
+			// Used by GRV
+			user: "pushme-pullyou",
+			repo: "tootoo-2021",
+			branch: "main",
+
+			// Used by FRX
+			pathContent: "./",
+
+			// pathTooToo: "https://pushme-pullyou.github.io/tootoo-2021/",
+			pathTooToo: "./",
+			defaultFile: "README.md",
+
+			// defaultIgnoreFolders: [],
+			defaultIgnoreFolders: [ "archive", "lib", "lib3d", "lib-geo", "lib-templates" ],
+			// filterFiles: [ "gif", "md", "html", "jpg", "license", "pdf", "png", "svg", "txt" ],
+
 		};
 
 
