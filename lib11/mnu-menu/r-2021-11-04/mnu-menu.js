@@ -9,7 +9,7 @@ let MNU = {};
 
 MNU.init = function () {
 
-	MNU.infoBoxHtm = COR.description ? COR.description : "XYZ";
+	MNU.infoBoxHtm = COR.description ? COR.description : "MNU Menu";
 	MNU.iconGitHub = COR.iconGitHub ? COR.iconGitHub : `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`;
 	MNU.iconInfo = COR.iconInfo ? COR.iconInfo : `<img class=infoImg src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/noun_Information_585560.svg" height=16px >`;
 	MNU.iconRepo = COR.iconRepo ? COR.iconRepo : "❦";
