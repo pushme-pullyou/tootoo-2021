@@ -15,7 +15,7 @@ FRX.reader = new FileReader();
 FRX.init = function () {
 
 	FRX.defaultFile = COR.defaultFile ? COR.defaultFile : "README.md";
-	FRX.divTarget = FRXdivLog;
+
 	FRX.pathContent = COR.pathContent ? COR.pathContent : "./";
 	FRX.pathTooToo = COR.pathTooToo ? COR.pathTooToo : "./";
 	FRX.pathUtilities = FRX.pathTooToo + `lib11/frx-file-read-xhr/${ FRX.release }/`;
@@ -64,6 +64,7 @@ Release: ${ FRX.release }<br>`;
 
 	}
 
+	FRX.divTarget = FRXdivLog;
 
 	window.addEventListener( "hashchange", FRX.onHashChange );
 
