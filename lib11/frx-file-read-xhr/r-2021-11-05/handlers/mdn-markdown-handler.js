@@ -22,7 +22,7 @@ MDN.handle = function () {
 
 MDN.read = function () {
 
-	FRX.loadLoader( MDN.loader, MDN.src, MDN.readFile );
+	FRX.loadLoaders( MDN, MDN.src, MDN.readFile );
 
 };
 

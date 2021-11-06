@@ -21,7 +21,7 @@ r3DM.handle = function () {
 
 r3DM.read = function () {
 
-	FRX.loadLoader( r3DM, r3DM.src, r3DM.readFile );
+	FRX.loadLoaders( r3DM, r3DM.src, r3DM.readFile );
 
 };
 

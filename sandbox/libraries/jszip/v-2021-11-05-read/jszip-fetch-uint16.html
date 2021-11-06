@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="description" content="JSZIP">
+	<meta name="date" content="2021-11-05">
+	<title></title>
+	<style>
+		body {
+			font: 100% monospace;
+		}
+	</style>
+</head>
+
+<body>
+	<script src="https://cdn.jsdelivr.net/npm/jszip@3.7.1/dist/jszip.min.js"></script>
+
+
+	<h1>
+		<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/main/sandbox/libraries/jszip" target="_blank"
+			title="source code on GitHub"><img
+				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
+		<a href="" title="Click this menu title to reset the model">
+			<span id=spnTitle></span>
+			<span id=spnVersion></span>
+		</a>
+		<a href="https://github.com/Stuk/jszip" target="_blank">jszip</a>
+	</h1>
+
+	<p>
+		<button onclick=fetchZipFile(url4);>winchester-school-560-surfaces.zip</button>
+
+		<button onclick=fetchZipFile(url3);>bristol-clifton-down-road-utf16.zip</button>
+
+		<input type="file" id=inpFile>
+
+	</p>
+
+	<div id="title"></div>
+
+	<div><select id=selFiles oninput=getFiles(); size=10 style=width:20rem></select></div>
+
+
+	<div id="divContent"></div>
+
+
+	<script>
+
+		// https://stuk.github.io/jszip/
+
+		const base = "https://cdn.jsdelivr.net/gh/ladybug-tools/3d-models@master/";
+
+		const url1 = base + "gbxml-sample-files/zip/vauxhall-tower-30k-surfaces.zip";  // breaks the browser
+
+		const url2 = base + "gbxml-sample-files/zip/london-office2.zip";
+
+		const url3 = base + "gbxml-sample-files/zip/bristol-clifton-down-road-utf16.zip";
+
+		const url4 = base + "gbxml-sample-files/zip/winchester-school-560-surfaces.zip"
+
+		let ZIP;
+
+		init();
+
+		function init() {
+
+			spnTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+
+			spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
+
+			//fetchZipFile( url2 );
+
+			window.addEventListener( "dragenter", dragenter, false );
+			window.addEventListener( "dragover", dragover, false );
+			window.addEventListener( "drop", drop, false );
+
+
+		}
+
+
+		function dragenter( e ) {
+			e.stopPropagation();
+			e.preventDefault();
+		}
+
+		function dragover( e ) {
+			e.stopPropagation();
+			e.preventDefault();
+		}
+
+		function drop( e ) {
+
+			e.stopPropagation();
+			e.preventDefault();
+
+			const dt = e.dataTransfer;
+			const files = dt.files;
+
+			startTime = performance.now();
+			handleFile( files[ 0 ] );
+
+		}
+
+
+
+		inpFile.onchange = function ( event ) {
+
+			startTime = performance.now();
+
+			const files = event.target.files;
+
+			for ( let i = 0; i < files.length; i++ ) { readFile( files[ i ] ); }
+
+		}
+
+
+
+		function readFile( file ) {
+
+			console.log( "file", file );
+
+			title.innerHTML = `<h3>${ file.name }</h3>`;
+			divContent.innerHTML = "";
+
+			JSZip.loadAsync( file )
+				.then( ( data ) => {
+					ZIP = data;
+					title.innerHTML += `
+<span> loaded in ${ ( performance.now() - startTime ).toLocaleString() }ms</span>`;
+
+					const names = getNames();
+
+					//getZipContents( names[ 0 ], zip );
+
+				} )
+
+				.catch( error => {
+					console.error( "There has been a problem with your file operation:", error );
+				} );
+
+		}
+
+
+
+		function fetchZipFile( url = url2 ) {
+
+			divContent.innerHTML = "";
+
+			fetch( url )
+
+				.then( response => {
+
+					if ( !response.ok ) { throw new Error( "Error" + response.statusText ); }
+
+					return response.blob();
+
+				} )
+
+				.then( JSZip.loadAsync )
+
+				.then( zip => {
+
+					ZIP = zip;
+
+					const names = getNames();
+
+					//getZipContents( names[ 0 ], zip );
+
+				} )
+
+				.catch( error => {
+					console.error( "There has been a problem with your fetch operation:", error );
+				} );
+
+		}
+
+
+		function getNames( zip ) {
+
+			const names = [];
+
+			ZIP.forEach( ( relativePath, zipEntry ) => {
+				//console.log( "zipEntry.name", zipEntry.name );
+				names.push( zipEntry.name );
+			} );
+
+			selFiles.innerHTML = names.map( name => "<option>" + name ).join( "" );
+
+			return names;
+
+		}
+
+		// https://android.googlesource.com/platform/external/chromium-trace/+/cef7893/catapult/tracing/tracing/extras/importer/ddms_importer.html
+
+
+		function getFiles() {
+
+			fileName = selFiles.value;
+
+			getZipContents( fileName, ZIP );
+
+		}
+
+
+
+		function getZipContents( fileName, zip ) {
+
+			zip.file( fileName ).async( "uint8array" )
+
+				.then( function ( uint8array ) {
+
+					let text;
+
+					if ( uint8array[ 0 ] !== 255 || uint8array[ 0 ] === 239 || uint8array[ 0 ] === 60 ) {
+
+						text = new TextDecoder( "utf-8" ).decode( uint8array );
+						//console.log( 'text', text );
+
+					} else {
+
+						const arr = new Uint8Array( uint8array.length / 2 );
+						let index = 0;
+
+						for ( let i = 0; i < uint8array.length; i++ ) {
+
+							if ( i % 2 === 0 ) {
+
+								arr[ index++ ] = uint8array[ i ];
+
+							}
+
+						}
+
+						text = new TextDecoder( "utf-8" ).decode( arr );
+
+					}
+
+					const regex = /encoding="utf-16"/i;
+
+					return text.match( regex ) ? text.slice( 1 ).replace( regex, "" ) : text;
+
+				} )
+
+				.then( text => {
+					divContent.innerText = text;
+				} )
+
+				.catch( error => {
+					console.error( "There has been a problem with your fetch operation:", error );
+				} );
+
+		}
+
+
+	</script>
+
+</body>
+
+</html>

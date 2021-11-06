@@ -6,18 +6,17 @@
 
 const FRX = {};
 
-FRX.release = "r-2021-11-02";
-FRX.releaseThree = "r133";
-FRX.urlLoaders = `https://cdn.jsdelivr.net/gh/mrdoob/three.js@${ FRX.reeaseThree }/examples/js/loaders/`;
+FRX.release = "r-2021-11-05";
+FRX.releaseThree = "r134";
+FRX.urlLoaders = `https://cdn.jsdelivr.net/gh/mrdoob/three.js@${ FRX.releaseThree }/examples/js/loaders/`;
 FRX.reader = new FileReader();
-
 
 FRX.init = function () {
 
 	FRX.defaultFile = COR.defaultFile ? COR.defaultFile : "README.md";
 
-	FRX.pathContent = COR.pathContent ? COR.pathContent : "./";
-	FRX.pathTooToo = COR.pathTooToo ? COR.pathTooToo : "./";
+	FRX.pathContent = COR.pathContent ? COR.pathContent : "../../../";
+	FRX.pathTooToo = COR.pathTooToo ? COR.pathTooToo : "../../../";
 	FRX.pathUtilities = FRX.pathTooToo + `lib11/frx-file-read-xhr/${ FRX.release }/`;
 	//FRX.pathUtilities = `./`;
 
@@ -26,7 +25,7 @@ FRX.init = function () {
 
 	//${ MNU.addInfoBox( info ); }
 
-	if ( window.FRXdivDetails ) {
+	if ( !window.FRXdivDetails ) {
 
 	const info = `
 <p>Open <a href="http://gbxml.org" target="_blank">gbXML</a>, HBJSON, Rhino 3DM, gLTF,
@@ -36,9 +35,9 @@ File: frx-file-read-xhr.js<br>
 Name space: FRX<br>
 Release: ${ FRX.release }<br>`;
 
-	divFRX = MNUdivContent.appendChild( document.createElement( 'div' ) );
+	FRXdivDetails = MNUdivContent.appendChild( document.createElement( 'div' ) );
 
-	divFRX.innerHTML = `
+		FRXdivDetails.innerHTML = `
 <details id=detFile open>
 		<summary class="summary-primary gmd-1" title="Open files on your device: ">
 		File menu
@@ -63,8 +62,6 @@ Release: ${ FRX.release }<br>`;
 </details>`;
 
 	}
-
-
 
 	window.addEventListener( "hashchange", FRX.onHashChange );
 
@@ -279,7 +276,7 @@ FRX.loadLoader = function ( obj, script, onLoad ) {
 	console.log( "obj", obj );
 	//console.log( "loaded", obj, onLoad );
 
-	if ( obj.loaded === false ) {
+	if ( obj?.loaded === false ) {
 
 		obj.loaded = true;
 		const load = document.body.appendChild( document.createElement( 'script' ) );
@@ -299,7 +296,7 @@ FRX.loadLoaders = function ( obj, scripts, onLoad ) {
 
 	scripts = Array.isArray( scripts ) ? scripts : [ scripts ];
 
-	if ( !obj.loaded ) {
+	if ( !obj?.loaded ) {
 
 		//console.log( "scripts", scripts );
 
@@ -372,12 +369,12 @@ FRX.onProgress = function ( size = 0, note = "" ) {
 			<span class=attributeTitle >Time to load</span>: <span class=attributeValue>${ FRX.timeToLoad } ms</span></br>
 			${ note }
 		</p>
-		<div id=FRXdivLog2 ></div>
 	`;
 
-	FRX.divTarget.innerHTML = htm;
+	FRXdivLog.innerHTML = htm;
 
 };
+
 
 
 // template

@@ -20,7 +20,7 @@ UNK.handle = function () {
 
 UNK.read = function () {
 
-	FRX.loadLoaders( UNK.loader, [], UNK.readFile );
+	FRX.loadLoaders( UNK, [], UNK.readFile );
 
 };
 
