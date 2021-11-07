@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name=description content="Real-time 3D in your browser with menu hiding">
+	<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM">
+	<meta name="date" content="2021-11-06">
+	<title></title>
+	<style>
+		/* Copyright 2021 Theo Armour. MIT License */
+
+		body {
+			font: 100% monospace;
+			margin: 0;
+			overflow: hidden;
+		}
+
+		#main {
+			border: 1px solid red;
+			margin: 0 auto 0 20rem;
+			max-width: 40rem;
+		}
+
+		.nav {
+			background: white;
+			border-radius: 10px;
+			box-shadow: 0 0 50px -25px black;
+			color: gray;
+			margin: 1rem;
+			width: 16rem;
+			overflow: auto;
+			padding: 1rem;
+			position: absolute;
+			resize: both;
+		}
+
+		.full-width {
+			width: 100%;
+		}
+	</style>
+</head>
+
+<body>
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r134/build/three.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r134/examples/js/controls/OrbitControls.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/gh/spite/ccapture.js@v1.0.9/build/CCapture.all.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/gh/thenickdude/webm-writer-js@v0.3.0/src/WebMWriter.js"></script>
+
+	<nav id=navMenu class=nav>
+
+		<details open>
+
+			<summary>show&darr; || hide&uarr; </summary>
+
+			<h1>
+				<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/lib3d/" target="_blank"
+					title="source code on GitHub"><img
+						src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
+				<a href="" id=aTitle title="Click this menu title to reset the model"></a>
+			</h1>
+
+			<div class="buttons">
+				<button id="start">Start recording to WebM</button>
+				<button id="stop">Stop (or wait 8 seconds)</button>
+			</div>
+
+			<div id=divMessage></div>
+
+
+
+		</details>
+
+	</nav>
+
+
+	<script>
+
+		let renderer, camera, controls, scene;
+		let geometry, material, mesh, axesHelper;
+
+
+		//animate();
+
+		function init( width, height ) {
+
+			//aTitle.innerHTML = document.title = location.href.split( "/" ).pop();
+
+			aTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+
+			// Create a capturer that exports a WebM video
+			var capturer = new CCapture( { format: 'webm' } );
+
+			setupScene( width, height );
+			setupButtons();
+			resize( width, height );
+			render();
+
+		}
+
+
+		const recorder = new CCapture( {
+			verbose: false,
+			display: true,
+			framerate: 60,
+			quality: 100,
+			format: 'webm',
+			timeLimit: 8,
+			frameLimit: 0,
+			autoSaveTime: 0
+		} );
+
+
+		function render() {
+			sphere.rotation.x += 0.01308996938995747;
+			sphere.rotation.y += 0.01308996938995747;
+			renderer.render( scene, camera );
+			recorder.capture( renderer.domElement );
+			requestAnimationFrame( render );
+		}
+
+
+		function resize( width, height ) {
+			camera.aspect = width / height;
+			camera.updateProjectionMatrix();
+			renderer.setSize( width, height );
+		}
+
+
+		function setupButtons() {
+			const $start = document.getElementById( 'start' );
+			const $stop = document.getElementById( 'stop' );
+
+			$start.addEventListener( 'click', e => {
+				e.preventDefault();
+				recorder.start();
+				$start.style.display = 'none';
+				$stop.style.display = 'block';
+			}, false );
+
+			$stop.addEventListener( 'click', e => {
+				e.preventDefault();
+				recorder.stop();
+				$stop.style.display = 'none';
+				recorder.save();
+			}, false );
+		}
+
+
+		function setupScene( width, height ) {
+
+			renderer = new THREE.WebGLRenderer( {
+				antialias: true
+			} );
+			renderer.setSize( width, height );
+			document.body.appendChild( renderer.domElement );
+
+			scene = new THREE.Scene();
+			camera = new THREE.PerspectiveCamera( 100, width / height, 0.1, 500 );
+			camera.position.set( 0, 0, 20 );
+
+			const light0 = new THREE.PointLight( 0xffffff, 1, 0 );
+			light0.position.set( 0, 200, 0 );
+			scene.add( light0 );
+
+			const light1 = new THREE.PointLight( 0xffffff, 1, 0 );
+			light1.position.set( 100, 200, 100 );
+			scene.add( light1 );
+
+			const light2 = new THREE.PointLight( 0xffffff, 1, 0 );
+			light2.position.set( -100, -200, -100 );
+			scene.add( light2 );
+
+			scene.add( new THREE.AmbientLight( 0x000000 ) );
+
+			sphere = new THREE.Mesh(
+				new THREE.TorusKnotGeometry( 10, 3, 100, 16 ),
+				new THREE.MeshPhongMaterial( {
+					color: 0x156289,
+					emissive: 0x072534,
+					side: THREE.DoubleSide,
+				} )
+			);
+
+			scene.add( sphere );
+		}
+;
+
+		init( 512, 512 );
+	</script>
+
+</body>
+
+</html>
