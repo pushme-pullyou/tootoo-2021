@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name=description content="Real-time 3D in your browser with menu hiding">
+	<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM">
+	<meta name="date" content="2021-11-08">
+	<title></title>
+	<style>
+		/* Copyright 2021 Theo Armour. MIT License */
+
+		body {
+			font: 100% monospace;
+			margin: 0;
+			overflow: hidden;
+		}
+
+		#main {
+			border: 1px solid red;
+			margin: 0 auto 0 20rem;
+			max-width: 40rem;
+		}
+
+		.nav {
+			background: white;
+			border-radius: 10px;
+			box-shadow: 0 0 50px -25px black;
+			color: gray;
+			margin: 1rem;
+			width: 16rem;
+			overflow: auto;
+			padding: 1rem;
+			position: absolute;
+			resize: both;
+		}
+
+		.full-width {
+			width: 100%;
+		}
+	</style>
+</head>
+
+<body>
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r134/build/three.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r134/examples/js/controls/OrbitControls.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/gh/spite/ccapture.js@v1.0.9/build/CCapture.all.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/gh/thenickdude/webm-writer-js@v0.3.0/src/WebMWriter.js"></script>
+
+	<nav id=navMenu class=nav>
+
+		<details open>
+
+			<summary>show&darr; || hide&uarr; </summary>
+
+			<h1>
+				<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/main/sandbox/libraries/ccapture"
+					target="_blank" title="source code on GitHub"><img
+						src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
+				<a href="" id=aTitle title="Click this menu title to reset the model"></a>
+				<span id="release"></span>
+			</h1>
+
+			<div class="buttons">
+				<button id="butStart">Start recording to WebM</button>
+				<button id="butStop">Stop (or wait for time limit)</button>
+			</div>
+
+			<div id=divMessage></div>
+
+		</details>
+
+	</nav>
+
+
+	<script>
+
+		let renderer, camera, controls, scene;
+		let geometry, material, mesh;
+		let progress = 0;
+
+		function init( width, height ) {
+
+			aTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+			release.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
+
+			// Create a capturer that exports a WebM video
+			//var capturer = new CCapture( { format: 'webm' } );
+
+			setupScene( width, height );
+			setupButtons();
+			resize( width, height );
+			render();
+
+		}
+
+
+		const recorder = new CCapture( {
+			verbose: false,
+			display: true,
+			framerate: 60,
+			quality: 100,
+			format: 'webm',
+			timeLimit: 8,
+			frameLimit: 0,
+			autoSaveTime: 0
+		} );
+
+
+		function render() {
+			mesh.rotation.x += 0.01308996938995747;
+			mesh.rotation.y += 0.01308996938995747;
+			renderer.render( scene, camera );
+			recorder.capture( renderer.domElement );
+			requestAnimationFrame( render );
+		}
+
+
+		function render( progressdd ) {
+
+			//console.log( "progress", progress );
+			// progress goes from 0 to 1
+
+			xx = Math.PI * 2 / 479;
+
+			mesh.rotation.x += xx;
+			mesh.rotation.y += xx;
+
+			mesh2.rotation.x -= xx;
+			mesh2.rotation.y -= xx;
+
+			distance = 17;
+			factor = 1; // / 480
+
+			center = scene.position;
+
+			camera.position.x = center.x + Math.cos( factor * progress * Math.PI * 2 ) * distance;
+			camera.position.y = center.y + Math.cos( factor * progress * Math.PI * 2 ) * distance;
+			camera.position.z = center.z + Math.sin( factor * progress * Math.PI * 2 ) * distance;
+
+			camera.lookAt( center );
+
+			progress += 1 / 480
+
+			renderer.render( scene, camera );
+			recorder.capture( renderer.domElement );
+			requestAnimationFrame( render );
+
+		}
+
+
+
+		function resize( width, height ) {
+			camera.aspect = width / height;
+			camera.updateProjectionMatrix();
+			renderer.setSize( width, height );
+		}
+
+
+
+		function setupButtons() {
+
+			butStart.addEventListener( 'click', e => {
+				e.preventDefault();
+				recorder.start();
+				butStart.style.display = 'none';
+				butStop.style.display = 'block';
+			}, false );
+
+			butStop.addEventListener( 'click', e => {
+				e.preventDefault();
+				recorder.stop();
+				butStop.style.display = 'none';
+				recorder.save();
+			}, false );
+
+		}
+
+
+
+		function setupScene( width, height ) {
+
+			renderer = new THREE.WebGLRenderer( {
+				antialias: true
+			} );
+			renderer.setSize( width, height );
+			document.body.appendChild( renderer.domElement );
+
+			scene = new THREE.Scene();
+			camera = new THREE.PerspectiveCamera( 130, width / height, 0.1, 500 );
+			camera.position.set( 0, 0, 20 );
+
+			const light0 = new THREE.PointLight( 0xffffff, 1, 0 );
+			light0.position.set( 0, 200, 0 );
+			scene.add( light0 );
+
+			const light1 = new THREE.PointLight( 0xffffff, 1, 0 );
+			light1.position.set( 100, 200, 100 );
+			scene.add( light1 );
+
+			const light2 = new THREE.PointLight( 0xffffff, 1, 0 );
+			light2.position.set( -100, -200, -100 );
+			scene.add( light2 );
+
+			scene.add( new THREE.AmbientLight( 0x000000 ) );
+
+			mesh = new THREE.Mesh(
+				new THREE.TorusKnotGeometry( 10, 3, 150, 24 ),
+				new THREE.MeshPhongMaterial( {
+					color: 0x156289,
+					emissive: 0x072534,
+					opacity: 0.95,
+					//side: THREE.DoubleSide,
+					transparent: true
+				} )
+			);
+
+
+
+			mesh2 = new THREE.Mesh(
+				new THREE.TorusKnotGeometry( 10, 3, 150, 24 ),
+				new THREE.MeshPhongMaterial( {
+					color: 0xffffff * Math.random(),
+					emissive: 0x072534,
+					opacity: 0.95,
+					//side: THREE.DoubleSide,
+					transparent: true
+				} )
+			);
+
+			scene.add( mesh2 );
+
+				mesh3 = new THREE.Mesh(
+				new THREE.TorusKnotGeometry( 10, 3, 150, 24 ),
+				new THREE.MeshPhongMaterial( {
+					color: 0xffffff * Math.random(),
+					emissive: 0x072534,
+					opacity: 0.95,
+					//side: THREE.DoubleSide,
+					transparent: true
+				} )
+			);
+
+			scene.add( mesh3 );
+
+			scene.add( mesh );
+
+		}
+
+		init( 512, 512 );
+
+	</script>
+
+</body>
+
+</html>

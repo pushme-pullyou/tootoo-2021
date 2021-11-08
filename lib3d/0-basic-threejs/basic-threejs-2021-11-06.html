@@ -58,6 +58,7 @@
 				title="source code on GitHub"><img
 				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
 				<a href="" id=aTitle title="Click this menu title to reset the model"></a>
+				<span id="release"></span>
 			</h1>
 
 			<div id=divMessage ></div>
@@ -85,6 +86,7 @@
 			//aTitle.innerHTML = document.title = location.href.split( "/" ).pop();
 
 			aTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+			release.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
 
 			const fov = 40;
 			const aspect = window.innerWidth / window.innerHeight;

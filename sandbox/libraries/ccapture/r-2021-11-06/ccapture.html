@@ -57,20 +57,19 @@
 			<summary>show&darr; || hide&uarr; </summary>
 
 			<h1>
-				<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/lib3d/" target="_blank"
+				<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/main/sandbox/libraries/ccapture" target="_blank"
 					title="source code on GitHub"><img
 						src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
 				<a href="" id=aTitle title="Click this menu title to reset the model"></a>
+				<span id="release"></span>
 			</h1>
 
 			<div class="buttons">
-				<button id="start">Start recording to WebM</button>
-				<button id="stop">Stop (or wait 8 seconds)</button>
+				<button id="butStart">Start recording to WebM</button>
+				<button id="butStop">Stop (or wait for time limit)</button>
 			</div>
 
 			<div id=divMessage></div>
-
-
 
 		</details>
 
@@ -80,19 +79,15 @@
 	<script>
 
 		let renderer, camera, controls, scene;
-		let geometry, material, mesh, axesHelper;
-
-
-		//animate();
+		let geometry, material, mesh;
 
 		function init( width, height ) {
 
-			//aTitle.innerHTML = document.title = location.href.split( "/" ).pop();
-
 			aTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+			release.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
 
 			// Create a capturer that exports a WebM video
-			var capturer = new CCapture( { format: 'webm' } );
+			//var capturer = new CCapture( { format: 'webm' } );
 
 			setupScene( width, height );
 			setupButtons();
@@ -115,8 +110,8 @@
 
 
 		function render() {
-			sphere.rotation.x += 0.01308996938995747;
-			sphere.rotation.y += 0.01308996938995747;
+			mesh.rotation.x += 0.01308996938995747;
+			mesh.rotation.y += 0.01308996938995747;
 			renderer.render( scene, camera );
 			recorder.capture( renderer.domElement );
 			requestAnimationFrame( render );
@@ -131,22 +126,21 @@
 
 
 		function setupButtons() {
-			const $start = document.getElementById( 'start' );
-			const $stop = document.getElementById( 'stop' );
 
-			$start.addEventListener( 'click', e => {
+			butStart.addEventListener( 'click', e => {
 				e.preventDefault();
 				recorder.start();
-				$start.style.display = 'none';
-				$stop.style.display = 'block';
+				butStart.style.display = 'none';
+				butStop.style.display = 'block';
 			}, false );
 
-			$stop.addEventListener( 'click', e => {
+			butStop.addEventListener( 'click', e => {
 				e.preventDefault();
 				recorder.stop();
-				$stop.style.display = 'none';
+				butStop.style.display = 'none';
 				recorder.save();
 			}, false );
+
 		}
 
 
@@ -176,7 +170,7 @@
 
 			scene.add( new THREE.AmbientLight( 0x000000 ) );
 
-			sphere = new THREE.Mesh(
+			mesh = new THREE.Mesh(
 				new THREE.TorusKnotGeometry( 10, 3, 100, 16 ),
 				new THREE.MeshPhongMaterial( {
 					color: 0x156289,
@@ -185,11 +179,12 @@
 				} )
 			);
 
-			scene.add( sphere );
+			scene.add( mesh );
+
 		}
-;
 
 		init( 512, 512 );
+
 	</script>
 
 </body>
