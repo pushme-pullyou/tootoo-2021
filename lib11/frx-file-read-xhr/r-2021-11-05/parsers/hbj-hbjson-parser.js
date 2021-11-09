@@ -79,7 +79,8 @@ HBJ.init = function () {
 
 </details>`;
 
-	whatever.innerHTML += htm;
+	HBJdivWhatever = MNUdivContent.appendChild( document.createElement( 'div' ) );
+	HBJdivWhatever.innerHTML = htm;
 
 };
 
