@@ -78,10 +78,10 @@ ZIP.onChange = function () {
 };
 
 
-ZIP.fetchZipFile = function () {
+ZIP.fetchZipFile = function ( url ) {
 
-	const url = "https://pushme-pullyou.github.io/tootoo-2021/" + FRX.url.slice( 2 )
-	//console.log( "url", url );
+	const url = url || "https://pushme-pullyou.github.io/tootoo-2021/" + FRX.url.slice( 2 )
+	console.log( "url", url );
 
 	fetch( url )
 
