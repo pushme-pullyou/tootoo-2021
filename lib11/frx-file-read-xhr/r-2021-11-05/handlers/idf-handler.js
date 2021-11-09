@@ -49,7 +49,7 @@ IDF.onChange = function () {
 
 IDF.checkLoader = function () {
 
-	FRX.loadLoaders( IDF, IDF.src, IDF.parse( FRX.content ) );
+	FRX.loadLoaders( IDF, IDF.src, IDF.parse );
 
 };
 

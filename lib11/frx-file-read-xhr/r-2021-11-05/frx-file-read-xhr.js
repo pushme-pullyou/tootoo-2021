@@ -8,12 +8,13 @@ const FRX = {};
 
 FRX.release = "r-2021-11-05";
 
-FRX.urlLoaders = `https://cdn.jsdelivr.net/gh/mrdoob/three.js@${ FRX.releaseThree }/examples/js/loaders/`;
 FRX.reader = new FileReader();
 
 FRX.init = function () {
 
 	FRX.releaseThree = COR.releaseThree;
+	FRX.urlLoaders = `https://cdn.jsdelivr.net/gh/mrdoob/three.js@${ FRX.releaseThree }/examples/js/loaders/`;
+
 	FRX.defaultFile = COR.defaultFile ? COR.defaultFile : "README.md";
 
 	FRX.pathContent = COR.pathContent ? COR.pathContent : "../../../";

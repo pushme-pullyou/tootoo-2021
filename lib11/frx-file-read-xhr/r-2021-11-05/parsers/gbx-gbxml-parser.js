@@ -26,7 +26,7 @@ GBX.referenceObject = new THREE.Object3D();
 GBX.parser = new DOMParser();
 
 
-GBX.parse = function ( string ) {
+GBX.parse = function ( string = FRX.content) {
 
 	//console.log( "string", string );
 

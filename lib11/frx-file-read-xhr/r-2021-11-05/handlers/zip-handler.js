@@ -78,12 +78,12 @@ ZIP.onChange = function () {
 };
 
 
-ZIP.fetchZipFile = function ( url ) {
+ZIP.fetchZipFile = function ( e) {
 
-	const url = url || "https://pushme-pullyou.github.io/tootoo-2021/" + FRX.url.slice( 2 )
-	console.log( "url", url );
+	//url = url || "https://pushme-pullyou.github.io/tootoo-2021/" + FRX.url.slice( 2 )
+	console.log( "e", e );
 
-	fetch( url )
+	fetch( FRX.url )
 
 		.then( response => {
 
@@ -122,6 +122,11 @@ ZIP.getNames = function () {
 	} );
 
 	// console.log( "names", names );
+
+	if ( names.length === 1 ) {
+
+		ZIP.getZipContents( names[ 0 ], ZIP.zip )
+	}
 
 	if ( ZIP.target ) {
 

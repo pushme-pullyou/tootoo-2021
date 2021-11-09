@@ -22,7 +22,7 @@ HBJ.handle = function () {
 
 HBJ.read = function () {
 
-	FRX.loadLoader( HBJ, HBJ.src, HBJ.readFile );
+	FRX.loadLoaders( HBJ, HBJ.src, HBJ.readFile );
 
 };
 
@@ -47,7 +47,7 @@ HBJ.onChange = function () {
 
 HBJ.checkLoader = function () {
 
-	FRX.loadLoaders( HBJ, HBJ.src, HBJ.requestFile );
+	FRX.loadLoaders( HBJ, HBJ.src, HBJ.parse );
 
 };
 

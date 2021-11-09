@@ -18,10 +18,10 @@ IDF.colors = {
 	undefined: 0x00ff00,
 };
 
-console.log( "", 23 );
+//console.log( "", 23 );
 
 
-IDF.parse = function ( string ) {
+IDF.parse = function ( string = FRX.content ) {
 	//console.log( "string",string);
 
 	IDF.string = string;

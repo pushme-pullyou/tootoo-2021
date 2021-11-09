@@ -15,7 +15,7 @@ GBX.handle = function () {
 
 	if ( FRX.url ) { console.log( "url", FRX.url.split( "/" ).pop() ); GBX.onChange(); return; }
 
-	if ( FRX.zipFileName ) { console.log( "FRX.zipFileName", FRX.zipFileName ); GBX.checkLoader(); return }
+	//if ( FRX.zipFileName ) { console.log( "FRX.zipFileName", FRX.zipFileName ); GBX.checkLoader(); return }
 
 	if ( FRX.content ) { console.log( "zip", FRX.zipFileName ); GBX.checkLoader(); return; }
 
@@ -25,7 +25,7 @@ GBX.handle = function () {
 
 GBX.read = function () {
 
-	FRX.loadLoader( GBX.loader, GBX.src, GBX.readFile );
+	FRX.loadLoaders( GBX, GBX.src, GBX.readFile );
 
 };
 
@@ -45,7 +45,7 @@ GBX.onChange = function ( url ) {
 
 	console.log( "GBX.loaded", GBX.loaded );
 
-	FRX.loadLoader( GBX, GBX.src, GBX.requestFile );
+	FRX.loadLoaders( GBX, GBX.src, GBX.requestFile );
 
 };
 
@@ -53,7 +53,9 @@ GBX.onChange = function ( url ) {
 
 GBX.checkLoader = function () {
 
-	FRX.loadLoader( GBX, GBX.src, GBX.parse( FRX.content ) );
+	console.log( "GBX.src", GBX.src );
+
+	FRX.loadLoaders( GBX, GBX.src, GBX.parse );
 
 };
 

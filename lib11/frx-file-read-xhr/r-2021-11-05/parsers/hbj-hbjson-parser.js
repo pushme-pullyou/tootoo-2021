@@ -23,7 +23,7 @@ HBJ.Face3DTypes = [ "AirBoundary", "Aperture", "Door", "Floor", "RoofCeiling", "
 HBJ.colorsDaylight = [ "#ea2600", "#ea7100", "#f7c835", "#e0e591", "#9fbdee", "#4b6ba9" ];
 
 
-HBJ.parse = function ( json ) {
+HBJ.parse = function ( json = JSON.parse( FRX.content ) ) {
 
 	HBJ.json = json;
 	console.log( "HBJ.json", HBJ.json );
