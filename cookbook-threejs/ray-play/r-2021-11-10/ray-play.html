@@ -121,7 +121,7 @@
 			renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 			controls = new THREE.OrbitControls( camera, renderer.domElement );
-			//controls.autoRotate = true;
+			controls.autoRotate = true;
 			controls.autoRotateSpeed = 2;
 			controls.enableDamping = true;
 			controls.enablePan = true;
@@ -137,8 +137,10 @@
 			axesHelper = new THREE.AxesHelper( 50 );
 			scene.add( axesHelper );
 
-			geometry = new THREE.TorusKnotGeometry( 30, 6, 100, 16 );
-			material = new THREE.MeshNormalMaterial( { opacity: 0, transparent: true } );
+			geometry = new THREE.TorusKnotGeometry( 30, 8, 100, 16 );
+			//geometry = new THREE.IcosahedronGeometry( 30 );
+
+			material = new THREE.MeshNormalMaterial( { opacity: 0.02, side: 2, transparent: true } );
 			mesh = new THREE.Mesh( geometry, material );
 			scene.add( mesh );
 
@@ -159,7 +161,7 @@
 				//geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( values, 3 ) );
 				geometry.scale( 100, 100, 100 );
 				geometry.translate( -50, -50, -50 );
-				const material = new THREE.LineBasicMaterial( { color: 0xff0000 } );
+				const material = new THREE.LineBasicMaterial( { color: 0xff0000, side: 2  } );
 				const line = new THREE.Line( geometry, material );
 				group.add( line );
 
@@ -174,46 +176,51 @@
 
 			lines = new THREE.Group();
 
-			for ( line of group.children ) {
+			for ( let i = 0; i < 10000; i++ ) {
 
-				//console.log( "line", line );
 
-				start = line.geometry.attributes.position.array.slice( 0, 3 );
-				start  = new THREE.Vector3().fromArray( start )
-				end = line.geometry.attributes.position.array.slice( -3);
-				end = new THREE.Vector3().fromArray( end );
+				start = new THREE.Vector3( Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5 ).multiplyScalar( 100 );
 
-				const direction1 = end.clone().sub( start ).normalize();
+				end = new THREE.Vector3( Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5 );
+
+				const direction1 = end.clone().normalize();
 				//console.log( "", start, direction1 );
 
 				raycaster.set( start, direction1 );
 
-				const intersects1 = raycaster.intersectObject( mesh, true );
+				const intersects1 = raycaster.intersectObject( mesh, false );
 				//console.log( "inter1", intersects1 );
 
-				const direction2 = start.clone().sub( end ).normalize();
-				//console.log( "dir2", end, direction2 );
+				//const direction2 = start.clone().sub( end ).normalize();
 
-				raycaster.set( end, direction2 );
 
-				const intersects2 = raycaster.intersectObject( mesh, true );
-				//console.log( "inter2", intersects2 );
-
-				if ( intersects1.length && intersects2.length ) {
+				if ( intersects1.length > 0 ) {
 
 					pt1 = intersects1[ 0 ].point;
 
-					pt2 = intersects2[ 0 ].point;
+					//const direction2 = start.clone().negate( direction1 ).normalize();
+					//console.log( "dir2", end, direction2 );
 
-					//console.log( "", pt1, pt2 );
+					raycaster.set( pt1, direction1, 0.5 );
 
-					const geometry = new THREE.BufferGeometry();
-					values = [ ...pt1.toArray(), ...pt2.toArray() ]
-					geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( values, 3 ) );
-					geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( values, 3 ) );
-					const material = new THREE.LineBasicMaterial( { color: 0xffffff, vertexColors: THREE.VertexColors } );
-					const line = new THREE.Line( geometry, material );
-					lines.add( line );
+					intersects2 = raycaster.intersectObject( mesh, true );
+					//console.log( "inter2", intersects2 );
+
+					if ( intersects2.length === 1 ) {
+
+						pt2 = intersects2[ 0 ].point;
+
+						//console.log( "", pt1, pt2 );
+
+						const geometry = new THREE.BufferGeometry();
+						values = [ ...pt1.toArray(), ...pt2.toArray() ]
+						geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( values, 3 ) );
+						geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( values, 3 ) );
+						const material = new THREE.LineBasicMaterial( { color: 0xffffff, vertexColors: THREE.VertexColors } );
+						const line = new THREE.Line( geometry, material );
+						lines.add( line );
+
+					}
 
 				}
 
