@@ -150,31 +150,33 @@
 
 		function addSphereLines() {
 
+			scene.remove( group );
 			group = new THREE.Group();
 
-			for ( let i = 0; i < 10000; i++ ) {
+			for ( let i = 0; i < 1000; i++ ) {
 
 				const values = [ Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random() ];
 
 				const geometry = new THREE.BufferGeometry();
 				geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( values, 3 ) );
-				//geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( values, 3 ) );
+				geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( values, 3 ) );
 				geometry.scale( 100, 100, 100 );
 				geometry.translate( -50, -50, -50 );
-				const material = new THREE.LineBasicMaterial( { color: 0xff0000, side: 2  } );
+				const material = new THREE.LineBasicMaterial( { color: 0xffffff, vertexColors: THREE.VertexColors  } );
 				const line = new THREE.Line( geometry, material );
 				group.add( line );
 
 			}
 
-			//scene.add( group );
+			scene.add( group );
 
 		}
 
 
 		function castRays() {
 
-			lines = new THREE.Group();
+			scene.remove( group );
+			group = new THREE.Group();
 
 			for ( let i = 0; i < 10000; i++ ) {
 
@@ -218,15 +220,13 @@
 						geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( values, 3 ) );
 						const material = new THREE.LineBasicMaterial( { color: 0xffffff, vertexColors: THREE.VertexColors } );
 						const line = new THREE.Line( geometry, material );
-						lines.add( line );
+						group.add( line );
 
 					}
 
 				}
 
-				scene.add( lines );
-
-
+				scene.add( group );
 
 			}
 		}
