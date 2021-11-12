@@ -6,9 +6,11 @@
 
 const FRX = {};
 
-FRX.release = "r-2021-11-05";
+FRX.release = "r-2021-11-11";
 
 FRX.reader = new FileReader();
+
+
 
 FRX.init = function () {
 
@@ -23,7 +25,6 @@ FRX.init = function () {
 	//FRX.pathUtilities = `./`;
 
 	FRX.defaultUrl = FRX.pathContent + FRX.defaultFile;
-
 
 	//${ MNU.addInfoBox( info ); }
 
@@ -41,7 +42,7 @@ Release: ${ FRX.release }<br>`;
 
 		FRXdivDetails.innerHTML = `
 <details id=detFile open>
-		<summary class="summary-primary gmd-1" title="Open files on your device: ">
+	<summary class="summary-primary gmd-1" title="Open files on your device: ">
 		File menu
 		${ MNU.addInfoBox( info ) }
 	</summary>

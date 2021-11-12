@@ -78,7 +78,7 @@ ZIP.onChange = function () {
 };
 
 
-ZIP.fetchZipFile = function ( e) {
+ZIP.fetchZipFile = function ( e ) {
 
 	//url = url || "https://pushme-pullyou.github.io/tootoo-2021/" + FRX.url.slice( 2 )
 	//console.log( "e", e );
@@ -125,15 +125,20 @@ ZIP.getNames = function () {
 
 	if ( names.length === 1 ) {
 
-		ZIP.getZipContents( names[ 0 ], ZIP.zip )
+		ZIP.getZipContents( names[ 0 ], ZIP.zip );
 	}
 
 	if ( ZIP.target ) {
 
-		const htm = `<h3>${ FRX.file.name }</h3>`
+		const htm = `
+<h3>${ FRX.file.name }</h3>
+<select id=ZIPselFiles oninput=ZIP.getZipContents(Array.from(this.selectedOptions)) multiple size=10 width=100%></select>`;
 
-		ZIP.target.innerHTML = htm + names.map( name =>
-			`<div><button onclick=ZIP.getZipContents("${ name }",ZIP.zip)>${ name }</button></div>` ).join( "" ) + "<br>";
+		ZIP.target.innerHTML = htm;
+
+		namesSelected = names.filter( name => name.toLowerCase().endsWith( "rad"))
+
+		ZIPselFiles.innerHTML = names.map( name => `<option>${ name }</option>` ).join( "" ) + "<br>";
 
 	}
 
@@ -145,7 +150,7 @@ ZIP.getNames = function () {
 
 ZIP.getZipContents = function ( fileName, zip ) {
 
-	//console.log( "fileName", fileName );
+	console.log( "fileName", fileName );
 	//console.log( "ZIP.zip", ZIP.zip );
 	extension = fileName.split( "." ).pop().toLowerCase();
 
