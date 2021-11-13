@@ -87,18 +87,43 @@ RAD.readFile = function () {
 };
 
 
-RAD.checkLoader = function () {
+RAD.onChange = function () {
 
-	FRX.loadLoaders( RAD, RAD.src, RAD.addDataFile );
+	const xhr = new XMLHttpRequest();
+	xhr.open( 'GET', FRX.url, true );
+	xhr.onerror = ( xhr ) => console.log( 'error:', xhr );
+	//xhr.onprogress = ( xhr ) => console.log( 'bytes loaded:', xhr.loaded );
+	xhr.onload = ( xhr ) => RAD.addDataFile( xhr.target.response );
+	xhr.send( null );
 
 };
 
+
+RAD.checkLoader = function () {
+
+	FRX.loadLoaders( RAD, RAD.src, RAD.handleZip );
+
+};
+
+
+RAD.handleZip = function () {
+
+	FRX.content += FRX.content;
+
+	if ( index = ZIP.fileNames.length ) {
+
+		RAD.addDataFile();
+
+	}
+	index++
+
+}
 
 // called by RAD.callbackRequestFile &&
 
 RAD.addDataFile = function ( text = FRX.content ) {
 
-	if ( text.isTrusted ) { text = FRX.content }
+	if ( text.isTrusted ) { text = FRX.content } // parameter was an event therefore assume and take ZIP content
 	//console.log( "text", text );
 
 	RAD.json = { 'surfaces': [], 'materials': [], 'other': [] };
@@ -120,19 +145,6 @@ RAD.addDataFile = function ( text = FRX.content ) {
 	RAD.setThreeJsWindowUpdate( RAD.json );
 
 	return json;
-
-};
-
-
-
-RAD.onChange = function () {
-
-	const xhr = new XMLHttpRequest();
-	xhr.open( 'GET', FRX.url, true );
-	xhr.onerror = ( xhr ) => console.log( 'error:', xhr );
-	//xhr.onprogress = ( xhr ) => console.log( 'bytes loaded:', xhr.loaded );
-	xhr.onload = ( xhr ) => RAD.addDataFile( xhr.target.response );
-	xhr.send( null );
 
 };
 

@@ -50,7 +50,7 @@ ZIP.readFile = function ( file = FRX.file ) {
 
 			ZIP.zip = zip;
 
-			const names = ZIP.getNames( zip );
+			ZIP.getNames( zip );
 
 			//ZIP.getZipContents( names[ 0 ], zip );
 
@@ -114,103 +114,126 @@ ZIP.fetchZipFile = function ( e ) {
 
 ZIP.getNames = function () {
 
-	const names = [];
+	ZIP.names = [];
 
 	ZIP.zip.forEach( ( relativePath, zipEntry ) => {
 		//console.log( "zipEntry.name", zipEntry.name );
-		names.push( zipEntry.name );
+		ZIP.names.push( zipEntry.name );
 	} );
 
 	// console.log( "names", names );
 
-	if ( names.length === 1 ) {
+	if ( ZIP.names.length === 1 ) {
 
-		ZIP.getZipContents( names[ 0 ], ZIP.zip );
+		ZIP.getZipContents( ZIP.names );
 	}
 
 	if ( ZIP.target ) {
 
 		const htm = `
 <h3>${ FRX.file.name }</h3>
-<select id=ZIPselFiles oninput=ZIP.getZipContents(Array.from(this.selectedOptions)) multiple size=10 width=100%></select>`;
+<p>
+<select id=ZIPselFiles  multiple size=10 width=100%></select>
+</p>
+<p>
+<button onclick=ZIP.getZipContents(ZIPselFiles) >Process selected files</button>
+</p>
+`;
 
 		ZIP.target.innerHTML = htm;
 
-		namesSelected = names.filter( name => name.toLowerCase().endsWith( "rad"))
+		namesSelected = ZIP.names.filter( name => name.toLowerCase().endsWith( "rad"))
 
-		ZIPselFiles.innerHTML = names.map( name => `<option>${ name }</option>` ).join( "" ) + "<br>";
+		ZIPselFiles.innerHTML = namesSelected.map( name => `<option>${ name }</option>` ).join( "" ) + "<br>";
 
 	}
 
-	return names;
+	//return names;
 
 };
 
 
 
-ZIP.getZipContents = function ( fileName, zip ) {
+ZIP.getZipContents = function ( fileNames ) {
 
-	console.log( "fileName", fileName );
-	//console.log( "ZIP.zip", ZIP.zip );
-	extension = fileName.split( "." ).pop().toLowerCase();
+	ZIP.fileNames = fileNames;
 
-	ZIP.zip.file( fileName ).async( "uint8array" )
+	if ( !Array.isArray( fileNames ) ) {
 
-		.then( function ( uint8array ) {
+		ZIP.fileNames = Array.from( fileNames.selectedOptions ).map( option => option.innerText );
 
-			let text;
-			//console.log( "text", text );
+		if ( fileNames.length > 1 ) {
 
-			if ( uint8array[ 0 ] !== 255 || uint8array[ 0 ] === 239 || uint8array[ 0 ] === 60 ) {
+			chkNewFile.checked = false;
 
-				text = new TextDecoder( "utf-8" ).decode( uint8array );
-				//console.log( 'text', text );
+			THR.group = THR.getGroupNew();
 
-			} else {
+		}
 
-				const arr = new Uint8Array( uint8array.length / 2 );
-				let index = 0;
+	}
 
-				for ( let i = 0; i < uint8array.length; i++ ) {
 
-					if ( i % 2 === 0 ) {
+	for ( let fileName of ZIP.fileNames ) {
 
-						arr[ index++ ] = uint8array[ i ];
+		console.log( "fileName", fileName );
+
+		extension = fileName.split( "." ).pop().toLowerCase();
+
+		ZIP.zip.file( fileName ).async( "uint8array" )
+
+			.then( function ( uint8array ) {
+
+				let text;
+				//console.log( "text", text );
+
+				if ( uint8array[ 0 ] !== 255 || uint8array[ 0 ] === 239 || uint8array[ 0 ] === 60 ) {
+
+					text = new TextDecoder( "utf-8" ).decode( uint8array );
+					//console.log( 'text', text );
+
+				} else {
+
+					const arr = new Uint8Array( uint8array.length / 2 );
+					let index = 0;
+
+					for ( let i = 0; i < uint8array.length; i++ ) {
+
+						if ( i % 2 === 0 ) {
+
+							arr[ index++ ] = uint8array[ i ];
+
+						}
 
 					}
 
+					text = new TextDecoder( "utf-8" ).decode( arr );
+
 				}
 
-				text = new TextDecoder( "utf-8" ).decode( arr );
+				const regex = /encoding="utf-16"/i;
 
-			}
+				return text.match( regex ) ? text.slice( 1 ).replace( regex, "" ) : text;
 
-			const regex = /encoding="utf-16"/i;
+			} )
 
-			return text.match( regex ) ? text.slice( 1 ).replace( regex, "" ) : text;
+			.then( text => {
+				//divMainContent.innerText = text;
 
-		} )
+				FRX.content = text;
+				FRX.file = "";
+				FRX.url = "";
 
-		.then( text => {
-			//divMainContent.innerText = text;
+				FRX.zipFileName = fileName;
 
-			FRX.content = text;
-			FRX.file = "";
-			FRX.url = "";
+				FRX.selectHandler( fileName );
 
-			FRX.zipFileName = fileName;
+			} )
 
-			//console.log( "223", fileName  );
+			.catch( error => {
+				console.error( "There has been a problem with your fetch operation:", error );
+			} );
 
-			FRX.selectHandler( fileName );
-
-			//console.log( "text", text );
-		} )
-
-		.catch( error => {
-			console.error( "There has been a problem with your fetch operation:", error );
-		} );
-
+	}
 };
 
 
