@@ -57,7 +57,6 @@ FOO.getMenu = function () {
 
 		File open OBJ
 
-
 	</summary>
 
 	<input type="file" id=inpFiles onchange="FOO.readFile()"><br>
@@ -334,7 +333,7 @@ FOO.summer = [
 
 FOO.addForest = function ( count = 100 ) {
 
-	FOradOpenNew.checked = false;
+	//FOradOpenNew.checked = false;
 
 	//const gbx = THR.group.getObjectByName( "gbx" );
 	const bbox = new THREE.Box3().setFromObject( THR.group );

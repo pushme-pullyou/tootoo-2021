@@ -46,7 +46,7 @@ OBJ.read = function () {
 
 OBJ.readFile = function () {
 
-	console.log( "", 23 );
+	console.log( "FRX.file.name", FRX.file.name );
 	OBJ.loadedScripts++;
 
 
@@ -56,11 +56,7 @@ OBJ.readFile = function () {
 
 		OBJ.manager.addHandler( /\.dds$/i, new THREE.DDSLoader() );
 
-		OBJ.loadObj()
-
-		// const reader = new FileReader();
-		// reader.onload = ( event ) => OBJ.loadUrl( event.target.result );
-		// reader.readAsDataURL( FRX.file );
+		OBJ.loadObj( FRX.file.name  );
 
 	}
 

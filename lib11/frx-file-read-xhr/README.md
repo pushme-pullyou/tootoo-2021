@@ -31,6 +31,7 @@ _FOX File Read XHR in a resizable window. One finger to rotate. Two to zoom._
 
 ## Links of Interest
 
+* https://github.com/mrdoob/three.js/blob/dev/editor/js/Loader.js
 * https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
 * https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest
 * https://en.wikipedia.org/wiki/XMLHttpRequest
