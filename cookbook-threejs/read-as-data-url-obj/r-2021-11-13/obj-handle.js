@@ -121,11 +121,6 @@ OBJ.loadData = function ( name, txt ) {
 	reader.readAsText( fileMaterial );
 
 
-
-
-
-
-
 		//FO.getOpenNew();
 
 		//THR.scene.add( THR.group );
