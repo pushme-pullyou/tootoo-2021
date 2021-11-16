@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 	<meta name=description content="Real-time 3D in your browser with menu hiding">
 	<meta name=keywords content="Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM">
-	<meta name="date" content="2021-11-06">
+	<meta name="date" content="2021-11-15">
 	<title></title>
 	<style>
 		/* Copyright 2021 Theo Armour. MIT License */
@@ -39,7 +39,6 @@
 		.full-width {
 			width: 100%;
 		}
-
 	</style>
 </head>
 
@@ -47,6 +46,7 @@
 	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r134/build/three.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r134/examples/js/controls/OrbitControls.js"></script>
 
+	<script src="obj-handle.js"></script>
 
 	<nav id=navMenu class=nav>
 
@@ -56,13 +56,19 @@
 
 			<h1>
 				<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/lib3d/" target="_blank"
-				title="source code on GitHub"><img
-				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
+					title="source code on GitHub"><img
+						src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
 				<a href="" id=aTitle title="Click this menu title to reset the model"></a>
 				<span id="release"></span>
 			</h1>
 
-			<div id=divMessage ></div>
+			<p>
+				<label>
+					<input type=checkbox id=chkNewFile checked> Open new File
+				</label>
+			</p>
+
+			<div id=divMenu></div>
 
 			<p
 				title="View the number of objects that need rendering and the total number of triangles used to create the objects">
@@ -102,6 +108,15 @@
 			//scene.fog = new THREE.Fog( 0xcce0ff, 550, 800 );
 			scene.add( camera );
 
+
+			const ambientLight = new THREE.AmbientLight( 0xcccccc, 0.4 );
+			scene.add( ambientLight );
+
+			const pointLight = new THREE.PointLight( 0xffffff, 0.8 );
+			camera.add( pointLight );
+			scene.add( camera );
+
+
 			renderer = new THREE.WebGLRenderer( { antialias: true, alpha: false } );
 			//renderer.setPixelRatio( window.devicePixelRatio );
 			renderer.setSize( window.innerWidth, window.innerHeight );
@@ -131,7 +146,9 @@
 			geometry = new THREE.BoxGeometry( 50, 50, 50 );
 			material = new THREE.MeshNormalMaterial();
 			mesh = new THREE.Mesh( geometry, material );
-			scene.add( mesh );
+			//scene.add( mesh );
+
+			OBJ.init( { target: divMenu } );
 
 		}
 
@@ -205,4 +222,5 @@
 	</script>
 
 </body>
+
 </html>
