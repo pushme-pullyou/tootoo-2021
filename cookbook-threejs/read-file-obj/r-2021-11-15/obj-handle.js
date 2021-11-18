@@ -109,7 +109,7 @@ OBJ.loadObj = function ( file, material ) {
 
 	reader.onload = () => {
 
-		if ( chkNewFile.checked ) { scene.remove( OBJ.object );  }
+		if ( chkNewFile.checked ) { scene.remove( OBJ.object ); }
 
 		OBJ.object = loader.parse( reader.result );
 

@@ -137,7 +137,7 @@
 			axesHelper = new THREE.AxesHelper( 50 );
 			scene.add( axesHelper );
 
-			geometry = new THREE.TorusKnotGeometry( 30, 8, 100, 16 );
+			geometry = new THREE.TorusKnotGeometry( 30, 20, 100, 16 );
 			//geometry = new THREE.IcosahedronGeometry( 30 );
 
 			material = new THREE.MeshNormalMaterial( { opacity: 0.02, side: 2, transparent: true } );
@@ -178,7 +178,7 @@
 			scene.remove( group );
 			group = new THREE.Group();
 
-			for ( let i = 0; i < 10000; i++ ) {
+			for ( let i = 0; i < 20000; i++ ) {
 
 
 				start = new THREE.Vector3( Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5 ).multiplyScalar( 100 );
