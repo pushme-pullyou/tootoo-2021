@@ -23,7 +23,7 @@ OBJ.init = function ( obj = {} ) {
 	OBJdivMenu = OBJ.target.appendChild( document.createElement( 'div' ) );
 
 	OBJdivMenu.innerHTML = `
-<details id=OBJdetMenu ontoggle=OBJ.loadLoaders(); >
+<details open>
 	<summary style=font-size:150%;font-weight:bold; >OBJ menu</summary>
 	<p>
 	<p>
@@ -33,20 +33,23 @@ OBJ.init = function ( obj = {} ) {
 	<input id=OBJinpPath class=full-width onchange=localStorage.setItem("OBJpath",this.value); >
 	</p>
 	<p>
-		<input type=file id=OBJinpFiles onchange="OBJ.readFiles()"  multiple>
+		<input type=file id=OBJinpFiles onchange="OBJ.loadLoaders()"  multiple>
 	</p>
 </details>
 `;
 
 	OBJinpPath.value = localStorage.getItem( "OBJpath" );
-
-	OBJdetMenu.open = true;
+	
+	OBJ.loadLoaders();
 
 };
 
 
 
+
 OBJ.loadLoaders = function () {
+
+	if ( OBJ.loaded ) { OBJ.readFiles(); return; }
 
 	const script = OBJ.scripts[ OBJ.scriptToLoad ];
 	const load = document.body.appendChild( document.createElement( "script" ) );
@@ -58,21 +61,10 @@ OBJ.loadLoaders = function () {
 
 
 OBJ.onLoadScript = function () {
-	//console.log( "OBJ.scriptToLoad", OBJ.scriptToLoad );
 
 	OBJ.scriptToLoad++;
 
-	if ( OBJ.scriptToLoad < OBJ.scripts.length ) {
-
-		OBJ.loadLoaders();
-
-	} else {
-
-		OBJ.loaded = true;
-
-		OBJ.readFiles();
-
-	}
+	OBJ.scriptToLoad < OBJ.scripts.length ? OBJ.loadLoaders() : OBJ.readFiles();
 
 };
 
@@ -81,11 +73,11 @@ OBJ.onLoadScript = function () {
 
 OBJ.readFiles = function () {
 
-	if ( OBJ.loaded === false ) { OBJ.loadLoaders() };
+	OBJ.loaded = true;
 
-	OBJ.files = Array.from( OBJinpFiles.files ).filter( file => file.name.toLowerCase().endsWith( "obj" ) );
+	const objFiles = Array.from( OBJinpFiles.files ).filter( file => file.name.toLowerCase().endsWith( "obj" ) );
 
-	for ( let file of OBJ.files ) {
+	for ( let file of objFiles ) {
 
 		const nameMtl = file.name.toLowerCase().replace( ".obj", ".mtl" );
 
@@ -122,10 +114,10 @@ OBJ.loadMtl = function ( file, fileMaterials ) {
 
 
 
-OBJ.loadObj = function ( file, materials ) {
+OBJ.loadObj = function ( file, material ) {
 
 	const loader = new THREE.OBJLoader();
-	if ( materials ) { loader.setMaterials( materials ); }
+	if ( material ) { loader.setMaterials( material ); }
 
 	const reader = new FileReader();
 
