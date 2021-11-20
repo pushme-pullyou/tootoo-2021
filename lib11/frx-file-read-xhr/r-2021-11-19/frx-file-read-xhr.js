@@ -6,7 +6,7 @@
 
 const FRX = {};
 
-FRX.release = "r-2021-11-11";
+FRX.release = "r-2021-11-19";
 
 FRX.reader = new FileReader();
 
@@ -60,6 +60,11 @@ Release: ${ FRX.release }<br>`;
 
 	<div id=FRXdivLog2 ></div>
 
+	<p>
+	<button onclick=FRX.saveFile(); >save md to html</button>
+	</p>
+
+
 </details>`;
 
 	}
@@ -72,6 +77,16 @@ Release: ${ FRX.release }<br>`;
 
 };
 
+FRX.saveFile =function () {
+
+	const blob = new Blob( [ divMainContent.innerHTML ] );
+	let a = document.createElement( 'a' );
+	a.href = window.URL.createObjectURL( blob );
+	a.download = `${ FRX.fileName }.htm`;
+	a.click();
+	a = null;
+
+}
 
 
 FRX.dragenter = function ( event ) {

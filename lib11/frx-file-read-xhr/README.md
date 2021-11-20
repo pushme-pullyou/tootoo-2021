@@ -39,6 +39,10 @@ _FOX File Read XHR in a resizable window. One finger to rotate. Two to zoom._
 
 ## Change Log
 
+### 2021-11-20
+
+* Save md to htm
+
 ### 2021-09-16
 
 First commit as FRX

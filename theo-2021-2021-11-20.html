@@ -8,15 +8,15 @@
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files in a repository hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
 	<meta name="date" content="2021-11-20">
-	<title>TooToo</title>
+	<title>Theo 2021 </title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
 	<link id=CORstyle rel="stylesheet" href="./lib11/style/style-2021-11-02.css">
 
 	<style>
 		:root {
-			/* --mnu-width: 20rem; commit*/
-			--main-hue: 240;
+			/* --mnu-width: 20rem; */
+			--main-hue: 350;
 			/* 0 to 360 0=red 120=green 240=blue */
 		}
 	</style>
@@ -46,31 +46,31 @@
 
 		const COR = {
 
-			// Used by MNU ~ mnu-menu.js
+			// Used by MNU
 			description: document.head.querySelector( "[ name=description ]" ).content,
 			iconExternalFile: `<img class=infoImg  src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/icon-external-link.svg">`,
 			iconGitHub: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`,
 			iconInfo: `<img class=infoImg src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/noun_Information_585560.svg">`,
 			iconRepo: "❦",
 			title: document.title ? document.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " ),
-			urlSource: "https://github.com/pushme-pullyou/tootoo-2021/",
+			urlSource: "https://github.com/theo-armour/2021/",
 			version: document.head.querySelector( "[ name=date ]" ).content,
 
 			// Used by GRV
-			user: "pushme-pullyou",
-			repo: "tootoo-2021",
+			user: "theo-armour",
+			repo: "2021",
 			branch: "main",
 
 			// Used by FRX
-			pathContent: "./",
+			pathContent: "https://theo-armour.github.io/2021/",
 
-			// pathTooToo: "https://pushme-pullyou.github.io/tootoo-2021/",
+			//pathTooToo: "https://pushme-pullyou.github.io/tootoo-2021/",
 			pathTooToo: "./",
-			defaultFile: "README.md",
-
-			// defaultIgnoreFolders: [],
+			// defaultFile: "README.md",
+			// //defaultIgnoreFolders: [],
 			defaultIgnoreFolders: [ "archive", "lib", "lib3d", "lib-geo", "lib-templates" ],
-			// filterFiles: [ "gif", "md", "html", "jpg", "license", "pdf", "png", "svg", "txt" ],
+			filterFiles: [ "gif", "md", "html", "jpg", "license", "pdf", "png", "svg", "txt" ],
+			// urlAssets: "https://pushme-pullyou.github.io/tootoo-2021/",
 
 		};
 
@@ -112,7 +112,7 @@
 
 			if ( location.protocol === "https:" ) {
 
-				if ( COR.version !== "2021-11-04" ) { window.history.pushState( "", "", "../" + location.hash ); }
+				if ( COR.version !== "2021-11-20" ) { window.history.pushState( "", "", "../" + location.hash ); }
 
 				COR.ignoreFolders = COR.defaultIgnoreFolders;
 
