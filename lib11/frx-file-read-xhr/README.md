@@ -16,6 +16,7 @@ _FOX File Read XHR in a resizable window. One finger to rotate. Two to zoom._
 
 ## To Do / Wish List
 
+* 2021-11-20 ~ fix event handlers
 * 2021-09-16 ~ PopUp progress indicator
 * 2021-09-16 ~ ZIP handler to use FRX handler
 * 2021-09-16 ~ Good stats for all types
