@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="description"
+		content="TooToo 2021 uses the GitHub API to provide access to all the current files in a repository hosted with GitHub Pages.">
+	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
+	<meta name="date" content="2021-11-20">
+	<title>Theo qData</title>
+
+	<!-- Copyright 2021 Theo Armour. MIT license -->
+	<link id=CORstyle rel="stylesheet" href="./lib11/style/style-2021-11-02.css">
+
+	<style>
+		:root {
+			/* --mnu-width: 20rem; commit*/
+			--main-hue: 240;
+			/* 0 to 360 0=red 120=green 240=blue */
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<script src="./lib11/mnu-menu/r-2021-11-05/mnu-menu.js"></script>
+
+	<script src="./lib11/cke-ckeditor/r-2021-11-20/cke-ckeditor.js"></script>
+
+	<script src="./lib11/frx-file-read-xhr/r-2021-11-19/frx-file-read-xhr.js"></script>
+
+	<script src="./lib/gra-github-repo-access/v-2021-07-13/gra-github-repo-access.js"></script>
+
+	<script src="./lib11/grv-github-repo-tree-view/v-2021-11-02/grv-github-repo-tree-view.js"></script>
+
+
+	<div id=MNUdivShowHide></div>
+
+		<main id=main>
+		<div>
+
+			<button onclick=CKE.getSha()>putToGitHub</button>
+
+			<a href="">notes</a>
+			<a href="#snippets/things-i-forget.htm">forget</a>
+			<a href="#snippets/things-i-like.htm">like</a>
+			<a href="#snippets/lingo.htm">lingo</a>
+			<a href="#snippets/aphorisms-mantras.htm">aphorism</a>
+			<a href="#snippets/jokes-and-quotes.htm">jokes</a>
+
+			<a href="">README.md</a>
+			<a href="#LICENSE.md">license</a>
+			<a href="#test-cases/markdown.md">markdown</a>
+			<a href="#test-cases/sample.md">sample</a>
+
+			<span id=spnMessage></span>
+
+		</div>
+
+		<div id="divMainContent"></div>
+
+	</main>
+
+
+	<script>
+
+		const COR = {
+
+			// Used by MNU ~ mnu-menu.js
+			description: document.head.querySelector( "[ name=description ]" ).content,
+			iconExternalFile: `<img class=infoImg  src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/icon-external-link.svg">`,
+			iconGitHub: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`,
+			iconInfo: `<img class=infoImg src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/noun_Information_585560.svg">`,
+			iconRepo: "❦",
+			title: document.title ? document.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " ),
+			urlSource: "https://github.com/theo-armour/qdata/",
+			version: document.head.querySelector( "[ name=date ]" ).content,
+
+			// Used by GRV
+			user: "theo-armour",
+			repo: "qdata",
+			branch: "master",
+
+			// Used by FRX
+			//pathContent: "https://theo-armour.github.io/qdata/",
+			pathContent: "./",
+
+			//pathTooToo: "https://pushme-pullyou.github.io/tootoo-2021/",
+			pathTooToo: "./",
+			defaultFile: "README.md",
+
+			// defaultIgnoreFolders: [],
+			defaultIgnoreFolders: [ "archive", "lib", "lib3d", "lib-geo", "lib-templates" ],
+			// filterFiles: [ "gif", "md", "html", "jpg", "license", "pdf", "png", "svg", "txt" ],
+
+		};
+
+
+		init();
+
+
+		function init() {
+
+			// MNU = Menu ~ mnu-menu.js
+			MNU.init();
+			//MNU.getSample();
+			sumNavMenu.hidden = false;
+
+			//const htm = "Hello, World!";
+			//MNU.init( { description: htm } );
+			//MNUaSource.hidden = true;
+			//MNUspnVersion.hidden = true;
+
+			// FRX = File Read XHR
+			//FRX.init();
+
+			// GR
+			//GRA.init();
+
+			//GRV = GitHub Repo View
+			GRV.getFiles = GRV.getFilesAll;
+			GRV.getFiles = GRV.getFilesCurated;
+			GRV.init();
+			GRVdet.open = true;
+			//GRVsumRepo.hidden = true;
+			GRV.getRepo();
+
+
+			//FRX.onHashChange();
+
+			// start the action!
+			if ( GRV.accessToken ) {
+
+				divMainContent.style.cssText = `
+					margin-left: 5rem;
+					height: 90vh;
+					overflow: auto;
+					resize: both;
+					width: 32rem;`;
+
+				const base = "https://api.github.com/repos/theo-armour/qdata/contents/";
+				const content = divMainContent;
+				const claass = ".editor";
+				const file = "README.md";
+				const source = "./"; //"https://github.com/theo-armour/qdata/tree/master/";
+				const type = "html";
+
+				CKE.init( base, content, claass, file, source, type );
+
+				window.removeEventListener( "hashchange", FRX.onHashChange );
+
+				//addPopUp();
+
+			} else {
+
+				divMainContent.style.cssText = "";
+
+				FRX.onHashChange();
+
+			}
+			// if running on server, keeps address bar pointed to latest dev
+
+			if ( location.protocol === "https:" ) {
+
+				if ( COR.version !== "2021-11-04" ) { window.history.pushState( "", "", "../" + location.hash ); }
+
+				COR.ignoreFolders = COR.defaultIgnoreFolders;
+
+			} else {
+
+				COR.ignoreFolders = [];
+
+			}
+
+		}
+
+	</script>
+
+</body>
+
+</html>

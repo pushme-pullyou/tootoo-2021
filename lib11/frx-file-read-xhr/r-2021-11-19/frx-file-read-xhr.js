@@ -61,7 +61,7 @@ Release: ${ FRX.release }<br>`;
 	<div id=FRXdivLog2 ></div>
 
 	<p>
-	<button onclick=FRX.saveFile(); >save md to html</button>
+	<button onclick=FRX.saveFile(); >save file to html</button>
 	</p>
 
 
