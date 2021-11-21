@@ -18,7 +18,8 @@ All JavaScript files are with 3 letter namespaces. The same three letter are use
 
 *   View files in 3D
 *   View files in galleries
-*   Edit files
+*   Edit files is different app
+* this add is for viewing Markdown anf HTML files. Don't add more
 
 ## Issues
 

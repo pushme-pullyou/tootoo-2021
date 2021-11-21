@@ -27,7 +27,7 @@
 
 	<script src="./lib11/mnu-menu/r-2021-11-05/mnu-menu.js"></script>
 
-	<script src="./lib11/cke-ckeditor/r-2021-11-20/cke-ckeditor.js"></script>
+	<!-- <script src="./lib11/cke-ckeditor/r-2021-11-20/cke-ckeditor.js"></script> -->
 
 	<script src="./lib11/frx-file-read-xhr/r-2021-11-19/frx-file-read-xhr.js"></script>
 
@@ -38,26 +38,7 @@
 
 	<div id=MNUdivShowHide></div>
 
-		<main id=main>
-		<div>
-
-			<button onclick=CKE.getSha()>putToGitHub</button>
-
-			<a href="">notes</a>
-			<a href="#snippets/things-i-forget.htm">forget</a>
-			<a href="#snippets/things-i-like.htm">like</a>
-			<a href="#snippets/lingo.htm">lingo</a>
-			<a href="#snippets/aphorisms-mantras.htm">aphorism</a>
-			<a href="#snippets/jokes-and-quotes.htm">jokes</a>
-
-			<a href="">README.md</a>
-			<a href="#LICENSE.md">license</a>
-			<a href="#test-cases/markdown.md">markdown</a>
-			<a href="#test-cases/sample.md">sample</a>
-
-			<span id=spnMessage></span>
-
-		</div>
+	<main id=main>
 
 		<div id="divMainContent"></div>
 
@@ -84,8 +65,8 @@
 			branch: "master",
 
 			// Used by FRX
-			//pathContent: "https://theo-armour.github.io/qdata/",
-			pathContent: "./",
+			pathContent: "https://theo-armour.github.io/qdata/",
+			//pathContent: "./",
 
 			//pathTooToo: "https://pushme-pullyou.github.io/tootoo-2021/",
 			pathTooToo: "./",
@@ -114,10 +95,10 @@
 			//MNUspnVersion.hidden = true;
 
 			// FRX = File Read XHR
-			//FRX.init();
+			FRX.init();
 
 			// GR
-			//GRA.init();
+			GRA.init();
 
 			//GRV = GitHub Repo View
 			GRV.getFiles = GRV.getFilesAll;
@@ -128,38 +109,38 @@
 			GRV.getRepo();
 
 
-			//FRX.onHashChange();
+			FRX.onHashChange();
 
-			// start the action!
-			if ( GRV.accessToken ) {
+			// // start the action!
+			// if ( GRV.accessToken ) {
 
-				divMainContent.style.cssText = `
-					margin-left: 5rem;
-					height: 90vh;
-					overflow: auto;
-					resize: both;
-					width: 32rem;`;
+			// 	divMainContent.style.cssText = `
+			// 		margin-left: 5rem;
+			// 		height: 90vh;
+			// 		overflow: auto;
+			// 		resize: both;
+			// 		width: 32rem;`;
 
-				const base = "https://api.github.com/repos/theo-armour/qdata/contents/";
-				const content = divMainContent;
-				const claass = ".editor";
-				const file = "README.md";
-				const source = "./"; //"https://github.com/theo-armour/qdata/tree/master/";
-				const type = "html";
+			// 	const base = "https://api.github.com/repos/theo-armour/qdata/contents/";
+			// 	const content = divMainContent;
+			// 	const claass = ".editor";
+			// 	const file = "README.md";
+			// 	const source = "./"; //"https://github.com/theo-armour/qdata/tree/master/";
+			// 	const type = "html";
 
-				CKE.init( base, content, claass, file, source, type );
+			// 	CKE.init( base, content, claass, file, source, type );
 
-				window.removeEventListener( "hashchange", FRX.onHashChange );
+			// 	window.removeEventListener( "hashchange", FRX.onHashChange );
 
-				//addPopUp();
+			// 	//addPopUp();
 
-			} else {
+			// } else {
 
-				divMainContent.style.cssText = "";
+			// 	divMainContent.style.cssText = "";
 
-				FRX.onHashChange();
+			// 	FRX.onHashChange();
 
-			}
+			// }
 			// if running on server, keeps address bar pointed to latest dev
 
 			if ( location.protocol === "https:" ) {
