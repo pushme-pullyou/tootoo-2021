@@ -37,7 +37,7 @@ ZIP.writeZip = function ( files = ZIP.fileNames ) {
 		scr.onload = () => {
 
 			ZIP.zip = new JSZip();
-			ZIP.requestFile()
+			ZIP.requestFile();
 
 		};
 

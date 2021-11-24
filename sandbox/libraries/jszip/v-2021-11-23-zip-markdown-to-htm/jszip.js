@@ -5,20 +5,18 @@ const ZIP = {};
 
 ZIP.scripts = [
 	"https://cdn.jsdelivr.net/npm/jszip@3.7.1/dist/jszip.min.js",
-	"https://cdn.jsdelivr.net/npm/mammoth@1.4.19/mammoth.browser.min.js",
 	"https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"
 ];
 
 ZIP.month = 12;
 
-ZIP.days = [ 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
 
 ZIP.baseNew = `../../../../../theo-armour-qdata/journal/days-of-year-md/${ ZIP.month}/`;
 
-ZIP.baseOld = `../../../../../zzz-diary/${ ZIP.month}/`;
+ZIP.baseMarkdown = `../../../../../zzz-diary/${ ZIP.month}/`;
 
 
-ZIP.fileNames = [ "LICENSE", "NPP_16.stl", "Photo Album_Example Auckland.pdf", "README.md", "Structural_MRI_animation.ogv.240p.webm", "ca_cs.xls", "code-of-conduct.md", "concept.md", "envmap.png", "heritage-front.jpg", "markdown-help.md", "markdown.md", "noun_Information_585560.svg", "pano.mp4", "readme.html", "sample.md", "snippets.txt", "style-sample-tags.html", "system-map.gif", "test-case.zip", "text-to-hack-3.html", "text-to-hack.html", "text.txt", "the-scream.jpg", "tree.obj", "us-county-state-latlon-pop.csv" ];
+//ZIP.fileNames = [ "LICENSE", "NPP_16.stl", "Photo Album_Example Auckland.pdf", "README.md", "Structural_MRI_animation.ogv.240p.webm", "ca_cs.xls", "code-of-conduct.md", "concept.md", "envmap.png", "heritage-front.jpg", "markdown-help.md", "markdown.md", "noun_Information_585560.svg", "pano.mp4", "readme.html", "sample.md", "snippets.txt", "style-sample-tags.html", "system-map.gif", "test-case.zip", "text-to-hack-3.html", "text-to-hack.html", "text.txt", "the-scream.jpg", "tree.obj", "us-county-state-latlon-pop.csv" ];
 
 
 ZIP.init = function () {

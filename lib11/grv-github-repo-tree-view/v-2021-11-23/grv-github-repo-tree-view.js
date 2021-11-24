@@ -27,7 +27,7 @@ GRV.menuCurated = "Display curated list of folders and files";
 
 GRV.init = function ( { user = COR.user, repo = COR.repo, branch = COR.branch } = {} ) {
 
-	GRV.urlHome = COR.pathContent;
+	GRV.pathContent = COR.pathContent || "";
 
 	GRV.accessToken = localStorage.getItem( 'githubAccessToken' ) || "";
 
@@ -40,7 +40,7 @@ GRV.init = function ( { user = COR.user, repo = COR.repo, branch = COR.branch } 
 
 	<summary id=GRVsumRepo class="summary-primary gmd-1" title="View selected items">
 		<span id=GRVsumTitle >${ COR.repo } folders & files</span>
-		${ MNU.addInfoBox( GRV.info ) }
+		${ window.MNU && MNU.addInfoBox( GRV.info ) || "" }
 	</summary>
 
 
@@ -68,8 +68,6 @@ GRV.getRepo = function ( user = COR.user, repo = COR.repo, branch = COR.branch )
 	GRV.repo = repo;
 	GRV.branch = branch;
 
-
-	//GRV.urlApi = `https://api.github.com/repos/${ user }/${ repo }/git/trees/${ branch }?recursive=1`;
 	GRV.urlApi = `https://api.github.com/repos/${ GRV.user }/${ GRV.repo }/git/trees/${ GRV.branch }?recursive=1`;
 	GRV.urlSource = `https://github.com/${ GRV.user }/${ GRV.repo }/tree/${ GRV.branch }/`;
 	GRV.urlViewer = GRV.repo.startsWith( GRV.user ) ? `https://${ GRV.user }.github.io/` : `https://${ GRV.user }.github.io/${ GRV.repo }/`;
@@ -146,7 +144,7 @@ GRV.onLoadTree = function ( json ) {
 			.filter( file => COR.filterFiles.includes( file.split( "." ).pop().toLowerCase() ) )
 			.map( ( item, i ) => `
 		<div class=GRVdiv >
-			<a href="#${ GRV.urlHome }${ item }" >${ item.split( "." ).shift().replace( /-/g, " " ) }</a>
+			<a href="#${ GRV.pathContent }${ item }" >${ item.split( "." ).shift().replace( /-/g, " " ) }</a>
 		</div>`);
 
 	} else {
@@ -158,7 +156,7 @@ GRV.onLoadTree = function ( json ) {
 		<div class=GRVdiv >
 			<a href="${ GRV.urlSource }${ item }" title="Source code on GitHub. Edit me!" target="_blank" >
 			${ COR.iconGitHub }</a>
-			<a href="#${ GRV.urlHome }${ item }" >${ item.split( "/" ).pop() }</a>
+			<a href="#${ GRV.pathContent }${ item }" >${ item.split( "/" ).pop() }</a>
 			<a href="${ GRV.urlViewer }${ item }" title="Link to just this file. Open file in new tab." target="_blank" >${ COR.iconExternalFile }</a>
 		</div>`);
 
@@ -185,7 +183,7 @@ GRV.onHashChange = function () {
 
 	GRV.links.forEach( link => link.parentNode.classList.remove( "highlight" ) );
 
-	const str = location.hash ? location.hash.slice( 1 ) : GRV.urlHome  + COR.defaultFile;
+	const str = location.hash ? location.hash.slice( 1 ) : GRV.pathContent  + COR.defaultFile;
 	//const str = location.hash.slice( 1 );
 	const item = GRV.links.find( a => a.getAttribute( "href" ).includes( str ) );
 	//console.log( "item", item );
@@ -289,7 +287,7 @@ GRV.getFilesAll = function ( subtree, files ) {
 		<div class=GRVdiv>
 			<a href="${ GRV.urlSource }${ item }" title="Source code on GitHub" target="_blank" >
 			${ COR.iconGitHub }</a>
-			<a href="#${ GRV.urlHome }${ item }" title="">${ item.split( "/" ).pop() }</a>
+			<a href="#${ GRV.pathContent }${ item }" title="">${ item.split( "/" ).pop() }</a>
 			<a href="${ GRV.urlViewer }${ item }" title="Open file in new tab"  target="_blank" >
 			${ COR.iconExternalFile }</a>
 		</div>`);
@@ -314,7 +312,7 @@ GRV.getFilesCurated = function ( subtree, files ) {
 		.filter( file => COR.filterFiles.includes( file.split( "." ).pop().toLowerCase() ) )
 		.map( item => `
 		<div style="margin: 5px 0;" >
-			<a href="#${ GRV.urlHome }${ item }" title="" onclick="JavaScript:if(window.innerWidth<640||window.innerHeight<500){navMenuDet.open=false;}" >${ item.split( "/" ).pop().split( "." ).shift().replace( /-/g, " " ) }</a>
+			<a href="#${ GRV.pathContent }${ item }" title="" onclick="JavaScript:if(window.innerWidth<640||window.innerHeight<500){navMenuDet.open=false;}" >${ item.split( "/" ).pop().split( "." ).shift().replace( /-/g, " " ) }</a>
 		</div>`);
 
 	return filtered;
@@ -436,3 +434,11 @@ GRV.test = function () {
 		}
 	}
 };
+
+
+
+GRV.filterFiles = function () {
+
+	md = GRV.files.filter( file => file.endsWith( ".md" ) )
+
+}
