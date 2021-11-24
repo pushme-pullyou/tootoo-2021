@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
 	<meta name="description" content="">
-	<meta name="date" content="2021-07-29">
+	<meta name="date" content="2021-11-23">
 	<title></title>
 	<style>
 		body {
@@ -16,7 +16,7 @@
 
 <body>
 
-	<script src="grv-github-repo-tree-view.js"></script>
+	<script src="../../grv-github-repo-tree-view/v-2021-11-23/grv-github-repo-tree-view.js"></script>
 
 	<script src="zsf-zip-selected-files.js"></script>
 
@@ -31,6 +31,7 @@
 	</h1>
 
 	<p><button onclick=ZSF.getFiles()>getFiles</button></p>
+
 	<div id=GRVdivDetails></div>
 
 	<hr>
@@ -69,6 +70,8 @@
 			//requestFile();
 
 			GRV.init();
+
+			GRVdet.open = true;
 
 			ZSF.init();
 
