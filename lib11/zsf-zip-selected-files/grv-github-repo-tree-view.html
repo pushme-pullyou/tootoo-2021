@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
 	<meta name="description" content="">
-	<meta name="date" content="2021-11-23">
+	<meta name="date" content="2021-07-29">
 	<title></title>
 	<style>
 		body {
@@ -18,6 +18,8 @@
 
 	<script src="grv-github-repo-tree-view.js"></script>
 
+	<script src="zsf-zip-selected-files.js"></script>
+
 	<h1>
 		<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/xxxxxx/" target="_blank"
 			title="source code on GitHub"><img
@@ -28,9 +30,11 @@
 		</a>
 	</h1>
 
+	<p><button onclick=ZSF.getFiles()>getFiles</button></p>
 	<div id=GRVdivDetails></div>
 
 	<hr>
+
 
 	<div id="divContent"></div>
 
@@ -66,7 +70,8 @@
 
 			GRV.init();
 
-			GRVdet.open = true;
+			ZSF.init();
+
 		}
 
 

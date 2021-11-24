@@ -56,6 +56,8 @@ ZSF.getFile = function () {
 	url = ZSF.base + ZSF.filesFiltered[ ZSF.count ];
 
 	console.log( "url", url );
+	const options = { openLinksInNewWindow: false, excludeTrailingPunctuationFromURLs: true, ghMention: true, simplifiedAutoLink: true, simpleLineBreaks: true, emoji: true };
+
 
 	const xhr = new XMLHttpRequest();
 	xhr.open( "GET", url, true );
@@ -63,9 +65,13 @@ ZSF.getFile = function () {
 	xhr.onerror = ( xhr ) => console.log( "error:", xhr );
 	//xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
 	xhr.onload = ( xhr ) => {
-		console.log( "", xhr.target.response );
+		//console.log( "response", xhr.target.response );
 
-		ZSF.zip.file( ZSF.filesFiltered[ ZSF.count ], xhr.target.response );
+		let txt = xhr.target.response;
+		txt = txt.replace( /\<!--@@@/, "" ).replace( /\@@@-->/, "" );
+
+		htm = new showdown.Converter( options ).makeHtml( txt );
+		ZSF.zip.file( ZSF.filesFiltered[ ZSF.count ].replace( /\.md/, ".htm" ), htm );
 		//console.log( "ZSF.zip", ZSF.zip );
 		ZSF.saveZip();
 
@@ -74,6 +80,8 @@ ZSF.getFile = function () {
 	xhr.send( null );
 
 };
+
+
 
 ZSF.saveZip = function () {
 
