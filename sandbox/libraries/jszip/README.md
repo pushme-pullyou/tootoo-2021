@@ -32,7 +32,6 @@ _"jsZip" in a resizable window. One finger to rotate. Two to zoom._
 ### 2021-11-01
 
 * creates list of file names
-()
 * First commit
 
 
