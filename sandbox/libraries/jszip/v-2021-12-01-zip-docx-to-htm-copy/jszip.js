@@ -9,7 +9,7 @@ ZIP.scripts = [
 	"https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"
 ];
 
-ZIP.month = 12;
+ZIP.month = "09";
 
 ZIP.days = [ 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
 
@@ -140,7 +140,7 @@ ZIP.requestFileOld = function () {
 
 
 
-ZIP.saveZip = function ( fileName = `month-${ ZIP.month }.zip` ) {
+ZIP.saveZip = function ( fileName = `${ ZIP.month }.zip` ) {
 
 	ZIP.zip.generateAsync( { type: "blob" } ).then( ( content ) => {
 
