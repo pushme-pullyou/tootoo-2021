@@ -6,10 +6,7 @@
 
 ZIP = {};
 
-ZIP.src = [
-	"https://cdn.jsdelivr.net/npm/jszip@3.7.1/dist/jszip.min.js",
-	"https://pushme-pullyou.github.io/tootoo-2021/lib12/frx-file-read-xhr/r-2021-12-02/zip-parser.js"
-];
+ZIP.src = "https://cdn.jsdelivr.net/npm/jszip@3.7.1/dist/jszip.min.js";
 
 ZIP.target = FRXdivDetails.appendChild( document.createElement( "div" ) );
 

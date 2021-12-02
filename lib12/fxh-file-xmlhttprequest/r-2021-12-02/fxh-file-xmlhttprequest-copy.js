@@ -50,20 +50,17 @@ FXH.selectHandler = function ( fName ) {
 
 		FXH.zip = {};
 
-		const src = [
-				"https://cdn.jsdelivr.net/npm/jszip@3.7.1/dist/jszip.min.js",
-				"https://pushme-pullyou.github.io/tootoo-2021/lib12/frx-file-read-xhr/r-2021-12-02/zip-parser.js"
+		const src = "https://cdn.jsdelivr.net/npm/jszip@3.7.1/dist/jszip.min.js";
 
-		];
+		//ZIP.target = FRXdivDetails.appendChild( document.createElement( "div" ) );
 
-
-		FXH.loadLoaders( FXH,zip, src, ZIP.readFile );
+		//FXH.loadLoaders( FXH.zip, src, ZIP.readFile );
 
 	}
 
 	if ( [ "htm", "html" ].includes( FXH.extension ) ) {
 
-		FXH.request( FXH.url, FXH.displayHTM );
+		FXH.request( FXH.displayHTM );
 
 	}
 
@@ -124,6 +121,7 @@ FXH.loadLoaders = function ( obj, scripts, onLoad ) {
 
 FXH.request = function ( callback = FXH.displayMarkdown ) {
 
+	console.log( "callback", callback );
 
 	const xhr = new XMLHttpRequest();
 	//FXH.addListeners( xhr );
@@ -138,6 +136,8 @@ FXH.request = function ( callback = FXH.displayMarkdown ) {
 
 
 FXH.displayMarkdown = function ( content ) {
+
+	console.log( "content", content );
 
 	showdown.setFlavor( "github" );
 
