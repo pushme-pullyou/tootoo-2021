@@ -7,7 +7,7 @@
 	<meta name="description"
 		content="TooToo 2021 uses the GitHub API to provide access to all the current files in a repository hosted with GitHub Pages.">
 	<meta name="keywords" content="JavaScript,Markdown,GitHub,FOSS">
-	<meta name="date" content="2021-11-20">
+	<meta name="date" content="2021-12-01">
 	<title>TooToo</title>
 
 	<!-- Copyright 2021 Theo Armour. MIT license -->
@@ -25,11 +25,11 @@
 
 <body>
 
-	<script src="./lib11/mnu-menu/r-2021-11-05/mnu-menu.js"></script>
+	<script src="./lib12/mnu-menu/r-2021-12-01/mnu-menu.js"></script>
 
 	<script src="./lib11/frx-file-read-xhr/r-2021-11-19/frx-file-read-xhr.js"></script>
 
-	<script src="./lib11/grv-github-repo-tree-view/v-2021-11-02/grv-github-repo-tree-view.js"></script>
+	<script src="./lib12/grv-github-repo-tree-view/v-2021-12-01/grv-github-repo-tree-view.js"></script>
 
 
 	<div id=MNUdivShowHide ></div>
@@ -83,7 +83,7 @@
 			// MNU = Menu ~ mnu-menu.js
 			MNU.init();
 			//MNU.getSample();
-			sumNavMenu.hidden = false;
+			//sumNavMenu.hidden = false;
 
 			//const htm = "Hello, World!";
 			//MNU.init( { description: htm } );
@@ -91,7 +91,7 @@
 			//MNUspnVersion.hidden = true;
 
 			// FRX = File Read XHR
-			FRX.init();
+			//FRX.init();
 
 			// GR
 			//GRA.init();
@@ -104,6 +104,7 @@
 			//GRVsumRepo.hidden = true;
 			GRV.getRepo();
 
+			FRX.defaultUrl = FRX.pathContent + "README.md"; //FRX.defaultFile;
 
 			FRX.onHashChange();
 
