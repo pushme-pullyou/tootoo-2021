@@ -42,6 +42,8 @@ FXH.selectHandler = function ( fName ) {
 
 		FXH.mdn = {};
 
+		FXH.display = FXH.displayMarkdown;
+
 		FXH.loadLoaders( FXH.mdn, src, FXH.request );
 
 	}
@@ -51,19 +53,20 @@ FXH.selectHandler = function ( fName ) {
 		FXH.zip = {};
 
 		const src = [
-				"https://cdn.jsdelivr.net/npm/jszip@3.7.1/dist/jszip.min.js",
-				"https://pushme-pullyou.github.io/tootoo-2021/lib12/frx-file-read-xhr/r-2021-12-02/zip-parser.js"
+			"https://cdn.jsdelivr.net/npm/jszip@3.7.1/dist/jszip.min.js",
+			"https://pushme-pullyou.github.io/tootoo-2021/lib12/fxh-file-xmlhttprequest/r-2021-12-02/zip-parser.js"
 
 		];
 
-
-		FXH.loadLoaders( FXH,zip, src, ZIP.readFile );
+		FXH.loadLoaders( FXH.zip, src, FXH.fetchZipFile );
 
 	}
 
 	if ( [ "htm", "html" ].includes( FXH.extension ) ) {
 
-		FXH.request( FXH.url, FXH.displayHTM );
+		FXH.display = FXH.displayHTM;
+
+		FXH.request();
 
 	}
 
@@ -92,7 +95,7 @@ FXH.loadLoaders = function ( obj, scripts, onLoad ) {
 
 	if ( !obj?.loaded ) {
 
-		//console.log( "scripts", scripts );
+		console.log( "scripts", scripts );
 
 		if ( scripts.length === 0 ) {
 
@@ -122,13 +125,13 @@ FXH.loadLoaders = function ( obj, scripts, onLoad ) {
 
 
 
-FXH.request = function ( callback = FXH.displayMarkdown ) {
-
+FXH.request = function ( event ) {
+	console.log( "event", event );
 
 	const xhr = new XMLHttpRequest();
 	//FXH.addListeners( xhr );
 	xhr.open( "get", FXH.url, true );
-	xhr.onload = () => callback( xhr.responseText );
+	xhr.onload = () => FXH.display( xhr.responseText );
 	xhr.send( null );
 
 	return xhr;

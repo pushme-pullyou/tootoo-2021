@@ -2,11 +2,13 @@
 const ZIP = {};
 
 
-ZIP.readFile = function ( file = FRX.file ) {
+console.log( "", 23 );
 
-	//console.log( "file", FRX.file );
+FXH.readFile = function ( file = FXH.file ) {
 
-	JSZip.loadAsync( FRX.file )
+console.log( "file", file );
+
+	JSZip.loadAsync( FXH.file )
 
 		.then( ( zip ) => {
 
@@ -31,23 +33,23 @@ ZIP.onChange = function () {
 
 	if ( !window.JSZip ) {
 
-		FRX.loadLoaders( ZIP, ZIP.src, ZIP.fetchZipFile );
+		FXH.loadLoaders( ZIP, ZIP.src, ZIP.fetchZipFile );
 
 		return;
 
 	}
 
-	FRX.loadLoaders( ZIP, ZIP.src, ZIP.fetchZipFile );
+	FXH.loadLoaders( ZIP, ZIP.src, ZIP.fetchZipFile );
 
 };
 
 
-ZIP.fetchZipFile = function ( e ) {
+FXH.fetchZipFile = function ( e ) {
 
-	//url = url || "https://pushme-pullyou.github.io/tootoo-2021/" + FRX.url.slice( 2 )
-	//console.log( "e", e );
+	//url = url || "https://pushme-pullyou.github.io/tootoo-2021/" + FXH.url.slice( 2 )
+	console.log( "e", e );
 
-	fetch( FRX.url )
+	fetch( FXH.url )
 
 		.then( response => {
 
@@ -95,7 +97,7 @@ ZIP.getNames = function () {
 	if ( ZIP.target ) {
 
 		const htm = `
-<h3>${ FRX.file.name }</h3>
+<h3>${ FXH.file.name }</h3>
 <p>
 <select id=ZIPselFiles  multiple size=10 width=100%></select>
 </p>
@@ -183,13 +185,13 @@ ZIP.getZipContents = function ( fileNames ) {
 			.then( text => {
 				//divMainContent.innerText = text;
 
-				FRX.content = text;
-				FRX.file = "";
-				FRX.url = "";
+				FXH.content = text;
+				FXH.file = "";
+				FXH.url = "";
 
-				FRX.zipFileName = fileName;
+				FXH.zipFileName = fileName;
 
-				FRX.selectHandler( fileName );
+				FXH.selectHandler( fileName );
 
 			} )
 
@@ -200,3 +202,4 @@ ZIP.getZipContents = function ( fileNames ) {
 	}
 };
 
+FXH.fetchZipFile();
