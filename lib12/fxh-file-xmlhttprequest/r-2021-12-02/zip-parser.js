@@ -1,44 +1,5 @@
-// copyright 2021 Theo Armour. MIT license.
-/* global THREE, COR, FRX, JSZip, r3DM, GBX, GLTF, HBJ, IDF, IFC, OBJ, RAD, STL, ZIP, FRXdivLog */
-// jshint esversion: 6
-// jshint loopfunc: true
 
-
-ZIP = {};
-
-ZIP.src = [
-	"https://cdn.jsdelivr.net/npm/jszip@3.7.1/dist/jszip.min.js",
-	"https://pushme-pullyou.github.io/tootoo-2021/lib12/frx-file-read-xhr/r-2021-12-02/zip-parser.js"
-];
-
-ZIP.target = FRXdivDetails.appendChild( document.createElement( "div" ) );
-
-
-
-ZIP.handle = function () {
-
-	if ( FRX.file ) { console.log( "files ", FRX.file.name ); ZIP.read(); return; }
-
-	if ( FRX.url ) { console.log( "url", FRX.url.split( "/" ).pop() ); ZIP.onChange( FRX.url ); return; }
-
-};
-
-
-
-ZIP.read = function () {
-
-	if ( !window.JSZip ) {
-
-		FRX.loadLoaders( ZIP, ZIP.src, ZIP.readFile );
-
-		return;
-
-	}
-
-	ZIP.readFile();
-
-};
-
+const ZIP = {};
 
 
 ZIP.readFile = function ( file = FRX.file ) {
@@ -145,7 +106,7 @@ ZIP.getNames = function () {
 
 		ZIP.target.innerHTML = htm;
 
-		namesSelected = ZIP.names.filter( name => name.toLowerCase().endsWith( "rad"))
+		namesSelected = ZIP.names.filter( name => name.toLowerCase().endsWith( "rad" ) );
 
 		ZIPselFiles.innerHTML = namesSelected.map( name => `<option>${ name }</option>` ).join( "" ) + "<br>";
 
@@ -239,6 +200,3 @@ ZIP.getZipContents = function ( fileNames ) {
 	}
 };
 
-
-
-ZIP.handle();
