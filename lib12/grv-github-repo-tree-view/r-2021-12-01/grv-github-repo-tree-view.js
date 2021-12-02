@@ -22,10 +22,10 @@ GRV.menuAll = "Display all the folders and files in the repository";
 GRV.menuCurated = "Display curated list of folders and files";
 
 
-//GRV.getFiles = GRV.getFilesCurated;
+GRV.getFiles = GRV.getFilesAll;
 
 
-GRV.init = function ( { user = COR.user, repo = COR.repo, branch = COR.branch } = {} ) {
+GRV.init = function () {
 
 	GRV.pathContent = COR.pathContent || "";
 
@@ -34,13 +34,19 @@ GRV.init = function ( { user = COR.user, repo = COR.repo, branch = COR.branch } 
 	GRV.ignoreFolders = window.COR && COR.defaultIgnoreFolders.slice() || [];
 
 	// check if GRV.repo could be better
-	const menuType = GRV.getFiles === GRV.getFilesAll ? GRV.menuCurated : GRV.menuAll;
-	const htm = `
-<details id=GRVdet ontoggle=GRV.toggleMenu(); >
+	//const menuType = GRV.getFiles === GRV.getFilesAll ? GRV.menuAll : GRV.menuCurated;
 
-	<summary id=GRVsumRepo class="summary-primary gmd-1" title="View selected items">
+	GRV.getFiles = GRV.getFilesAll;
+
+	GRV.getRepo();
+
+
+	const htm = `
+<details id=GRVdet >
+
+	<summary id=GRVsumRepo class="summary-primary gmd-1" title="View selected items" hidden>
 		<span id=GRVsumTitle >${ COR.repo } folders & files</span>
-		${ window.MNU && MNU.addInfoBox( GRV.info ) || "" }
+		${ MNU.addInfoBox( GRV.info ) || "" }
 	</summary>
 
 
@@ -50,7 +56,7 @@ GRV.init = function ( { user = COR.user, repo = COR.repo, branch = COR.branch } 
 
 		<div id=GRVdivGitHubRepoTreeView></div>
 
-		<p><button id=GRVbutMenu onclick=GRV.toggleMenu() >${ menuType }</button></p>
+		<p><button id=GRVbutMenu onclick=GRV.toggleMenu() >${ GRV.menuCurated }</button></p>
 
 	</div>
 
@@ -63,12 +69,34 @@ GRV.init = function ( { user = COR.user, repo = COR.repo, branch = COR.branch } 
 };
 
 
+GRV.toggleMenu = function () {
+
+	if ( !GRVbutMenu.innerText.includes( "curated") ) {
+
+		GRVbutMenu.innerHTML = GRV.menuCurated;
+		GRV.getFiles = GRV.getFilesAll;
+		GRV.ignoreFolders = [];
+
+
+	} else {
+
+		GRVbutMenu.innerHTML = GRV.menuAll;
+		GRV.getFiles = GRV.getFilesCurated;
+		GRV.ignoreFolders = COR.defaultIgnoreFolders;
+	}
+
+	//console.log( "", GRV.getFiles );
+
+	GRV.getRepo();
+};
+
+
 
 GRV.getRepo = function ( user = COR.user, repo = COR.repo, branch = COR.branch ) {
 
-	GRV.user = user;
-	GRV.repo = repo;
-	GRV.branch = branch;
+	GRV.user = user || "pushme-pullyou";
+	GRV.repo = repo || "tootoo-2021";
+	GRV.branch = branch || "main";
 
 	GRV.urlApi = `https://api.github.com/repos/${ GRV.user }/${ GRV.repo }/git/trees/${ GRV.branch }?recursive=1`;
 	GRV.urlSource = `https://github.com/${ GRV.user }/${ GRV.repo }/tree/${ GRV.branch }/`;
@@ -323,26 +351,10 @@ GRV.getFilesCurated = function ( subtree, files ) {
 
 
 
-GRV.toggleMenu = function () {
-
-	if ( GRVbutMenu.innerText === GRV.menuAll ) {
-
-		GRVbutMenu.innerHTML = GRV.menuCurated;
-		GRV.getFiles = GRV.getFilesAll;
-		GRV.ignoreFolders = [];
 
 
-	} else {
 
-		GRVbutMenu.innerHTML = GRV.menuAll;
-		GRV.getFiles = GRV.getFilesCurated;
-		GRV.ignoreFolders = COR.defaultIgnoreFolders;
-	}
 
-	//console.log( "", GRV.getFiles );
-	GRV.getRepo();
-
-};
 
 ////////////
 

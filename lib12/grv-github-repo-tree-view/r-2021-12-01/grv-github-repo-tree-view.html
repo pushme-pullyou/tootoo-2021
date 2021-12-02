@@ -5,8 +5,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
 	<meta name="description" content="">
-	<meta name="date" content="2021-11-23">
+	<meta name="date" content="2021-12-01">
 	<title></title>
+	<link id=CORstyle rel="stylesheet" href="../../../lib11/style/style-2021-11-02.css">
 	<style>
 		body {
 			font: 100% monospace;
@@ -16,41 +17,53 @@
 
 <body>
 
+	<script src="../../mnu-menu/r-2021-12-01/mnu-menu.js"></script>
 	<script src="grv-github-repo-tree-view.js"></script>
 
-	<h1>
-		<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/xxxxxx/" target="_blank"
+	<!-- <h1>
+		<a href="https://github.com/pushme-pullyou/tootoo-2021/tree/master/lib12/" target="_blank"
 			title="source code on GitHub"><img
 				src=https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg></a>
 		<a href="" title="Click this menu title to reset the model">
 			<span id=spnTitle></span>
 			<span id=spnVersion></span>
 		</a>
-	</h1>
+	</h1> -->
 
-	<div id=GRVdivDetails></div>
+	<div id=MNUdivShowHide></div>
 
-	<hr>
+	<main id=main>
 
-	<div id="divContent"></div>
+		<div id="divMainContent"></div>
+
+	</main>
 
 
 	<script>
 
 		//MNU = {};
+
+
 		const COR = {
+
+			description: `
+nnnnn<br>
+<br>
+File: mnu-menu.js<br>
+Name space: vvvv<br>
+Release: 2021-12-01<br>
+<button onclick=MNU.getSample()>Testing: add sample menu</button>`,
 
 			iconExternalFile: `<img class=infoImg  src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/icon-external-link.svg" height=16>`,
 			iconGitHub: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`,
 			iconInfo: `<img class=infoImg src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/noun_Information_585560.svg">`,
 
-			// Used by GRV
-
+			//Used by GRV
 			user: "pushme-pullyou",
 			repo: "tootoo-2021",
 			branch: "main",
-			filterFiles: [],
-			defaultIgnoreFolders: [],
+			filterFiles: [ "md"],
+			defaultIgnoreFolders: [ "apps"],
 
 		}
 
@@ -58,15 +71,18 @@
 
 		function init() {
 
-			spnTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
+			//spnTitle.innerHTML = document.title ? document.title : location.href.split( '/' ).pop().slice( 0, - 5 ).replace( /-/g, ' ' );
 
-			spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
+			//spnVersion.innerHTML = document.head.querySelector( "[ name=date ]" ).content;
 
 			//requestFile();
+
+			MNU.init();
 
 			GRV.init();
 
 			GRVdet.open = true;
+
 		}
 
 
@@ -76,12 +92,12 @@
 			url = "https://cdn.jsdelivr.net/gh/pushme-pullyou/tootoo-2021@master/README.md";
 			const urlCORS = ""; //https://cors-anywhere.herokuapp.com/";
 
-			xhr = new XMLHttpRequest();
+			const xhr = new XMLHttpRequest();
 			xhr.open( "GET", urlCORS + url, true );
 			xhr.responseType = "text";
 			xhr.onerror = ( xhr ) => console.log( "error:", xhr );
 			//xhr.onprogress = ( xhr ) => console.log( "bytes loaded:", xhr.loaded );
-			xhr.onload = ( xhr ) => callback( xhr.target.response );
+			xhr.onload = () => callback( xhr.responseText );
 			xhr.send( null );
 
 		}
@@ -92,7 +108,7 @@
 
 			console.log( "response", response );
 
-			divContent.innerText = response;
+			divMainContent.innerText = response;
 
 		}
 

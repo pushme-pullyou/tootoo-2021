@@ -12,11 +12,13 @@ _GRV GitHub Repo Tree View_
 ## Concept
 
 * Display all folders and files in a GitHub repository in a tree view menu
+* File menu items have 3 parts: got to source, 2 view file, 3 open file in new tab
+
 
 
 ## To Do / Wish List
 
-* 2021-07-05 Refactor includeFiles function to ignotre sub-folders
+* 2021-07-05 Refactor includeFiles function to ignore sub-folders
 * Cursor key support
 * Exclude sub-folders
 * 2020-09-18 ~ add search

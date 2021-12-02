@@ -9,11 +9,20 @@ let MNU = {};
 
 MNU.init = function () {
 
-	MNU.infoBoxHtm = COR.description ? COR.description : "MNU Menu<br>2021-11-04";
+
+	MNU.info = `
+Menu system<br>
+<br>
+File: mnu-menu.js<br>
+Name space: MNU<br>
+Release: 2021-12-01<br>
+<button onclick=MNU.getSample()>Testing: add sample menu</button>`;
+
+	MNU.infoBoxHtm = COR.description ? COR.description : MNU.info;
 	MNU.iconGitHub = COR.iconGitHub ? COR.iconGitHub : `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`;
 	MNU.iconInfo = COR.iconInfo ? COR.iconInfo : `<img class=infoImg src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/noun_Information_585560.svg" height=16px >`;
 	MNU.iconRepo = COR.iconRepo ? COR.iconRepo : "❦";
-	MNU.title = COR.title ? COR.title : location.href.split( "/" ).pop().slice( 0, - 5 ).replace( /-/g, " " );
+	MNU.title = COR.title ? COR.title : location.href.split( "/" ).pop().slice( 0, -5 ).replace( /-/g, " " );
 	MNU.urlSource = COR.urlSource ? COR.urlSource : "https://github.com/pushme-pullyou/tootoo-2021/";
 	MNU.version = COR.version ? COR.version : document.head.querySelector( "[ name=date ]" ).content;
 
@@ -21,7 +30,7 @@ MNU.init = function () {
 
 	<details id=detNavMenu class="gmd-4">
 
-		<summary id=sumNavMenu class="summary-nav gmd-1">
+		<summary id=sumNavMenu class="summary-nav gmd-1" hidden>
 			☰ <span id=spnMenuHelp>show&darr; || hide&uarr; menu</span>
 		</summary>
 
@@ -95,7 +104,7 @@ MNU.init = function () {
 
 
 
-MNU.addInfoBox = function ( text = MNU.MNU.infoBoxHtm, id = "" ) {
+MNU.addInfoBox = function ( text = MNU.infoBoxHtm, id = "" ) {
 	//console.log( { text } );
 	const htm = `
 <span class="info">
