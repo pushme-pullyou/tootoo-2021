@@ -469,11 +469,12 @@ GRV.repos = [
 
 GRV.getRepos = function() {
 
-	htm = GRV.repos.map( repo => `<button>${ repo[ 0 ] } / ${ repo[ 1 ] }</button>`);
+	htm = GRV.repos.map( repo => `<button
+	onclick=GRV.getRepoNew("${ repo[ 0 ] }","${ repo[ 1 ] }","${ repo[ 2 ] }")>${ repo[ 0 ] } / ${ repo[ 1 ] }</button>` );
 
 	MNUdivExtras.innerHTML = htm;
 }
-MNUdivExtras
+
 
 GRV.getRepoNew = function ( user, repo, branch ) {
 
