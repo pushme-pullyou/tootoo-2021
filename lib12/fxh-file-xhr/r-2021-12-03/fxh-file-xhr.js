@@ -6,7 +6,7 @@
 
 const FXH = {};
 
-FXH.htm = [ "htm", "html" ];
+FXH.htm = [ "htm" ];
 FXH.img = [ "gif", "jpg", "jpeg", "png", "svg" ];
 FXH.mdn = [ "", "txt", "md", "markdown"  ];
 FXH.zip = [ "zip" ];
@@ -32,6 +32,8 @@ FXH.onHashChange = function () {
 	FXH.url = COR.urlBaseContent + relativeURL;
 
 	FXH.selectHandler( FXH.url );
+
+	window.scrollTo( 0, 0 );
 
 };
 

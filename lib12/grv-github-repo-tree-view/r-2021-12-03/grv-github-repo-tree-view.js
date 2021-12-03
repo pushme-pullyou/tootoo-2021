@@ -455,7 +455,10 @@ GRV.filterFiles = function () {
 
 GRV.repos = [
 	[ "theo-armour", "theo-armour.github.io", "master", "" ],
-	[ "ladybug-tools", "3d-models", "master", "https://www.ladybug.tools/3d-models/"]
+	[ "ladybug-tools", "3d-models", "master", "https://www.ladybug.tools/3d-models/" ],
+	[ "ladybug-tools", "spider-2021", "main", "https://www.ladybug.tools/spider-2021/" ],
+	[ "ladybug-tools", "spider-covid-19-viz-3d", "main", "https://www.ladybug.tools/spider-covid-19-viz-3d/" ],
+	[ "ladybug-tools", "spider-gbxml-tools", "master", "https://www.ladybug.tools/spider-gbxml-tools/" ],
 
 ]
 
@@ -483,6 +486,12 @@ GRV.getRepoNew = function ( user, repo, branch, urlBaseContent ) {
 
 	COR.urlBaseContent = urlBaseContent || url;
 
+
 	console.log( "COR.urlBaseContent", COR.urlBaseContent );
+
+	location.hash = "";
+
+	FXH.onHashChange();
+
 
 };
