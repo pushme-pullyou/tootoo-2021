@@ -1,12 +1,11 @@
 
 const ZIP = {};
 
-
-console.log( "", 23 );
+ZIP.target = MNUdivSample;
 
 FXH.readFile = function ( file = FXH.file ) {
 
-console.log( "file", file );
+	console.log( "file", file );
 
 	JSZip.loadAsync( FXH.file )
 
@@ -47,7 +46,8 @@ ZIP.onChange = function () {
 FXH.fetchZipFile = function ( e ) {
 
 	//url = url || "https://pushme-pullyou.github.io/tootoo-2021/" + FXH.url.slice( 2 )
-	console.log( "e", e );
+	console.log( "e", );
+
 
 	fetch( FXH.url )
 
@@ -64,6 +64,8 @@ FXH.fetchZipFile = function ( e ) {
 		.then( zip => {
 
 			ZIP.zip = zip;
+
+			//console.log( "zip", zip );
 
 			ZIP.getNames();
 
@@ -97,7 +99,7 @@ ZIP.getNames = function () {
 	if ( ZIP.target ) {
 
 		const htm = `
-<h3>${ FXH.file.name }</h3>
+<h3>${ FXH.fileName }</h3>
 <p>
 <select id=ZIPselFiles  multiple size=10 width=100%></select>
 </p>
@@ -108,7 +110,7 @@ ZIP.getNames = function () {
 
 		ZIP.target.innerHTML = htm;
 
-		namesSelected = ZIP.names.filter( name => name.toLowerCase().endsWith( "rad" ) );
+		namesSelected = ZIP.names; //.filter( name => name.toLowerCase().endsWith( "rad" ) );
 
 		ZIPselFiles.innerHTML = namesSelected.map( name => `<option>${ name }</option>` ).join( "" ) + "<br>";
 
@@ -130,9 +132,9 @@ ZIP.getZipContents = function ( fileNames ) {
 
 		if ( fileNames.length > 1 ) {
 
-			chkNewFile.checked = false;
+			//chkNewFile.checked = false;
 
-			THR.group = THR.getGroupNew();
+			//THR.group = THR.getGroupNew();
 
 		}
 
@@ -202,4 +204,4 @@ ZIP.getZipContents = function ( fileNames ) {
 	}
 };
 
-FXH.fetchZipFile();
+//FXH.fetchZipFile();

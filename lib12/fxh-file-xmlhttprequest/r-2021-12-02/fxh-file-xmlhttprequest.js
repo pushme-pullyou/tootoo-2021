@@ -5,6 +5,11 @@
 
 const FXH = {};
 
+FXH.htm = [ "htm", "html" ];
+FXH.img = [ "gif", "jpg", "jpeg", "png", "svg" ];
+FXH.mdn = [ "", "txt", "md", "markdown"  ];
+FXH.zip = [ "zip" ];
+FXH.all = FXH.img.concat( FXH.htm, FXH.mdn, FXH.zip );
 
 FXH.init = function () {
 
@@ -13,13 +18,12 @@ FXH.init = function () {
 };
 
 
+
 FXH.onHashChange = function () {
 
 	FXH.timeStart = performance.now();
 
 	const relativeURL = location.hash ? location.hash.slice( 1 ) : COR.defaultFile;
-	//FXH.content = "";
-	//FXH.file = "";
 	FXH.fileName = relativeURL.split( "/" ).pop();
 	FXH.extension = FXH.fileName.includes( "." ) ? FXH.fileName.toLowerCase().split( '.' ).pop() : "";
 	FXH.url = COR.defaultBaseURL + relativeURL;
@@ -30,111 +34,72 @@ FXH.onHashChange = function () {
 
 
 
+FXH.selectHandler = function () {
 
-
-FXH.selectHandler = function ( fName ) {
-
-	//console.log( "fName", fName );
-
-	if ( [ "", "txt", "md", "markdown" ].includes( FXH.extension ) ) {
-
-		const src = "https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js";
-
-		FXH.mdn = {};
-
-		FXH.display = FXH.displayMarkdown;
-
-		FXH.loadLoaders( FXH.mdn, src, FXH.request );
-
-	}
-
-	if ( [ "zip" ].includes( FXH.extension ) ) {
-
-		FXH.zip = {};
-
-		const src = [
-			"https://cdn.jsdelivr.net/npm/jszip@3.7.1/dist/jszip.min.js",
-			"https://pushme-pullyou.github.io/tootoo-2021/lib12/fxh-file-xmlhttprequest/r-2021-12-02/zip-parser.js"
-
-		];
-
-		FXH.loadLoaders( FXH.zip, src, FXH.fetchZipFile );
-
-	}
-
-	if ( [ "htm", "html" ].includes( FXH.extension ) ) {
+	if ( FXH.htm.includes( FXH.extension ) ) {
 
 		FXH.display = FXH.displayHTM;
-
 		FXH.request();
+		return;
 
 	}
 
-	if ( [ "gif", "jpg", "jpeg", "png", "svg" ].includes( FXH.extension ) ) {
+	if ( FXH.img.includes( FXH.extension ) ) {
 
 		divMainContent.innerHTML = `
-<a href=${ FXH.url } title="Open this image in a new window" target="_blank" >
-	<img src="${ decodeURI( FXH.url ) }" alt="${ FXH.fileName }"style=max-width:100% >
-</a>`;
+		<a href=${ FXH.url } title="Open this image in a new window" target="_blank" >
+			<img src="${ decodeURI( FXH.url ) }" alt="${ FXH.fileName }"style=max-width:100% >
+		</a>`;
+		return;
+
+	}
+
+	if ( FXH.mdn.includes( FXH.extension ) ) {
+
+		FXH.display = FXH.displayMarkdown;
+		const load = document.body.appendChild( document.createElement( "script" ) );
+		load.onload = FXH.request;
+		load.src = "https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js";
+		return;
+
+	}
+
+	if ( FXH.zip.includes( FXH.extension ) ) {
+
+		let loaded = 0;
+		const loader = () => ++loaded === 2 && FXH.fetchZipFile();
+
+		const load = document.body.appendChild( document.createElement( "script" ) );
+		load.onload = loader;
+		load.src = "https://cdn.jsdelivr.net/npm/jszip@3.7.1/dist/jszip.min.js";
+
+		const load2 = document.body.appendChild( document.createElement( "script" ) );
+		load2.onload = loader;
+		load2.src = "zip-parser.js";
+		return;
 
 	}
 
 
-	//FXH.loadHandler( "UNK", "unk-unknown-handler.js" );
+	if ( !FXH.all.includes( FXH.extension ) ) {
 
-	//console.log( "FXH.url", decodeURI( FXH.url ) );
-	//divMainContent.innerHTML =
-	// 	`<iframe id=ifr src="${ decodeURI( FXH.url ) }" style="border:none;height:100vh;width:100%" ></iframe>`;
-
-};
-
-
-FXH.loadLoaders = function ( obj, scripts, onLoad ) {
-
-	scripts = Array.isArray( scripts ) ? scripts : [ scripts ];
-
-	if ( !obj?.loaded ) {
-
-		console.log( "scripts", scripts );
-
-		if ( scripts.length === 0 ) {
-
-			obj.loaded = true;
-			onLoad();
-
-		} else {
-
-			for ( script of scripts ) {
-
-				obj.loaded = true;
-				const load = document.body.appendChild( document.createElement( "script" ) );
-				load.onload = onLoad;
-				load.src = script;
-
-			}
-
-			return;
-
-		}
+		console.log( "FXH.url", decodeURI( FXH.url ) );
+		divMainContent.innerHTML =
+			`<iframe id=ifr src="${ decodeURI( FXH.url ) }" style="border:none;height:100vh;width:100%" ></iframe>`;
 
 	}
-
-	onLoad();
 
 };
 
 
 
-FXH.request = function ( event ) {
-	console.log( "event", event );
+FXH.request = function () {
 
 	const xhr = new XMLHttpRequest();
 	//FXH.addListeners( xhr );
 	xhr.open( "get", FXH.url, true );
 	xhr.onload = () => FXH.display( xhr.responseText );
 	xhr.send( null );
-
-	return xhr;
 
 };
 
@@ -161,11 +126,11 @@ ${ htm }
 
 
 FXH.displayHTM = function ( content ) {
-
 	//console.log( "content", content );
 
 	divMainContent.innerHTML = `
-<div style="border:0px solid red; margin: 0 auto; padding: 0 1rem; max-width: 40rem;" >
-	${ content }
-</div>`;
+	<div style="border:1px solid #888; margin: 0 auto; padding: 0 1rem; max-width: 40rem;" >
+		${ content }
+	</div>`;
+
 };

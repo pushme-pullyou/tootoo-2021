@@ -4,8 +4,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0" />
-	<meta name="description" content="">
-	<meta name="date" content="2021-12-01">
+	<meta name="description" content="load files with XMLHTTPRequest">
+	<meta name="date" content="2021-12-02">
 	<title></title>
 	<link id=CORstyle rel="stylesheet" href="../../../lib11/style/style-2021-11-02.css">
 	<style>
@@ -33,17 +33,15 @@
 
 	<script>
 
-
-
 		const COR = {
 
 			description: `
-nnnnn<br>
-<br>
-File: fxh-file-xmlhttprequest.js<br>
-Name space: FXH<br>
-Release: 2021-12-02<br>
-<button onclick=MNU.getSample()>Testing: add sample menu</button>`,
+			load files with XMLHTTPRequest<br>
+			<br>
+			File: fxh-file-xmlhttprequest.js<br>
+			Name space: FXH<br>
+			Release: 2021-12-02<br>
+			<button onclick=MNU.getSample()>Testing: add sample menu</button>`,
 
 			iconExternalFile: `<img class=infoImg  src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/icon-external-link.svg" height=16>`,
 			iconGitHub: `<img src="https://pushme-pullyou.github.io/tootoo-2021/lib/assets/icons/mark-github.svg">`,
@@ -53,9 +51,10 @@ Release: 2021-12-02<br>
 			user: "pushme-pullyou",
 			repo: "tootoo-2021",
 			branch: "main",
-			defaultBaseURL:  "../../../",
+			//defaultBaseURL:  "../../../",
+			defaultBaseURL: "https://pushme-pullyou.github.io/tootoo-2021/",
 			defaultFile: "README.md",
-			filterFiles: [ "md" ],
+			filterFiles: [ "md", "htm" ],
 			defaultIgnoreFolders: [ "apps" ],
 
 		}
@@ -73,6 +72,8 @@ Release: 2021-12-02<br>
 			FXH.init();
 
 			FXH.onHashChange();
+
+			MNUdivSample.innerHTML = "bbbb"
 
 		}
 
