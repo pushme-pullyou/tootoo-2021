@@ -3,6 +3,7 @@
 // jshint esversion: 6
 // jshint loopfunc: true
 
+
 const FXH = {};
 
 FXH.htm = [ "htm", "html" ];
@@ -10,6 +11,8 @@ FXH.img = [ "gif", "jpg", "jpeg", "png", "svg" ];
 FXH.mdn = [ "", "txt", "md", "markdown"  ];
 FXH.zip = [ "zip" ];
 FXH.all = FXH.img.concat( FXH.htm, FXH.mdn, FXH.zip );
+
+
 
 FXH.init = function () {
 
@@ -134,3 +137,18 @@ FXH.displayHTM = function ( content ) {
 	</div>`;
 
 };
+
+
+
+FXH.getTestCases = function () {
+
+	const files = [ "LICENSE", "NPP_16.stl", "Photo Album_Example Auckland.pdf", "README.md", "Structural_MRI_animation.ogv.240p.webm", "ca_cs.xls", "code-of-conduct.md", "concept.md", "envmap.png", "heritage-front.jpg", "markdown-help.md", "markdown.md", "noun_Information_585560.svg", "pano.mp4", "readme.html", "sample.md", "snippets.txt", "style-sample-tags.html", "system-map.gif", "test-case.zip", "text-to-hack-3.html", "text-to-hack.html", "text.txt", "the-scream.jpg", "tree.obj", "us-county-state-latlon-pop.csv" ];
+
+	const htm = files.map( file => `<a href="#test-cases/${ file }" >${ file }</a>` ).join( "<br>" );
+
+	return htm;
+
+};
+
+
+
