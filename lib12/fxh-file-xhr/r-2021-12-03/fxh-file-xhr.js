@@ -6,6 +6,7 @@
 
 const FXH = {};
 
+FXH.loaded = true;
 FXH.htm = [ "htm" ];
 FXH.img = [ "gif", "jpg", "jpeg", "png", "svg" ];
 FXH.mdn = [ "", "txt", "md", "markdown"  ];
@@ -90,7 +91,7 @@ FXH.selectHandler = function () {
 
 		console.log( "FXH.url", decodeURI( FXH.url ) );
 		divMainContent.innerHTML =
-			`<iframe id=ifr src="${ decodeURI( FXH.url ) }" style="border:none;height:100vh;width:100%" ></iframe>`;
+			`<iframe id=ifr src="${ decodeURI( FXH.url ) }" style="height:100vh;margin:2rem 0;width:100%;" ></iframe>`;
 
 	}
 

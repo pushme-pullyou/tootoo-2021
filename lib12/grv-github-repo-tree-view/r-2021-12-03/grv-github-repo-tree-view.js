@@ -17,8 +17,6 @@ Release: 2021-09-18<br>
 GRV.intro = `
 <p>This menu displays a tree view of all folders and files in the selected GitHub repository.</p>
 `
-//COR.urlBaseContent = "";
-
 GRV.menuAll = "Display all the folders and files in the repository";
 GRV.menuCurated = "Display curated list of folders and files";
 
@@ -27,19 +25,18 @@ GRV.getFiles = GRV.getFilesAll;
 
 GRV.init = function () {
 
+	GRV.ignoreFolders = COR.defaultIgnoreFolders.slice() || [];
+
+	GRV.getFiles = COR.filesAll === true ? GRV.getFilesAll : GRV.getFilesCurated;
+
 	GRV.urlApi = `https://api.github.com/repos/${ COR.user }/${ COR.repo }/git/trees/${ COR.branch }?recursive=1`;
 	GRV.urlSource = `https://github.com/${ COR.user }/${ COR.repo }/tree/${ COR.branch }/`;
 
-	GRV.links = undefined;
-
 	GRV.accessToken = localStorage.getItem( 'githubAccessToken' ) || "";
 
-	GRV.ignoreFolders = window.COR && COR.defaultIgnoreFolders.slice() || [];
-
-	GRV.getFiles = GRV.getFilesAll;
+	GRV.links = undefined;
 
 	GRV.getRepo();
-
 
 	const htm = `
 <details id=GRVdet >
@@ -67,8 +64,15 @@ GRV.init = function () {
 
 	}
 
-
 	GRVdivDetails.innerHTML = htm;
+
+};
+
+
+
+GRV.getRepo = function () {
+
+	GRV.requestFile( GRV.urlApi, GRV.onLoadTree );
 
 };
 
@@ -93,14 +97,6 @@ GRV.toggleMenu = function () {
 	//console.log( "", GRV.getFiles );
 
 	GRV.getRepo();
-};
-
-
-
-GRV.getRepo = function () {
-
-	GRV.requestFile( GRV.urlApi, GRV.onLoadTree );
-
 };
 
 
@@ -340,7 +336,7 @@ GRV.getFilesCurated = function ( subtree, files ) {
 		.filter( file => COR.filterFiles.includes( file.split( "." ).pop().toLowerCase() ) )
 		.map( item => `
 		<div style="margin: 5px 0;" >
-			<a href="#${ COR.urlBaseContent }${ item }" title="" onclick="JavaScript:if(window.innerWidth<640||window.innerHeight<500){navMenuDet.open=false;}" >${ item.split( "/" ).pop().split( "." ).shift().replace( /-/g, " " ) }</a>
+			<a href="#${ item }" title="" onclick="JavaScript:if(window.innerWidth<640||window.innerHeight<500){navMenuDet.open=false;}" >${ item.split( "/" ).pop().split( "." ).shift().replace( /-/g, " " ) }</a>
 		</div>`);
 
 	return filtered;
@@ -454,44 +450,57 @@ GRV.filterFiles = function () {
 
 
 GRV.repos = [
+	[ "heretics-sf", "heretics-sf.github.io", "master", "", false, [ "archive", "drafts", "journal", "lib", "lib-templates", "zzz-residents" ], [ "md", "htm", "jpg", "png" ] ],
 	[ "theo-armour", "theo-armour.github.io", "master", "" ],
+	[ "theo-armour", "sdg-2021", "main", "" ],
 	[ "ladybug-tools", "3d-models", "master", "https://www.ladybug.tools/3d-models/" ],
 	[ "ladybug-tools", "spider-2021", "main", "https://www.ladybug.tools/spider-2021/" ],
+	[ "ladybug-tools", "spider-2020", "master", "https://www.ladybug.tools/spider-2020/" ],
+	[ "ladybug-tools", "spider", "master", "https://www.ladybug.tools/spider/" ],
 	[ "ladybug-tools", "spider-covid-19-viz-3d", "main", "https://www.ladybug.tools/spider-covid-19-viz-3d/" ],
 	[ "ladybug-tools", "spider-gbxml-tools", "master", "https://www.ladybug.tools/spider-gbxml-tools/" ],
 
-]
+];
 
 
-GRV.getRepos = function() {
+
+GRV.getRepos = function () {
 
 	htm = GRV.repos.map( repo => `<button
-	onclick=GRV.getRepoNew("${ repo[ 0 ] }","${ repo[ 1 ] }","${ repo[ 2 ]}","${ repo[ 3 ] }")>${ repo[ 0 ] } / ${ repo[ 1 ] }</button>` );
+	onclick=GRV.getRepoNew({user:"${ repo[ 0 ] }",repo:"${ repo[ 1 ] }",branch:"${ repo[ 2 ] }",base:"${ repo[ 3 ] }",menu:"${ repo[ 4 ] }",folders:"${ repo[ 5 ] }",files:"${ repo[ 6 ] }"})>${ repo[ 0 ] } / ${ repo[ 1 ] }</button>` );
 
 	MNUdivExtras.innerHTML = htm;
-}
+
+};
 
 
-GRV.getRepoNew = function ( user, repo, branch, urlBaseContent ) {
 
-	COR.user = user || "theo-armour";
-	COR.repo = repo || "2021";
-	COR.branch = branch || "main";
+GRV.getRepoNew = function ( obj = {} ) {
 
-	url = COR.repo.startsWith( COR.user ) ? `https://${ COR.user }.github.io/` : `https://${ COR.user }.github.io/${ COR.repo }/`;
+	COR.user = obj.user || "theo-armour";
+	COR.repo = obj.repo || "2021";
+	COR.branch = obj.branch || "main";
+
+	COR.filesAll = obj.menu || true;
+
+	COR.defaultIgnoreFolders = obj.folders.split( ",") || [ "apps" ];
+	console.log( "folder", COR.defaultIgnoreFolders[ 0 ] );
+
+	COR.filterFiles = obj.files || [ "md" ];
 
 	GRV.init();
 
 	GRVdet.open = true;
 
-	COR.urlBaseContent = urlBaseContent || url;
-
-
+	const url = COR.repo.startsWith( COR.user ) ? `https://${ COR.user }.github.io/` : `https://${ COR.user }.github.io/${ COR.repo }/`;
+	COR.urlBaseContent = obj.base || url;
 	console.log( "COR.urlBaseContent", COR.urlBaseContent );
 
-	location.hash = "";
+	if ( FXH.loaded ) {
 
-	FXH.onHashChange();
+		location.hash = "";
+		FXH.onHashChange();
 
+	}
 
 };

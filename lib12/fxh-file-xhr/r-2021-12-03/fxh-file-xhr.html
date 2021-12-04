@@ -53,10 +53,12 @@
 			user: "pushme-pullyou",
 			repo: "tootoo-2021",
 			branch: "main",
-			//defaultBaseURL:  "../../../",
+
+			urlBaseContent: "../../../",
+			filesAll: true, // false === filesCurated
 
 			defaultFile: "README.md",
-			filterFiles: [ "md", "htm" ],
+			filterFiles: [ "md", "htm", "jpg", "png" ],
 			defaultIgnoreFolders: [ "apps" ],
 
 		}
@@ -65,7 +67,6 @@
 
 		function init() {
 
-			COR.urlBaseContent = "../../../";
 			//COR.urlBaseContent = `https://${ COR.user }.github.io/${ COR.repo }/`;
 
 			MNU.init();
