@@ -69,6 +69,7 @@ THR.init = function () {
 	THR.controls = controls;
 	THR.renderer = renderer;
 	THR.scene = scene;
+	
 	//THR.controls.addEventListener( 'change', () => THR.renderer.render( THR.scene, THR.camera ) );
 
 	THR.axesHelper = axesHelper;
@@ -78,7 +79,7 @@ THR.init = function () {
 	window.addEventListener( "onloadthree", THR.onLoad, false );
 
 	window.dispatchEvent( event );
-	
+
 };
 
 
