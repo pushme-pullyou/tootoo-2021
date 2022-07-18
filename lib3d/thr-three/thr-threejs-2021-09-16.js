@@ -69,7 +69,7 @@ THR.init = function () {
 	THR.controls = controls;
 	THR.renderer = renderer;
 	THR.scene = scene;
-	
+
 	//THR.controls.addEventListener( 'change', () => THR.renderer.render( THR.scene, THR.camera ) );
 
 	THR.axesHelper = axesHelper;
@@ -80,9 +80,16 @@ THR.init = function () {
 
 	window.dispatchEvent( event );
 
+	console.log( "event", event );
+
 };
 
 
+THR.onLoad = function () {
+
+	console.log( "", 999 );
+
+}
 
 THR.onStart = function () {
 	controls.autoRotate = false;
@@ -113,6 +120,8 @@ THR.getGroupNew = function ( group = THR.group ) {
 	return group;
 
 };
+
+
 
 THR.dispose = function ( objects ) {
 
