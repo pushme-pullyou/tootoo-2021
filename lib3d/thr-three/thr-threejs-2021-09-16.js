@@ -80,14 +80,14 @@ THR.init = function () {
 
 	window.dispatchEvent( event );
 
-	console.log( "event", event );
+	//console.log( "event", event );
 
 };
 
 
 THR.onLoad = function () {
 
-	console.log( "", 999 );
+	//console.log( "", 999 );
 
 }
 
